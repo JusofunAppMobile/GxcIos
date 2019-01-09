@@ -1,0 +1,127 @@
+//
+//  URLManager.h
+//  框架
+//
+//  Created by WangZhipeng on 16/5/18.
+//  Copyright © 2016年 WangZhipeng. All rights reserved.
+//
+
+#ifndef URLManager_h
+#define URLManager_h
+
+//线下
+//#define HOSTURL   @"http://172.16.100.34:8888"
+//H5 交互规则
+#define Md5Encryption  @"md5encryption://parameter"
+
+//线上
+#define HOSTURL @"http://api.jusfoun.com/api_qixinbao"
+
+//企业详情
+#define GetCompanyDetail  [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/entdetail/GetCompanyDetails_beta"]
+//企业图谱
+#define GetEntAtlasData  [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/EntAll/GetEntAtlasData"]
+//    企业图谱查询企业或股东信息
+#define GetEntAtlasEntDetail  [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/EntAll/GetEntAtlasEntDetail"]
+
+
+//对外投资和分支机构
+#define GetEntBranchOrInvesment  [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/entdetail/GetEntBranchOrInvesment"]
+
+//关注公司
+#define  UpDateAttend [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/Attend/UpDateAttend"]
+
+//获取热词
+#define GetHotKey  [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/Tools/GetHotSearchWord"]
+
+//搜索
+
+#define GetSear  [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/Search/GetSear"]
+
+
+//热词搜索接口
+#define GetHotSearch  [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/Tools/GetHotSearch"]
+
+//失信热词搜索接口
+#define SXGetHotSearch  [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/Tools/SXGetHotSearch"]
+
+
+//更新企业信息
+#define RefreshEntInfo  [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/EntAll/RefreshEntInfo"]
+
+//获取企业信息更新状态
+#define GetRefreshEntInfo [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/EntAll/GetRefreshEntInfo"]
+
+
+//获取筛选条件
+#define GetKeyWordSummary  [NSString stringWithFormat:@"%@%@",HOSTURL,@"/Api/FirstPage/GetKeyWordSummary"]
+
+//获取失信的筛选条件
+#define PriviceListDeal  [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/Tools/PriviceListDeal"]
+
+//失信查询
+#define BlackListSearch  [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/BlackListNew/BlackListSearch"]
+
+//九宫格-风险信息
+#define KRiskMessage [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/entdetail/GetRiskInformation_beta"]
+
+//九宫格-经营状况
+#define KBusinessInfo [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/entdetail/GetBusinessInformation_beta"]
+
+//九宫格-无形资产
+#define KIntangible [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/entdetail/GetIntangibleAssets_beta"]
+
+//招投标
+#define KGetBid [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/entdetail/GetBidWinningNoticeInfo"]
+
+//招投标详情
+//#define KBidDetail  @""KH5URL"bidInformation.html"
+
+//无形资产-商标
+#define KTrademarkList [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/entdetail/GetCompIcon"]
+
+//招聘
+#define KGetJob [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/entdetail/GetCompInJobPage"]
+
+//招聘详情
+//#define KJobDetail  @""KH5URL"recruitInformation.html"
+
+//专利
+#define KGetPatent [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/entdetail/GetCompPatent"]
+
+
+//行政处罚
+#define KGetPenalty [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/entdetail/GetEntXZPunishmentInfoModel"]
+
+//股权出质
+#define KGetGuQuan [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/entdetail/GetEstateMortgageByEntName"]
+
+// 经营状况–招标
+#define KGetZhaoBiao [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/entdetail/GetTenderNoticeRawByProcurementCompany"]
+
+//查税号
+#define KGetSearByRegCode [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/search/GetSearByRegCode"]
+
+//招聘搜索
+#define KGetCompInJobPage [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/entdetail/GetCompInJobPageAll"]
+
+//企业通讯录搜索
+#define KSearchEntContact [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/Contacts/get"]
+
+//获取纠错问题列表
+#define KGetQuestionList [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/entdetail/GetQuestionResult"]
+
+//提交纠错问题列表
+#define KCommitQuestion [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/entdetail/PostQuestionResult"]
+
+//纠错
+#define KErrorCorrection [NSString stringWithFormat:@"%@%@",HOSTURL,@"/Api/ErrorBack/InsertErrorBack"]
+
+//欠税公告
+#define KGetEntOwingTaxList [NSString stringWithFormat:@"%@%@",HOSTURL,@"/api/entdetail/GetEntOwingTaxAnnouncement"]
+
+//全网查找
+#define FullWebSearch @"/Html/AIC_search.html"
+
+
+#endif /* URLManager_h */
