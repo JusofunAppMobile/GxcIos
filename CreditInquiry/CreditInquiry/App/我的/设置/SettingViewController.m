@@ -1,25 +1,27 @@
 //
-//  MyOrderController.m
+//  SettingViewController.m
 //  CreditInquiry
 //
 //  Created by JUSFOUN on 2019/1/9.
 //  Copyright © 2019年 JUSFOUN. All rights reserved.
 //
 
-#import "MyOrderController.h"
-#import "MyOrderReportCell.h"
+#import "SettingViewController.h"
+#import "SettingPlainCell.h"
+#import "SettingAvatarCell.h"
 
-static NSString *CellID1 = @"MyOrderReportCell";
+static NSString *CellID1 = @"SettingAvatarCell";
+static NSString *CellID2 = @"SettingPlainCell";
 
-@interface MyOrderController ()<UITableViewDelegate,UITableViewDataSource>
+@interface SettingViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic ,strong) UITableView *tableview;
 @end
 
-@implementation MyOrderController
+@implementation SettingViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setNavigationBarTitle:@"我的订单"];
+    [self setNavigationBarTitle:@"个人设置"];
     [self setBackBtn:nil];
     
     [self initView];
@@ -32,19 +34,21 @@ static NSString *CellID1 = @"MyOrderReportCell";
         [self.view addSubview:view];
         view.delegate = self;
         view.dataSource = self;
-        view.estimatedRowHeight = 210;
         view.rowHeight = UITableViewAutomaticDimension;
+        view.estimatedRowHeight = 52;
         view;
     });
-    [_tableview registerClass:[MyOrderReportCell class] forCellReuseIdentifier:CellID1];
+    [_tableview registerClass:[SettingAvatarCell class] forCellReuseIdentifier:CellID1];
+    [_tableview registerClass:[SettingPlainCell class] forCellReuseIdentifier:CellID2];
 }
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
+    return 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -55,12 +59,16 @@ static NSString *CellID1 = @"MyOrderReportCell";
     return CGFLOAT_MIN;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    MyOrderReportCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID1 forIndexPath:indexPath];
-    cell.type = indexPath.section;
-    return cell;
-}
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0&&indexPath.row == 0) {
+        SettingAvatarCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID1 forIndexPath:indexPath];
+        return cell;
+    }else{
+        SettingPlainCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID2 forIndexPath:indexPath];
+        return cell;
+    }
+}
 
 
 @end

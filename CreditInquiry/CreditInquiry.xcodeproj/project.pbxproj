@@ -238,7 +238,11 @@
 		CADD609221E588EC00EB01CD /* MePlainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD609121E588EC00EB01CD /* MePlainCell.m */; };
 		CADD609821E5DF7D00EB01CD /* MyOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD609721E5DF7D00EB01CD /* MyOrderController.m */; };
 		CADD609B21E5E1A500EB01CD /* MyOrderReportCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD609A21E5E1A500EB01CD /* MyOrderReportCell.m */; };
-		CADD609E21E5E1D300EB01CD /* MyOrderServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD609D21E5E1D300EB01CD /* MyOrderServiceCell.m */; };
+		CADD60A221E61EB500EB01CD /* MyMonitorListController.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60A121E61EB500EB01CD /* MyMonitorListController.m */; };
+		CADD60A621E61F5700EB01CD /* MyMonitorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60A521E61F5700EB01CD /* MyMonitorCell.m */; };
+		CADD60AA21E626AB00EB01CD /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60A921E626AB00EB01CD /* SettingViewController.m */; };
+		CADD60AE21E626E900EB01CD /* SettingAvatarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60AD21E626E900EB01CD /* SettingAvatarCell.m */; };
+		CADD60B121E6270100EB01CD /* SettingPlainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60B021E6270100EB01CD /* SettingPlainCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -708,8 +712,16 @@
 		CADD609721E5DF7D00EB01CD /* MyOrderController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyOrderController.m; sourceTree = "<group>"; };
 		CADD609921E5E1A500EB01CD /* MyOrderReportCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyOrderReportCell.h; sourceTree = "<group>"; };
 		CADD609A21E5E1A500EB01CD /* MyOrderReportCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyOrderReportCell.m; sourceTree = "<group>"; };
-		CADD609C21E5E1D300EB01CD /* MyOrderServiceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyOrderServiceCell.h; sourceTree = "<group>"; };
-		CADD609D21E5E1D300EB01CD /* MyOrderServiceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyOrderServiceCell.m; sourceTree = "<group>"; };
+		CADD60A021E61EB500EB01CD /* MyMonitorListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyMonitorListController.h; sourceTree = "<group>"; };
+		CADD60A121E61EB500EB01CD /* MyMonitorListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyMonitorListController.m; sourceTree = "<group>"; };
+		CADD60A421E61F5700EB01CD /* MyMonitorCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyMonitorCell.h; sourceTree = "<group>"; };
+		CADD60A521E61F5700EB01CD /* MyMonitorCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyMonitorCell.m; sourceTree = "<group>"; };
+		CADD60A821E626AB00EB01CD /* SettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		CADD60A921E626AB00EB01CD /* SettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		CADD60AC21E626E900EB01CD /* SettingAvatarCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingAvatarCell.h; sourceTree = "<group>"; };
+		CADD60AD21E626E900EB01CD /* SettingAvatarCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingAvatarCell.m; sourceTree = "<group>"; };
+		CADD60AF21E6270100EB01CD /* SettingPlainCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingPlainCell.h; sourceTree = "<group>"; };
+		CADD60B021E6270100EB01CD /* SettingPlainCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingPlainCell.m; sourceTree = "<group>"; };
 		F9DD2AFF454673A827AD096D /* Pods-CreditInquiry.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CreditInquiry.release.xcconfig"; path = "Pods/Target Support Files/Pods-CreditInquiry/Pods-CreditInquiry.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1301,6 +1313,8 @@
 		CA5E00A721DDE5E30040ABE2 /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
+				CADD60A721E6268300EB01CD /* 设置 */,
+				CADD609F21E6199F00EB01CD /* 我的监控 */,
 				CADD609321E5DF0800EB01CD /* 我的订单 */,
 				79D34ED421E05EFF00B1CB32 /* Model */,
 				793D1B6121DF694C00C29908 /* View */,
@@ -1723,8 +1737,46 @@
 			children = (
 				CADD609921E5E1A500EB01CD /* MyOrderReportCell.h */,
 				CADD609A21E5E1A500EB01CD /* MyOrderReportCell.m */,
-				CADD609C21E5E1D300EB01CD /* MyOrderServiceCell.h */,
-				CADD609D21E5E1D300EB01CD /* MyOrderServiceCell.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		CADD609F21E6199F00EB01CD /* 我的监控 */ = {
+			isa = PBXGroup;
+			children = (
+				CADD60A321E61EBE00EB01CD /* view */,
+				CADD60A021E61EB500EB01CD /* MyMonitorListController.h */,
+				CADD60A121E61EB500EB01CD /* MyMonitorListController.m */,
+			);
+			path = "我的监控";
+			sourceTree = "<group>";
+		};
+		CADD60A321E61EBE00EB01CD /* view */ = {
+			isa = PBXGroup;
+			children = (
+				CADD60A421E61F5700EB01CD /* MyMonitorCell.h */,
+				CADD60A521E61F5700EB01CD /* MyMonitorCell.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		CADD60A721E6268300EB01CD /* 设置 */ = {
+			isa = PBXGroup;
+			children = (
+				CADD60AB21E626BB00EB01CD /* view */,
+				CADD60A821E626AB00EB01CD /* SettingViewController.h */,
+				CADD60A921E626AB00EB01CD /* SettingViewController.m */,
+			);
+			path = "设置";
+			sourceTree = "<group>";
+		};
+		CADD60AB21E626BB00EB01CD /* view */ = {
+			isa = PBXGroup;
+			children = (
+				CADD60AC21E626E900EB01CD /* SettingAvatarCell.h */,
+				CADD60AD21E626E900EB01CD /* SettingAvatarCell.m */,
+				CADD60AF21E6270100EB01CD /* SettingPlainCell.h */,
+				CADD60B021E6270100EB01CD /* SettingPlainCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1885,6 +1937,7 @@
 				CA5E00BA21DDEA410040ABE2 /* CustomTabBar.m in Sources */,
 				CA5E008221DDE05E0040ABE2 /* ZFGradientAttribute.m in Sources */,
 				79D34F4A21E4958300B1CB32 /* RiskDetailCell.m in Sources */,
+				CADD60A221E61EB500EB01CD /* MyMonitorListController.m in Sources */,
 				CA5E007221DDE05E0040ABE2 /* UUDatePicker.m in Sources */,
 				CA5E007121DDE05E0040ABE2 /* TimePickerView.m in Sources */,
 				793D1B5921DF690300C29908 /* ButtonModel.m in Sources */,
@@ -1972,6 +2025,7 @@
 				CA5E008F21DDE05E0040ABE2 /* ZFLine.m in Sources */,
 				CA5EFF9E21DC59BF0040ABE2 /* main.m in Sources */,
 				793D1B4A21DF68B700C29908 /* AnimalTableView.m in Sources */,
+				CADD60AE21E626E900EB01CD /* SettingAvatarCell.m in Sources */,
 				CA5E008021DDE05E0040ABE2 /* ZFYAxisLine.m in Sources */,
 				79D34E9E21E05DEF00B1CB32 /* annotationPaoView.m in Sources */,
 				79D34ED321E05E5600B1CB32 /* CompanyInfoModel.m in Sources */,
@@ -1996,6 +2050,7 @@
 				793D1C7821E0583400C29908 /* ItemModel.m in Sources */,
 				79D34EF821E0652000B1CB32 /* SearchTaxCodeCell.m in Sources */,
 				CA5EFF9021DC59B20040ABE2 /* AppDelegate.m in Sources */,
+				CADD60AA21E626AB00EB01CD /* SettingViewController.m in Sources */,
 				CA5E015421E433E30040ABE2 /* MonitorFilterCell.m in Sources */,
 				79D34EFB21E0652000B1CB32 /* SearchJobCell.m in Sources */,
 				799F796A21E5EE72000DBB88 /* BuyVipController.m in Sources */,
@@ -2029,7 +2084,6 @@
 				793D1B4721DF68A300C29908 /* BranchOrInvesmentModel.m in Sources */,
 				CA5E008921DDE05E0040ABE2 /* ZFGenericAxis.m in Sources */,
 				793D1B2721DF67E000C29908 /* CompanyMap.m in Sources */,
-				CADD609E21E5E1D300EB01CD /* MyOrderServiceCell.m in Sources */,
 				CA5E008621DDE05E0040ABE2 /* ZFBarChart.m in Sources */,
 				CA5E013221E433890040ABE2 /* CreditServiceHeader.m in Sources */,
 				793D1B3021DF67E000C29908 /* LoadDetailWithH5ViewController.m in Sources */,
@@ -2058,12 +2112,14 @@
 				CA5E009621DDE05E0040ABE2 /* ZFRadarChart.m in Sources */,
 				79D34EA021E05DEF00B1CB32 /* leftViewCell.m in Sources */,
 				CA5E007821DDE05E0040ABE2 /* NSNumber+Zirkfied.m in Sources */,
+				CADD60B121E6270100EB01CD /* SettingPlainCell.m in Sources */,
 				CADD606921E4931900EB01CD /* CreditEditLabelCell.m in Sources */,
 				CA5E007E21DDE05E0040ABE2 /* ZFPopoverLabel.m in Sources */,
 				CA5E009521DDE05E0040ABE2 /* ZFRadar.m in Sources */,
 				79D34F3021E3682600B1CB32 /* RiskAnalyzeCell.m in Sources */,
 				79D34F1E21E0AF3700B1CB32 /* NewsCell.m in Sources */,
 				79D34EFF21E0654100B1CB32 /* ExportBar.m in Sources */,
+				CADD60A621E61F5700EB01CD /* MyMonitorCell.m in Sources */,
 				CA5E008B21DDE05E0040ABE2 /* ZFHorizontalAxis.m in Sources */,
 				CA5EFFB321DDE0390040ABE2 /* BasicViewController.m in Sources */,
 				79D34E9D21E05DEF00B1CB32 /* ReportTypeCell.m in Sources */,
