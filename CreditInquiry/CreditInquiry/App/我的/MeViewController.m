@@ -11,6 +11,8 @@
 #import "MeItemCell.h"
 #import "MePlainCell.h"
 #import "MyOrderController.h"
+#import "MyMonitorListController.h"
+#import "SettingViewController.h"
 
 static NSString *InfoID = @"MeInfoCell";
 static NSString *ItemID = @"MeItemCell";
@@ -106,6 +108,15 @@ static NSString *PlainID = @"MePlainCell";
     }
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 2) {
+        SettingViewController *vc = [SettingViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat cornerRadius = 8.0;
     NSInteger numberOfRows = [tableView numberOfRowsInSection:indexPath.section];
@@ -141,6 +152,9 @@ static NSString *PlainID = @"MePlainCell";
 - (void)didClickItemAtIndex:(NSInteger)index{
     if (index == 0) {
         MyOrderController *vc = [MyOrderController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (index ==1||index==2){
+        MyMonitorListController *vc = [MyMonitorListController new];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

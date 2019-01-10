@@ -1,5 +1,5 @@
 //
-//  MyOrderReportCell.h
+//  SettingAvatarCell.h
 //  CreditInquiry
 //
 //  Created by JUSFOUN on 2019/1/9.
@@ -10,8 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MyOrderReportCell : UITableViewCell
-@property (nonatomic ,assign) NSInteger type;
+@interface SettingAvatarCell : UITableViewCell
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -18,6 +18,7 @@
 @property (nonatomic ,strong) UILabel *emailLab;
 @property (nonatomic ,strong) UILabel *formatLab;
 @property (nonatomic ,strong) UIView *footerBg;
+@property (nonatomic ,strong) UIView *line2;
 @end
 
 @implementation MyOrderReportCell
@@ -30,11 +31,9 @@
             [self.contentView addSubview:view];
             [view mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.top.mas_equalTo(13);
-                
             }];
             view.font = KFont(15);
             view.textColor = KHexRGB(0x303030);
-            view.text = @"企业信用报告-专业版";
             view;
         });
         
@@ -42,12 +41,11 @@
             UILabel *view = [UILabel new];
             [self.contentView addSubview:view];
             [view mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.mas_equalTo(13);
+                make.centerY.mas_equalTo(_titleLab);
                 make.right.mas_equalTo(-15);
             }];
-            view.font = KFont(12);
+            view.font = KBlodFont(12);
             view.textColor = KHexRGB(0xe00018);
-            view.text = @"已生成";
             view;
         });
         
@@ -71,6 +69,19 @@
             view.font = KFont(13);
             view.textColor = KHexRGB(0x303030);
             view.text = @"小米科技有限责任公司";
+            view;
+        });
+        
+        self.priceLab = ({
+            UILabel *view = [UILabel new];
+            [self.contentView addSubview:view];
+            [view mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(_nameLab);
+                make.right.mas_equalTo(-15);
+            }];
+            view.font = KBlodFont(12);
+            view.text = @"￥233";
+            view.textColor = KHexRGB(0xe00018);
             view;
         });
         
@@ -119,6 +130,7 @@
             [view mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(_titleLab);
                 make.top.mas_equalTo(_emailLab.mas_bottom).offset(10);
+                make.height.mas_equalTo(14);
             }];
             view.font = KFont(13);
             view.text = @"报告格式：PDF";
@@ -126,14 +138,16 @@
             view;
         });
         
-        
-        UIView *line2 = [UIView new];
-        line2.backgroundColor = KHexRGB(0xd9d9d9);
-        [self.contentView addSubview:line2];
-        [line2 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(_formatLab.mas_bottom).offset(13);
-            make.left.right.height.mas_equalTo(line);
-        }];
+        self.line2 = ({
+            UIView *line2 = [UIView new];
+            line2.backgroundColor = KHexRGB(0xd9d9d9);
+            [self.contentView addSubview:line2];
+            [line2 mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(_formatLab.mas_bottom).offset(13);
+                make.left.right.height.mas_equalTo(line);
+            }];
+            line2;
+        });
         
         self.footerBg = ({
             UIView *footerBg = [UIView new];
@@ -141,14 +155,14 @@
             [footerBg mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.height.mas_equalTo(40);
                 make.left.right.bottom.mas_equalTo(self.contentView);
-                make.top.mas_equalTo(line2.mas_bottom);
+                make.top.mas_equalTo(_line2.mas_bottom);
             }];
             footerBg;
         });
        
         
         UIButton *reportBtn = [UIButton new];
-        reportBtn.layer.cornerRadius = 2;
+        reportBtn.layer.cornerRadius = 4;
         reportBtn.layer.masksToBounds = YES;
         reportBtn.backgroundColor = KHexRGB(0xd60e23);
         reportBtn.titleLabel.font = [UIFont boldSystemFontOfSize:13];
@@ -163,10 +177,10 @@
         
         
         UIButton *sendBtn = [UIButton new];
-        sendBtn.layer.cornerRadius = 2;
+        sendBtn.layer.cornerRadius = 4;
         sendBtn.layer.masksToBounds = YES;
         sendBtn.layer.borderWidth = 1;
-        sendBtn.layer.borderColor = KHexRGB(0xd93947).CGColor;
+        sendBtn.layer.borderColor = KHexRGB(0xc8c8c8).CGColor;
         sendBtn.titleLabel.font =[UIFont boldSystemFontOfSize:13];
         [sendBtn setTitle:@"重新发送" forState:UIControlStateNormal];
         [sendBtn setTitleColor:KHexRGB(0xd93947) forState:UIControlStateNormal];
@@ -175,10 +189,58 @@
             make.top.bottom.width.height.mas_equalTo(reportBtn);
             make.right.mas_equalTo(reportBtn.mas_left).offset(-10);
         }];
-        
-        
     }
     return self;
+}
+
+- (void)setType:(NSInteger)type{
+    _type = type;
+    if (type == 1) {
+        _statusLab.text = @"已生成";
+        _titleLab.text = @"VIP会员服务";
+        _orderLab.attributedText = [self getAttibuteForText:@"订单编号：1233321312321545"];
+        _dateLab.attributedText = [self getAttibuteForText:@"购买时间：2018-12-31 14:21:20"];
+        _emailLab.attributedText = [self getAttibuteForText:@"服务时长：12个月"];
+
+        _formatLab.hidden = YES;
+        _footerBg.hidden = YES;
+        _line2.hidden = YES;
+       
+        [_formatLab mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
+            make.top.mas_equalTo(_emailLab.mas_bottom).offset(0);
+        }];
+        [_footerBg mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
+        }];
+        
+    }else{
+        _statusLab.text = @"已支付";
+        _titleLab.text = @"企业信用报告-专业版";
+        _orderLab.attributedText = [self getAttibuteForText:@"订单编号：1233321312321545"];
+        _dateLab.attributedText = [self getAttibuteForText:@"购买时间：2018-12-31 14:21:20"];
+        _emailLab.attributedText = [self getAttibuteForText:@"接收邮箱：sadsa222@sina.com"];
+        _formatLab.attributedText = [self getAttibuteForText:@"订单编号：1233321312321545"];
+
+        _formatLab.hidden = NO;
+        _footerBg.hidden = NO;
+        _line2.hidden = NO;
+       
+        [_formatLab mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(14);
+            make.top.mas_equalTo(_emailLab.mas_bottom).offset(10);
+        }];
+        [_footerBg mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(40);
+        }];
+    }
+}
+
+
+- (NSAttributedString *)getAttibuteForText:(NSString *)str{
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc]initWithString:str];
+    [attr addAttribute:NSForegroundColorAttributeName value:KHexRGB(0x303030) range:NSMakeRange(5, str.length-5)];
+    return attr;
 }
 
 @end
