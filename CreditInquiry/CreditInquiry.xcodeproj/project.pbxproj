@@ -996,13 +996,6 @@
 			path = VC;
 			sourceTree = "<group>";
 		};
-		79D34F0821E0789C00B1CB32 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		79D34F0921E0789E00B1CB32 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1267,7 +1260,6 @@
 			children = (
 				79D34F0721E0789500B1CB32 /* VC */,
 				79D34F0921E0789E00B1CB32 /* View */,
-				79D34F0821E0789C00B1CB32 /* Model */,
 				793D1B5A21DF692700C29908 /* CommonWebViewController.h */,
 				793D1B5B21DF692800C29908 /* CommonWebViewController.m */,
 			);

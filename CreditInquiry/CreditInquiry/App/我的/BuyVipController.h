@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BuyVipController : BasicViewController<UITableViewDelegate,UITableViewDataSource>
+@interface BuyVipController :BasicViewController<UITableViewDelegate,UITableViewDataSource>
 
 @end
 

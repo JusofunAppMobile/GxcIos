@@ -64,7 +64,8 @@ static NSString *NewsCellID = @"NewsCellID";
 
 -(void)joinVIP
 {
-    
+    BuyVipController*vc = [[BuyVipController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
@@ -383,7 +384,7 @@ static NSString *NewsCellID = @"NewsCellID";
 
 - (void)drawRightBarButton{
     buttonRight = [UIButton buttonWithType:UIButtonTypeCustom];
-    [buttonRight setTitle:@"加入VIP >" forState:UIControlStateNormal];
+    [buttonRight setTitle:@" 加入VIP >" forState:UIControlStateNormal];
     buttonRight.frame = CGRectMake(KDeviceW - 95, 0, 80, 40);
     [buttonRight setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     buttonRight.titleLabel.font = KFont(14);
@@ -398,7 +399,7 @@ static NSString *NewsCellID = @"NewsCellID";
 #pragma mark - life cycle
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    buttonRight.hidden = NO;
+    
     if (_tableview.contentOffset.y>0) {//复位导航栏样式
         CGFloat alpha = _tableview.contentOffset.y /(HomeBannerHeight - KNavigationBarHeight);
         alpha = MIN(alpha, 1);
@@ -416,6 +417,7 @@ static NSString *NewsCellID = @"NewsCellID";
 }
 
 - (void)viewDidAppear:(BOOL)animated{
+    buttonRight.hidden = NO;
     if(@available(iOS 11.0, *))
     {
         if (_tableview.contentOffset.y>0) {//复位导航栏样式

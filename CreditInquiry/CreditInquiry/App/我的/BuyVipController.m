@@ -18,6 +18,7 @@
     NSInteger chooseIndex;
     
     UILabel *moneyLabel;
+    UIButton *buyBtn;
     
     
 }
@@ -53,6 +54,11 @@
     } failure:^(NSError *error) {
         [weakSelf showNetFailViewWithFrame:KFrame(0, KNavigationBarHeight, KDeviceW, KDeviceH-KNavigationBarHeight)];
     }];
+    
+}
+
+-(void)buy
+{
     
 }
 
@@ -96,14 +102,17 @@
 {
     return CGFLOAT_MIN;
 }
+
+
 -(void)drawTableView
 {
     
     UIView*backView = [UIView new];
     backView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:backView];
     [backView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.view);
-        make.height.mas_equalTo(50);
+        make.height.mas_equalTo(50+KBottomHeight);
         make.width.mas_equalTo(KDeviceW);
     }];
     
@@ -114,36 +123,34 @@
     [backView addSubview:label];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
+        make.height.mas_equalTo(50);
+    }];
+    
+    buyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [buyBtn setBackgroundColor:KRGB(238, 37, 32)];
+    [buyBtn setTitle:@"购买" forState:UIControlStateNormal];
+    [buyBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [buyBtn addTarget:self action:@selector(buy) forControlEvents:UIControlEventTouchUpInside];
+    [backView addSubview:buyBtn];
+    
+    [buyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(backView);
         make.height.mas_equalTo(backView);
+        make.width.mas_equalTo(250/750.0*KDeviceW);
+        make.right.mas_equalTo(backView);
+        
     }];
     
     moneyLabel = [[UILabel alloc]init];
-    moneyLabel.textColor = [UIColor blackColor];
-    moneyLabel.font = KFont(14);
-    moneyLabel.text = @"实付金额:";
+    moneyLabel.textColor = KRGB(238, 37, 32);
+    moneyLabel.font = KFont(16);
+    moneyLabel.text = @"¥4353";
     [backView addSubview:moneyLabel];
     [moneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(15);
-        make.height.mas_equalTo(backView);
+        make.left.mas_equalTo(label.mas_right).offset(5);
+        make.right.mas_equalTo(buyBtn.mas_left);
+        make.height.mas_equalTo(50);
     }];
-    
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setBackgroundColor:KRGB(238, 37, 32)];
-    [button setTitle:@"提交认证" forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    button.layer.cornerRadius = 5;
-    button.clipsToBounds = YES;
-    [self.view addSubview:button];
-    
-    [button mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.view).offset(-10);
-        make.height.mas_equalTo(45);
-        make.width.mas_equalTo(KDeviceW-30);
-        make.left.mas_equalTo(15);
-        
-    }];
-    [button addTarget:self action:@selector(certification) forControlEvents:UIControlEventTouchUpInside];
-    
     
     
     backTableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
@@ -159,7 +166,7 @@
         make.top.mas_equalTo(KNavigationBarHeight);
         make.left.mas_equalTo(0);
         make.width.mas_equalTo(KDeviceW);
-        make.bottom.mas_equalTo(button.mas_top).offset(-10);
+        make.bottom.mas_equalTo(backView.mas_top);
     }];
     
 }
