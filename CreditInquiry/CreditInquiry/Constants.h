@@ -13,7 +13,7 @@
 #define Constants_h
 
 // navigaitonBar标题大小
-#define KNavigationTitleFontSize  17
+#define KNavigationTitleFontSize  18
 
 //navigaitonBar背景颜色
 #define KNavigationBarBackGroundColor [UIColor whiteColor]

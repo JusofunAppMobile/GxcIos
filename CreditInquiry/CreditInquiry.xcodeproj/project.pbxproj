@@ -64,6 +64,9 @@
 		799F78E421E5C24C000DBB88 /* SeekRelationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F78E321E5C24C000DBB88 /* SeekRelationController.m */; };
 		799F796721E5E9E1000DBB88 /* RiskVipController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F796621E5E9E1000DBB88 /* RiskVipController.m */; };
 		799F796A21E5EE72000DBB88 /* BuyVipController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F796921E5EE72000DBB88 /* BuyVipController.m */; };
+		799F796D21E6E574000DBB88 /* BuyVipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F796C21E6E574000DBB88 /* BuyVipCell.m */; };
+		799F797021E72655000DBB88 /* VisitorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F796F21E72655000DBB88 /* VisitorController.m */; };
+		799F797321E74656000DBB88 /* VistorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F797221E74656000DBB88 /* VistorCell.m */; };
 		79D34E8B21E05DA100B1CB32 /* MyAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D34E8A21E05DA100B1CB32 /* MyAlertView.m */; };
 		79D34E8E21E05DB300B1CB32 /* ItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D34E8C21E05DB300B1CB32 /* ItemView.m */; };
 		79D34E9B21E05DEF00B1CB32 /* SearchAllWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D34E8F21E05DEE00B1CB32 /* SearchAllWebView.m */; };
@@ -361,6 +364,12 @@
 		799F796621E5E9E1000DBB88 /* RiskVipController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RiskVipController.m; sourceTree = "<group>"; };
 		799F796821E5EE72000DBB88 /* BuyVipController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuyVipController.h; sourceTree = "<group>"; };
 		799F796921E5EE72000DBB88 /* BuyVipController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuyVipController.m; sourceTree = "<group>"; };
+		799F796B21E6E574000DBB88 /* BuyVipCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuyVipCell.h; sourceTree = "<group>"; };
+		799F796C21E6E574000DBB88 /* BuyVipCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuyVipCell.m; sourceTree = "<group>"; };
+		799F796E21E72655000DBB88 /* VisitorController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VisitorController.h; sourceTree = "<group>"; };
+		799F796F21E72655000DBB88 /* VisitorController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VisitorController.m; sourceTree = "<group>"; };
+		799F797121E74656000DBB88 /* VistorCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VistorCell.h; sourceTree = "<group>"; };
+		799F797221E74656000DBB88 /* VistorCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VistorCell.m; sourceTree = "<group>"; };
 		79D34E8921E05DA100B1CB32 /* MyAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAlertView.h; sourceTree = "<group>"; };
 		79D34E8A21E05DA100B1CB32 /* MyAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAlertView.m; sourceTree = "<group>"; };
 		79D34E8C21E05DB300B1CB32 /* ItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemView.m; sourceTree = "<group>"; };
@@ -946,6 +955,10 @@
 				CADD608E21E588D900EB01CD /* MeItemCell.m */,
 				CADD609021E588EC00EB01CD /* MePlainCell.h */,
 				CADD609121E588EC00EB01CD /* MePlainCell.m */,
+				799F796B21E6E574000DBB88 /* BuyVipCell.h */,
+				799F796C21E6E574000DBB88 /* BuyVipCell.m */,
+				799F797121E74656000DBB88 /* VistorCell.h */,
+				799F797221E74656000DBB88 /* VistorCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1314,6 +1327,8 @@
 				CA5E00B321DDE6B10040ABE2 /* MeViewController.m */,
 				799F796821E5EE72000DBB88 /* BuyVipController.h */,
 				799F796921E5EE72000DBB88 /* BuyVipController.m */,
+				799F796E21E72655000DBB88 /* VisitorController.h */,
+				799F796F21E72655000DBB88 /* VisitorController.m */,
 			);
 			path = "我的";
 			sourceTree = "<group>";
@@ -1928,6 +1943,7 @@
 				79D34F1821E08EA200B1CB32 /* HomeHeaderView.m in Sources */,
 				CA5E00BA21DDEA410040ABE2 /* CustomTabBar.m in Sources */,
 				CA5E008221DDE05E0040ABE2 /* ZFGradientAttribute.m in Sources */,
+				799F796D21E6E574000DBB88 /* BuyVipCell.m in Sources */,
 				79D34F4A21E4958300B1CB32 /* RiskDetailCell.m in Sources */,
 				CADD60A221E61EB500EB01CD /* MyMonitorListController.m in Sources */,
 				CA5E007221DDE05E0040ABE2 /* UUDatePicker.m in Sources */,
@@ -1999,6 +2015,7 @@
 				CA5E013321E433890040ABE2 /* XXLineChartView.m in Sources */,
 				CA5E013121E433890040ABE2 /* CreditCollectionCell.m in Sources */,
 				793D1B1D21DF67E000C29908 /* RecoveryErrorViewController.m in Sources */,
+				799F797321E74656000DBB88 /* VistorCell.m in Sources */,
 				CADD606F21E4A74300EB01CD /* EditHonorController.m in Sources */,
 				CA5E005C21DDE05E0040ABE2 /* UINavigationBar+Extention.m in Sources */,
 				CADD606021E491C200EB01CD /* CreditEditTextCell.m in Sources */,
@@ -2119,6 +2136,7 @@
 				CADD608221E4BB8900EB01CD /* CreditReportCell.m in Sources */,
 				CA5E008721DDE05E0040ABE2 /* ZFCirque.m in Sources */,
 				79D34EF721E0652000B1CB32 /* ShareholderCell.m in Sources */,
+				799F797021E72655000DBB88 /* VisitorController.m in Sources */,
 				79D34EE321E0616E00B1CB32 /* FilterCellModel.m in Sources */,
 				793D1B2F21DF67E000C29908 /* RiskContainerController.m in Sources */,
 				CADD608521E4CA0F00EB01CD /* CreditProReportCell.m in Sources */,

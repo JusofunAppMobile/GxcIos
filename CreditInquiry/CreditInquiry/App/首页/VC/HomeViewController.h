@@ -15,6 +15,7 @@
 #import "SeekRelationController.h"
 #import "RiskVipController.h"
 #import "BuyVipController.h"
+#import "VisitorController.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HomeViewController : BasicViewController<UITableViewDelegate,UITableViewDataSource,HomeHeaderViewDelegate,SectionHeaderDelegate>
