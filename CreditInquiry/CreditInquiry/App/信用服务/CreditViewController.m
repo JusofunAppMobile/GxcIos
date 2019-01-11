@@ -42,7 +42,7 @@ static NSString *ChartID = @"CreditChartLineCell";
         
     ULBCollectionViewFlowLayout *layout = [ULBCollectionViewFlowLayout new];
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    layout.minimumInteritemSpacing = 0.2;
+    layout.minimumInteritemSpacing = 0;
     layout.minimumLineSpacing = 0;
     
     self.collectionview = ({
@@ -113,10 +113,10 @@ static NSString *ChartID = @"CreditChartLineCell";
         }
         return CGSizeMake(KDeviceW, height);
     }else if (indexPath.section == 3) {
-        return CGSizeMake(KDeviceW, 210);
+        return CGSizeMake(KDeviceW, 200);
     }else {
-        CGFloat width = (KDeviceW-10*2-0.2*3)/4;
-        return CGSizeMake(width, 75);
+        CGFloat width = (KDeviceW-10*2)/4;
+        return CGSizeMake(width, 77);
     }
 }
 

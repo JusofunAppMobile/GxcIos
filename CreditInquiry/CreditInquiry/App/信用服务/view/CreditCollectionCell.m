@@ -13,6 +13,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
+                
         UIButton *view = [UIButton new];
         view.enabled = NO;
         [view setImage:KImageName(@"icon_shuiwu") forState:UIControlStateNormal];
@@ -24,9 +25,7 @@
             make.edges.mas_equalTo(self.contentView).insets(UIEdgeInsetsMake(20, 0, 0, 0));
         }];
         [self layoutIfNeeded];
-        [view setImagePosition:LXMImagePositionTop spacing:10];
-        
-        view.imageView.backgroundColor = [UIColor redColor];
+        [view setImagePosition:LXMImagePositionTop spacing:5];
     }
     return self;
 }
