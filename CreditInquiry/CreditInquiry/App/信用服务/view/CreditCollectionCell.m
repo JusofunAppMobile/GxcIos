@@ -15,7 +15,7 @@
     if (self = [super initWithFrame:frame]) {
         UIButton *view = [UIButton new];
         view.enabled = NO;
-        [view setImage:KImageName(@"test123") forState:UIControlStateNormal];
+        [view setImage:KImageName(@"icon_shuiwu") forState:UIControlStateNormal];
         [view setTitle:@"税务案件" forState:UIControlStateNormal];
         [view setTitleColor:KHexRGB(0x303030) forState:UIControlStateNormal];
         view.titleLabel.font = KFont(14);

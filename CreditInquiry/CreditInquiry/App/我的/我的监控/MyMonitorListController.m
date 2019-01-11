@@ -22,8 +22,8 @@ static NSString *CellID = @"MyMonitorCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setNavigationBarTitle:@"我的监控"];
-    [self setBackBtn:nil];
-    
+    [self setBlankBackButton];
+
     [self initView];
 }
 

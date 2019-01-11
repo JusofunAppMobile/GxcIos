@@ -64,18 +64,18 @@
 
 - (void)setupHeader:(int)state section:(NSInteger)section{
     if (state == 1) {//test
-        if (section == 0) {
+        if (section == 1) {
             _titleLab.text = @"企业服务";
             _line.hidden = NO;
-        }else if (section == 1){
-            _titleLab.text = @"企业查询";
+        }else if (section == 2){
+            _titleLab.text = @"专项查询";
             _line.hidden = NO;
         }else{
             _titleLab.text = @"政府访客统计";
             _line.hidden = YES;
         }
     }else{
-        _titleLab.text = @"企业查询";
+        _titleLab.text = @"专项查询";
         _line.hidden = NO;
     }
 }

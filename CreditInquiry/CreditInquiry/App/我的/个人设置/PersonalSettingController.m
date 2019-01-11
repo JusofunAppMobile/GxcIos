@@ -1,23 +1,25 @@
 //
-//  SettingViewController.m
+//  PersonalSettingController.m
 //  CreditInquiry
 //
-//  Created by JUSFOUN on 2019/1/9.
+//  Created by JUSFOUN on 2019/1/10.
 //  Copyright © 2019年 JUSFOUN. All rights reserved.
 //
 
-#import "SettingViewController.h"
+#import "PersonalSettingController.h"
 #import "SettingPlainCell.h"
 #import "SettingAvatarCell.h"
+#import "ModifyPhoneController.h"
+#import "ModifyInfoController.h"
 
 static NSString *CellID1 = @"SettingAvatarCell";
 static NSString *CellID2 = @"SettingPlainCell";
 
-@interface SettingViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface PersonalSettingController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic ,strong) UITableView *tableview;
 @end
 
-@implementation SettingViewController
+@implementation PersonalSettingController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -59,14 +61,30 @@ static NSString *CellID2 = @"SettingPlainCell";
     return CGFLOAT_MIN;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0&&indexPath.row == 0) {
         SettingAvatarCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID1 forIndexPath:indexPath];
         return cell;
     }else{
         SettingPlainCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID2 forIndexPath:indexPath];
+        cell.indexPath = indexPath;
         return cell;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.section == 0&&indexPath.row ==0) {
+        
+    }else if (indexPath.section == 0&&indexPath.row == 1){
+        ModifyPhoneController *vc = [ModifyPhoneController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        SettingPlainCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        
+        ModifyInfoController *vc = [ModifyInfoController new];
+        vc.typeStr = cell.title;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

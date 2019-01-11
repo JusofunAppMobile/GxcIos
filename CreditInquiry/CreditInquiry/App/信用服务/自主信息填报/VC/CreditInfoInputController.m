@@ -27,8 +27,8 @@ static NSString *CellID = @"CreditInfoInputCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setNavigationBarTitle:@"自主信息填报"];
-    [self setBackBtn:nil];
-    
+    [self setBlankBackButton];
+
     [self initView];
 }
 
