@@ -13,6 +13,8 @@
 #import "MyOrderController.h"
 #import "MyMonitorListController.h"
 #import "SettingViewController.h"
+#import "PersonalSettingController.h"
+#import "FogotPwdController.h"
 
 static NSString *InfoID = @"MeInfoCell";
 static NSString *ItemID = @"MeItemCell";
@@ -33,11 +35,11 @@ static NSString *PlainID = @"MePlainCell";
     self.view.backgroundColor = KHexRGB(0xecedf2);
     
     UIImageView *redBg = [UIImageView new];
-    redBg.backgroundColor = KHexRGB(0xdf2129);
+    redBg.image = KImageName(@"mine_topbg");
     [self.view addSubview:redBg];
     [redBg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.right.left.mas_equalTo(self.view);//test高度
-        make.height.mas_equalTo(220);
+        make.height.mas_equalTo((444.f/750)*KDeviceW);
     }];
     
     self.tableview = ({
@@ -110,9 +112,17 @@ static NSString *PlainID = @"MePlainCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section == 2) {
-        SettingViewController *vc = [SettingViewController new];
+    if (indexPath.section == 0) {
+        PersonalSettingController *vc = [PersonalSettingController new];
         [self.navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.section == 2) {
+        if (indexPath.row == 3) {
+            SettingViewController *vc = [SettingViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            FogotPwdController *vc = [FogotPwdController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
 }
 

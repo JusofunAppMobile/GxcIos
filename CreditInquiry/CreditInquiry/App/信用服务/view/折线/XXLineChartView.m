@@ -72,31 +72,30 @@
     
     //画轴线
     CGFloat xAxisX = 15;
-    CGFloat xAxisY = height -20;
+    CGFloat xAxisY = height -20 -25;//距底部25
     CGFloat xAxisWidth = width-15*2;
 
     
-    CGFloat yAxisX = 40;
+    CGFloat yAxisX = 30;
     CGFloat yAxisY = 0;
 
     
     NSMutableArray *pathArr = [NSMutableArray array];
   
-    CGFloat yTittleMargin = (xAxisY - yAxisY)/(self.yTittleCount + 1);
-    for (int i = 0; i <= self.yTittleCount; i++) {
+    CGFloat yTittleMargin = (xAxisY - yAxisY)/(self.yTittleCount-1);
+    for (int i = 0; i < self.yTittleCount; i++) {
         //绘制背景横线
         CGFloat x = yAxisX;
-        CGFloat y = yTittleMargin * (i + 1) + yAxisY;
+        CGFloat y = yTittleMargin * (i) + yAxisY;
 
         [pathArr addObject:[NSValue valueWithCGPoint:CGPointMake(x, y)]];
         [pathArr addObject:[NSValue valueWithCGPoint:CGPointMake(xAxisX + xAxisWidth, y)]];
 
         //y轴标题
-        if (i%2 == 0) {
+        if (i%2 != 0) {
             NSString *str = self.yTittles[i];
-            //        CGSize strSize = [str sizeWithFont:[UIFont systemFontOfSize:10]];
             CGSize strSize = [str sizeWithAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:10]}];
-            [str drawInRect:CGRectMake(yAxisX - strSize.width - 3, y + strSize.height/2, strSize.width, strSize.height)
+            [str drawInRect:CGRectMake(yAxisX - strSize.width - 3, y - strSize.height, strSize.width, strSize.height)
              withAttributes:@{NSForegroundColorAttributeName : self.axisTitleColor,
                               NSFontAttributeName            : [UIFont systemFontOfSize:10]}];
         }
@@ -139,7 +138,7 @@
         [self.backLineColor set];
 
         CGFloat x = yAxisX + margin + xTittleMargin * idx;
-        CGFloat backLineY = (xAxisY - yAxisY)/(self.yTittleCount + 1) + yAxisY ;
+        CGFloat backLineY =  yAxisY ;
         UIBezierPath *path = [UIBezierPath bezierPath];
         [path moveToPoint:CGPointMake(x, backLineY)];
         [path addLineToPoint:CGPointMake(x, xAxisY)];
@@ -158,7 +157,7 @@
         if (idx < self.values.count) {
             //画圆
             NSNumber *number = self.values[idx];
-            CGFloat y = xAxisY - (number.floatValue / [self.yTittles[0] integerValue] * yTittleMargin * self.yTittleCount);
+            CGFloat y = xAxisY - (number.floatValue / [self.yTittles[0] integerValue] * yTittleMargin * (self.yTittleCount-1));
             
             [self.circleColor set];//圆的颜色
             UIBezierPath *circle = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(x - 2.5, y - 2.5, 5, 5)];

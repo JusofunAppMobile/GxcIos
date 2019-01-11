@@ -13,9 +13,10 @@
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
+                
         UIButton *view = [UIButton new];
         view.enabled = NO;
-        [view setImage:KImageName(@"test123") forState:UIControlStateNormal];
+        [view setImage:KImageName(@"icon_shuiwu") forState:UIControlStateNormal];
         [view setTitle:@"税务案件" forState:UIControlStateNormal];
         [view setTitleColor:KHexRGB(0x303030) forState:UIControlStateNormal];
         view.titleLabel.font = KFont(14);
@@ -24,8 +25,7 @@
             make.edges.mas_equalTo(self.contentView).insets(UIEdgeInsetsMake(20, 0, 0, 0));
         }];
         [self layoutIfNeeded];
-        [view setImagePosition:LXMImagePositionTop spacing:10];
-        
+        [view setImagePosition:LXMImagePositionTop spacing:5];
     }
     return self;
 }

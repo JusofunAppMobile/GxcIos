@@ -24,7 +24,7 @@ static NSString *TextCellID = @"CreditEditTextCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setNavigationBarTitle:@"合作伙伴"];
-    [self setBackBtn:nil];
+    [self setBlankBackButton];
     [self setRightNaviButton];
     [self initView];
 }

@@ -7,14 +7,16 @@
 //
 
 #import "CreditViewController.h"
-#import "CreditServiceHeader.h"
 #import "CreditCollectionCell.h"
 #import "CreditSectionHeader.h"
 #import "ULBCollectionViewFlowLayout.h"
 #import "CreditChartLineCell.h"
 #import "CreditInfoInputController.h"
 #import "CreditReportController.h"
+#import "ObjectionAppealController.h"
+#import "CreditInfoCell.h"
 
+static NSString *InfoID = @"CreditInfoCell";
 static NSString *CellID = @"CreditCollectionCell";
 static NSString *HeaderID = @"CreditSectionHeader";
 static NSString *ChartID = @"CreditChartLineCell";
@@ -37,22 +39,18 @@ static NSString *ChartID = @"CreditChartLineCell";
 - (void)initView{
     
     self.view.backgroundColor = KHexRGB(0xedeef3);
-    
-    CreditServiceHeader *creditHeader = [[CreditServiceHeader alloc]initWithFrame:KFrame(0, KNavigationBarHeight, KDeviceW, 115+5+10)];
-    creditHeader.companyInfo = _companyInfo;
-    [self.view addSubview:creditHeader];
-    
-    
+        
     ULBCollectionViewFlowLayout *layout = [ULBCollectionViewFlowLayout new];
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    layout.minimumInteritemSpacing = 0.2;
+    layout.minimumInteritemSpacing = 0;
     layout.minimumLineSpacing = 0;
     
     self.collectionview = ({
         UICollectionView *view = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];
         [self.view addSubview:view];
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(creditHeader.mas_bottom);
+            make.top.mas_equalTo(
+            KNavigationBarHeight);
             make.left.right.mas_equalTo(self.view);
             make.bottom.mas_equalTo(self.view).offset(-KTabBarHeight);
         }];
@@ -61,6 +59,7 @@ static NSString *ChartID = @"CreditChartLineCell";
         view.dataSource = self;
         view;
     });
+    [_collectionview registerClass:[CreditInfoCell class] forCellWithReuseIdentifier:InfoID];
     [_collectionview registerClass:[CreditCollectionCell class] forCellWithReuseIdentifier:CellID];
     [_collectionview registerClass:[CreditChartLineCell class] forCellWithReuseIdentifier:ChartID];
     [_collectionview registerClass:[CreditSectionHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderID];
@@ -68,18 +67,22 @@ static NSString *ChartID = @"CreditChartLineCell";
 
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return [_companyInfo[@"state"] intValue] ==1 ?3:1;
+    return [_companyInfo[@"state"] intValue] ==1 ?4:2;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    if (section == 2) {
+    if (section == 3||section == 0) {
         return 1;
     }
-    return 12;//test
+    return 8;//test
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section ==2) {
+    if (indexPath.section == 0) {
+        CreditInfoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:InfoID forIndexPath:indexPath];
+        cell.companyInfo = _companyInfo;
+        return cell;
+    }if (indexPath.section ==3) {
         CreditChartLineCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ChartID forIndexPath:indexPath];
         return cell;
     }else{
@@ -89,27 +92,45 @@ static NSString *ChartID = @"CreditChartLineCell";
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
-    CreditSectionHeader *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderID forIndexPath:indexPath];
-    [header setupHeader:[_companyInfo[@"state"] intValue] section:indexPath.section];//test
-    return header;
+    if (indexPath.section != 0) {
+        CreditSectionHeader *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderID forIndexPath:indexPath];
+        [header setupHeader:[_companyInfo[@"state"] intValue] section:indexPath.section];//test
+        return header;
+    }
+    return nil;
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 2) {
-        return CGSizeMake(KDeviceW, 210);
-    }else{
-        CGFloat width = (KDeviceW-10*2-0.2*3)/4;
-        return CGSizeMake(width, 75);
+    if (indexPath.section == 0) {
+        CGFloat height ;
+        int state = [_companyInfo[@"state"] intValue];
+        if (state == 0) {
+            height = 15+(KDeviceW -15*2)*(221.f/688);
+        }else if (state == 1){
+            height = 187;
+        }else{
+            height = 125;
+        }
+        return CGSizeMake(KDeviceW, height);
+    }else if (indexPath.section == 3) {
+        return CGSizeMake(KDeviceW, 200);
+    }else {
+        CGFloat width = (KDeviceW-10*2)/4;
+        return CGSizeMake(width, 77);
     }
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
-    int state = [_companyInfo[@"state"] intValue];//test
-    return CGSizeMake(KDeviceW, state == 1?60:50);
+    if (section != 0) {
+        int state = [_companyInfo[@"state"] intValue];//test
+        return CGSizeMake(KDeviceW, state == 1?60:50);
+    }else{
+        return CGSizeZero;
+    }
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    if (section == 2) {
+    if (section == 3||section == 0) {
         return UIEdgeInsetsMake(0, 0, 0, 0);
     }
     return UIEdgeInsetsMake(0, 10, 20, 10);
@@ -121,12 +142,17 @@ static NSString *ChartID = @"CreditChartLineCell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.section == 0) {
-        CreditReportController *vc = [CreditReportController new];
-        [self.navigationController pushViewController:vc animated:YES];
-    }else{
-        CreditInfoInputController *vc = [CreditInfoInputController new];
-        [self.navigationController pushViewController:vc animated:YES];
+    if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
+            CreditReportController *vc = [CreditReportController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if (indexPath.row == 1){
+            CreditInfoInputController *vc = [CreditInfoInputController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if (indexPath.row == 2){
+            ObjectionAppealController *vc = [ObjectionAppealController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
  
 }
@@ -134,14 +160,7 @@ static NSString *ChartID = @"CreditChartLineCell";
 #pragma mark - life cycle
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    //state 0未认证 1已认证 2审核中
-    if ([_companyInfo[@"state"] intValue] == 0) {
-        [self.navigationController.navigationBar fs_setBackgroundColor:[UIColor whiteColor]];
-        [self setNavigationBarTitle:@"信用服务" andTextColor:[UIColor blackColor]];
-    }else{
-        [self.navigationController.navigationBar fs_setBackgroundColor:KHexRGB(0xd51424)];
-        [self setNavigationBarTitle:@"信用服务" andTextColor:[UIColor whiteColor]];
-    }
+    [self.navigationController.navigationBar fs_setBackgroundColor:KHexRGB(0xd51424)];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{

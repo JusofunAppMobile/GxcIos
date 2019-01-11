@@ -20,8 +20,8 @@ static NSString *CellID1 = @"MyOrderReportCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setNavigationBarTitle:@"我的订单"];
-    [self setBackBtn:nil];
-    
+    [self setBlankBackButton];
+
     [self initView];
 }
 

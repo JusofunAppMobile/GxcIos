@@ -205,7 +205,6 @@
 		CA5E013221E433890040ABE2 /* CreditServiceHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5E012721E433880040ABE2 /* CreditServiceHeader.m */; };
 		CA5E013321E433890040ABE2 /* XXLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5E012C21E433890040ABE2 /* XXLineChartView.m */; };
 		CA5E013421E433890040ABE2 /* CreditChartLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5E012D21E433890040ABE2 /* CreditChartLineCell.m */; };
-		CA5E013521E433890040ABE2 /* test123@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA5E012E21E433890040ABE2 /* test123@2x.png */; };
 		CA5E013621E433890040ABE2 /* ULBCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5E012F21E433890040ABE2 /* ULBCollectionViewFlowLayout.m */; };
 		CA5E013F21E433A40040ABE2 /* CreditInfoInputController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5E013921E433A40040ABE2 /* CreditInfoInputController.m */; };
 		CA5E014021E433A40040ABE2 /* CreditInfoInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5E013C21E433A40040ABE2 /* CreditInfoInputCell.m */; };
@@ -249,6 +248,22 @@
 		CADD60AA21E626AB00EB01CD /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60A921E626AB00EB01CD /* SettingViewController.m */; };
 		CADD60AE21E626E900EB01CD /* SettingAvatarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60AD21E626E900EB01CD /* SettingAvatarCell.m */; };
 		CADD60B121E6270100EB01CD /* SettingPlainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60B021E6270100EB01CD /* SettingPlainCell.m */; };
+		CADD60B521E6DC7700EB01CD /* ObjectionAppealController.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60B421E6DC7700EB01CD /* ObjectionAppealController.m */; };
+		CADD60B921E6E22300EB01CD /* ObjectionInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60B821E6E22300EB01CD /* ObjectionInfoCell.m */; };
+		CADD60BC21E6E25900EB01CD /* ObjectionTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60BB21E6E25900EB01CD /* ObjectionTypeCell.m */; };
+		CADD60BF21E6E27200EB01CD /* ObjectionEntCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60BE21E6E27200EB01CD /* ObjectionEntCell.m */; };
+		CADD60C221E6E34200EB01CD /* ObjectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60C121E6E34200EB01CD /* ObjectionItem.m */; };
+		CADD60C521E723CF00EB01CD /* ObjectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60C421E723CE00EB01CD /* ObjectionFooterView.m */; };
+		CADD60C921E728CF00EB01CD /* PersonalSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60C821E728CF00EB01CD /* PersonalSettingController.m */; };
+		CADD60CD21E72D7F00EB01CD /* ModifyPhoneController.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60CC21E72D7F00EB01CD /* ModifyPhoneController.m */; };
+		CADD60D021E72D9400EB01CD /* ModifyInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60CF21E72D9400EB01CD /* ModifyInfoController.m */; };
+		CADD60D321E73CB100EB01CD /* ModifyInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60D221E73CB100EB01CD /* ModifyInfoCell.m */; };
+		CADD60D621E74A5D00EB01CD /* FogotPwdController.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60D521E74A5D00EB01CD /* FogotPwdController.m */; };
+		CADD60D921E75F5A00EB01CD /* CreditInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60D821E75F5A00EB01CD /* CreditInfoCell.m */; };
+		CADD60DC21E775D500EB01CD /* MonitorDynamicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60DB21E775D500EB01CD /* MonitorDynamicCell.m */; };
+		CADD60E021E833E500EB01CD /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60DF21E833E500EB01CD /* SettingCell.m */; };
+		CADD60E321E8364400EB01CD /* SettingFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60E221E8364400EB01CD /* SettingFooterView.m */; };
+		CADD60E621E838FD00EB01CD /* MsgSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60E521E838FD00EB01CD /* MsgSettingController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -591,7 +606,6 @@
 		CA5E012B21E433890040ABE2 /* XXLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXLineChartView.h; sourceTree = "<group>"; };
 		CA5E012C21E433890040ABE2 /* XXLineChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXLineChartView.m; sourceTree = "<group>"; };
 		CA5E012D21E433890040ABE2 /* CreditChartLineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditChartLineCell.m; sourceTree = "<group>"; };
-		CA5E012E21E433890040ABE2 /* test123@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test123@2x.png"; sourceTree = "<group>"; };
 		CA5E012F21E433890040ABE2 /* ULBCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ULBCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		CA5E013821E433A40040ABE2 /* CreditInfoInputController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditInfoInputController.h; sourceTree = "<group>"; };
 		CA5E013921E433A40040ABE2 /* CreditInfoInputController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditInfoInputController.m; sourceTree = "<group>"; };
@@ -740,6 +754,38 @@
 		CADD60AD21E626E900EB01CD /* SettingAvatarCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingAvatarCell.m; sourceTree = "<group>"; };
 		CADD60AF21E6270100EB01CD /* SettingPlainCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingPlainCell.h; sourceTree = "<group>"; };
 		CADD60B021E6270100EB01CD /* SettingPlainCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingPlainCell.m; sourceTree = "<group>"; };
+		CADD60B321E6DC7700EB01CD /* ObjectionAppealController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectionAppealController.h; sourceTree = "<group>"; };
+		CADD60B421E6DC7700EB01CD /* ObjectionAppealController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectionAppealController.m; sourceTree = "<group>"; };
+		CADD60B721E6E22300EB01CD /* ObjectionInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectionInfoCell.h; sourceTree = "<group>"; };
+		CADD60B821E6E22300EB01CD /* ObjectionInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectionInfoCell.m; sourceTree = "<group>"; };
+		CADD60BA21E6E25900EB01CD /* ObjectionTypeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectionTypeCell.h; sourceTree = "<group>"; };
+		CADD60BB21E6E25900EB01CD /* ObjectionTypeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectionTypeCell.m; sourceTree = "<group>"; };
+		CADD60BD21E6E27200EB01CD /* ObjectionEntCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectionEntCell.h; sourceTree = "<group>"; };
+		CADD60BE21E6E27200EB01CD /* ObjectionEntCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectionEntCell.m; sourceTree = "<group>"; };
+		CADD60C021E6E34200EB01CD /* ObjectionItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectionItem.h; sourceTree = "<group>"; };
+		CADD60C121E6E34200EB01CD /* ObjectionItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectionItem.m; sourceTree = "<group>"; };
+		CADD60C321E723CE00EB01CD /* ObjectionFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectionFooterView.h; sourceTree = "<group>"; };
+		CADD60C421E723CE00EB01CD /* ObjectionFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectionFooterView.m; sourceTree = "<group>"; };
+		CADD60C721E728CF00EB01CD /* PersonalSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalSettingController.h; sourceTree = "<group>"; };
+		CADD60C821E728CF00EB01CD /* PersonalSettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalSettingController.m; sourceTree = "<group>"; };
+		CADD60CB21E72D7F00EB01CD /* ModifyPhoneController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModifyPhoneController.h; sourceTree = "<group>"; };
+		CADD60CC21E72D7F00EB01CD /* ModifyPhoneController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModifyPhoneController.m; sourceTree = "<group>"; };
+		CADD60CE21E72D9400EB01CD /* ModifyInfoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModifyInfoController.h; sourceTree = "<group>"; };
+		CADD60CF21E72D9400EB01CD /* ModifyInfoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModifyInfoController.m; sourceTree = "<group>"; };
+		CADD60D121E73CB100EB01CD /* ModifyInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModifyInfoCell.h; sourceTree = "<group>"; };
+		CADD60D221E73CB100EB01CD /* ModifyInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModifyInfoCell.m; sourceTree = "<group>"; };
+		CADD60D421E74A5D00EB01CD /* FogotPwdController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FogotPwdController.h; sourceTree = "<group>"; };
+		CADD60D521E74A5D00EB01CD /* FogotPwdController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FogotPwdController.m; sourceTree = "<group>"; };
+		CADD60D721E75F5A00EB01CD /* CreditInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreditInfoCell.h; sourceTree = "<group>"; };
+		CADD60D821E75F5A00EB01CD /* CreditInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreditInfoCell.m; sourceTree = "<group>"; };
+		CADD60DA21E775D500EB01CD /* MonitorDynamicCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MonitorDynamicCell.h; sourceTree = "<group>"; };
+		CADD60DB21E775D500EB01CD /* MonitorDynamicCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonitorDynamicCell.m; sourceTree = "<group>"; };
+		CADD60DE21E833E500EB01CD /* SettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SettingCell.h; path = "CreditInquiry/App/我的/设置/SettingCell.h"; sourceTree = SOURCE_ROOT; };
+		CADD60DF21E833E500EB01CD /* SettingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SettingCell.m; path = "CreditInquiry/App/我的/设置/SettingCell.m"; sourceTree = SOURCE_ROOT; };
+		CADD60E121E8364400EB01CD /* SettingFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SettingFooterView.h; path = "CreditInquiry/App/我的/设置/SettingFooterView.h"; sourceTree = SOURCE_ROOT; };
+		CADD60E221E8364400EB01CD /* SettingFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SettingFooterView.m; path = "CreditInquiry/App/我的/设置/SettingFooterView.m"; sourceTree = SOURCE_ROOT; };
+		CADD60E421E838FD00EB01CD /* MsgSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MsgSettingController.h; sourceTree = "<group>"; };
+		CADD60E521E838FD00EB01CD /* MsgSettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MsgSettingController.m; sourceTree = "<group>"; };
 		F9DD2AFF454673A827AD096D /* Pods-CreditInquiry.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CreditInquiry.release.xcconfig"; path = "Pods/Target Support Files/Pods-CreditInquiry/Pods-CreditInquiry.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1316,6 +1362,7 @@
 		CA5E00A621DDE5E00040ABE2 /* 信用服务 */ = {
 			isa = PBXGroup;
 			children = (
+				CADD60B221E6DBFB00EB01CD /* 信用异议 */,
 				CADD607A21E4B94B00EB01CD /* 信用报告 */,
 				CADD607621E4B68200EB01CD /* 信用评价 */,
 				CA5E013721E433A40040ABE2 /* 自主信息填报 */,
@@ -1329,6 +1376,7 @@
 		CA5E00A721DDE5E30040ABE2 /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
+				CADD60C621E728A000EB01CD /* 个人设置 */,
 				CADD60A721E6268300EB01CD /* 设置 */,
 				CADD609F21E6199F00EB01CD /* 我的监控 */,
 				CADD609321E5DF0800EB01CD /* 我的订单 */,
@@ -1338,6 +1386,8 @@
 				CA5E00B321DDE6B10040ABE2 /* MeViewController.m */,
 				799F796821E5EE72000DBB88 /* BuyVipController.h */,
 				799F796921E5EE72000DBB88 /* BuyVipController.m */,
+				CADD60D421E74A5D00EB01CD /* FogotPwdController.h */,
+				CADD60D521E74A5D00EB01CD /* FogotPwdController.m */,
 				799F796E21E72655000DBB88 /* VisitorController.h */,
 				799F796F21E72655000DBB88 /* VisitorController.m */,
 				799F797721E86CC5000DBB88 /* LoginController.h */,
@@ -1360,9 +1410,10 @@
 				CA5E012221E433880040ABE2 /* CreditSectionHeader.m */,
 				CA5E012821E433890040ABE2 /* CreditServiceHeader.h */,
 				CA5E012721E433880040ABE2 /* CreditServiceHeader.m */,
-				CA5E012E21E433890040ABE2 /* test123@2x.png */,
 				CA5E012921E433890040ABE2 /* ULBCollectionViewFlowLayout.h */,
 				CA5E012F21E433890040ABE2 /* ULBCollectionViewFlowLayout.m */,
+				CADD60D721E75F5A00EB01CD /* CreditInfoCell.h */,
+				CADD60D821E75F5A00EB01CD /* CreditInfoCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1426,6 +1477,8 @@
 				CA5E015021E433E30040ABE2 /* MonitorHeaderView.m */,
 				CA5E015121E433E30040ABE2 /* MonitorTableHeader.h */,
 				CA5E015221E433E30040ABE2 /* MonitorTableHeader.m */,
+				CADD60DA21E775D500EB01CD /* MonitorDynamicCell.h */,
+				CADD60DB21E775D500EB01CD /* MonitorDynamicCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1785,9 +1838,11 @@
 		CADD60A721E6268300EB01CD /* 设置 */ = {
 			isa = PBXGroup;
 			children = (
-				CADD60AB21E626BB00EB01CD /* view */,
+				CADD60DD21E8329B00EB01CD /* view */,
 				CADD60A821E626AB00EB01CD /* SettingViewController.h */,
 				CADD60A921E626AB00EB01CD /* SettingViewController.m */,
+				CADD60E421E838FD00EB01CD /* MsgSettingController.h */,
+				CADD60E521E838FD00EB01CD /* MsgSettingController.m */,
 			);
 			path = "设置";
 			sourceTree = "<group>";
@@ -1799,8 +1854,63 @@
 				CADD60AD21E626E900EB01CD /* SettingAvatarCell.m */,
 				CADD60AF21E6270100EB01CD /* SettingPlainCell.h */,
 				CADD60B021E6270100EB01CD /* SettingPlainCell.m */,
+				CADD60D121E73CB100EB01CD /* ModifyInfoCell.h */,
+				CADD60D221E73CB100EB01CD /* ModifyInfoCell.m */,
 			);
 			path = view;
+			sourceTree = "<group>";
+		};
+		CADD60B221E6DBFB00EB01CD /* 信用异议 */ = {
+			isa = PBXGroup;
+			children = (
+				CADD60B621E6E1DE00EB01CD /* view */,
+				CADD60B321E6DC7700EB01CD /* ObjectionAppealController.h */,
+				CADD60B421E6DC7700EB01CD /* ObjectionAppealController.m */,
+			);
+			path = "信用异议";
+			sourceTree = "<group>";
+		};
+		CADD60B621E6E1DE00EB01CD /* view */ = {
+			isa = PBXGroup;
+			children = (
+				CADD60BD21E6E27200EB01CD /* ObjectionEntCell.h */,
+				CADD60BE21E6E27200EB01CD /* ObjectionEntCell.m */,
+				CADD60BA21E6E25900EB01CD /* ObjectionTypeCell.h */,
+				CADD60BB21E6E25900EB01CD /* ObjectionTypeCell.m */,
+				CADD60B721E6E22300EB01CD /* ObjectionInfoCell.h */,
+				CADD60B821E6E22300EB01CD /* ObjectionInfoCell.m */,
+				CADD60C021E6E34200EB01CD /* ObjectionItem.h */,
+				CADD60C121E6E34200EB01CD /* ObjectionItem.m */,
+				CADD60C321E723CE00EB01CD /* ObjectionFooterView.h */,
+				CADD60C421E723CE00EB01CD /* ObjectionFooterView.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		CADD60C621E728A000EB01CD /* 个人设置 */ = {
+			isa = PBXGroup;
+			children = (
+				CADD60AB21E626BB00EB01CD /* view */,
+				CADD60C721E728CF00EB01CD /* PersonalSettingController.h */,
+				CADD60C821E728CF00EB01CD /* PersonalSettingController.m */,
+				CADD60CB21E72D7F00EB01CD /* ModifyPhoneController.h */,
+				CADD60CC21E72D7F00EB01CD /* ModifyPhoneController.m */,
+				CADD60CE21E72D9400EB01CD /* ModifyInfoController.h */,
+				CADD60CF21E72D9400EB01CD /* ModifyInfoController.m */,
+			);
+			path = "个人设置";
+			sourceTree = "<group>";
+		};
+		CADD60DD21E8329B00EB01CD /* view */ = {
+			isa = PBXGroup;
+			children = (
+				CADD60DE21E833E500EB01CD /* SettingCell.h */,
+				CADD60DF21E833E500EB01CD /* SettingCell.m */,
+				CADD60E121E8364400EB01CD /* SettingFooterView.h */,
+				CADD60E221E8364400EB01CD /* SettingFooterView.m */,
+			);
+			name = view;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		E4C77B2863F73FC84D3FFC40 /* Frameworks */ = {
@@ -1874,7 +1984,6 @@
 				CA5E006E21DDE05E0040ABE2 /* MBProgressHUD.bundle in Resources */,
 				CA5EFF9821DC59BF0040ABE2 /* Assets.xcassets in Resources */,
 				CA5EFF9621DC59B20040ABE2 /* Main.storyboard in Resources */,
-				CA5E013521E433890040ABE2 /* test123@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1941,8 +2050,10 @@
 				CADD606321E491DB00EB01CD /* CreditEditImageCell.m in Sources */,
 				793D1B2E21DF67E000C29908 /* DetailWebController.m in Sources */,
 				CA5E007C21DDE05E0040ABE2 /* UIView+Zirkfied.m in Sources */,
+				CADD60CD21E72D7F00EB01CD /* ModifyPhoneController.m in Sources */,
 				CA5E005921DDE05E0040ABE2 /* NSNumber+StringValue.m in Sources */,
 				CA5E006821DDE05E0040ABE2 /* DLPanableWebView.m in Sources */,
+				CADD60E021E833E500EB01CD /* SettingCell.m in Sources */,
 				79D34E8B21E05DA100B1CB32 /* MyAlertView.m in Sources */,
 				793D1B6821DF699500C29908 /* CompanyDetailModel.m in Sources */,
 				79D34EBB21E05E1F00B1CB32 /* RiskSegmentView.m in Sources */,
@@ -1957,6 +2068,7 @@
 				799F797C21E87E77000DBB88 /* RegistController.m in Sources */,
 				CA5E006721DDE05E0040ABE2 /* UITextView+Placeholder.m in Sources */,
 				79D34F1821E08EA200B1CB32 /* HomeHeaderView.m in Sources */,
+				CADD60D021E72D9400EB01CD /* ModifyInfoController.m in Sources */,
 				CA5E00BA21DDEA410040ABE2 /* CustomTabBar.m in Sources */,
 				CA5E008221DDE05E0040ABE2 /* ZFGradientAttribute.m in Sources */,
 				799F796D21E6E574000DBB88 /* BuyVipCell.m in Sources */,
@@ -1965,6 +2077,7 @@
 				CA5E007221DDE05E0040ABE2 /* UUDatePicker.m in Sources */,
 				CA5E007121DDE05E0040ABE2 /* TimePickerView.m in Sources */,
 				793D1B5921DF690300C29908 /* ButtonModel.m in Sources */,
+				CADD60D621E74A5D00EB01CD /* FogotPwdController.m in Sources */,
 				CA5E009721DDE05E0040ABE2 /* ZFWave.m in Sources */,
 				79D34EB721E05E1F00B1CB32 /* BidCell.m in Sources */,
 				79D34EE621E0616E00B1CB32 /* FilterSectionHeader.m in Sources */,
@@ -1999,7 +2112,9 @@
 				CA5E009221DDE05E0040ABE2 /* ZFPieChart.m in Sources */,
 				CA5E014121E433A40040ABE2 /* CreditInfoInputHeader.m in Sources */,
 				793D1B1B21DF67E000C29908 /* DetailWebBasicController.m in Sources */,
+				CADD60D921E75F5A00EB01CD /* CreditInfoCell.m in Sources */,
 				CA5E008821DDE05E0040ABE2 /* ZFCirqueChart.m in Sources */,
+				CADD60BC21E6E25900EB01CD /* ObjectionTypeCell.m in Sources */,
 				CA5EFFB221DDE0390040ABE2 /* BasicWebViewController.m in Sources */,
 				79D34F2721E347AE00B1CB32 /* DetailMapCell.m in Sources */,
 				CA5E007921DDE05E0040ABE2 /* NSString+Zirkfied.m in Sources */,
@@ -2014,6 +2129,7 @@
 				CA5E007421DDE05E0040ABE2 /* YBPopupMenu.m in Sources */,
 				793D1C8D21E0588800C29908 /* NearCompanyModel.m in Sources */,
 				CA5E00B721DDE6E40040ABE2 /* BasicTabBarController.m in Sources */,
+				CADD60B521E6DC7700EB01CD /* ObjectionAppealController.m in Sources */,
 				CA5E006A21DDE05E0040ABE2 /* DVPieCenterView.m in Sources */,
 				CA5E00A221DDE1910040ABE2 /* NoDataView.m in Sources */,
 				CA5E005E21DDE05E0040ABE2 /* UIView+BorderLine.m in Sources */,
@@ -2037,6 +2153,7 @@
 				CADD606F21E4A74300EB01CD /* EditHonorController.m in Sources */,
 				CA5E005C21DDE05E0040ABE2 /* UINavigationBar+Extention.m in Sources */,
 				CADD606021E491C200EB01CD /* CreditEditTextCell.m in Sources */,
+				CADD60DC21E775D500EB01CD /* MonitorDynamicCell.m in Sources */,
 				CA5E006B21DDE05E0040ABE2 /* DVPieChart.m in Sources */,
 				79D34EF921E0652000B1CB32 /* SearchCompanyCell.m in Sources */,
 				79D34EFC21E0652000B1CB32 /* BaseSearchCell.m in Sources */,
@@ -2045,11 +2162,13 @@
 				CADD607921E4B6AC00EB01CD /* CreditScoreController.m in Sources */,
 				79D34F1521E0836100B1CB32 /* HomeSectionHeader.m in Sources */,
 				CADD605D21E482CE00EB01CD /* EditCompanyInfoController.m in Sources */,
+				CADD60C521E723CF00EB01CD /* ObjectionFooterView.m in Sources */,
 				CADD609221E588EC00EB01CD /* MePlainCell.m in Sources */,
 				CA5E006421DDE05E0040ABE2 /* MyTextView.m in Sources */,
 				CA5E005F21DDE05E0040ABE2 /* UIView+Extensions.m in Sources */,
 				CA5E013621E433890040ABE2 /* ULBCollectionViewFlowLayout.m in Sources */,
 				CA5E008F21DDE05E0040ABE2 /* ZFLine.m in Sources */,
+				CADD60C921E728CF00EB01CD /* PersonalSettingController.m in Sources */,
 				CA5EFF9E21DC59BF0040ABE2 /* main.m in Sources */,
 				793D1B4A21DF68B700C29908 /* AnimalTableView.m in Sources */,
 				CADD60AE21E626E900EB01CD /* SettingAvatarCell.m in Sources */,
@@ -2095,6 +2214,7 @@
 				793D1B1E21DF67E000C29908 /* CompanyDetailController.m in Sources */,
 				CA5E008D21DDE05E0040ABE2 /* ZFHorizontalBarChart.m in Sources */,
 				CADD607F21E4BA1F00EB01CD /* CreditReportController.m in Sources */,
+				CADD60E321E8364400EB01CD /* SettingFooterView.m in Sources */,
 				CA5E013421E433890040ABE2 /* CreditChartLineCell.m in Sources */,
 				79D34EB821E05E1F00B1CB32 /* JobCell.m in Sources */,
 				793D1C8121E0586200C29908 /* OweTaxModel.m in Sources */,
@@ -2117,6 +2237,7 @@
 				CA5E008C21DDE05E0040ABE2 /* ZFHorizontalBar.m in Sources */,
 				79D34EBA21E05E1F00B1CB32 /* OweTaxCell.m in Sources */,
 				79D34ED121E05E5600B1CB32 /* SearchJobModel.m in Sources */,
+				CADD60C221E6E34200EB01CD /* ObjectionItem.m in Sources */,
 				CADD609B21E5E1A500EB01CD /* MyOrderReportCell.m in Sources */,
 				CADD608821E4CC9F00EB01CD /* CreditReportHeader.m in Sources */,
 				CA5E009121DDE05E0040ABE2 /* ZFPie.m in Sources */,
@@ -2133,6 +2254,7 @@
 				793D1B3521DF67E000C29908 /* ZhaoBiaoController.m in Sources */,
 				79D34EBC21E05E1F00B1CB32 /* SalaryQueryCell.m in Sources */,
 				79D34EE721E0616E00B1CB32 /* FilterPlainSeionHeader.m in Sources */,
+				CADD60B921E6E22300EB01CD /* ObjectionInfoCell.m in Sources */,
 				793D1B2621DF67E000C29908 /* InvestController.m in Sources */,
 				79D34EB521E05E1F00B1CB32 /* ZhaoBiaoCell.m in Sources */,
 				793D1B7421DF69ED00C29908 /* DetailGridCell.m in Sources */,
@@ -2160,12 +2282,15 @@
 				CADD608521E4CA0F00EB01CD /* CreditProReportCell.m in Sources */,
 				CA5E00B121DDE69C0040ABE2 /* CreditViewController.m in Sources */,
 				CA5E007A21DDE05E0040ABE2 /* UIBezierPath+Zirkfied.m in Sources */,
+				CADD60BF21E6E27200EB01CD /* ObjectionEntCell.m in Sources */,
+				CADD60D321E73CB100EB01CD /* ModifyInfoCell.m in Sources */,
 				79D34F2121E3267200B1CB32 /* DetailHolderCell.m in Sources */,
 				793D1C7D21E0585D00C29908 /* TrademarkModel.m in Sources */,
 				793D1B3E21DF684900C29908 /* ErrorModel.m in Sources */,
 				793D1B5C21DF692800C29908 /* CommonWebViewController.m in Sources */,
 				793D1B2D21DF67E000C29908 /* JobController.m in Sources */,
 				CA5E009921DDE05E0040ABE2 /* NSDate+ZJPickerView.m in Sources */,
+				CADD60E621E838FD00EB01CD /* MsgSettingController.m in Sources */,
 				CA5E014021E433A40040ABE2 /* CreditInfoInputCell.m in Sources */,
 				793D1B2821DF67E000C29908 /* TrademarkController.m in Sources */,
 				CA5E007021DDE05E0040ABE2 /* TTUITableViewZoomController.m in Sources */,

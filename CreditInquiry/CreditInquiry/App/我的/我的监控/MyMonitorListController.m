@@ -22,8 +22,8 @@ static NSString *CellID = @"MyMonitorCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setNavigationBarTitle:@"我的监控"];
-    [self setBackBtn:nil];
-    
+    [self setBlankBackButton];
+
     [self initView];
 }
 
@@ -35,6 +35,7 @@ static NSString *CellID = @"MyMonitorCell";
         view.delegate = self;
         view.dataSource = self;
         view.tableHeaderView = self.header;
+        view.rowHeight = 52;
         view;
     });
     [_tableview registerClass:[MyMonitorCell class] forCellReuseIdentifier:CellID];

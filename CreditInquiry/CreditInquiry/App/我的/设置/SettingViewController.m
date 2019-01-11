@@ -7,23 +7,23 @@
 //
 
 #import "SettingViewController.h"
-#import "SettingPlainCell.h"
-#import "SettingAvatarCell.h"
-
-static NSString *CellID1 = @"SettingAvatarCell";
-static NSString *CellID2 = @"SettingPlainCell";
+#import "SettingCell.h"
+#import "SettingFooterView.h"
+#import "MsgSettingController.h"
+static NSString *CellID = @"SettingCell";
 
 @interface SettingViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic ,strong) UITableView *tableview;
+@property (nonatomic ,strong) SettingFooterView *footer;
 @end
 
 @implementation SettingViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setNavigationBarTitle:@"个人设置"];
-    [self setBackBtn:nil];
-    
+    [self setNavigationBarTitle:@"设置"];
+    [self setBlankBackButton];
+
     [self initView];
 }
 
@@ -36,10 +36,10 @@ static NSString *CellID2 = @"SettingPlainCell";
         view.dataSource = self;
         view.rowHeight = UITableViewAutomaticDimension;
         view.estimatedRowHeight = 52;
+        view.tableFooterView = self.footer;
         view;
     });
-    [_tableview registerClass:[SettingAvatarCell class] forCellReuseIdentifier:CellID1];
-    [_tableview registerClass:[SettingPlainCell class] forCellReuseIdentifier:CellID2];
+    [_tableview registerClass:[SettingCell class] forCellReuseIdentifier:CellID];
 }
 
 #pragma mark - UITableViewDataSource
@@ -48,7 +48,7 @@ static NSString *CellID2 = @"SettingPlainCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return section == 0?2:3;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -59,15 +59,27 @@ static NSString *CellID2 = @"SettingPlainCell";
     return CGFLOAT_MIN;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0&&indexPath.row == 0) {
-        SettingAvatarCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID1 forIndexPath:indexPath];
-        return cell;
-    }else{
-        SettingPlainCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID2 forIndexPath:indexPath];
-        return cell;
+    SettingCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID forIndexPath:indexPath];
+    cell.indexPath = indexPath;
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            MsgSettingController *vc = [MsgSettingController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
+}
+
+#pragma mark - lazy load
+- (SettingFooterView *)footer{
+    if (!_footer) {
+        _footer = [[SettingFooterView alloc]initWithFrame:KFrame(0, 0, KDeviceW, 70)];
+    }
+    return _footer;
 }
 
 
