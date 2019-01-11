@@ -35,6 +35,8 @@ static NSString *NewsCellID = @"NewsCellID";
     
     [self performSelector:@selector(loadData) withObject:nil afterDelay:0.2];
     
+    
+    
 }
 
 
@@ -64,10 +66,21 @@ static NSString *NewsCellID = @"NewsCellID";
 
 -(void)joinVIP
 {
-    VisitorController *vc = [[VisitorController alloc]init];
+    LoginController *vc = [[LoginController alloc]init];
+    
+    // BuyVipController*vc = [[BuyVipController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    return;
+    
+    [[ShowMessageView alloc]initWithType:PushMessageAutiType action:^{
+        NSLog(@"点击");
+    }];
+    return;
+    VisitorController *vc2 = [[VisitorController alloc]init];
    
    // BuyVipController*vc = [[BuyVipController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:vc2 animated:YES];
 }
 
 

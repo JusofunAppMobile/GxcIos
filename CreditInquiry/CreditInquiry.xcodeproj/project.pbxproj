@@ -67,6 +67,9 @@
 		799F796D21E6E574000DBB88 /* BuyVipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F796C21E6E574000DBB88 /* BuyVipCell.m */; };
 		799F797021E72655000DBB88 /* VisitorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F796F21E72655000DBB88 /* VisitorController.m */; };
 		799F797321E74656000DBB88 /* VistorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F797221E74656000DBB88 /* VistorCell.m */; };
+		799F797621E825A0000DBB88 /* ShowMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F797521E825A0000DBB88 /* ShowMessageView.m */; };
+		799F797921E86CC5000DBB88 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F797821E86CC5000DBB88 /* LoginController.m */; };
+		799F797C21E87E77000DBB88 /* RegistController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F797B21E87E77000DBB88 /* RegistController.m */; };
 		79D34E8B21E05DA100B1CB32 /* MyAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D34E8A21E05DA100B1CB32 /* MyAlertView.m */; };
 		79D34E8E21E05DB300B1CB32 /* ItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D34E8C21E05DB300B1CB32 /* ItemView.m */; };
 		79D34E9B21E05DEF00B1CB32 /* SearchAllWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D34E8F21E05DEE00B1CB32 /* SearchAllWebView.m */; };
@@ -370,6 +373,12 @@
 		799F796F21E72655000DBB88 /* VisitorController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VisitorController.m; sourceTree = "<group>"; };
 		799F797121E74656000DBB88 /* VistorCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VistorCell.h; sourceTree = "<group>"; };
 		799F797221E74656000DBB88 /* VistorCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VistorCell.m; sourceTree = "<group>"; };
+		799F797421E825A0000DBB88 /* ShowMessageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShowMessageView.h; sourceTree = "<group>"; };
+		799F797521E825A0000DBB88 /* ShowMessageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShowMessageView.m; sourceTree = "<group>"; };
+		799F797721E86CC5000DBB88 /* LoginController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
+		799F797821E86CC5000DBB88 /* LoginController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
+		799F797A21E87E77000DBB88 /* RegistController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistController.h; sourceTree = "<group>"; };
+		799F797B21E87E77000DBB88 /* RegistController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegistController.m; sourceTree = "<group>"; };
 		79D34E8921E05DA100B1CB32 /* MyAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAlertView.h; sourceTree = "<group>"; };
 		79D34E8A21E05DA100B1CB32 /* MyAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAlertView.m; sourceTree = "<group>"; };
 		79D34E8C21E05DB300B1CB32 /* ItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemView.m; sourceTree = "<group>"; };
@@ -959,6 +968,8 @@
 				799F796C21E6E574000DBB88 /* BuyVipCell.m */,
 				799F797121E74656000DBB88 /* VistorCell.h */,
 				799F797221E74656000DBB88 /* VistorCell.m */,
+				799F797421E825A0000DBB88 /* ShowMessageView.h */,
+				799F797521E825A0000DBB88 /* ShowMessageView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1329,6 +1340,10 @@
 				799F796921E5EE72000DBB88 /* BuyVipController.m */,
 				799F796E21E72655000DBB88 /* VisitorController.h */,
 				799F796F21E72655000DBB88 /* VisitorController.m */,
+				799F797721E86CC5000DBB88 /* LoginController.h */,
+				799F797821E86CC5000DBB88 /* LoginController.m */,
+				799F797A21E87E77000DBB88 /* RegistController.h */,
+				799F797B21E87E77000DBB88 /* RegistController.m */,
 			);
 			path = "我的";
 			sourceTree = "<group>";
@@ -1939,6 +1954,7 @@
 				793D1B3321DF67E000C29908 /* QuestionItem.m in Sources */,
 				793D1B2221DF67E000C29908 /* DetailMapController.m in Sources */,
 				793D1B3121DF67E000C29908 /* ReportController.m in Sources */,
+				799F797C21E87E77000DBB88 /* RegistController.m in Sources */,
 				CA5E006721DDE05E0040ABE2 /* UITextView+Placeholder.m in Sources */,
 				79D34F1821E08EA200B1CB32 /* HomeHeaderView.m in Sources */,
 				CA5E00BA21DDEA410040ABE2 /* CustomTabBar.m in Sources */,
@@ -1956,6 +1972,7 @@
 				793D1B5F21DF693600C29908 /* StockCell.m in Sources */,
 				CA5E00AD21DDE6760040ABE2 /* MonitorViewController.m in Sources */,
 				CA5E015621E433E30040ABE2 /* MonitorFilterView.m in Sources */,
+				799F797621E825A0000DBB88 /* ShowMessageView.m in Sources */,
 				79D34EB921E05E1F00B1CB32 /* PatentCell.m in Sources */,
 				CA5E00B421DDE6B10040ABE2 /* MeViewController.m in Sources */,
 				793D1ACD21DF660000C29908 /* LoseCreditModel.m in Sources */,
@@ -1991,6 +2008,7 @@
 				CA5E009B21DDE05E0040ABE2 /* ZJPickBaseView.m in Sources */,
 				793D1B2521DF67E000C29908 /* BidController.m in Sources */,
 				79D34ECE21E05E5600B1CB32 /* ChooseDataModel.m in Sources */,
+				799F797921E86CC5000DBB88 /* LoginController.m in Sources */,
 				793D1C8B21E0588800C29908 /* HotKeyModel.m in Sources */,
 				79D34F4021E4386E00B1CB32 /* HomeMonitorCell.m in Sources */,
 				CA5E007421DDE05E0040ABE2 /* YBPopupMenu.m in Sources */,
