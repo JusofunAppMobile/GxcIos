@@ -82,14 +82,12 @@
     
     NSMutableArray *pathArr = [NSMutableArray array];
   
-    NSLog(@"______%f",xAxisY - yAxisY);
     CGFloat yTittleMargin = (xAxisY - yAxisY)/(self.yTittleCount-1);
     for (int i = 0; i < self.yTittleCount; i++) {
         //绘制背景横线
         CGFloat x = yAxisX;
         CGFloat y = yTittleMargin * (i) + yAxisY;
 
-        
         [pathArr addObject:[NSValue valueWithCGPoint:CGPointMake(x, y)]];
         [pathArr addObject:[NSValue valueWithCGPoint:CGPointMake(xAxisX + xAxisWidth, y)]];
 
