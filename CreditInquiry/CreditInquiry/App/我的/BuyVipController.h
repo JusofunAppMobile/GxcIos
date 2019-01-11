@@ -7,7 +7,7 @@
 //
 
 #import "BasicViewController.h"
-
+#import "BuyVipCell.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BuyVipController :BasicViewController<UITableViewDelegate,UITableViewDataSource>

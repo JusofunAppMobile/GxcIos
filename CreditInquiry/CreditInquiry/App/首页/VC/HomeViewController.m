@@ -64,7 +64,9 @@ static NSString *NewsCellID = @"NewsCellID";
 
 -(void)joinVIP
 {
-    BuyVipController*vc = [[BuyVipController alloc]init];
+    VisitorController *vc = [[VisitorController alloc]init];
+   
+   // BuyVipController*vc = [[BuyVipController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -385,7 +387,7 @@ static NSString *NewsCellID = @"NewsCellID";
 - (void)drawRightBarButton{
     buttonRight = [UIButton buttonWithType:UIButtonTypeCustom];
     [buttonRight setTitle:@" 加入VIP >" forState:UIControlStateNormal];
-    buttonRight.frame = CGRectMake(KDeviceW - 95, 0, 80, 40);
+    buttonRight.frame = CGRectMake(KDeviceW - 105, 0, 90, 40);
     [buttonRight setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     buttonRight.titleLabel.font = KFont(14);
     [buttonRight setImage:KImageName(@"icon_vip") forState:UIControlStateNormal];
