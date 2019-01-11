@@ -261,6 +261,12 @@
 		CADD60E021E833E500EB01CD /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60DF21E833E500EB01CD /* SettingCell.m */; };
 		CADD60E321E8364400EB01CD /* SettingFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60E221E8364400EB01CD /* SettingFooterView.m */; };
 		CADD60E621E838FD00EB01CD /* MsgSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60E521E838FD00EB01CD /* MsgSettingController.m */; };
+		CADD60E921E87E8E00EB01CD /* MonitorDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60E821E87E8E00EB01CD /* MonitorDetailController.m */; };
+		CADD60EC21E884DD00EB01CD /* MonitorDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60EB21E884DD00EB01CD /* MonitorDetailCell.m */; };
+		CADD60EF21E887DD00EB01CD /* MonitorDetailHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60EE21E887DD00EB01CD /* MonitorDetailHeader.m */; };
+		CADD60F221E897D000EB01CD /* MonitorMoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60F121E897D000EB01CD /* MonitorMoreController.m */; };
+		CADD60F521E8A32F00EB01CD /* ReportSendSuccessController.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60F421E8A32F00EB01CD /* ReportSendSuccessController.m */; };
+		CADD60F821E8A88800EB01CD /* ConfirmOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60F721E8A88800EB01CD /* ConfirmOrderController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -777,6 +783,18 @@
 		CADD60E221E8364400EB01CD /* SettingFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SettingFooterView.m; path = "CreditInquiry/App/我的/设置/SettingFooterView.m"; sourceTree = SOURCE_ROOT; };
 		CADD60E421E838FD00EB01CD /* MsgSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MsgSettingController.h; sourceTree = "<group>"; };
 		CADD60E521E838FD00EB01CD /* MsgSettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MsgSettingController.m; sourceTree = "<group>"; };
+		CADD60E721E87E8E00EB01CD /* MonitorDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MonitorDetailController.h; sourceTree = "<group>"; };
+		CADD60E821E87E8E00EB01CD /* MonitorDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonitorDetailController.m; sourceTree = "<group>"; };
+		CADD60EA21E884DD00EB01CD /* MonitorDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MonitorDetailCell.h; sourceTree = "<group>"; };
+		CADD60EB21E884DD00EB01CD /* MonitorDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonitorDetailCell.m; sourceTree = "<group>"; };
+		CADD60ED21E887DD00EB01CD /* MonitorDetailHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MonitorDetailHeader.h; sourceTree = "<group>"; };
+		CADD60EE21E887DD00EB01CD /* MonitorDetailHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonitorDetailHeader.m; sourceTree = "<group>"; };
+		CADD60F021E897D000EB01CD /* MonitorMoreController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MonitorMoreController.h; sourceTree = "<group>"; };
+		CADD60F121E897D000EB01CD /* MonitorMoreController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonitorMoreController.m; sourceTree = "<group>"; };
+		CADD60F321E8A32F00EB01CD /* ReportSendSuccessController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReportSendSuccessController.h; sourceTree = "<group>"; };
+		CADD60F421E8A32F00EB01CD /* ReportSendSuccessController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReportSendSuccessController.m; sourceTree = "<group>"; };
+		CADD60F621E8A88800EB01CD /* ConfirmOrderController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConfirmOrderController.h; sourceTree = "<group>"; };
+		CADD60F721E8A88800EB01CD /* ConfirmOrderController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfirmOrderController.m; sourceTree = "<group>"; };
 		F9DD2AFF454673A827AD096D /* Pods-CreditInquiry.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CreditInquiry.release.xcconfig"; path = "Pods/Target Support Files/Pods-CreditInquiry/Pods-CreditInquiry.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1344,6 +1362,10 @@
 				CA5E014221E433D30040ABE2 /* model */,
 				CA5E00AB21DDE6760040ABE2 /* MonitorViewController.h */,
 				CA5E00AC21DDE6760040ABE2 /* MonitorViewController.m */,
+				CADD60E721E87E8E00EB01CD /* MonitorDetailController.h */,
+				CADD60E821E87E8E00EB01CD /* MonitorDetailController.m */,
+				CADD60F021E897D000EB01CD /* MonitorMoreController.h */,
+				CADD60F121E897D000EB01CD /* MonitorMoreController.m */,
 			);
 			path = "监控";
 			sourceTree = "<group>";
@@ -1464,6 +1486,10 @@
 				CA5E015221E433E30040ABE2 /* MonitorTableHeader.m */,
 				CADD60DA21E775D500EB01CD /* MonitorDynamicCell.h */,
 				CADD60DB21E775D500EB01CD /* MonitorDynamicCell.m */,
+				CADD60EA21E884DD00EB01CD /* MonitorDetailCell.h */,
+				CADD60EB21E884DD00EB01CD /* MonitorDetailCell.m */,
+				CADD60ED21E887DD00EB01CD /* MonitorDetailHeader.h */,
+				CADD60EE21E887DD00EB01CD /* MonitorDetailHeader.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1765,6 +1791,10 @@
 				CADD607B21E4B9E600EB01CD /* view */,
 				CADD607D21E4BA1F00EB01CD /* CreditReportController.h */,
 				CADD607E21E4BA1F00EB01CD /* CreditReportController.m */,
+				CADD60F321E8A32F00EB01CD /* ReportSendSuccessController.h */,
+				CADD60F421E8A32F00EB01CD /* ReportSendSuccessController.m */,
+				CADD60F621E8A88800EB01CD /* ConfirmOrderController.h */,
+				CADD60F721E8A88800EB01CD /* ConfirmOrderController.m */,
 			);
 			path = "信用报告";
 			sourceTree = "<group>";
@@ -2071,6 +2101,7 @@
 				CA5E015621E433E30040ABE2 /* MonitorFilterView.m in Sources */,
 				79D34EB921E05E1F00B1CB32 /* PatentCell.m in Sources */,
 				CA5E00B421DDE6B10040ABE2 /* MeViewController.m in Sources */,
+				CADD60E921E87E8E00EB01CD /* MonitorDetailController.m in Sources */,
 				793D1ACD21DF660000C29908 /* LoseCreditModel.m in Sources */,
 				CA5E006F21DDE05E0040ABE2 /* Tools.m in Sources */,
 				793D1B3421DF67E000C29908 /* GuQuanController.m in Sources */,
@@ -2112,6 +2143,7 @@
 				793D1C8D21E0588800C29908 /* NearCompanyModel.m in Sources */,
 				CA5E00B721DDE6E40040ABE2 /* BasicTabBarController.m in Sources */,
 				CADD60B521E6DC7700EB01CD /* ObjectionAppealController.m in Sources */,
+				CADD60EC21E884DD00EB01CD /* MonitorDetailCell.m in Sources */,
 				CA5E006A21DDE05E0040ABE2 /* DVPieCenterView.m in Sources */,
 				CA5E00A221DDE1910040ABE2 /* NoDataView.m in Sources */,
 				CA5E005E21DDE05E0040ABE2 /* UIView+BorderLine.m in Sources */,
@@ -2168,6 +2200,7 @@
 				79D34E9F21E05DEF00B1CB32 /* RedButton.m in Sources */,
 				793D1AC321DF658300C29908 /* SearchResultController.m in Sources */,
 				CA5E006921DDE05E0040ABE2 /* DVFoodPieModel.m in Sources */,
+				CADD60EF21E887DD00EB01CD /* MonitorDetailHeader.m in Sources */,
 				CA5E009F21DDE0AE0040ABE2 /* RequestManager.m in Sources */,
 				CA5E005B21DDE05E0040ABE2 /* UIImage+Wechat.m in Sources */,
 				CA5E007D21DDE05E0040ABE2 /* ZFLabel.m in Sources */,
@@ -2182,6 +2215,7 @@
 				CA5E015421E433E30040ABE2 /* MonitorFilterCell.m in Sources */,
 				79D34EFB21E0652000B1CB32 /* SearchJobCell.m in Sources */,
 				799F796A21E5EE72000DBB88 /* BuyVipController.m in Sources */,
+				CADD60F521E8A32F00EB01CD /* ReportSendSuccessController.m in Sources */,
 				CA5E008521DDE05E0040ABE2 /* ZFBar.m in Sources */,
 				CA5E009A21DDE05E0040ABE2 /* ZJDatePickerView.m in Sources */,
 				793D1B3221DF67E000C29908 /* OweTaxController.m in Sources */,
@@ -2256,8 +2290,10 @@
 				79D34E9D21E05DEF00B1CB32 /* ReportTypeCell.m in Sources */,
 				CA5E006521DDE05E0040ABE2 /* StackButton.m in Sources */,
 				CADD608221E4BB8900EB01CD /* CreditReportCell.m in Sources */,
+				CADD60F221E897D000EB01CD /* MonitorMoreController.m in Sources */,
 				CA5E008721DDE05E0040ABE2 /* ZFCirque.m in Sources */,
 				79D34EF721E0652000B1CB32 /* ShareholderCell.m in Sources */,
+				CADD60F821E8A88800EB01CD /* ConfirmOrderController.m in Sources */,
 				799F797021E72655000DBB88 /* VisitorController.m in Sources */,
 				79D34EE321E0616E00B1CB32 /* FilterCellModel.m in Sources */,
 				793D1B2F21DF67E000C29908 /* RiskContainerController.m in Sources */,

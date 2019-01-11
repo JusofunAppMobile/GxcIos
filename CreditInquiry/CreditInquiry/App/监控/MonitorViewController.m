@@ -12,6 +12,7 @@
 #import "MonitorTableHeader.h"
 #import "MonitorFilterView.h"
 #import "MonitorDynamicCell.h"
+#import "MonitorDetailController.h"
 
 static NSString *CELLID = @"MonitorDynamicCell";
 
@@ -59,6 +60,11 @@ static NSString *CELLID = @"MonitorDynamicCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MonitorDynamicCell *cell = [tableView dequeueReusableCellWithIdentifier:CELLID forIndexPath:indexPath];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    MonitorDetailController *vc = [MonitorDetailController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 筛选
