@@ -26,6 +26,7 @@
         [self layoutIfNeeded];
         [view setImagePosition:LXMImagePositionTop spacing:10];
         
+        view.imageView.backgroundColor = [UIColor redColor];
     }
     return self;
 }

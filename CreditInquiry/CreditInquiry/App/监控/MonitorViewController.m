@@ -8,12 +8,12 @@
 
 #import "MonitorViewController.h"
 #import "MonitorListModel.h"
-#import "MonitorCell.h"
 #import "MonitorHeaderView.h"
 #import "MonitorTableHeader.h"
 #import "MonitorFilterView.h"
+#import "MonitorDynamicCell.h"
 
-static NSString *CELLID = @"MonitorCell";
+static NSString *CELLID = @"MonitorDynamicCell";
 
 @interface MonitorViewController ()<UITableViewDelegate,UITableViewDataSource,MonitorTableHeaderDelegate>
 @property (nonatomic ,strong) UITableView *tableview;
@@ -31,24 +31,24 @@ static NSString *CELLID = @"MonitorCell";
 #pragma mark - initView
 - (void)initView{
     
-    MonitorHeaderView *monitorHeader = [[MonitorHeaderView alloc]initWithFrame:KFrame(0, KNavigationBarHeight, KDeviceW, 48)];
-    [self.view addSubview:monitorHeader];
+//    MonitorHeaderView *monitorHeader = [[MonitorHeaderView alloc]initWithFrame:KFrame(0, KNavigationBarHeight, KDeviceW, 48)];
+//    [self.view addSubview:monitorHeader];
     
     self.tableview = ({
         UITableView *view = [UITableView new];
         [self.view addSubview:view];
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(monitorHeader.mas_bottom);
+            make.top.mas_equalTo(KNavigationBarHeight);
             make.bottom.mas_equalTo(self.view).offset(-KTabBarHeight);
             make.left.right.mas_equalTo(self.view);
         }];
         view.delegate = self;
         view.dataSource = self;
-        view.rowHeight = UITableViewAutomaticDimension;
-        view.estimatedRowHeight = 200;
+        view.rowHeight = 75;
         view.tableHeaderView = self.tableHeader;
         view;
     });
+    [_tableview registerClass:[MonitorDynamicCell class] forCellReuseIdentifier:CELLID];
 }
 
 #pragma mark - UITableViewDataSource
@@ -57,10 +57,7 @@ static NSString *CELLID = @"MonitorCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    MonitorCell *cell = [tableView dequeueReusableCellWithIdentifier:CELLID];
-    if (!cell) {
-        cell = [[MonitorCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELLID];
-    }
+    MonitorDynamicCell *cell = [tableView dequeueReusableCellWithIdentifier:CELLID forIndexPath:indexPath];
     return cell;
 }
 

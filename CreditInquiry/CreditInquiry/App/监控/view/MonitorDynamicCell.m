@@ -20,6 +20,7 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         
         self.iconView = ({
             UIImageView *view = [UIImageView new];
@@ -27,6 +28,7 @@
             [view mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.mas_equalTo(self.contentView);
                 make.width.height.mas_equalTo(40);
+                make.left.mas_equalTo(10);
             }];
             view.backgroundColor = [UIColor greenColor];
             view;
@@ -38,17 +40,19 @@
             [view mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.mas_equalTo(self.contentView);
                 make.right.mas_equalTo(self.contentView).offset(-15);
-                make.height.mas_equalTo(25);
+                make.height.mas_equalTo(26);
                 make.width.mas_equalTo(50);
             }];
-            view.titleLabel.font = KFont(12);
-            [view setTitle:@"监控" forState:UIControlStateNormal];
-            [view setTitleColor:KHexRGB(0xd93947) forState:UIControlStateNormal];
-            [view setTitleColor:KHexRGB(0x909090) forState:UIControlStateNormal];
             view.layer.borderWidth = .5f;
             view.layer.borderColor = KHexRGB(0xd93947).CGColor;
-            view.layer.cornerRadius = 3;
+            view.layer.cornerRadius = 2;
             view.layer.masksToBounds = YES;
+            view.titleLabel.font = KFont(12);
+            [view setTitle:@"监控" forState:UIControlStateNormal];
+            [view setTitle:@"取消监控" forState:UIControlStateSelected];
+            [view setTitleColor:KHexRGB(0xd93947) forState:UIControlStateNormal];
+            [view setTitleColor:KHexRGB(0x909090) forState:UIControlStateSelected];
+            [view addTarget:self action:@selector(monitorAction) forControlEvents:UIControlEventTouchUpInside];
             view;
         });
         
@@ -93,6 +97,22 @@
         
     }
     return self;
+}
+
+- (void)monitorAction{
+    _monitorBtn.selected = !_monitorBtn.selected;
+    if (_monitorBtn.selected) {
+        _monitorBtn.layer.borderColor = KHexRGB(0x909090).CGColor;
+        [_monitorBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(60);
+        }];
+    }else{
+        _monitorBtn.layer.borderColor = KHexRGB(0xd93947).CGColor;
+        [_monitorBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(50);
+        }];
+    }
+    
 }
 
 @end

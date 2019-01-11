@@ -116,8 +116,13 @@ static NSString *PlainID = @"MePlainCell";
         PersonalSettingController *vc = [PersonalSettingController new];
         [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.section == 2) {
-        FogotPwdController *vc = [FogotPwdController new];
-        [self.navigationController pushViewController:vc animated:YES];
+        if (indexPath.row == 3) {
+            SettingViewController *vc = [SettingViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            FogotPwdController *vc = [FogotPwdController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
 }
 

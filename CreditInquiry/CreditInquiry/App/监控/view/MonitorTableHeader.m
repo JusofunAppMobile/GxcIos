@@ -46,21 +46,21 @@
         vipLab.textColor = KHexRGB(0xe26062);
         
         
-        UIButton *filterBtn = [UIButton new];
-        [filterBtn setTitle:@"筛选" forState:UIControlStateNormal];
-        [filterBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [filterBtn addTarget:self action:@selector(filterAction) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:filterBtn];
-        [filterBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(self);
-            make.right.mas_equalTo(-15);
-        }];
+//        UIButton *filterBtn = [UIButton new];
+//        [filterBtn setTitle:@"筛选" forState:UIControlStateNormal];
+//        [filterBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//        [filterBtn addTarget:self action:@selector(filterAction) forControlEvents:UIControlEventTouchUpInside];
+//        [self addSubview:filterBtn];
+//        [filterBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.centerY.mas_equalTo(self);
+//            make.right.mas_equalTo(-15);
+//        }];
         
         UIView *line = [UIView new];
         line.backgroundColor = KHexRGB(0xd7d7d7);
         [self addSubview:line];
         [line mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(1);
+            make.height.mas_equalTo(.5);
             make.bottom.left.right.mas_equalTo(self);
         }];
         
