@@ -93,10 +93,12 @@ static NSString *TextCellID = @"CreditEditTextCell";
         }else{
             CreditEditLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:LabelCellID forIndexPath:indexPath];
             [cell setContent:@"" row:indexPath.row editType:EditTypeMember];
+            cell.canEdit = _canEdit;
             return cell;
         }
     }else{
         CreditEditTextCell *cell = [tableView dequeueReusableCellWithIdentifier:TextCellID forIndexPath:indexPath];
+        [cell setContent:nil type:EditTypeMember];
         return cell;
     }
 }

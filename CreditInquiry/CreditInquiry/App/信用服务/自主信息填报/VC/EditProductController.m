@@ -99,6 +99,7 @@ static NSString *TextCellID = @"CreditEditTextCell";
         }
     }else{
         CreditEditTextCell *cell = [tableView dequeueReusableCellWithIdentifier:TextCellID forIndexPath:indexPath];
+        [cell setContent:nil type:EditTypeProduct];
         return cell;
     }
 }

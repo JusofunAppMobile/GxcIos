@@ -84,9 +84,7 @@ static NSString *CellID3 = @"ObjectionInfoCell";
     }
 }
 
-
 #pragma mark -lazy load
-
 - (ObjectionFooterView *)footer{
     if (!_footer) {
         _footer = [[ObjectionFooterView alloc]initWithFrame:KFrame(0, 0, KDeviceW, 120)];

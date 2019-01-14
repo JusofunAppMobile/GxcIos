@@ -129,5 +129,14 @@ typedef NS_ENUM(NSInteger, SearchType) {
     SeekRelation //查关系
 };
 
+//自主信息填报类型
+typedef enum : NSUInteger {
+    EditTypeInfo,//企业信息
+    EditTypeProduct,//产品信息
+    EditTypeHonor,//荣誉信息
+    EditTypePartner,//合作伙伴信息
+    EditTypeMember,//成员信息
+} CreditEditType;
+
 
 #endif /* Constants_h */

@@ -69,7 +69,6 @@
 }
 
 - (void)pickImageAction{
-    NSLog(@"选取图片");
     KWeakSelf
     [[GetPhoto sharedGetPhoto] getPhotoWithTarget:self success:^(UIImage *image, NSString *imagePath) {
         NSLog(@"图片___%@",imagePath);
