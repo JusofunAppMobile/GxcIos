@@ -44,6 +44,41 @@
 
 -(void)login{
     
+    [self.view endEditing:YES];
+    if (_phoneTextFld.text.length == 0) {
+        [MBProgressHUD showError:@"请输入手机号" toView:self.view];
+        return;
+    }
+    if (_pwdTextFld.text.length == 0) {
+        [MBProgressHUD showError:@"请输入密码" toView:self.view];
+        return;
+    }
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:_phoneTextFld.text forKey:@"phone"];
+    [params setObject:@"" forKey:@"regId"];
+    [params setObject:[Tools md5:_pwdTextFld.text] forKey:@"password"];
+    [MBProgressHUD showMessag:@"" toView:self.view];
+    [RequestManager postWithURLString:KLogin parameters:params  success:^(id responseObject) {
+        [MBProgressHUD hideHudToView:self.view animated:NO];
+        if ([responseObject[@"result"] integerValue] == 0) {
+            [User clearTable];
+            User *model = [User mj_objectWithKeyValues:[responseObject objectForKey:@"data"]];
+            [model save];
+            [KNotificationCenter postNotificationName:KLoginSuccess object:nil];
+            
+            [MBProgressHUD showSuccess:@"登录成功" toView:self.view];
+        }else{
+            [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
+            
+            
+        }
+        
+    } failure:^(NSError *error) {
+        [MBProgressHUD showError:@"哎呀，服务器开小差啦，请您稍等，马上回来~" toView:self.view];
+    }];
+    
+    
 }
 
 -(void)regist

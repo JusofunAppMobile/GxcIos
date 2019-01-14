@@ -217,8 +217,39 @@
 {
     _newsType = newsType;
     
-    self.nameLabel.text = @"摩托司机违规上高速追尾轿车死亡，轿车主责，律师：应追责摩托车";
     [self layoutIfNeeded];
+}
+
+-(void)setDataDic:(NSDictionary *)dataDic
+{
+    _dataDic = dataDic;
+    
+    _nameLabel.text = [dataDic objectForKey:@"newsName"];
+    _timeLabel.text = [NSString stringWithFormat:@"%@   %@",[dataDic objectForKey:@"newsFrom"],[dataDic objectForKey:@"newsTime"]];
+    
+    NSArray *imageArray = [dataDic objectForKey:@"newsImage"];
+    if(imageArray.count >= 2)
+    {
+        self.newsType = NewsMoreImageType;
+        [_imageView1 sd_setImageWithURL:[NSURL URLWithString:imageArray[0]] placeholderImage:KImageName(@"")];
+        [_imageView2 sd_setImageWithURL:[NSURL URLWithString:imageArray[1]] placeholderImage:KImageName(@"")];
+        if(imageArray.count>=3)
+        {
+            [_imageView3 sd_setImageWithURL:[NSURL URLWithString:imageArray[2]] placeholderImage:KImageName(@"")];
+        }
+        
+    }
+    else if (imageArray.count == 1)
+    {
+        self.newsType = NewsOneImageType;
+        [_imageView1 sd_setImageWithURL:[NSURL URLWithString:imageArray[0]] placeholderImage:KImageName(@"")];
+    }
+    else
+    {
+        self.newsType = NewsNomalType;
+    }
+    
+    
 }
 
 

@@ -31,6 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic ,assign)NewsType newsType;
 
+@property(nonatomic,strong)NSDictionary *dataDic;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -88,6 +88,17 @@
 }
 
 
+-(void)setDataDic:(NSDictionary *)dataDic
+{
+    _dataDic = dataDic;
+    
+    [_logoImageView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:KImageName(@"")];
+    _nameLabel.text = [dataDic objectForKey:@"companyName"];
+    _contentLabel.text = [dataDic objectForKey:@""];
+    _timeLabel.text = [dataDic objectForKey:@"changeDate"];
+    
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

@@ -34,9 +34,11 @@
 
 
 
+//登录
+#define KLogin   @""HOSTURL"/app/UserLogin/loginApp"
 
-
-
+//发送验证码
+#define KSendMesCode   @""HOSTURL"/app/UserLogin/sendMesCode"
 
 
 

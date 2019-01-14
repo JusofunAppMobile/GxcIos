@@ -15,6 +15,8 @@
     UIView *searchView;
     SDCycleScrollView *cycleView;
     UIView *kongView;
+    
+    
 }
 
 @end
@@ -56,7 +58,7 @@
         searchView = [[UIView alloc]initWithFrame:KFrame(0, hotKeyView.maxY, KDeviceW, width+40)];
         [self addSubview:searchView];
         
-        [self reloadSearchView:@[@"股东高管",@"主营产品",@"地址电话",@"失信查询"]];
+       // [self reloadSearchView:@[@"股东高管",@"主营产品",@"地址电话",@"失信查询"]];
         
         kongView = [[UIView alloc]initWithFrame:KFrame(0, searchView.maxY+20, KDeviceW, 10)];
         kongView.backgroundColor = KRGB(243, 242, 242);
@@ -76,15 +78,25 @@
     return self;
 }
 
--(void)reloadData
+-(void)setDataDic:(NSDictionary *)dataDic
 {
-    [self reloadHotKeyView:@[@"马云",@"马化腾",@"老赖",@"雷军",@"特斯拉",@"小米",@"华为",@"九次方",@"群兴玩具"]];
+    _dataDic = dataDic;
     
-    [self reloadSearchView:@[@"股东高管",@"主营产品",@"地址电话",@"失信查询",@"查税号",@"招聘",@"企业通讯录",@"股东穿透",@"查关系",@"风险分析",@"裁判文书",@"行政许可"]];
+    [self reloadHotKeyView:[dataDic objectForKey:@"keywords"]];
+    NSArray *array = [dataDic objectForKey:@"menu"];
+    [self reloadSearchView:array];
     
-    cycleView.imageURLStringsGroup = @[@"https://inews.gtimg.com/newsapp_ls/0/7145519306_294195/0",@"https://inews.gtimg.com/newsapp_ls/0/7145389348_294195/0",@"https://inews.gtimg.com/newsapp_ls/0/7145603732_294195/0",@"https://inews.gtimg.com/newsapp_ls/0/7145593795_294195/0"];
-    
+    NSArray *array2 = [dataDic objectForKey:@"adImages"];
+    NSMutableArray *imageArray = [NSMutableArray arrayWithCapacity:1];
+    for(NSDictionary *dic in array2)
+    {
+        [imageArray addObject:[dic objectForKey:@"imageURL"]];
+    }
+    cycleView.imageURLStringsGroup = imageArray;
+   
 }
+
+
 
 -(void)reloadSearchView:(NSArray *)titleArray
 {
@@ -95,22 +107,31 @@
     CGFloat orginy = 15;
     CGFloat hight = 65;
     CGFloat space = 10;
+    CenterButton *lastBtn;
     for (int i = 0; i<[titleArray count]; i++) {
         int col = i%4;//列数
         int row = i/4;//行数
+        
+        NSDictionary*dic = [titleArray objectAtIndex:i];
+        
         CenterButton *centButton = [[CenterButton alloc] initWithFrame:CGRectMake(orginx+ col * width, orginy+row*hight+space*row, width, hight)];
         centButton.tag = 100+ i;
         centButton.titleLabel.font = KFont(13);
-        [centButton setTitle:titleArray[i] forState:UIControlStateNormal];
+        [centButton setTitle:[dic objectForKey:@"menuName"] forState:UIControlStateNormal];
         [centButton setTitleColor:KHexRGB(0x333333) forState:UIControlStateNormal];
         [centButton setTitleColor:KHexRGB(0x666666) forState:UIControlStateDisabled];
         [centButton setImage:[UIImage imageNamed:@"icon_gudong"] forState:UIControlStateNormal];
         [centButton addTarget:self action:@selector(goToSearch:) forControlEvents:UIControlEventTouchUpInside];
         [searchView addSubview:centButton];
+        
+        if(i == titleArray.count-1)
+        {
+            lastBtn = centButton;
+        }
     }
     
     CGRect frame = searchView.frame;
-    frame.size.height = orginy + titleArray.count/4*hight + space*titleArray.count/4 + 10;
+    frame.size.height = lastBtn.maxY + 10;
     searchView.frame = frame;
     
     [self adjustFrame];
@@ -119,7 +140,6 @@
 
 -(void)adjustFrame
 {
-    
     
     CGRect frame3 = kongView.frame;
     frame3.origin.y = searchView.maxY+10;
@@ -187,6 +207,21 @@
     }
 }
 
+
+-(void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
+{
+    if(self.delegate && [self.delegate respondsToSelector:@selector(adClick:)])
+    {
+        
+        NSArray *array =  [self.dataDic objectForKey:@"adImages"];
+        if(array.count >index)
+        {
+            NSDictionary *dic = array[index];
+            [self.delegate adClick:[dic objectForKey:@"webURL"]];
+        }
+        
+    }
+}
 
 
 @end
