@@ -46,5 +46,25 @@
     return self;
 }
 
+- (void)setContent:(id)content type:(CreditEditType)type{
+    if (type == EditTypeInfo) {
+        _titleLab.text = @"公司介绍";
+        _textView.placeholder = @"请输入公司介绍";
+    }else if (type == EditTypeProduct){
+        _titleLab.text = @"简介";
+        _textView.placeholder = @"描述介绍产品性能、用途等信息";
+    }else if (type == EditTypeHonor){
+        _titleLab.text = @"简介";
+        _textView.placeholder = @"请输入简介";
+    }else if (type == EditTypePartner){
+        _titleLab.text = @"简介";
+        _textView.placeholder = @"请输入简介";
+    }else{
+        _titleLab.text = @"简介";
+        _textView.placeholder = @"请输入简介";
+
+    }
+}
+
 
 @end

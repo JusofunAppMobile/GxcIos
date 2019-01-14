@@ -20,6 +20,7 @@ static NSString *CELLID = @"MonitorDynamicCell";
 @property (nonatomic ,strong) UITableView *tableview;
 @property (nonatomic ,strong) MonitorTableHeader *tableHeader;
 @property (nonatomic ,strong) MonitorFilterView *filterView;
+@property (nonatomic ,strong) NSArray *datalist;
 @end
 
 @implementation MonitorViewController
@@ -34,7 +35,6 @@ static NSString *CELLID = @"MonitorDynamicCell";
     
 //    MonitorHeaderView *monitorHeader = [[MonitorHeaderView alloc]initWithFrame:KFrame(0, KNavigationBarHeight, KDeviceW, 48)];
 //    [self.view addSubview:monitorHeader];
-    
     self.tableview = ({
         UITableView *view = [UITableView new];
         [self.view addSubview:view];
@@ -52,6 +52,10 @@ static NSString *CELLID = @"MonitorDynamicCell";
     [_tableview registerClass:[MonitorDynamicCell class] forCellReuseIdentifier:CELLID];
 }
 
+#pragma mark - loadData
+- (void)loadData{
+ 
+}
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 10;
