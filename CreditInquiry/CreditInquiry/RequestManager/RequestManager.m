@@ -344,7 +344,7 @@
     
     NSMutableDictionary *changeDic = [NSMutableDictionary dictionaryWithDictionary:dic];
    
-    [changeDic setObject:[JAddField debugAddField:cdate] forKey:@"m"];
+    [changeDic setObject:[NSString stringWithFormat:@"%d",t] forKey:@"t"];
     
     NSError *parseError = nil;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:changeDic options:NSJSONWritingPrettyPrinted error:&parseError];
@@ -352,10 +352,11 @@
    NSString *jsonStr =[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     
     
-    NSMutableDictionary *returnDic = [NSMutableDictionary dictionaryWithDictionary:dic];
+    NSMutableDictionary *returnDic = [NSMutableDictionary dictionary];
     
-     [returnDic setObject:[NSString stringWithFormat:@"%d",t] forKey:@"t"];
-    [returnDic setObject:[JAddField encryptWithJsonString:jsonStr] forKey:@"data"];
+     [returnDic setObject:[NSString stringWithFormat:@"%@",jsonStr] forKey:@"data"];
+    
+    [returnDic setObject:[JAddField encryptWithJsonString:jsonStr] forKey:@"m"];
     
     return returnDic;
     

@@ -22,12 +22,14 @@
 #define QXBHOSTURL @"http://api.jusfoun.com/api_qixinbao"
 
 //首页
-#define GetHomeData   @""HOSTURL"/app/Home/GetHomeData"
+#define KGetHomeData   @""HOSTURL"/app/Home/GetHomeData"
 
 
+//行业资讯
+#define KIndustryInformation   @""HOSTURL"/app/Home/IndustryInformation"
 
-
-
+//企业风险分析
+#define KnterpriseRiskAnalysis   @""HOSTURL"/app/Home/EnterpriseRiskAnalysis"
 
 
 
