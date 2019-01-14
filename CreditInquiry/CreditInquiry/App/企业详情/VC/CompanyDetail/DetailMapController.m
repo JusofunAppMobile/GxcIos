@@ -38,7 +38,7 @@
     
     [MBProgressHUD showMessag:@"" toView:self.view];
     
-    NSString *url = [NSString stringWithFormat:@"%@?entid=%@&entname=%@&userid=%@",GetEntAtlasData,self.companyId,self.companyName,USER.userID];
+    NSString *url = [NSString stringWithFormat:@"%@?entid=%@&entname=%@&userid=%@",GetEntAtlasData,self.companyId,self.companyName,KUSER.userId];
     NSString *requestURL = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [MBProgressHUD showMessag:@"" toView:self.view];
     [RequestManager QXBGetWithURLString:requestURL parameters:nil success:^(id responseObject) {

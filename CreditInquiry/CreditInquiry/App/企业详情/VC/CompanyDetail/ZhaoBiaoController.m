@@ -35,7 +35,7 @@
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
     [paraDic setObject:self.companyId forKey:@"companyid"];
     [paraDic setObject:self.companyName forKey:@"companyname"];
-    [paraDic setObject:USER.userID forKey:@"userid"];
+    [paraDic setObject:KUSER.userId forKey:@"userid"];
     [paraDic setObject:self.companyName forKey:@"entname"];
     [paraDic setObject:@"20" forKey:@"pageSize"];
     [paraDic setObject:[NSNumber numberWithInt:pageIndex] forKey:@"pageIndex"];

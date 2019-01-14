@@ -44,7 +44,7 @@
     [paraDic setObject:self.companyName forKey:@"entname"];
     [paraDic setObject:@"20" forKey:@"pagesize"];
     [paraDic setObject:[NSString stringWithFormat:@"%d",pageIndex] forKey:@"pageIndex"];
-    [paraDic setObject:USER.userID forKey:@"userid"];
+    [paraDic setObject:KUSER.userId forKey:@"userid"];
     NSString* urlstr = [GetEntBranchOrInvesment stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [RequestManager QXBGetWithURLString:urlstr parameters:paraDic success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:YES];

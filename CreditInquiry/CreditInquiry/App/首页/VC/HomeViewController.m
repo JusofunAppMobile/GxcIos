@@ -46,7 +46,7 @@ static NSString *NewsCellID = @"NewsCellID";
 - (void)loadData{
     
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
-    [paraDic setObject:USER.userID forKey:@"userId"];
+    [paraDic setObject:KUSER.userId forKey:@"userId"];
     [RequestManager postWithURLString:KGetHomeData parameters:paraDic success:^(id responseObject) {
         if ([responseObject[@"result"] integerValue] == 0) {
             
@@ -113,7 +113,9 @@ static NSString *NewsCellID = @"NewsCellID";
         
     }
     if ([title isEqualToString:@"行业资讯"]) {
-    
+        NewsController *vc = [[NewsController alloc]init];
+        
+        [self.navigationController pushViewController:vc animated:YES];
     }
     
 }

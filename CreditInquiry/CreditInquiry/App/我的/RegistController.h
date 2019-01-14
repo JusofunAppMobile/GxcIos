@@ -9,6 +9,7 @@
 #import "BasicViewController.h"
 #import <YYLabel.h>
 #import <NSAttributedString+YYText.h>
+#import <IQKeyboardManager.h>
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RegistController : BasicViewController

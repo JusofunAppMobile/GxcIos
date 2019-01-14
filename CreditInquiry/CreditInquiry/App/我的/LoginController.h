@@ -8,6 +8,8 @@
 
 #import "BasicViewController.h"
 #import "RegistController.h"
+#import <IQKeyboardManager.h>
+#import "FogotPwdController.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LoginController : BasicViewController

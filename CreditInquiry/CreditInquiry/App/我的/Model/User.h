@@ -10,7 +10,7 @@
 
 #import <JKDBModel.h>
 
-#define USER [User sharedUser]
+#define KUSER [User sharedUser]
 
 typedef enum : NSInteger{
 
@@ -24,68 +24,37 @@ typedef enum : NSInteger{
 SingletonH(User);
 
 
-////手机号登录
-//+ (void)loginWithAccount:(NSString*)account
-//                  accpwd:(NSString *)pwd
-//                    type:(NSString*)type
-//               superview:(UIView*)superView;
-//
-////第三方登录
-//
-//+(void)otherLogin:(OtherLoginType)type
-//     PlatformType:(SSDKPlatformType)PlatformType;
-//
-//+ (void)otherLoginWithAccount:(NSString*)account
-//                       accpwd:(NSString *)pwd
-//                         type:(NSString*)type
-//                   thirdToken:(NSString*)thirdToken
-//                     nickname:(NSString*)nickname
-//                        photo:(NSString*)photo
-//                      unionid:(NSString*)unionid
-//                    superview:(UIView*)superView;
-//
-//-(void)gotUserinfo;
-//
-//-(void)giveUserInfo:(NSDictionary*)userInfo;
-//
-//-(void)logout;
-
 @property(nonatomic,assign)BOOL isUserLogin;
 
 ///用户userid
-@property(nonatomic,copy)NSString *userID;
-///电话
-@property(nonatomic,copy)NSString *mobile;
-///昵称
-@property(nonatomic,copy)NSString *nickname;
-///头像
-@property(nonatomic,copy)NSString *photo;
-///公司
+@property(nonatomic,copy)NSString *userId;
+
+@property(nonatomic,copy)NSString *phone;
+
+@property(nonatomic,copy)NSString *email;
+
 @property(nonatomic,copy)NSString *company;
-///职位
+
+@property(nonatomic,copy)NSString *department;
+
 @property(nonatomic,copy)NSString *job;
-///职位id
-@property(nonatomic,copy)NSString *jobID;
-///关注未读
-@property(nonatomic,copy)NSString *focuseUnread;
-///消息未读
-@property(nonatomic,copy)NSString *messageUnread;
-///性别
-@property(nonatomic,copy)NSString *sex;
-///公司id
-@property(nonatomic,copy)NSString *companyid;
-///关注数目
-@property(nonatomic,copy)NSString *myfocuscount;
 
-///系统消息未读数量
-@property(nonatomic,copy)NSString *systemmessageunread;
+@property(nonatomic,copy)NSString *trade;//行业
 
-@property(nonatomic,assign)BOOL issetpwd;
+@property(nonatomic,copy)NSString *headIcon;
+
+//认证状态 0：未认证 1：已认证
+@property(nonatomic,copy)NSString *authStatus;
+
+//用户vip状态 0：普通用户 1：vip用户
+@property(nonatomic,copy)NSString *vipStatus;
+
+//消息推送开关状态 0：开 1：关
+@property(nonatomic,copy)NSString *pushStatus;
 
 
+@property(nonatomic,copy)NSString*token;
 
-
-@property (nonatomic ,copy) NSString *vipType;
 
 
 

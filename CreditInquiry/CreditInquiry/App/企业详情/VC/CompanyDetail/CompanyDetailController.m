@@ -73,7 +73,7 @@
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
     [paraDic setObject:self.companyId forKey:@"companyid"];
     [paraDic setObject:self.companyName forKey:@"companyname"];
-    [paraDic setObject:USER.userID forKey:@"userid"];
+    [paraDic setObject:KUSER.userId forKey:@"userid"];
     [paraDic setObject:self.companyName forKey:@"entname"];
     NSString* urlstr = [GetCompanyDetail stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
@@ -190,7 +190,7 @@
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
     [paraDic setObject:self.companyId forKey:@"companyid"];
     [paraDic setObject:self.companyName forKey:@"companyname"];
-    [paraDic setObject:USER.userID forKey:@"userid"];
+    [paraDic setObject:KUSER.userId forKey:@"userid"];
     [paraDic setObject:self.companyName forKey:@"entname"];
     NSString* url = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURLSessionDataTask*task = [RequestManager QXBGetWithURLString:url parameters:paraDic success:^(id responseObject) {
@@ -264,7 +264,7 @@
     if(sender.tag == 45678)//关注这家企业
     {
         
-        if(USER.userID.length>0)
+        if(KUSER.userId.length>0)
         {
             type = @"1";
         }
@@ -282,7 +282,7 @@
     }
     else //取消关注企业
     {
-        if (USER.userID.length>0) {
+        if (KUSER.userId.length>0) {
             type = @"2";
         }else
         {
@@ -300,7 +300,7 @@
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
     [paraDic setObject:detailModel.companyid forKey:@"companyid"];
     [paraDic setObject:type forKey:@"type"];
-    [paraDic setObject:USER.userID forKey:@"userid"];
+    [paraDic setObject:KUSER.userId forKey:@"userid"];
     [paraDic setObject:self.companyName forKey:@"entname"];
     [MBProgressHUD showMessag:@"" toView:self.view];
     NSString* urlstr = [UpDateAttend stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -385,7 +385,7 @@
     //[[BaiduMobStat defaultStat] logEvent:@"Detail59" eventLabel:@"企业详情页－刷新按钮点击数"];
 
     [MBProgressHUD showMessag:@"" toView:self.view];
-    NSString *str = [NSString stringWithFormat:@"%@?entid=%@&userId=%@&entname=%@",RefreshEntInfo,detailModel.companyid,USER.userID,self.companyName];
+    NSString *str = [NSString stringWithFormat:@"%@?entid=%@&userId=%@&entname=%@",RefreshEntInfo,detailModel.companyid,KUSER.userId,self.companyName];
     str = [str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [detailView beginRefreshAnimation];
 
@@ -436,8 +436,8 @@
 - (void)checkUpdateStatus{
 
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    if (USER.userID) {
-        [params setObject:USER.userID forKey:@"userId"];
+    if (KUSER.userId) {
+        [params setObject:KUSER.userId forKey:@"userId"];
     }
     [params setObject:self.companyName forKey:@"entName"];
     [params setObject:detailModel.companyid forKey:@"entId"];
@@ -548,7 +548,7 @@
 -(void)loginSuccessCheckReport:(NSString *)reportType
  {
 //    [MBProgressHUD showMessag:@"" toView:self.view];
-//    NSString *str = [NSString stringWithFormat:@"%@?entId=%@&userId=%@&entName=%@&type=%@",KCheckEntReportVipType,detailModel.companyid,USER.userID,self.companyName,reportType];
+//    NSString *str = [NSString stringWithFormat:@"%@?entId=%@&userId=%@&entName=%@&type=%@",KCheckEntReportVipType,detailModel.companyid,KUSER.userId,self.companyName,reportType];
 //    str = [str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 //    KBolckSelf;
 //    NSURLSessionDataTask*task = [RequestManager QXBGetWithURLString:str parameters:nil success:^(id responseObject) {
@@ -605,7 +605,7 @@
 #pragma mark 导出企业通讯录
 -(void)downContact
 {
-//    if (USER.userID.length) {
+//    if (KUSER.userId.length) {
 //        DownContactController*vc = [[DownContactController alloc]init];
 //        NSMutableArray *phoneArray = [NSMutableArray array];
 //        for(NSDictionary *dic in detailModel.companyphonelist)
