@@ -10,8 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class MonitorDetailModel;
 @interface MonitorDetailCell : UITableViewCell
-
+@property (nonatomic ,strong) MonitorDetailModel *model;
 @end
 
 NS_ASSUME_NONNULL_END

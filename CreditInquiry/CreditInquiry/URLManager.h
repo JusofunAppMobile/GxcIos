@@ -40,8 +40,8 @@
 //发送验证码
 #define KSendMesCode   @""HOSTURL"/app/UserLogin/sendMesCode"
 
-
-
+//监控动态
+#define KGetMonitorDynamic @""HOSTURL"/app/MonitoringDynamics/GetmonitoringDynamics"
 
 
 

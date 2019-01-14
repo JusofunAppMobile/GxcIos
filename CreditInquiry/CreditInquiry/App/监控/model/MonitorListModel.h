@@ -14,12 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic ,copy) NSString *companyName;
 @property (nonatomic ,copy) NSString *companyId;
 @property (nonatomic ,copy) NSString *changeNum;
-@property (nonatomic ,copy) NSString *monitorType;
-@property (nonatomic ,copy) NSString *changeAfter;
-@property (nonatomic ,copy) NSString *changeBefore;
-@property (nonatomic ,copy) NSString *changeItem;
 @property (nonatomic ,copy) NSString *changeDate;
-
+@property (nonatomic ,copy) NSString *isUserMonitor;
+@property (nonatomic ,copy) NSString *companyIcon;
 @end
 
 NS_ASSUME_NONNULL_END

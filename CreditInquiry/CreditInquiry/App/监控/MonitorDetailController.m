@@ -11,6 +11,7 @@
 #import "MonitorDetailHeader.h"
 #import "MonitorMoreController.h"
 #import "MonitorFilterView.h"
+#import "MDSectionModel.h"
 
 static NSString *CellID = @"MonitorDetailCell";
 static NSString *HeadID = @"MonitorDetailHeader";
@@ -19,7 +20,7 @@ static NSString *HeadID = @"MonitorDetailHeader";
 @interface MonitorDetailController ()<UITableViewDelegate,UITableViewDataSource,MonitorDetailHeaderDelegate>
 @property (nonatomic ,strong) UITableView *tableview;
 @property (nonatomic ,strong) MonitorFilterView *filterView;
-
+@property (nonatomic ,strong) NSArray *datalist;
 @end
 
 @implementation MonitorDetailController
@@ -31,6 +32,28 @@ static NSString *HeadID = @"MonitorDetailHeader";
     [self setRightNaviButton];
     
     [self initView];
+    [self loadData];
+}
+
+#pragma mark - loadData
+- (void)loadData{
+    [MBProgressHUD showMessag:@"" toView:nil];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:@"" forKey:@"userId"];
+    [params setObject:@"" forKey:@"companyid"];
+    [params setObject:@"" forKey:@"companyName"];
+    [params setObject:@"" forKey:@"filterId"];
+    
+    [RequestManager postWithURLString:nil parameters:params success:^(id responseObject) {
+        [MBProgressHUD hideHudToView:self.view animated:YES];
+        if ([responseObject[@"result"] intValue] == 0) {
+            self.datalist = [MDSectionModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"data"]];
+            [_tableview reloadData];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD hideHudToView:self.view animated:YES];
+    }];
 }
 
 #pragma mark - initView
@@ -128,7 +151,6 @@ static NSString *HeadID = @"MonitorDetailHeader";
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.navigationController.navigationBar fs_clearBackgroudCustomColor];
 }
 
 

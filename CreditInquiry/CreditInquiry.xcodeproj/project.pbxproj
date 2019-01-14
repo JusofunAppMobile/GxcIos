@@ -129,6 +129,8 @@
 		CA46605621EC5952005C630F /* CreditPormiseController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA46605521EC5952005C630F /* CreditPormiseController.m */; };
 		CA46605A21EC6460005C630F /* GetPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = CA46605821EC6460005C630F /* GetPhoto.m */; };
 		CA46605D21EC7288005C630F /* UILabel+Alignment.m in Sources */ = {isa = PBXBuildFile; fileRef = CA46605C21EC7288005C630F /* UILabel+Alignment.m */; };
+		CA56111121ECBC7B0052CF38 /* MonitorDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56111021ECBC7B0052CF38 /* MonitorDetailModel.m */; };
+		CA56111721ECBE380052CF38 /* MDSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56111621ECBE380052CF38 /* MDSectionModel.m */; };
 		CA5E005921DDE05E0040ABE2 /* NSNumber+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFB721DDE05D0040ABE2 /* NSNumber+StringValue.m */; };
 		CA5E005A21DDE05E0040ABE2 /* UIColor+Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFB921DDE05D0040ABE2 /* UIColor+Tool.m */; };
 		CA5E005B21DDE05E0040ABE2 /* UIImage+Wechat.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFBB21DDE05D0040ABE2 /* UIImage+Wechat.m */; };
@@ -522,6 +524,10 @@
 		CA46605921EC6460005C630F /* GetPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetPhoto.h; sourceTree = "<group>"; };
 		CA46605B21EC7288005C630F /* UILabel+Alignment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+Alignment.h"; sourceTree = "<group>"; };
 		CA46605C21EC7288005C630F /* UILabel+Alignment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Alignment.m"; sourceTree = "<group>"; };
+		CA56110F21ECBC7B0052CF38 /* MonitorDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MonitorDetailModel.h; sourceTree = "<group>"; };
+		CA56111021ECBC7B0052CF38 /* MonitorDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonitorDetailModel.m; sourceTree = "<group>"; };
+		CA56111521ECBE380052CF38 /* MDSectionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDSectionModel.h; sourceTree = "<group>"; };
+		CA56111621ECBE380052CF38 /* MDSectionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDSectionModel.m; sourceTree = "<group>"; };
 		CA5E000021DDE05D0040ABE2 /* NSNumber+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Zirkfied.h"; sourceTree = "<group>"; };
 		CA5E000121DDE05D0040ABE2 /* NSNumber+Zirkfied.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Zirkfied.m"; sourceTree = "<group>"; };
 		CA5E000221DDE05D0040ABE2 /* NSString+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Zirkfied.h"; sourceTree = "<group>"; };
@@ -1516,6 +1522,10 @@
 			children = (
 				CA5E014321E433D30040ABE2 /* MonitorListModel.h */,
 				CA5E014421E433D30040ABE2 /* MonitorListModel.m */,
+				CA56110F21ECBC7B0052CF38 /* MonitorDetailModel.h */,
+				CA56111021ECBC7B0052CF38 /* MonitorDetailModel.m */,
+				CA56111521ECBE380052CF38 /* MDSectionModel.h */,
+				CA56111621ECBE380052CF38 /* MDSectionModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -2304,6 +2314,7 @@
 				793D1B4721DF68A300C29908 /* BranchOrInvesmentModel.m in Sources */,
 				CA5E008921DDE05E0040ABE2 /* ZFGenericAxis.m in Sources */,
 				793D1B2721DF67E000C29908 /* CompanyMap.m in Sources */,
+				CA56111721ECBE380052CF38 /* MDSectionModel.m in Sources */,
 				CA5E008621DDE05E0040ABE2 /* ZFBarChart.m in Sources */,
 				CA5E013221E433890040ABE2 /* CreditServiceHeader.m in Sources */,
 				793D1B3021DF67E000C29908 /* LoadDetailWithH5ViewController.m in Sources */,
@@ -2358,6 +2369,7 @@
 				CADD608521E4CA0F00EB01CD /* CreditProReportCell.m in Sources */,
 				CA5E00B121DDE69C0040ABE2 /* CreditViewController.m in Sources */,
 				CA5E007A21DDE05E0040ABE2 /* UIBezierPath+Zirkfied.m in Sources */,
+				CA56111121ECBC7B0052CF38 /* MonitorDetailModel.m in Sources */,
 				CADD60BF21E6E27200EB01CD /* ObjectionEntCell.m in Sources */,
 				CADD60D321E73CB100EB01CD /* ModifyInfoCell.m in Sources */,
 				79D34F2121E3267200B1CB32 /* DetailHolderCell.m in Sources */,

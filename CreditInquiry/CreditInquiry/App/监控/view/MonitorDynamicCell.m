@@ -7,6 +7,7 @@
 //
 
 #import "MonitorDynamicCell.h"
+#import "MonitorListModel.h"
 
 @interface MonitorDynamicCell ()
 @property (nonatomic ,strong) UIImageView *iconView;
@@ -99,8 +100,28 @@
     return self;
 }
 
+- (void)setModel:(MonitorListModel *)model{
+    _model = model;
+    _nameLab.text = model.companyName;
+    _dateLab.text = model.changeDate;
+    [self setMonitorButtonState:[model.isUserMonitor boolValue]];
+    
+    NSString *dynamicStr = [NSString stringWithFormat:@"共%@条动态",model.changeNum];
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc]initWithString:dynamicStr];
+    [attr addAttribute:NSForegroundColorAttributeName value:KHexRGB(0xe8603b) range:NSMakeRange(1, dynamicStr.length - 4)];
+    _dynamicLab.attributedText = attr;
+    
+    [_iconView sd_setImageWithURL:[NSURL URLWithString:model.companyIcon] placeholderImage:KImageName(@"")];//test
+}
+
 - (void)monitorAction{
-    _monitorBtn.selected = !_monitorBtn.selected;
+    if ([self.delegate respondsToSelector:@selector(didClickMonitorButton:monitor:)]) {
+        [self.delegate didClickMonitorButton:_model monitor:!_monitorBtn.selected];
+    }
+}
+
+- (void)setMonitorButtonState:(BOOL)selected{
+    _monitorBtn.selected = selected;
     if (_monitorBtn.selected) {
         _monitorBtn.layer.borderColor = KHexRGB(0x909090).CGColor;
         [_monitorBtn mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -112,7 +133,6 @@
             make.width.mas_equalTo(50);
         }];
     }
-    
 }
 
 @end

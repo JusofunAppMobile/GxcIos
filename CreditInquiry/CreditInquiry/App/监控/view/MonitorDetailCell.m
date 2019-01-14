@@ -7,6 +7,7 @@
 //
 
 #import "MonitorDetailCell.h"
+#import "MonitorDetailModel.h"
 
 @interface MonitorDetailCell ()
 @property (nonatomic ,strong) UILabel *contentLab;
@@ -29,6 +30,7 @@
             view.numberOfLines = 0;
             view.font = KFont(15);
             view.textColor = KHexRGB(0x303030);
+            view.textAlignment = NSTextAlignmentJustified;
             view;
         });
         
@@ -49,6 +51,12 @@
     return self;
 }
 
+- (void)setModel:(MonitorDetailModel *)model{
+    _model = model;
+    _contentLab.text = model.contont;
+    _dateLab.text = model.time;
+    
+}
 
 
 @end

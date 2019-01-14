@@ -20,21 +20,22 @@ static NSString *CELLID = @"MonitorDynamicCell";
 @property (nonatomic ,strong) UITableView *tableview;
 @property (nonatomic ,strong) MonitorTableHeader *tableHeader;
 @property (nonatomic ,strong) MonitorFilterView *filterView;
-@property (nonatomic ,strong) NSArray *datalist;
+@property (nonatomic ,strong) NSMutableArray *datalist;
+@property (nonatomic ,assign) NSInteger page;
+@property (nonatomic ,assign) BOOL moreData;
 @end
 
 @implementation MonitorViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self initView];
+    [self loadData:YES];
 }
 
 #pragma mark - initView
 - (void)initView{
-    
-//    MonitorHeaderView *monitorHeader = [[MonitorHeaderView alloc]initWithFrame:KFrame(0, KNavigationBarHeight, KDeviceW, 48)];
-//    [self.view addSubview:monitorHeader];
     self.tableview = ({
         UITableView *view = [UITableView new];
         [self.view addSubview:view];
@@ -50,15 +51,58 @@ static NSString *CELLID = @"MonitorDynamicCell";
         view;
     });
     [_tableview registerClass:[MonitorDynamicCell class] forCellReuseIdentifier:CELLID];
+   
+    [self addRefreshView];
 }
 
+- (void)addRefreshView{
+    KWeakSelf
+    _tableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        weakSelf.page = 1;
+        [weakSelf loadData:NO];
+    }];
+    _tableview.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [weakSelf loadData:NO];
+    }];
+}
+
+- (void)endRefresh{
+    [_tableview.mj_header endRefreshing];
+    if (_moreData) {
+        [_tableview.mj_footer endRefreshing];
+    }else{
+        [_tableview.mj_footer endRefreshingWithNoMoreData];
+    }
+}
 #pragma mark - loadData
-- (void)loadData{
+- (void)loadData:(BOOL)loading{
  
+    if (loading) {
+        [MBProgressHUD showMessag:@"" toView:self.view];
+    }
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:@"7" forKey:@"userId"];//test
+    [params setObject:@"1" forKey:@"pageIndex"];//test
+    [params setObject:@"10" forKey:@"pageSize"];//test
+
+    [RequestManager postWithURLString:KGetMonitorDynamic parameters:params success:^(id responseObject) {
+        [MBProgressHUD hideHudToView:self.view animated:YES];
+        if ([responseObject[@"result"] intValue] == 0) {
+            if (_page == 1) {
+                [_datalist removeAllObjects];
+            }
+            [self.datalist addObjectsFromArray: [MonitorListModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"monitor"]]];
+            [_tableview reloadData];
+            _page++;
+            _moreData = _datalist.count< [responseObject[@"total"] intValue];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD hideHudToView:self.view animated:YES];
+    }];
 }
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return _datalist.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -77,6 +121,13 @@ static NSString *CELLID = @"MonitorDynamicCell";
     [self.filterView showChooseView];
 }
 
+#pragma mark - life cycle
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self setNavigationBarTitle:@"监控动态" andTextColor:[UIColor whiteColor]];
+    [self.navigationController.navigationBar fs_setBackgroundColor:KHexRGB(0xd91526)];
+}
+
 #pragma mark - lazy load
 - (MonitorTableHeader *)tableHeader{
     if (!_tableHeader) {
@@ -92,6 +143,13 @@ static NSString *CELLID = @"MonitorDynamicCell";
         _filterView.dataArray = @[@"裁判文书",@"被执行人",@"开庭公告",@"法院公告",@"失信信息",@"动产抵押",@"欠税信息",@"非正常户",@"税务重大违法",@"司法拍卖",@"股权出质",@"经营异常",@"行政处罚",@"股权冻结",@"司法协助",@"立案信息",@"商标信息",@"专利信息",@"作品著作权",@"软件著作权",@"资质认证",@"工商变更",@"域名信息",@"新闻舆情"];
     }
     return _filterView;
+}
+
+- (NSMutableArray *)datalist{
+    if (!_datalist) {
+        _datalist = [NSMutableArray array];
+    }
+    return _datalist;
 }
 
 @end

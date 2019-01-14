@@ -15,6 +15,7 @@
 #import "SettingViewController.h"
 #import "PersonalSettingController.h"
 #import "FogotPwdController.h"
+#import "LoginController.h"
 
 static NSString *InfoID = @"MeInfoCell";
 static NSString *ItemID = @"MeItemCell";
@@ -113,8 +114,15 @@ static NSString *PlainID = @"MePlainCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0) {
-        PersonalSettingController *vc = [PersonalSettingController new];
-        [self.navigationController pushViewController:vc animated:YES];
+        
+        if (USER.userID.length) {
+            PersonalSettingController *vc = [PersonalSettingController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            LoginController *vc = [LoginController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+       
     }else if (indexPath.section == 2) {
         if (indexPath.row == 3) {
             SettingViewController *vc = [SettingViewController new];
