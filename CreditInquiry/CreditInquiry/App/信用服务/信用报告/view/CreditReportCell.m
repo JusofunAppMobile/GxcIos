@@ -118,6 +118,7 @@
         reportBtn.backgroundColor = KHexRGB(0xd60e23);
         reportBtn.titleLabel.font = [UIFont boldSystemFontOfSize:12];
         [reportBtn setTitle:@"获取报告" forState:UIControlStateNormal];
+        [reportBtn addTarget:self action:@selector(sendReportAction) forControlEvents:UIControlEventTouchUpInside];
         [contentBg addSubview:reportBtn];
         [reportBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(line.mas_bottom).offset(10);
@@ -135,6 +136,7 @@
         preViewBtn.titleLabel.font =[UIFont boldSystemFontOfSize:12];
         [preViewBtn setTitle:@"样本预览" forState:UIControlStateNormal];
         [preViewBtn setTitleColor:KHexRGB(0xd93947) forState:UIControlStateNormal];
+        [preViewBtn addTarget:self action:@selector(previewAction) forControlEvents:UIControlEventTouchUpInside];
         [contentBg addSubview:preViewBtn];
         [preViewBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.bottom.width.height.mas_equalTo(reportBtn);
@@ -144,5 +146,19 @@
     }
     return self;
 }
+
+- (void)sendReportAction{
+    if ([self.delegate respondsToSelector:@selector(didClickSendReportButton)]) {
+        [self.delegate didClickSendReportButton];
+    }
+    
+}
+
+- (void)previewAction{
+    if ([self.delegate respondsToSelector:@selector(didClickPreviewButton)]) {
+        [self.delegate didClickSendReportButton];
+    }
+}
+
 
 @end

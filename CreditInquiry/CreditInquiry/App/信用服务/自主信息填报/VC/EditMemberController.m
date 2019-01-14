@@ -18,6 +18,8 @@ static NSString *TextCellID = @"CreditEditTextCell";
 @interface EditMemberController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic ,strong) UIButton *rightBtn;
 @property (nonatomic ,strong) UITableView *tableview;
+@property (nonatomic ,assign) BOOL canEdit;
+
 @end
 
 @implementation EditMemberController
@@ -90,6 +92,7 @@ static NSString *TextCellID = @"CreditEditTextCell";
             return cell;
         }else{
             CreditEditLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:LabelCellID forIndexPath:indexPath];
+            [cell setContent:@"" row:indexPath.row editType:EditTypeMember];
             return cell;
         }
     }else{
@@ -99,6 +102,8 @@ static NSString *TextCellID = @"CreditEditTextCell";
 }
 
 - (void)rightAction{
-    NSLog(@"完成");
+    _rightBtn.selected = !_rightBtn.selected;
+    _canEdit = _rightBtn.selected;
+    [_tableview reloadData];
 }
 @end

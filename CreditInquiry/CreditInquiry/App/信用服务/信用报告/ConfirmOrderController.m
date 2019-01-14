@@ -8,8 +8,13 @@
 
 #import "ConfirmOrderController.h"
 #import "MyTextField.h"
+#import "ReportSendSuccessController.h"
+
 @interface ConfirmOrderController ()
 
+@property (nonatomic ,strong) UIButton *leftBtn;
+@property (nonatomic ,strong) UIButton *rightBtn;
+@property (nonatomic ,strong) UILabel *priceLab;
 @end
 
 @implementation ConfirmOrderController
@@ -23,6 +28,8 @@
 
 #pragma mark - initView
 - (void)initView{
+    
+    self.view.backgroundColor = KHexRGB(0xebf0f3);
     
     UIImageView *iconBg1 = [UIImageView new];
     iconBg1.backgroundColor = [UIColor yellowColor];
@@ -50,7 +57,7 @@
     [typeLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(typeTitle.mas_right);
         make.top.mas_equalTo(typeTitle);
-        make.right.mas_equalTo(iconBg1).offset(-20);
+        make.right.mas_lessThanOrEqualTo(iconBg1).offset(-20);
     }];
     
     UILabel *goalTitle = [UILabel new];
@@ -73,7 +80,7 @@
         make.left.mas_equalTo(goalTitle.mas_right);
         make.top.mas_equalTo(goalTitle);
         make.right.mas_equalTo(iconBg1).offset(-20);
-        make.bottom.mas_equalTo(iconBg1.mas_bottom).offset(-12);
+        make.bottom.mas_equalTo(iconBg1.mas_bottom).offset(-20);
     }];
     
     UIImageView *iconBg2 = [UIImageView new];
@@ -82,11 +89,12 @@
     [iconBg2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(iconBg1);
         make.top.mas_equalTo(iconBg1.mas_bottom);
-        make.height.mas_equalTo((20/345)*(KDeviceW-15*2));
+        make.height.mas_equalTo((20.f/345)*(KDeviceW-15*2));
     }];
     
     UIImageView *iconBg3 = [UIImageView new];
     iconBg3.backgroundColor = [UIColor greenColor];
+    iconBg3.userInteractionEnabled = YES;
     [self.view addSubview:iconBg3];
     [iconBg3 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(iconBg1);
@@ -117,37 +125,120 @@
         make.top.mas_equalTo(textField.mas_bottom).offset(23);
     }];
     
-    UIButton *leftBtn = [UIButton new];
-    leftBtn.backgroundColor = KHexRGB(0xf1f2f4);
-    leftBtn.titleLabel.font = KFont(10);
-    leftBtn.layer.cornerRadius = 2;
-    [leftBtn setTitle:@"PDF" forState:UIControlStateNormal];
-    [iconBg3 addSubview:leftBtn];
-    [leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(formatLab);
-        make.top.mas_equalTo(formatLab.mas_bottom).offset(18);
-        make.width.mas_equalTo(82);
-        make.height.mas_equalTo(32);
+    self.leftBtn = ({
+        UIButton *leftBtn = [UIButton new];
+        leftBtn.selected = YES;
+        leftBtn.titleLabel.font = KFont(10);
+        leftBtn.layer.cornerRadius = 2;
+        leftBtn.layer.borderWidth = .5f;
+        leftBtn.layer.borderColor = KHexRGB(0xd31023).CGColor;
+        leftBtn.layer.masksToBounds = YES;
+        leftBtn.backgroundColor = KHexRGB(0xffefe9);
+        [leftBtn setTitle:@"PDF" forState:UIControlStateNormal];
+        [leftBtn setTitleColor:KHexRGB(0xd41124) forState:UIControlStateSelected];
+        [leftBtn setTitleColor:KHexRGB(0x303030) forState:UIControlStateNormal];
+        [leftBtn addTarget:self action:@selector(formatAction:) forControlEvents:UIControlEventTouchUpInside];
+        [iconBg3 addSubview:leftBtn];
+        [leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(formatLab);
+            make.top.mas_equalTo(formatLab.mas_bottom).offset(18);
+            make.width.mas_equalTo(82);
+            make.height.mas_equalTo(34);
+            make.bottom.mas_equalTo(iconBg3.mas_bottom).offset(-35);
+        }];
+        leftBtn;
+    });
+    
+    
+    self.rightBtn = ({
+        UIButton *rightBtn = [UIButton new];
+        rightBtn.titleLabel.font = KFont(10);
+        rightBtn.layer.cornerRadius = 2;
+        rightBtn.layer.borderWidth = .5f;
+        rightBtn.layer.borderColor =[UIColor clearColor].CGColor;
+        rightBtn.layer.masksToBounds = YES;
+        rightBtn.backgroundColor = KHexRGB(0xf1f2f3);
+        [rightBtn setTitle:@"PDF+word" forState:UIControlStateNormal];
+        [rightBtn setTitleColor:KHexRGB(0xd41124) forState:UIControlStateSelected];
+        [rightBtn setTitleColor:KHexRGB(0x303030) forState:UIControlStateNormal];
+        [rightBtn addTarget:self action:@selector(formatAction:) forControlEvents:UIControlEventTouchUpInside];
+        [iconBg3 addSubview:rightBtn];
+        [rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(_leftBtn.mas_right).offset(22);
+            make.top.width.height.mas_equalTo(_leftBtn);
+        }];
+        rightBtn;
+    });
+    
+    
+    UIView *footerBar = [UIView new];
+    footerBar.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:footerBar];
+    [footerBar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.mas_equalTo(self.view);
+        make.height.mas_equalTo(53);
     }];
     
-    UIButton *rightBtn = [UIButton new];
-    rightBtn.backgroundColor = KHexRGB(0xffefe9);
-    rightBtn.titleLabel.font = KFont(10);
-    rightBtn.layer.cornerRadius = 2;
-    rightBtn.layer.borderWidth = .5f;
-    rightBtn.layer.borderColor = KHexRGB(0xd31023).CGColor;
-    rightBtn.layer.masksToBounds = YES;
-    [rightBtn setTitle:@"PDF+word" forState:UIControlStateNormal];
-    [rightBtn setTitleColor:KHexRGB(0xd41124) forState:UIControlStateNormal];
-    [iconBg3 addSubview:rightBtn];
-    [rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(formatLab);
-        make.top.mas_equalTo(formatLab.mas_bottom).offset(18);
-        make.width.mas_equalTo(82);
-        make.height.mas_equalTo(32);
-        make.bottom.mas_equalTo(iconBg3.mas_bottom).offset(-35);
+    UILabel *priceTitle = [UILabel new];
+    priceTitle.font = KFont(16);
+    priceTitle.textColor = KHexRGB(0x303030);
+    priceTitle.text = @"待支付：";
+    [footerBar addSubview:priceTitle];
+    [priceTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(footerBar);
+        make.left.mas_equalTo(footerBar).offset(20);
     }];
     
+    self.priceLab = ({
+        UILabel *view = [UILabel new];
+        [footerBar addSubview:view];
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(footerBar);
+            make.left.mas_equalTo(priceTitle.mas_right);
+        }];
+        view.font = KFont(12);
+        view.text = @"￥0";
+        view.textColor = KHexRGB(0xd20b1e);
+        view;
+    });
+    
+    UIButton *sendBtn = [UIButton new];
+    sendBtn.titleLabel.font = KFont(16);
+    sendBtn.backgroundColor = KHexRGB(0xd31023);
+    [sendBtn setTitle:@"发送" forState:UIControlStateNormal];
+    [sendBtn addTarget:self action:@selector(sendAction) forControlEvents:UIControlEventTouchUpInside];
+    [footerBar addSubview:sendBtn];
+    [sendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.right.mas_equalTo(footerBar);
+        make.width.mas_equalTo(125);
+    }];
+
+}
+
+- (void)formatAction:(UIButton *)sender{
+    if ([sender isEqual:_leftBtn]) {
+        _leftBtn.selected = YES;
+        _rightBtn.selected = NO;
+        _leftBtn.backgroundColor = KHexRGB(0xffefe9);
+        _rightBtn.backgroundColor = KHexRGB(0xf1f2f3);
+        
+        _leftBtn.layer.borderColor = KHexRGB(0xd31023).CGColor;
+        _rightBtn.layer.borderColor = [UIColor clearColor].CGColor;
+
+    }else{
+        _rightBtn.selected = YES;
+        _leftBtn.selected = NO;
+        _rightBtn.backgroundColor = KHexRGB(0xffefe9);
+        _leftBtn.backgroundColor = KHexRGB(0xf1f2f3);
+        
+        _rightBtn.layer.borderColor = KHexRGB(0xd31023).CGColor;
+        _leftBtn.layer.borderColor = [UIColor clearColor].CGColor;
+    }
+}
+
+- (void)sendAction{
+    ReportSendSuccessController *vc = [ReportSendSuccessController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

@@ -10,8 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CreditReportCell : UITableViewCell
+@protocol CreditReportCellDelegate <NSObject>
 
+- (void)didClickPreviewButton;
+- (void)didClickSendReportButton;
+
+@end
+
+@interface CreditReportCell : UITableViewCell
+@property (nonatomic ,weak) id <CreditReportCellDelegate>delegate;
 @end
 
 NS_ASSUME_NONNULL_END

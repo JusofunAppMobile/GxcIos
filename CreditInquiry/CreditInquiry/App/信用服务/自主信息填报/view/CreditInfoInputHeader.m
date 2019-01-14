@@ -31,26 +31,49 @@
             view;
         });
         
+        UILabel *codeTitle = [UILabel new];
+        [self addSubview:codeTitle];
+        [codeTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(_nameLab);
+            make.top.mas_equalTo(_nameLab.mas_bottom).offset(15);
+        }];
+        codeTitle.text = @"统一社会信用代码：";
+        codeTitle.font = KFont(12);
+        codeTitle.textColor = KHexRGB(0x909090);
+        
         self.codeLab = ({
             UILabel *view = [UILabel new];
             [self addSubview:view];
             [view mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.mas_equalTo(_nameLab.mas_bottom).offset(15);
-                make.left.right.mas_equalTo(_nameLab);
+                make.top.mas_equalTo(codeTitle);
+                make.left.mas_equalTo(codeTitle.mas_right);
+                make.right.mas_lessThanOrEqualTo(self).offset(-15);
             }];
-            view.text = @"统一社会信用代码：9391293921931929MSKKL";
+            view.text = @"9391293921931929MSKKL";
             view.font = KFont(12);
             view;
         });
+        
+        UILabel *typeTitle = [UILabel new];
+        [self addSubview:typeTitle];
+        [typeTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(codeTitle.mas_bottom).offset(15);
+            make.left.mas_equalTo(codeTitle);
+        }];
+        typeTitle.text = @"企业类型：";
+        typeTitle.font = KFont(12);
+        typeTitle.textColor = KHexRGB(0x909090);
+        
         
         self.typeLab = ({
             UILabel *view = [UILabel new];
             [self addSubview:view];
             [view mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.mas_equalTo(_codeLab.mas_bottom).offset(10);
-                make.left.right.mas_equalTo(_nameLab);
+                make.top.mas_equalTo(typeTitle);
+                make.left.mas_equalTo(typeTitle.mas_right);
+                make.right.mas_lessThanOrEqualTo(self).offset(-15);
             }];
-            view.text = @"企业类型：非上市、自然人或投资控股";
+            view.text = @"非上市、自然人或投资控股";
             view.font = KFont(12);
             view;
         });

@@ -19,6 +19,8 @@ static NSString *TextCellID = @"CreditEditTextCell";
 @interface EditCompanyInfoController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic ,strong) UIButton *rightBtn;
 @property (nonatomic ,strong) UITableView *tableview;
+@property (nonatomic ,strong) NSArray *titleArr;
+@property (nonatomic ,assign) BOOL canEdit;
 @end
 
 @implementation EditCompanyInfoController
@@ -28,8 +30,8 @@ static NSString *TextCellID = @"CreditEditTextCell";
     [self setNavigationBarTitle:@"企业信息"];
     [self setBlankBackButton];
     [self setRightNaviButton];
+        
     [self initView];
-    
 }
 #pragma mark - initView
 - (void)initView{
@@ -51,7 +53,8 @@ static NSString *TextCellID = @"CreditEditTextCell";
 - (void)setRightNaviButton{
     _rightBtn = [[UIButton alloc]initWithFrame:KFrame(0, 0, 35, 40)];
     _rightBtn.titleLabel.font = KFont(15);
-    [_rightBtn setTitle:@"完成" forState: UIControlStateNormal];
+    [_rightBtn setTitle:@"编辑" forState: UIControlStateNormal];
+    [_rightBtn setTitle:@"完成" forState: UIControlStateSelected];
     [_rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_rightBtn addTarget:self action:@selector(rightAction) forControlEvents:UIControlEventTouchUpInside];
     
@@ -69,7 +72,7 @@ static NSString *TextCellID = @"CreditEditTextCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
-        return 6;
+        return 5;
     }
     return 1;
 }
@@ -87,11 +90,13 @@ static NSString *TextCellID = @"CreditEditTextCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        if (indexPath.row == 5) {
+        if (indexPath.row == 4) {
             CreditEditImageCell *cell = [tableView dequeueReusableCellWithIdentifier:ImageCellID forIndexPath:indexPath];
             return cell;
         }else{
             CreditEditLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:LabelCellID forIndexPath:indexPath];
+            [cell setContent:@"" row:indexPath.row editType:EditTypeInfo];
+            cell.canEdit = _canEdit;
             return cell;
         }
     }else{
@@ -101,6 +106,8 @@ static NSString *TextCellID = @"CreditEditTextCell";
 }
 
 - (void)rightAction{
-    NSLog(@"完成");
+    _rightBtn.selected = !_rightBtn.selected;
+    _canEdit = _rightBtn.selected;
+    [_tableview reloadData];
 }
 @end
