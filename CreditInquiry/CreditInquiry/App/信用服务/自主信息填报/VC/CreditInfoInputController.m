@@ -72,6 +72,7 @@ static NSString *CellID = @"CreditInfoInputCell";
     return cell;
 }
 
+
 #pragma mark -
 - (void)didClickEditButton:(NSInteger)section{
     if (section == 0) {

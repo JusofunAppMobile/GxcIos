@@ -125,6 +125,9 @@
 		79D34F4D21E4B7FA00B1CB32 /* ComCertificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D34F4C21E4B7FA00B1CB32 /* ComCertificationController.m */; };
 		79D34F5121E4BC2200B1CB32 /* CertificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D34F5021E4BC2200B1CB32 /* CertificationCell.m */; };
 		87E7B666298C06E9D3FD25BC /* libPods-CreditInquiry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 963E3CE0C10D1E4512DFED45 /* libPods-CreditInquiry.a */; };
+		CA46605621EC5952005C630F /* CreditPormiseController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA46605521EC5952005C630F /* CreditPormiseController.m */; };
+		CA46605A21EC6460005C630F /* GetPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = CA46605821EC6460005C630F /* GetPhoto.m */; };
+		CA46605D21EC7288005C630F /* UILabel+Alignment.m in Sources */ = {isa = PBXBuildFile; fileRef = CA46605C21EC7288005C630F /* UILabel+Alignment.m */; };
 		CA5E005921DDE05E0040ABE2 /* NSNumber+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFB721DDE05D0040ABE2 /* NSNumber+StringValue.m */; };
 		CA5E005A21DDE05E0040ABE2 /* UIColor+Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFB921DDE05D0040ABE2 /* UIColor+Tool.m */; };
 		CA5E005B21DDE05E0040ABE2 /* UIImage+Wechat.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFBB21DDE05D0040ABE2 /* UIImage+Wechat.m */; };
@@ -510,6 +513,12 @@
 		79D34F4F21E4BC2200B1CB32 /* CertificationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CertificationCell.h; sourceTree = "<group>"; };
 		79D34F5021E4BC2200B1CB32 /* CertificationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CertificationCell.m; sourceTree = "<group>"; };
 		963E3CE0C10D1E4512DFED45 /* libPods-CreditInquiry.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CreditInquiry.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA46605421EC5952005C630F /* CreditPormiseController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreditPormiseController.h; sourceTree = "<group>"; };
+		CA46605521EC5952005C630F /* CreditPormiseController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreditPormiseController.m; sourceTree = "<group>"; };
+		CA46605821EC6460005C630F /* GetPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetPhoto.m; sourceTree = "<group>"; };
+		CA46605921EC6460005C630F /* GetPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetPhoto.h; sourceTree = "<group>"; };
+		CA46605B21EC7288005C630F /* UILabel+Alignment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+Alignment.h"; sourceTree = "<group>"; };
+		CA46605C21EC7288005C630F /* UILabel+Alignment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Alignment.m"; sourceTree = "<group>"; };
 		CA5E000021DDE05D0040ABE2 /* NSNumber+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Zirkfied.h"; sourceTree = "<group>"; };
 		CA5E000121DDE05D0040ABE2 /* NSNumber+Zirkfied.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Zirkfied.m"; sourceTree = "<group>"; };
 		CA5E000221DDE05D0040ABE2 /* NSString+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Zirkfied.h"; sourceTree = "<group>"; };
@@ -1170,6 +1179,25 @@
 			path = CompanyDetailView;
 			sourceTree = "<group>";
 		};
+		CA46605321EC5904005C630F /* 信用承诺 */ = {
+			isa = PBXGroup;
+			children = (
+				CA46605721EC6449005C630F /* view */,
+				CA46605421EC5952005C630F /* CreditPormiseController.h */,
+				CA46605521EC5952005C630F /* CreditPormiseController.m */,
+			);
+			path = "信用承诺";
+			sourceTree = "<group>";
+		};
+		CA46605721EC6449005C630F /* view */ = {
+			isa = PBXGroup;
+			children = (
+				CA46605921EC6460005C630F /* GetPhoto.h */,
+				CA46605821EC6460005C630F /* GetPhoto.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		CA5E000A21DDE05D0040ABE2 /* Component */ = {
 			isa = PBXGroup;
 			children = (
@@ -1384,6 +1412,7 @@
 		CA5E00A621DDE5E00040ABE2 /* 信用服务 */ = {
 			isa = PBXGroup;
 			children = (
+				CA46605321EC5904005C630F /* 信用承诺 */,
 				CADD60B221E6DBFB00EB01CD /* 信用异议 */,
 				CADD607A21E4B94B00EB01CD /* 信用报告 */,
 				CADD607621E4B68200EB01CD /* 信用评价 */,
@@ -1461,6 +1490,8 @@
 		CA5E013A21E433A40040ABE2 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				CA46605B21EC7288005C630F /* UILabel+Alignment.h */,
+				CA46605C21EC7288005C630F /* UILabel+Alignment.m */,
 				CA5E013B21E433A40040ABE2 /* CreditInfoInputCell.h */,
 				CA5E013C21E433A40040ABE2 /* CreditInfoInputCell.m */,
 				CA5E013D21E433A40040ABE2 /* CreditInfoInputHeader.h */,
@@ -2189,6 +2220,7 @@
 				CA5E006B21DDE05E0040ABE2 /* DVPieChart.m in Sources */,
 				79D34EF921E0652000B1CB32 /* SearchCompanyCell.m in Sources */,
 				79D34EFC21E0652000B1CB32 /* BaseSearchCell.m in Sources */,
+				CA46605D21EC7288005C630F /* UILabel+Alignment.m in Sources */,
 				CA5E00AA21DDE61D0040ABE2 /* HomeViewController.m in Sources */,
 				793D1AC721DF65CC00C29908 /* SearchLoseCreitARRModel.m in Sources */,
 				CADD607921E4B6AC00EB01CD /* CreditScoreController.m in Sources */,
@@ -2252,6 +2284,7 @@
 				CA5E013421E433890040ABE2 /* CreditChartLineCell.m in Sources */,
 				79D34EB821E05E1F00B1CB32 /* JobCell.m in Sources */,
 				793D1C8121E0586200C29908 /* OweTaxModel.m in Sources */,
+				CA46605A21EC6460005C630F /* GetPhoto.m in Sources */,
 				CADD606C21E4A66F00EB01CD /* EditProductController.m in Sources */,
 				79D34ECD21E05E5600B1CB32 /* CompanySearchModel.m in Sources */,
 				CA5E009821DDE05E0040ABE2 /* ZFWaveChart.m in Sources */,
@@ -2301,6 +2334,7 @@
 				CA5E009521DDE05E0040ABE2 /* ZFRadar.m in Sources */,
 				79D34F3021E3682600B1CB32 /* RiskAnalyzeCell.m in Sources */,
 				79D34F1E21E0AF3700B1CB32 /* NewsCell.m in Sources */,
+				CA46605621EC5952005C630F /* CreditPormiseController.m in Sources */,
 				79D34EFF21E0654100B1CB32 /* ExportBar.m in Sources */,
 				CADD60A621E61F5700EB01CD /* MyMonitorCell.m in Sources */,
 				CA5E008B21DDE05E0040ABE2 /* ZFHorizontalAxis.m in Sources */,

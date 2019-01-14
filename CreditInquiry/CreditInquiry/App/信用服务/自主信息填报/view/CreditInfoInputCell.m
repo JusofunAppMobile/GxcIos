@@ -19,6 +19,8 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         UIView *headerBg = [UIView new];
         [self.contentView addSubview:headerBg];
         [headerBg mas_makeConstraints:^(MASConstraintMaker *make) {

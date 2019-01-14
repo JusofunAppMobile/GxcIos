@@ -10,11 +10,12 @@
 #import "CreditReportCell.h"
 #import "CreditProReportCell.h"
 #import "CreditReportHeader.h"
+#import "ConfirmOrderController.h"
 
 static NSString *CellID = @"CreditReportCell";
 static NSString *ProCellID = @"CreditProReportCell";
 
-@interface CreditReportController ()<UITableViewDataSource,UITableViewDelegate>
+@interface CreditReportController ()<UITableViewDataSource,UITableViewDelegate,CreditReportCellDelegate>
 @property (nonatomic ,strong) UITableView *tableview;
 @property (nonatomic ,strong) CreditReportHeader *header;
 @end
@@ -80,6 +81,7 @@ static NSString *ProCellID = @"CreditProReportCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section ==0) {
         CreditReportCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID forIndexPath:indexPath];
+        cell.delegate = self;
         return cell;
     }else{
         CreditProReportCell *cell = [tableView dequeueReusableCellWithIdentifier:ProCellID forIndexPath:indexPath];
@@ -90,6 +92,16 @@ static NSString *ProCellID = @"CreditProReportCell";
 #pragma mark - 我的订单
 - (void)rightAction{
     NSLog(@"我的订单");
+}
+
+#pragma mark - 预览 获取报告
+- (void)didClickSendReportButton{
+    ConfirmOrderController *vc = [ConfirmOrderController new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)didClickPreviewButton{
+    
 }
 
 #pragma mark - lazy load

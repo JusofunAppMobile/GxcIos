@@ -10,7 +10,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef enum : NSUInteger {
+    EditTypeInfo,
+    EditTypeProduct,
+    EditTypeHonor,
+    EditTypePartner,
+    EditTypeMember,
+} CreditEditType;
+
 @interface CreditEditLabelCell : UITableViewCell
+
+@property (nonatomic ,assign) BOOL canEdit;
+- (void)setContent:(id)content row:(NSInteger)row editType:(CreditEditType)type;
 
 @end
 

@@ -80,12 +80,12 @@
     UIButton *checkBtn = [UIButton new];
     checkBtn.layer.cornerRadius = 2;
     checkBtn.layer.masksToBounds = YES;
+    checkBtn.backgroundColor = KHexRGB(0xd31023);
     checkBtn.titleLabel.font = KFont(15);
     [checkBtn setTitle:@"查看订单" forState:UIControlStateNormal];
     [self.view addSubview:checkBtn];
     [checkBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(67);
-        make.right.mas_equalTo(-67);
+        make.left.right.mas_equalTo(doneBtn);
         make.bottom.mas_equalTo(doneBtn.mas_top).offset(-30);
         make.height.mas_equalTo(45);
     }];

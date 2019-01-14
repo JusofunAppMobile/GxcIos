@@ -18,6 +18,8 @@ static NSString *TextCellID = @"CreditEditTextCell";
 @interface EditPartnerController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic ,strong) UIButton *rightBtn;
 @property (nonatomic ,strong) UITableView *tableview;
+@property (nonatomic ,assign) BOOL canEdit;
+
 @end
 
 @implementation EditPartnerController
@@ -87,6 +89,8 @@ static NSString *TextCellID = @"CreditEditTextCell";
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             CreditEditLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:LabelCellID forIndexPath:indexPath];
+            [cell setContent:@"" row:indexPath.row editType:EditTypePartner];
+            cell.canEdit = _canEdit;
             return cell;
         }else{
             CreditEditImageCell *cell = [tableView dequeueReusableCellWithIdentifier:ImageCellID forIndexPath:indexPath];
@@ -99,6 +103,8 @@ static NSString *TextCellID = @"CreditEditTextCell";
 }
 
 - (void)rightAction{
-    NSLog(@"完成");
+    _rightBtn.selected = !_rightBtn.selected;
+    _canEdit = _rightBtn.selected;
+    [_tableview reloadData];
 }
 @end

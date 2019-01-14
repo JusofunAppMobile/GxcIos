@@ -15,6 +15,7 @@
 #import "CreditReportController.h"
 #import "ObjectionAppealController.h"
 #import "CreditInfoCell.h"
+#import "CreditPormiseController.h"
 
 static NSString *InfoID = @"CreditInfoCell";
 static NSString *CellID = @"CreditCollectionCell";
@@ -30,7 +31,6 @@ static NSString *ChartID = @"CreditChartLineCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setNavigationBarTitle:@"信用服务" andTextColor:[UIColor whiteColor]];
     self.companyInfo = @{@"companyName":@"阿里巴巴科技有限公司",@"code":@"91441400696419503L",@"type":@"非上市、自然人投资或控股",@"companyId":@"15",@"state":@"1",@"changeNum":@"5"};
     [self initView];
 }
@@ -152,6 +152,9 @@ static NSString *ChartID = @"CreditChartLineCell";
         }else if (indexPath.row == 2){
             ObjectionAppealController *vc = [ObjectionAppealController new];
             [self.navigationController pushViewController:vc animated:YES];
+        }else if (indexPath.row ==3){
+            CreditPormiseController *vc = [CreditPormiseController new];
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }
  
@@ -161,6 +164,7 @@ static NSString *ChartID = @"CreditChartLineCell";
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar fs_setBackgroundColor:KHexRGB(0xd51424)];
+    [self setNavigationBarTitle:@"信用服务" andTextColor:[UIColor whiteColor]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
