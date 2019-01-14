@@ -45,7 +45,7 @@
     [paraDic setObject:@"20" forKey:@"pageSize"];
     [paraDic setObject:[NSNumber numberWithInt:pageIndex] forKey:@"pageIndex"];
     
-    [RequestManager getWithURLString:KGetPenalty parameters:paraDic success:^(id responseObject) {
+    [RequestManager QXBGetWithURLString:KGetPenalty parameters:paraDic success:^(id responseObject) {
         [weakSelf hideLoadDataAnimation];
         [weakSelf endRefresh];
         if([[responseObject objectForKey:@"result"] intValue] == 0)

@@ -92,6 +92,33 @@
 {
     if(self.delegate && [self.delegate respondsToSelector:@selector(gridButtonClick: cellSection:)])
     {
+        
+        NSString *headStr = [headArray objectAtIndex:section];
+        
+       
+        if ([headStr isEqualToString:@"企业背景"])
+        {
+            section = 2;
+        }
+        else if ([headStr isEqualToString:@"风险信息"])
+        {
+            section = 3;
+        }
+        else if ([headStr isEqualToString:@"经营状况"])
+        {
+           section = 4;
+        }
+        else if ([headStr isEqualToString:@"无形资产"])
+        {
+            section = 5;
+        }
+        else
+        {
+            return;
+        }
+        
+      
+        
         ItemModel *sqModel = [ItemModel mj_objectWithKeyValues:button.buttonDic];
         [self.delegate gridButtonClick:sqModel cellSection:section];
     }
@@ -453,7 +480,15 @@
     }
     else if ([headStr isEqualToString:@"股东"])
     {
-        
+        DetailHolderCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if(!cell)
+        {
+            cell = [[DetailHolderCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        cell.hodelArray = @[];
+        cell.executivesArray = @[];
+        return cell;
     }
     else if ([headStr isEqualToString:@"企业风险"])
     {
@@ -569,7 +604,7 @@
     }
     else if ([headStr isEqualToString:@"股东"])
     {
-        return 120;
+        return 80+15+80+20;
     }
     else if ([headStr isEqualToString:@"企业风险"])
     {
@@ -691,9 +726,9 @@
         [phoneFoldBtn addTarget:self action:@selector(showPhone) forControlEvents:UIControlEventTouchUpInside];
         [phoneView addSubview:phoneFoldBtn];
         
-        UIView *lineView = [[UIView alloc]initWithFrame:KFrame(0, 44, KDeviceW, 1)];
-        lineView.backgroundColor =KHexRGB(0xebebeb);
-        [phoneView addSubview:lineView];
+//        UIView *lineView = [[UIView alloc]initWithFrame:KFrame(0, 44, KDeviceW, 1)];
+//        lineView.backgroundColor =KHexRGB(0xebebeb);
+//        [phoneView addSubview:lineView];
         
         
         return phoneView;
@@ -903,7 +938,7 @@
         _backTableView.delegate = self;
         _backTableView.dataSource = self;
         _backTableView.backgroundColor = [UIColor clearColor];
-        _backTableView.estimatedRowHeight = 0;//禁用self-sizing 计算完整contentsize
+        _backTableView.estimatedRowHeight = 80;//禁用self-sizing 计算完整contentsize
         _backTableView.estimatedSectionHeaderHeight = 0;
         _backTableView.estimatedSectionFooterHeight = 0;
     }

@@ -324,7 +324,7 @@
     {
         
         KWeakSelf
-        [RequestManager requestWithURLString:urlStr parameters:nil type:requestType success:^(id responseObject) {
+        [RequestManager QXBRequestWithURLString:urlStr parameters:nil type:requestType success:^(id responseObject) {
             [MBProgressHUD hideHudToView:self animated:YES];
             if([[responseObject objectForKey:@"result"] intValue] == 0)
             {

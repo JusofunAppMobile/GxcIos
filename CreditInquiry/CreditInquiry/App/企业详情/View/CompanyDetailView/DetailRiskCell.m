@@ -23,18 +23,19 @@
         kongView.backgroundColor = KRGB(241, 242, 246);
         [self.contentView addSubview:kongView];
         
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:KFrame(15, 5, 30, 75)];
-        imageView.image = [UIImage imageNamed:@"comState"];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:KFrame(15, 80/2.0-15+5, 30, 30)];
+        imageView.image = [UIImage imageNamed:@"info_pic_title"];
+        //imageView.contentMode = UIViewContentModeCenter;
         [self.contentView addSubview:imageView];
         
         UILabel*label = [[UILabel alloc]initWithFrame:KFrame(KDeviceW -70-15, 5+27.5, 70, 20)];
         label.text = @"查看风险";
-        label.textColor = KRGB(230, 36, 65);
+        label.textColor = KHexRGB(0xEF9295);
         label.font = KFont(14);
         label.layer.cornerRadius = 2;
-        label.layer.borderColor = KRGB(230, 36, 65).CGColor;
+        label.layer.borderColor = KHexRGB(0xEF9295).CGColor;
         label.layer.borderWidth = 1;
-        label.textAlignment = NSTextAlignmentCenter;
+       // label.textAlignment = NSTextAlignmentCenter;
         [self addSubview:label];
         
 

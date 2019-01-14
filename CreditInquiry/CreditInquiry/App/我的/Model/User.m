@@ -25,7 +25,7 @@ SingletonM(User);
 -(void)gotUserinfo
 {
 //    NSDictionary *dict = @{@"userid":[KUserDefaults objectForKey:@"useridDefaults"]};
-//    [RequestManager getWithURLString:GetUserInfo parameters:dict success:^(id responseObject) {
+//    [RequestManager QXBGetWithURLString:GetUserInfo parameters:dict success:^(id responseObject) {
 //
 //        NSDictionary *userinfo = responseObject[@"userinfo"];
 //        if ([responseObject[@"result"] integerValue] == 0) {
@@ -55,7 +55,7 @@ SingletonM(User);
 //        [MBProgressHUD showMessag:@"" toView:superView];
 //    }
 //
-//    [RequestManager postWithURLString:LOGIN_POST parameters:dict success:^(id responseObject) {
+//    [RequestManager QXBPostWithURLString:LOGIN_POST parameters:dict success:^(id responseObject) {
 //
 //        if (superView) {
 //            [MBProgressHUD hideHudToView:superView animated:NO];
@@ -198,7 +198,7 @@ SingletonM(User);
         [MBProgressHUD showMessag:@"" toView:superView];
     }
     
-//    [RequestManager postWithURLString:LOGIN_POST parameters:parameter success:^(id responseObject) {
+//    [RequestManager QXBPostWithURLString:LOGIN_POST parameters:parameter success:^(id responseObject) {
 //
 //        if (superView) {
 //            [MBProgressHUD hideHudToView:superView animated:NO];
@@ -246,7 +246,7 @@ SingletonM(User);
     //[[BaiduMobStat defaultStat] logEvent:@"Me96" eventLabel:@"个人页－登出账号点击数"];
     //告知服务器一下
 //    NSDictionary *dict = @{@"userid":_userID};
-//    [RequestManager postWithURLString:LOGOUT_POST parameters:dict success:^(id responseObject) {} failure:^(NSError *error) {}];
+//    [RequestManager QXBPostWithURLString:LOGOUT_POST parameters:dict success:^(id responseObject) {} failure:^(NSError *error) {}];
 //    
 //    
 //    //清空用户信息

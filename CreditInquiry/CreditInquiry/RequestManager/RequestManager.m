@@ -60,87 +60,169 @@
 }
 
 
++(AFHTTPSessionManager*)QXBSharedHTTPSessionManager
+{
+    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    //请求参数设置
+    //manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    //    manager.requestSerializer.stringEncoding = NSUTF8StringEncoding;
+    
+    //返回参数设置
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    //设置请求头
+    [manager.requestSerializer setValue:@"1" forHTTPHeaderField:@"AppType"];
+    [manager.requestSerializer setValue:@"AppStore" forHTTPHeaderField:@"Channel"];
+    [manager.requestSerializer setValue:[UIDevice currentDevice].identifierForVendor.UUIDString forHTTPHeaderField:@"Deviceid"];
+    [manager.requestSerializer setValue:@"3.0.0" forHTTPHeaderField:@"Version"];
+    
+    
+    [manager.requestSerializer setValue:@"3.0.0" forHTTPHeaderField:@"versionnum"];
+    [manager.requestSerializer setValue:[UIDevice currentDevice].identifierForVendor.UUIDString forHTTPHeaderField:@"did"];
+    [manager.requestSerializer setValue:@"iOS" forHTTPHeaderField:@"from"];
+    
+    
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:@[@"application/json",
+                                                                              @"text/html",
+                                                                              @"text/json",
+                                                                              @"text/plain",
+                                                                              @"text/javascript",
+                                                                              @"text/xml",
+                                                                              @"image/*"]];
+    
+    // 设置允许同时最大并发数量，过大容易出问题
+    manager.operationQueue.maxConcurrentOperationCount = 3;
+    
+    //请求超时的时间
+    manager.requestSerializer.timeoutInterval = 60;
+    
+    return manager;
+}
+
+
 #pragma mark -- GET请求 --
-+ (NSURLSessionDataTask *)getWithURLString:(NSString *)URLString
++ (NSURLSessionDataTask *)QXBGetWithURLString:(NSString *)URLString
                                 parameters:(id)parameters
-                             isJSONRequest:(BOOL)isJSONRequest
                                    success:(void (^)(id responseObject))success
                                    failure:(void (^)(NSError *error))failure {
     
     //给每个接口添加t跟m字段
-    NSMutableDictionary *tmpDic = [Tools encryptionWithDictionary:parameters];
+    NSMutableDictionary *tmpDic = [Tools QXBAddDictionary:parameters];
     
-    AFHTTPSessionManager *manager = [self sharedHTTPSessionManager:isJSONRequest];
-
+    AFHTTPSessionManager *manager = [self QXBSharedHTTPSessionManager];
+    
     NSURLSessionDataTask *session = [manager GET:URLString parameters:tmpDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (success) {
-            NSLog(@"\nget请求：Request success, URL: %@\n params:%@\n 返回内容：%@",
+           
+            NSLog(@"\nGET请求：Request success, URL: %@\n params:%@\n ",
                   [self generateGETAbsoluteURL:URLString params:tmpDic],
-                  tmpDic,responseObject);
+                  tmpDic);
             success( responseObject );
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (failure) {
-            NSLog(@"\nGET请求：Request fail, URL: %@\n params:%@\n",
+          
+            NSLog(@"\nGET请求：Request failure, URL: %@\n params:%@\n",
                   [self generateGETAbsoluteURL:URLString params:tmpDic],
                   tmpDic);
             failure(error);
         }
     }];
-  
+    
     return session;
 }
 
-+ (NSURLSessionDataTask *)getWithURLString:(NSString *)URLString
-                                parameters:(id)parameters
-                                   success:(void (^)(id responseObject))success
-                                   failure:(void (^)(NSError *error))failure {
-    
++ (NSURLSessionDataTask*)QXBGetHttpResponseWithURLString:(NSString *)URLString
+                                           parameters:(id)parameters
+                                              success:(void (^)(id responseObject))success
+                                              failure:(void (^)(NSError *error))failure
+{
     //给每个接口添加t跟m字段
-    NSMutableDictionary *tmpDic = [Tools encryptionWithDictionary:parameters];
+    NSMutableDictionary *tmpDic = [Tools QXBAddDictionary:parameters];
     
-    AFHTTPSessionManager *manager = [self sharedHTTPSessionManager:YES];
+    AFHTTPSessionManager *manager = [self QXBSharedHTTPSessionManager];
+    
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
     NSURLSessionDataTask *session = [manager GET:URLString parameters:tmpDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (success) {
-            NSLog(@"\nget请求：Request success, URL: %@\n params:%@\n 返回内容：%@",
+           
+            NSLog(@"\nGET请求：Request success, URL: %@\n params:%@\n ",
                   [self generateGETAbsoluteURL:URLString params:tmpDic],
-                  tmpDic,responseObject);
+                  tmpDic);
             success( responseObject );
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (failure) {
-            NSLog(@"\nGET请求：Request fail, URL: %@\n params:%@\n",
+           
+            NSLog(@"\nGET请求：Request success, URL: %@\n params:%@\n",
                   [self generateGETAbsoluteURL:URLString params:tmpDic],
                   tmpDic);
             failure(error);
         }
     }];
+    
+    return session;
+}
+
+
+#pragma mark -- POST请求 --
++ (NSURLSessionDataTask *)QXBPostWithURLString:(NSString *)URLString
+                                 parameters:(id)parameters
+                                    success:(void (^)(id responseObject))success
+                                    failure:(void (^)(NSError *error))failure {
+    
+    //给每个接口添加t跟m字段
+    NSMutableDictionary *tmpDic = [Tools QXBAddDictionary:parameters];
+    
+    AFHTTPSessionManager *manager = [self QXBSharedHTTPSessionManager];
+    
+    NSURLSessionDataTask *session = [manager POST:URLString parameters:tmpDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (success) {
+          
+            NSLog(@"\nPOST请求：Request success, URL: %@\n params:%@\n 返回内容：%@",
+                  [self generateGETAbsoluteURL:URLString params:tmpDic],
+                  tmpDic,responseObject);
+            success(responseObject);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (failure) {
+           
+            NSLog(@"\nPOST请求：Request success, URL: %@\n params:%@\n",
+                  [self generateGETAbsoluteURL:URLString params:tmpDic],
+                  tmpDic);
+            failure(error);
+        }
+    }];
+    
     
     return session;
 }
 
 #pragma mark -- POST请求 --
 + (NSURLSessionDataTask *)postWithURLString:(NSString *)URLString
-                             parameters:(id)parameters
-                              isJSONRequest:(BOOL)isJSONRequest
-                                success:(void (^)(id responseObject))success
-                                failure:(void (^)(NSError *error))failure {
+                                    parameters:(id)parameters
+                                       success:(void (^)(id responseObject))success
+                                       failure:(void (^)(NSError *error))failure {
     
     //给每个接口添加t跟m字段
-    NSMutableDictionary *tmpDic = parameters;
-    AFHTTPSessionManager *manager = [self sharedHTTPSessionManager:isJSONRequest];
-
+    NSMutableDictionary *tmpDic = [self addDictionary:parameters];
+    
+    AFHTTPSessionManager *manager = [self sharedHTTPSessionManager:NO];
+    
     NSURLSessionDataTask *session = [manager POST:URLString parameters:tmpDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (success) {
-            NSLog(@"\npost请求：Request success, URL: %@\n params:%@\n 返回内容：%@",
+            
+            NSLog(@"\nPOST请求：Request success, URL: %@\n params:%@\n 返回内容：%@",
                   [self generateGETAbsoluteURL:URLString params:tmpDic],
                   tmpDic,responseObject);
             success(responseObject);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (failure) {
-            NSLog(@"\npost请求：Request fail, URL: %@\n params:%@\n",
+            
+            NSLog(@"\nPOST请求：Request success, URL: %@\n params:%@\n",
                   [self generateGETAbsoluteURL:URLString params:tmpDic],
                   tmpDic);
             failure(error);
@@ -151,193 +233,87 @@
     return session;
 }
 
-+ (NSURLSessionDataTask *)postWithURLString:(NSString *)URLString
-                                 parameters:(id)parameters
-
-                                    success:(void (^)(id responseObject))success
-                                    failure:(void (^)(NSError *error))failure {
-    
-    //给每个接口添加t跟m字段
-    NSMutableDictionary *tmpDic = parameters;
-    AFHTTPSessionManager *manager = [self sharedHTTPSessionManager:YES];
-    
-    NSURLSessionDataTask *session = [manager POST:URLString parameters:tmpDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if (success) {
-            NSLog(@"\npost请求：Request success, URL: %@\n params:%@\n 返回内容：%@",
-                  [self generateGETAbsoluteURL:URLString params:tmpDic],
-                  tmpDic,responseObject);
-            success(responseObject);
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        if (failure) {
-            NSLog(@"\npost请求：Request fail, URL: %@\n params:%@\n",
-                  [self generateGETAbsoluteURL:URLString params:tmpDic],
-                  tmpDic);
-            failure(error);
-        }
-    }];
-    
-    
-    return session;
-}
 
 
 #pragma mark -- POST/GET网络请求 --
-+ (NSURLSessionDataTask *)requestWithURLString:(NSString *)URLString
++ (NSURLSessionDataTask *)QXBRequestWithURLString:(NSString *)URLString
                                     parameters:(id)parameters
                                           type:(HttpRequestType)type
-                                 isJSONRequest:(BOOL)isJSONRequest
                                        success:(void (^)(id responseObject))success
                                        failure:(void (^)(NSError *error))failure {
     //给每个接口添加t跟m字段
-//    NSMutableDictionary *tmpDic = [Tools encryptionWithDictionary:parameters];
-    NSMutableDictionary *tmpDic = parameters;
-    
+    NSMutableDictionary *tmpDic = [Tools QXBAddDictionary:parameters];
+    AFHTTPSessionManager *manager = [self QXBSharedHTTPSessionManager];
     NSURLSessionDataTask *session = nil;
     switch (type) {
         case HttpRequestTypeGet:
         {
-            
-            session = [self getWithURLString:URLString parameters:tmpDic isJSONRequest:isJSONRequest  success:^(id responseObject) {
+            session = [manager GET:URLString parameters:tmpDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 if (success) {
-                   
+                    
+                    NSLog(@"\nget请求：Request success, URL: %@\n params:%@\n 返回内容：%@",
+                          [self generateGETAbsoluteURL:URLString params:parameters],
+                          parameters,responseObject);
                     success(responseObject);
                 }
-            } failure:^(NSError *error) {
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 if (failure) {
                    
+                    NSLog(@"\nGET请求：Request success, URL: %@\n params:%@\n",
+                          [self generateGETAbsoluteURL:URLString params:parameters],
+                          parameters);
                     
                     failure(error);
                 }
             }];
+            
+            
         }
             break;
         case HttpRequestTypePost:
         {
-            
-            [self postWithURLString:URLString parameters:tmpDic isJSONRequest:isJSONRequest success:^(id responseObject) {
+            session = [manager POST:URLString parameters:tmpDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 if (success) {
+                   
+                    NSLog(@"\nPOST请求：Request success, URL: %@\n params:%@\n 返回内容：%@",
+                          [self generateGETAbsoluteURL:URLString params:parameters],
+                          parameters,responseObject);
                     success(responseObject);
                 }
-            } failure:^(NSError *error) {
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 if (failure) {
+                
+                    NSLog(@"\nPOST请求：Request success, URL: %@\n params:%@\n",
+                          [self generateGETAbsoluteURL:URLString params:parameters],
+                          parameters);
                     failure(error);
                 }
             }];
+            
+            
+            
         }
             break;
     }
     
-    return session;
-}
-
-
-+ (NSURLSessionDataTask *)requestWithURLString:(NSString *)URLString
-                                    parameters:(id)parameters
-                                          type:(HttpRequestType)type
-
-                                       success:(void (^)(id responseObject))success
-                                       failure:(void (^)(NSError *error))failure {
-    //给每个接口添加t跟m字段
-    //    NSMutableDictionary *tmpDic = [Tools encryptionWithDictionary:parameters];
-    NSMutableDictionary *tmpDic = parameters;
     
-    NSURLSessionDataTask *session = nil;
-    switch (type) {
-        case HttpRequestTypeGet:
-        {
-            
-            session = [self getWithURLString:URLString parameters:tmpDic isJSONRequest:YES  success:^(id responseObject) {
-                if (success) {
-                    
-                    success(responseObject);
-                }
-            } failure:^(NSError *error) {
-                if (failure) {
-                    
-                    
-                    failure(error);
-                }
-            }];
-        }
-            break;
-        case HttpRequestTypePost:
-        {
-            
-            [self postWithURLString:URLString parameters:tmpDic isJSONRequest:YES success:^(id responseObject) {
-                if (success) {
-                    success(responseObject);
-                }
-            } failure:^(NSError *error) {
-                if (failure) {
-                    failure(error);
-                }
-            }];
-        }
-            break;
-    }
     
     return session;
-}
-
-+ (NSURLSessionDataTask *)encryptRequestWithURLString:(NSString *)URLString
-                                    parameters:(id)parameters
-                                          type:(HttpRequestType)type
-                                 isJSONRequest:(BOOL)isJSONRequest
-                                       success:(void (^)(id responseObject))success
-                                       failure:(void (^)(NSError *error))failure{
-   return  [RequestManager requestWithURLString:URLString parameters:[Tools encryptionWithDictionary:parameters] type:type isJSONRequest:isJSONRequest success:success failure:failure];
 }
 
 #pragma mark -- 上传图片 --
 + (NSURLSessionDataTask *)uploadWithURLString:(NSString *)URLString
-                               parameters:(id)parameters
-                                 progress:(RequestProgress)progress
-                              uploadParam:(NSString *)uploadParam
-                                  success:(void (^)(id responseObject))success
-                                  failure:(void (^)(NSError *error))failure {
+                                   parameters:(id)parameters
+                                     progress:(RequestProgress)progress
+                                  uploadParam:(NSString *)uploadParam
+                                      success:(void (^)(id responseObject))success
+                                      failure:(void (^)(NSError *error))failure {
     //给每个接口添加t跟m字段
-    NSMutableDictionary *tmpDic = [Tools encryptionWithDictionary:parameters];
-    AFHTTPSessionManager *manager = [self sharedHTTPSessionManager:NO];
+    NSMutableDictionary *tmpDic = [Tools QXBAddDictionary:parameters];
+    AFHTTPSessionManager *manager = [self QXBSharedHTTPSessionManager];
     NSURLSessionDataTask *session = [manager POST:URLString parameters:tmpDic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         NSURL *filepath = [NSURL fileURLWithPath:uploadParam];
         [formData appendPartWithFileURL:filepath name:@"image" error:nil];
-    } progress:^(NSProgress * _Nonnull uploadProgress){
-        if(progress){
-            progress(uploadProgress);
-        }
-        
-        }
-      success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if (success) {
-            success(responseObject);
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        if (failure) {
-            failure(error);
-        }
-    }];
-    
-    return session;
-}
-
-+ (NSURLSessionDataTask *)uploadFileWithURLString:(NSString *)URLString
-                                       parameters:(id)parameters
-                                            files:(NSArray<FileModel*>*)files
-                                         progress:(RequestProgress)progress
-                                          success:(void (^)(id responseObject))success
-                                          failure:(void (^)(NSError *error))failure
-{
-    //给每个接口添加t跟m字段
-    NSMutableDictionary *tmpDic = [Tools encryptionWithDictionary:parameters];
-    AFHTTPSessionManager *manager = [self sharedHTTPSessionManager:NO];
-    NSURLSessionDataTask *session = [manager POST:URLString parameters:tmpDic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        for(FileModel *model in files)
-        {
-            NSURL *filepath = [NSURL fileURLWithPath:model.filePath];
-            [formData appendPartWithFileURL:filepath name:model.fileKey error:nil];
-        }
-        
     } progress:^(NSProgress * _Nonnull uploadProgress){
         if(progress){
             progress(uploadProgress);
@@ -355,44 +331,36 @@
                                           }];
     
     return session;
-
 }
 
-
-
-+(NSURLSessionDownloadTask *)downloadWithURLString:(NSString *)URLString
-                                       savePathURL:(NSURL *)fileURL
-                                          progress:(RequestProgress )progress
-                                           success:(void (^)(id responseObject))success
-                                           failure:(void (^)(NSError *error))failure
+//加密
++ (NSMutableDictionary*)addDictionary:(NSMutableDictionary*)dic
 {
+    NSDate *cdate = [Tools getCurrentTime];
+    CGFloat Offset = [[KUserDefaults objectForKey:@"CurrentTimeToServerOffset"] floatValue];
+    cdate = [NSDate dateWithTimeInterval:-Offset sinceDate:cdate];
     
-    AFHTTPSessionManager *manager = [self sharedHTTPSessionManager:NO];
+    int t = (int)[Tools getCurrentTimeStamp:cdate];
     
-    NSURL *urlpath = [NSURL URLWithString:URLString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:urlpath];
+    NSMutableDictionary *changeDic = [NSMutableDictionary dictionaryWithDictionary:dic];
+   
+    [changeDic setObject:[JAddField debugAddField:cdate] forKey:@"m"];
     
-    NSURLSessionDownloadTask *downloadtask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
-        progress(downloadProgress);
-        
-    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-        
-        return [fileURL URLByAppendingPathComponent:[response suggestedFilename]];
-    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
-        
-        if (error) {
-            failure(error);
-        }else{
-            
-            success(response);
-        }
-    }];
+    NSError *parseError = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:changeDic options:NSJSONWritingPrettyPrinted error:&parseError];
     
-    [downloadtask resume];
+   NSString *jsonStr =[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     
-    return downloadtask;
-
+    
+    NSMutableDictionary *returnDic = [NSMutableDictionary dictionaryWithDictionary:dic];
+    
+     [returnDic setObject:[NSString stringWithFormat:@"%d",t] forKey:@"t"];
+    [returnDic setObject:[JAddField encryptWithJsonString:jsonStr] forKey:@"data"];
+    
+    return returnDic;
+    
 }
+
 
 // 仅对一级字典结构起作用
 + (NSString *)generateGETAbsoluteURL:(NSString *)url params:(id)params {

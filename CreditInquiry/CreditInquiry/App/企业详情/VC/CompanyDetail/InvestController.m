@@ -46,7 +46,7 @@
     [paraDic setObject:[NSString stringWithFormat:@"%d",pageIndex] forKey:@"pageIndex"];
     [paraDic setObject:USER.userID forKey:@"userid"];
     NSString* urlstr = [GetEntBranchOrInvesment stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    [RequestManager getWithURLString:urlstr parameters:paraDic success:^(id responseObject) {
+    [RequestManager QXBGetWithURLString:urlstr parameters:paraDic success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:YES];
         
         if([[responseObject objectForKey:@"result"] intValue] == 0)

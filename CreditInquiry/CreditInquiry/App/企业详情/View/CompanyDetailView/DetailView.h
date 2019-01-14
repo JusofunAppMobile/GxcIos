@@ -14,7 +14,7 @@
 #import "DetailRiskCell.h"
 #import "DetailMapCell.h"
 #import <UIButton+LXMImagePosition.h>
-
+#import "DetailHolderCell.h"
 #define KDetailOperationTag  6452
 
 //搜索的类型

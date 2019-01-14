@@ -41,7 +41,7 @@
     [paraDic setObject:self.companyName forKey:@"entname"];
     [paraDic setObject:@"20" forKey:@"pageSize"];
     [paraDic setObject:[NSNumber numberWithInt:pageIndex] forKey:@"pageIndex"];
-    [RequestManager getWithURLString:KGetJob parameters:paraDic success:^(id responseObject) {
+    [RequestManager QXBGetWithURLString:KGetJob parameters:paraDic success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         [weakSelf endRefresh];
         [weakSelf hideLoadDataAnimation];

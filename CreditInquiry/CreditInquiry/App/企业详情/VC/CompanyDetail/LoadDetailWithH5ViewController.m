@@ -172,7 +172,7 @@
     [paraDic setObject:[NSString stringWithFormat:@"%ld",(long)pageIndex] forKey:@"pageIndex"];
     [paraDic setObject:USER.userID forKey:@"userid"];
      NSString* urlstr = [GetEntBranchOrInvesment stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    [RequestManager getWithURLString:urlstr parameters:paraDic success:^(id responseObject) {
+    [RequestManager QXBGetWithURLString:urlstr parameters:paraDic success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:YES];
         
         if([[responseObject objectForKey:@"result"] intValue] == 0)
@@ -351,7 +351,7 @@
         NSString *requestURL = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         
         [MBProgressHUD showMessag:@"" toView:self.view];
-        [RequestManager getWithURLString:requestURL parameters:nil success:^(id responseObject) {
+        [RequestManager QXBGetWithURLString:requestURL parameters:nil success:^(id responseObject) {
              [MBProgressHUD hideHudToView:self.view animated:YES];
                        
             CompanyMapModel *compModel = [CompanyMapModel mj_objectWithKeyValues:responseObject];

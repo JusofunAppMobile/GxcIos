@@ -237,7 +237,7 @@
     NSString *str = [NSString stringWithFormat:@"%@?userId=%@",KGetQuestionList,useid];
     KWeakSelf
     [MBProgressHUD showMessag:@"" toView:self.view];
-    [RequestManager getWithURLString:str parameters:params success:^(id responseObject) {
+    [RequestManager QXBGetWithURLString:str parameters:params success:^(id responseObject) {
         
         [MBProgressHUD hideHudToView:weakSelf.view animated:YES];
         if ([responseObject[@"result"] intValue] == 0) {
@@ -258,7 +258,7 @@
     NSString *str = [NSString stringWithFormat:@"%@?questionid=%@&answerid=%@&userId=%@",KCommitQuestion,model.questionid,answerModel.answerid,useid];
     KWeakSelf
     [MBProgressHUD showMessag:@"" toView:self.view];
-    [RequestManager postWithURLString:str parameters:nil success:^(id responseObject) {
+    [RequestManager QXBPostWithURLString:str parameters:nil success:^(id responseObject) {
 
         [MBProgressHUD hideHudToView:weakSelf.view animated:YES];
         if ([responseObject[@"result"] intValue] == 0) {
@@ -304,7 +304,7 @@
     
     
     [MBProgressHUD showMessag:@"" toView:self.view];
-    [RequestManager postWithURLString:KErrorCorrection parameters:paraDic success:^(id responseObject) {
+    [RequestManager QXBPostWithURLString:KErrorCorrection parameters:paraDic success:^(id responseObject) {
         //NSLog(@"%@",responseObject);
 
         [MBProgressHUD hideHudToView:self.view animated:YES];

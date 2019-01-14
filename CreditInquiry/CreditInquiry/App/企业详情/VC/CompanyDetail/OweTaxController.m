@@ -94,7 +94,7 @@ static NSString *CellID = @"OweTaxCell";
     _taxCode = @"";
     NSString *str = [NSString stringWithFormat:@"%@?pageSize=20&pageIndex=%d&entName=%@&taxCode=%@",KGetEntOwingTaxList,_page,_entName,_taxCode];
     KWeakSelf
-    [RequestManager postWithURLString:[str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] parameters:nil success:^(id responseObject) {
+    [RequestManager QXBPostWithURLString:[str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] parameters:nil success:^(id responseObject) {
         [weakSelf hideLoadDataAnimation];
         if ([responseObject[@"result"] intValue] == 0) {
             if (weakSelf.page == 1) {

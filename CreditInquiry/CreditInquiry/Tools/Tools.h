@@ -31,12 +31,12 @@ typedef void (^NavigationBarMessageBlock)(NSDictionary *messageDic);
 
 +(NSString *) md5:(NSString *)str;
 
-+ (NSMutableDictionary*)encryptionWithDictionary:(NSMutableDictionary*)dic;
++ (NSMutableDictionary*)QXBAddDictionary:(NSMutableDictionary*)dic;
 
 //获取现在的时间
-+(NSDate *)GetCurrentTime;
++(NSDate *)getCurrentTime;
 
-+(int )GetCurrentTimeStamp:(NSDate *)date;
++(int )getCurrentTimeStamp:(NSDate *)date;
 
 // 手机号码验证
 +(BOOL)validatePhoneNumber:(NSString *)phoneNumber;
