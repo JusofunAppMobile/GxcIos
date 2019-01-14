@@ -17,6 +17,7 @@ static NSString *NewsCellID = @"NewsCellID";
 @interface HomeViewController ()
 {
     UIButton *buttonRight;
+    NSDictionary *dataDic;
 }
 
 @property (nonatomic ,strong) HomeHeaderView *headerView;
@@ -44,17 +45,15 @@ static NSString *NewsCellID = @"NewsCellID";
 #pragma mark - 网络请求
 - (void)loadData{
     
-    NSMutableDictionary *paraDic  = [NSMutableDictionary dictionary];
-    [paraDic setObject:@"123" forKey:@"userId"];
-    [paraDic setObject:@"20" forKey:@"companyName"];
-    [paraDic setObject:@"1" forKey:@"pageIndex"];
-    [RequestManager postWithURLString:KIndustryInformation parameters:paraDic success:^(id responseObject) {
+    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    [paraDic setObject:USER.userID forKey:@"userId"];
+    [RequestManager postWithURLString:KGetHomeData parameters:paraDic success:^(id responseObject) {
         if ([responseObject[@"result"] integerValue] == 0) {
-            NSLog(@"222%@",responseObject);
             
-//            weakSelf.homeModel = [HomeModel mj_objectWithKeyValues:responseObject];
-//            [weakSelf reloadTableView];
-            
+            dataDic = [responseObject objectForKey:@"data"];
+            self.headerView.dataDic = dataDic;
+            self.tableview.tableHeaderView = self.headerView;
+            [self.tableview reloadData];
         }
     } failure:^(NSError *error) {
         [MBProgressHUD showError:@"请求失败" toView:self.view];
@@ -65,8 +64,7 @@ static NSString *NewsCellID = @"NewsCellID";
    
     _firstDate = [NSDate date];
     
-    [self.headerView reloadData];
-    self.tableview.tableHeaderView = self.headerView;
+   
    
 }
 
@@ -100,6 +98,12 @@ static NSString *NewsCellID = @"NewsCellID";
     [self.navigationController pushViewController:vc2 animated:YES];
 }
 
+-(void)adClick:(NSString *)url
+{
+    CommonWebViewController *vc = [[CommonWebViewController alloc]init];
+    vc.urlStr = url;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 #pragma mark - section 更多
 -(void)sectionHeaderMoreBtnClicked:(NSString *)title
@@ -245,8 +249,18 @@ static NSString *NewsCellID = @"NewsCellID";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-   
-    return 3;
+    
+    if(section == 0)
+    {
+        NSArray *array = [dataDic objectForKey:@"monitor"];
+        return array.count;
+    }
+    else
+    {
+        NSArray *array = [dataDic objectForKey:@"news"];
+        return array.count;
+    }
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -255,7 +269,8 @@ static NSString *NewsCellID = @"NewsCellID";
     {
         HomeMonitorCell *cell = [tableView dequeueReusableCellWithIdentifier:MonitorCellID forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
+        NSArray *array = [dataDic objectForKey:@"monitor"];
+        cell.dataDic = [array objectAtIndex:indexPath.row];
         return cell;
     }
     else
@@ -263,6 +278,8 @@ static NSString *NewsCellID = @"NewsCellID";
         NewsCell *cell = [tableView dequeueReusableCellWithIdentifier:NewsCellID forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.newsType = indexPath.row;
+        NSArray *array = [dataDic objectForKey:@"news"];
+        cell.dataDic = [array objectAtIndex:indexPath.row];
         return cell;
     }
     

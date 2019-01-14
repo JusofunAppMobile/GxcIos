@@ -16,6 +16,8 @@
 
 - (void)hotKeySearch:(NSString *)hotKey;
 
+-(void)adClick:(NSString*)url;
+
 @end
 
 
@@ -26,6 +28,8 @@
 @property (nonatomic ,strong) UIImageView *bannerView;
 @property (nonatomic ,weak) id <HomeHeaderViewDelegate>delegate;
 
--(void)reloadData;
+@property(nonatomic,strong)NSDictionary *dataDic;
+
+
 
 @end
