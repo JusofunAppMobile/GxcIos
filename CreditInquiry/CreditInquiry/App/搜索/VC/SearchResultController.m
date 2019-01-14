@@ -255,7 +255,7 @@
     }
     
     KWeakSelf
-    [RequestManager requestWithURLString:urlStr parameters:paraDic type:requestType success:^(id responseObject) {
+    [RequestManager QXBRequestWithURLString:urlStr parameters:paraDic type:requestType success:^(id responseObject) {
         NSLog(@"responseObject---%@",responseObject);
         [weakSelf hideLoadDataAnimation];
         [ weakSelf endRefresh];
@@ -1080,7 +1080,7 @@
 - (void)checkPenetrationVipType{
 //    [MBProgressHUD showMessag:@"" toView:self.view];
 //    NSString *str = [NSString stringWithFormat:@"%@?userId=%@",KGetShareholerVipType,USER.userID] ;
-//    [RequestManager getWithURLString:str parameters:nil success:^(id responseObject) {
+//    [RequestManager QXBGetWithURLString:str parameters:nil success:^(id responseObject) {
 //        NSLog(@"responseObject_______%@",responseObject);
 //        [MBProgressHUD hideHudToView:self.view animated:YES];
 //        if([[responseObject objectForKey:@"result"]intValue] == 0){
@@ -1097,7 +1097,7 @@
 - (void)checkReportWithModel:(SearchBaseModel *)model forPreview:(BOOL)forPreview{
 //    [MBProgressHUD showMessag:@"" toView:self.view];
 //    NSString *str = [[NSString stringWithFormat:@"%@?entId=%@&userid=%@&entName=%@",KGetReportLink,model.companyid,USER.userID,model.companyname] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//    [RequestManager getWithURLString:str parameters:nil success:^(id responseObject) {
+//    [RequestManager QXBGetWithURLString:str parameters:nil success:^(id responseObject) {
 //        [MBProgressHUD hideHudToView:self.view animated:YES];
 //        if([[responseObject objectForKey:@"result"]intValue] == 0){
 //
@@ -1162,7 +1162,7 @@
 //    NSString *url = [NSString stringWithFormat:@"%@?userId=%@&entId=%@&email=%@",method,USER.userID,idStr,mail];
 //    [MBProgressHUD showMessag:@"" toView:self.view];
 //
-//    [RequestManager postWithURLString:url parameters:nil success:^(id responseObject) {
+//    [RequestManager QXBPostWithURLString:url parameters:nil success:^(id responseObject) {
 //
 //
 //        if([[responseObject objectForKey:@"result"] intValue] == 0){

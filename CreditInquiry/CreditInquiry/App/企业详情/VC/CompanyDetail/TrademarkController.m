@@ -137,7 +137,7 @@ static NSString *cellID = @"TrademarkCell";
     [params setObject:_companyName forKey:@"entName"];
     [params setObject:@"" forKey:@"nameConcat"];
     KWeakSelf
-    [RequestManager requestWithURLString:KTrademarkList parameters:params type:HttpRequestTypeGet success:^(id responseObject) {
+    [RequestManager QXBRequestWithURLString:KTrademarkList parameters:params type:HttpRequestTypeGet success:^(id responseObject) {
         [weakSelf hideLoadDataAnimation];
         if ([responseObject[@"result"] intValue] == 0) {
             if (_page == 1) {//刷新

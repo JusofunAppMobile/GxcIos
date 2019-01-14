@@ -70,6 +70,7 @@
 		799F797621E825A0000DBB88 /* ShowMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F797521E825A0000DBB88 /* ShowMessageView.m */; };
 		799F797921E86CC5000DBB88 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F797821E86CC5000DBB88 /* LoginController.m */; };
 		799F797C21E87E77000DBB88 /* RegistController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F797B21E87E77000DBB88 /* RegistController.m */; };
+		799F798221EC1B22000DBB88 /* HodelButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F798121EC1B22000DBB88 /* HodelButton.m */; };
 		79D34E8B21E05DA100B1CB32 /* MyAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D34E8A21E05DA100B1CB32 /* MyAlertView.m */; };
 		79D34E8E21E05DB300B1CB32 /* ItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D34E8C21E05DB300B1CB32 /* ItemView.m */; };
 		79D34E9B21E05DEF00B1CB32 /* SearchAllWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D34E8F21E05DEE00B1CB32 /* SearchAllWebView.m */; };
@@ -403,6 +404,8 @@
 		799F797821E86CC5000DBB88 /* LoginController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
 		799F797A21E87E77000DBB88 /* RegistController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistController.h; sourceTree = "<group>"; };
 		799F797B21E87E77000DBB88 /* RegistController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegistController.m; sourceTree = "<group>"; };
+		799F798021EC1B22000DBB88 /* HodelButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HodelButton.h; sourceTree = "<group>"; };
+		799F798121EC1B22000DBB88 /* HodelButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HodelButton.m; sourceTree = "<group>"; };
 		79D34E8921E05DA100B1CB32 /* MyAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAlertView.h; sourceTree = "<group>"; };
 		79D34E8A21E05DA100B1CB32 /* MyAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAlertView.m; sourceTree = "<group>"; };
 		79D34E8C21E05DB300B1CB32 /* ItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemView.m; sourceTree = "<group>"; };
@@ -1135,6 +1138,8 @@
 				793D1B7321DF69ED00C29908 /* DetailGridCell.m */,
 				79D34F1F21E3267200B1CB32 /* DetailHolderCell.h */,
 				79D34F2021E3267200B1CB32 /* DetailHolderCell.m */,
+				799F798021EC1B22000DBB88 /* HodelButton.h */,
+				799F798121EC1B22000DBB88 /* HodelButton.m */,
 				79D34F2221E3283200B1CB32 /* DetailRiskCell.h */,
 				79D34F2321E3283200B1CB32 /* DetailRiskCell.m */,
 				79D34F2521E347AE00B1CB32 /* DetailMapCell.h */,
@@ -2223,6 +2228,7 @@
 				CA46605D21EC7288005C630F /* UILabel+Alignment.m in Sources */,
 				CA5E00AA21DDE61D0040ABE2 /* HomeViewController.m in Sources */,
 				793D1AC721DF65CC00C29908 /* SearchLoseCreitARRModel.m in Sources */,
+				799F798221EC1B22000DBB88 /* HodelButton.m in Sources */,
 				CADD607921E4B6AC00EB01CD /* CreditScoreController.m in Sources */,
 				79D34F1521E0836100B1CB32 /* HomeSectionHeader.m in Sources */,
 				CADD605D21E482CE00EB01CD /* EditCompanyInfoController.m in Sources */,

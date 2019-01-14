@@ -92,12 +92,13 @@
     
     CGFloat orginx = 15;
     CGFloat width = (KDeviceW - 30)/4;
-    CGFloat orginy = 0;
-    
+    CGFloat orginy = 15;
+    CGFloat hight = 65;
+    CGFloat space = 10;
     for (int i = 0; i<[titleArray count]; i++) {
         int col = i%4;//列数
         int row = i/4;//行数
-        CenterButton *centButton = [[CenterButton alloc] initWithFrame:CGRectMake(orginx+ col * width, orginy+row*width, width, width)];
+        CenterButton *centButton = [[CenterButton alloc] initWithFrame:CGRectMake(orginx+ col * width, orginy+row*hight+space*row, width, hight)];
         centButton.tag = 100+ i;
         centButton.titleLabel.font = KFont(13);
         [centButton setTitle:titleArray[i] forState:UIControlStateNormal];
@@ -109,7 +110,7 @@
     }
     
     CGRect frame = searchView.frame;
-    frame.size.height = titleArray.count/4*width ;
+    frame.size.height = orginy + titleArray.count/4*hight + space*titleArray.count/4 + 10;
     searchView.frame = frame;
     
     [self adjustFrame];

@@ -80,7 +80,7 @@
     KWeakSelf
     [self showLoadDataAnimation];
     
-    NSURLSessionDataTask*task = [RequestManager getWithURLString:urlstr parameters:paraDic success:^(id responseObject) {
+    NSURLSessionDataTask*task = [RequestManager QXBGetWithURLString:urlstr parameters:paraDic success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         [weakSelf hideLoadDataAnimation];
         
@@ -193,7 +193,7 @@
     [paraDic setObject:USER.userID forKey:@"userid"];
     [paraDic setObject:self.companyName forKey:@"entname"];
     NSString* url = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSURLSessionDataTask*task = [RequestManager getWithURLString:url parameters:paraDic success:^(id responseObject) {
+    NSURLSessionDataTask*task = [RequestManager QXBGetWithURLString:url parameters:paraDic success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         [MBProgressHUD hideHudToView:self.view animated:YES];
         if([[responseObject objectForKey:@"result"] intValue] == 0)
@@ -304,7 +304,7 @@
     [paraDic setObject:self.companyName forKey:@"entname"];
     [MBProgressHUD showMessag:@"" toView:self.view];
     NSString* urlstr = [UpDateAttend stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSURLSessionDataTask*task = [RequestManager getWithURLString:urlstr parameters:paraDic success:^(id responseObject) {
+    NSURLSessionDataTask*task = [RequestManager QXBGetWithURLString:urlstr parameters:paraDic success:^(id responseObject) {
         
         [MBProgressHUD hideHudToView:self.view animated:YES];
         if([[responseObject objectForKey:@"result"] intValue] == 0)
@@ -392,7 +392,7 @@
     KWeakSelf
 //    refreshNum = 1;
 //    refreshTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(stopRefreshAnimation) userInfo:nil repeats:YES];
-   NSURLSessionDataTask*task =  [RequestManager getWithURLString:str parameters:nil success:^(id responseObject) {
+   NSURLSessionDataTask*task =  [RequestManager QXBGetWithURLString:str parameters:nil success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:YES];
         if([[responseObject objectForKey:@"result"]intValue] == 0)
         {
@@ -442,7 +442,7 @@
     [params setObject:self.companyName forKey:@"entName"];
     [params setObject:detailModel.companyid forKey:@"entId"];
     KWeakSelf
-    NSURLSessionDataTask*task = [RequestManager getWithURLString:GetRefreshEntInfo parameters:params success:^(id responseObject) {
+    NSURLSessionDataTask*task = [RequestManager QXBGetWithURLString:GetRefreshEntInfo parameters:params success:^(id responseObject) {
         if([responseObject[@"result"]intValue] == 0){
             
             detailModel.currentstate = responseObject[@"currentstate"];
@@ -551,7 +551,7 @@
 //    NSString *str = [NSString stringWithFormat:@"%@?entId=%@&userId=%@&entName=%@&type=%@",KCheckEntReportVipType,detailModel.companyid,USER.userID,self.companyName,reportType];
 //    str = [str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 //    KBolckSelf;
-//    NSURLSessionDataTask*task = [RequestManager getWithURLString:str parameters:nil success:^(id responseObject) {
+//    NSURLSessionDataTask*task = [RequestManager QXBGetWithURLString:str parameters:nil success:^(id responseObject) {
 //        [MBProgressHUD hideHudToView:self.view animated:YES];
 //        NSLog(@"查看企业报告=%@",responseObject);
 //        if([[responseObject objectForKey:@"result"]intValue] == 0){//跳转各种报告

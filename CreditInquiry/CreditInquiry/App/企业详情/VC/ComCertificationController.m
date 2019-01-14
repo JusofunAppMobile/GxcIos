@@ -65,7 +65,7 @@
     // [paraDic setObject:self.companyId forKey:@"companyid"];
     //[paraDic setObject:self.companyName forKey:@"companyname"];
     
-    [RequestManager getWithURLString:KGetGuQuan parameters:paraDic success:^(id responseObject) {
+    [RequestManager QXBGetWithURLString:KGetGuQuan parameters:paraDic success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         if([[responseObject objectForKey:@"result"] intValue] == 0)
         {

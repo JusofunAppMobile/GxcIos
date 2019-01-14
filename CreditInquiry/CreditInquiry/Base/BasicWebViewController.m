@@ -47,8 +47,8 @@
 #pragma mark - 加密
 - (void)signInWithJs:(NSString *)type{
     NSDate *Date = [[NSDate alloc]init];
-    Date = [Tools GetCurrentTime];
-    NSString *timer = [NSString stringWithFormat:@"%d",(int)[Tools GetCurrentTimeStamp:Date]];
+    Date = [Tools getCurrentTime];
+    NSString *timer = [NSString stringWithFormat:@"%d",(int)[Tools getCurrentTimeStamp:Date]];
     NSString *whash;
 #warning  =================
 //    if([HOSTURL rangeOfString:@"api_qixinbao"].location !=NSNotFound)//存在就是线上预上线

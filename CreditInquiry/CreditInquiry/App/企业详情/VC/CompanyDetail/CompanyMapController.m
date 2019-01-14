@@ -259,7 +259,7 @@
     NSString *requestURL = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"%@",requestURL);
     
-    [RequestManager getWithURLString:requestURL parameters:nil success:^(id responseObject) {
+    [RequestManager QXBGetWithURLString:requestURL parameters:nil success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         [MBProgressHUD hideHudToView:self.view animated:YES];
        // CompanyMapModel *mapModel;
@@ -1077,7 +1077,7 @@
 
         NSString *requestURL = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         
-        [RequestManager getWithURLString:requestURL parameters:nil success:^(id responseObject) {
+        [RequestManager QXBGetWithURLString:requestURL parameters:nil success:^(id responseObject) {
             NSLog(@"%@",responseObject);
             [MBProgressHUD hideHudToView:self.view animated:YES];
             //CompanyMapModel *compModel ;
@@ -1218,7 +1218,7 @@
         NSLog(@"%@",url);
         NSString *requestURL = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         
-        [RequestManager getWithURLString:requestURL parameters:nil success:^(id responseObject) {
+        [RequestManager QXBGetWithURLString:requestURL parameters:nil success:^(id responseObject) {
             NSLog(@"%@",responseObject);
             [MBProgressHUD hideHudToView:self.view animated:YES];
             //CompanyMapModel *mapModel ;

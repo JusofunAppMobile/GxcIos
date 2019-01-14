@@ -13,6 +13,10 @@
 +(NSString *)debugAddField:(NSDate *)time;
 +(NSString *)releaseAddField:(NSDate *)time;
 +(NSDate *)convertHeaderDateToNSDate:(NSString *)headerdate;
+
 +(NSString*)desEncryptWithString:(NSString*)string;
+
++(NSString*)encryptWithJsonString:(NSString*)string;
+
 
 @end

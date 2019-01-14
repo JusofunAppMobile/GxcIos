@@ -88,38 +88,47 @@
     return [pred1 evaluateWithObject:phoneNumber];//||[pred1 evaluateWithObject:phoneNumber];
 }
 
-+ (NSMutableDictionary*)encryptionWithDictionary:(NSMutableDictionary*)dic{
-    NSDate *cdate = [Tools GetCurrentTime];
+//加密
++ (NSMutableDictionary*)QXBAddDictionary:(NSMutableDictionary*)dic
+{
+    NSDate *cdate = [Tools getCurrentTime];
     CGFloat Offset = [[KUserDefaults objectForKey:@"CurrentTimeToServerOffset"] floatValue];
-    cdate = [NSDate dateWithTimeInterval:Offset sinceDate:cdate];
+    cdate = [NSDate dateWithTimeInterval:-Offset sinceDate:cdate];
     
-    NSTimeZone *currentTimeZone = [NSTimeZone localTimeZone];
-    NSTimeZone *utcTimeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
-    
-    NSInteger currentGMTOffset = [currentTimeZone secondsFromGMTForDate:cdate];
-    NSInteger gmtOffset = [utcTimeZone secondsFromGMTForDate:cdate];
-    NSTimeInterval gmtInterval = currentGMTOffset - gmtOffset;
-    
-    CGFloat timestamp = [cdate timeIntervalSince1970] - gmtInterval;
-    
-    int t = (int)timestamp;
+    int t = (int)[Tools getCurrentTimeStamp:cdate];
     
     NSMutableDictionary *returnDic = [NSMutableDictionary dictionaryWithDictionary:dic];
     [returnDic setObject:[NSString stringWithFormat:@"%d",t] forKey:@"t"];
-//    if([HOSTURL rangeOfString:@"api_qixinbao"].location !=NSNotFound)//存在就是线上预上线
-//    {
-        [returnDic setObject:[JAddField releaseAddField:cdate] forKey:@"m"];
-//    }
-//    else//不存在就是线下
-//    {
-//        [returnDic setObject:[JAddField debugAddField:cdate] forKey:@"m"];
-//    }
+    [returnDic setObject:[JAddField releaseAddField:cdate] forKey:@"m"];
     
-//    [returnDic setObject:[JAddField releaseAddField:cdate] forKey:@"m"];
+    
+    
     return returnDic;
+    
 }
 
-+(int )GetCurrentTimeStamp:(NSDate *)date{
+////加密
+//+ (NSMutableDictionary*)QXBAddDictionary:(NSMutableDictionary*)dic
+//{
+//    NSDate *cdate = [Tools getCurrentTime];
+//    CGFloat Offset = [[KUserDefaults objectForKey:@"CurrentTimeToServerOffset"] floatValue];
+//    cdate = [NSDate dateWithTimeInterval:-Offset sinceDate:cdate];
+//
+//    int t = (int)[Tools getCurrentTimeStamp:cdate];
+//
+//    NSMutableDictionary *returnDic = [NSMutableDictionary dictionaryWithDictionary:dic];
+//    [returnDic setObject:[NSString stringWithFormat:@"%d",t] forKey:@"t"];
+//
+//    [returnDic setObject:[JAddField debugAddField:cdate] forKey:@"m"];
+//
+//
+//
+//    return returnDic;
+//
+//}
+
+
++(int)getCurrentTimeStamp:(NSDate *)date{
     
     NSTimeZone *currentTimeZone = [NSTimeZone localTimeZone];
     NSTimeZone *utcTimeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
@@ -133,7 +142,7 @@
 
 
 
-+(NSDate *)GetCurrentTime{
++(NSDate *)getCurrentTime{
     NSDate *date = [NSDate date];
     
     NSTimeZone *currentTimeZone = [NSTimeZone localTimeZone];

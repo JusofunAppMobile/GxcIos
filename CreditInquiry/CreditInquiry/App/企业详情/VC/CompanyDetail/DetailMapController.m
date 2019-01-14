@@ -41,7 +41,7 @@
     NSString *url = [NSString stringWithFormat:@"%@?entid=%@&entname=%@&userid=%@",GetEntAtlasData,self.companyId,self.companyName,USER.userID];
     NSString *requestURL = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [MBProgressHUD showMessag:@"" toView:self.view];
-    [RequestManager getWithURLString:requestURL parameters:nil success:^(id responseObject) {
+    [RequestManager QXBGetWithURLString:requestURL parameters:nil success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:YES];
         
         CompanyMapModel *compModel = [CompanyMapModel mj_objectWithKeyValues:responseObject];

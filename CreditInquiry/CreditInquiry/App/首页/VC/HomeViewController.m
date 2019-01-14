@@ -33,9 +33,8 @@ static NSString *NewsCellID = @"NewsCellID";
     
     [self drawView];
     
-    [self performSelector:@selector(loadData) withObject:nil afterDelay:0.2];
     
-    
+    [self loadData];
     
 }
 
@@ -44,6 +43,24 @@ static NSString *NewsCellID = @"NewsCellID";
 
 #pragma mark - 网络请求
 - (void)loadData{
+    
+    NSMutableDictionary *paraDic  = [NSMutableDictionary dictionary];
+    [paraDic setObject:@"123" forKey:@"userId"];
+    [paraDic setObject:@"20" forKey:@"companyName"];
+    [paraDic setObject:@"1" forKey:@"pageIndex"];
+    [RequestManager postWithURLString:KIndustryInformation parameters:paraDic success:^(id responseObject) {
+        if ([responseObject[@"result"] integerValue] == 0) {
+            NSLog(@"222%@",responseObject);
+            
+//            weakSelf.homeModel = [HomeModel mj_objectWithKeyValues:responseObject];
+//            [weakSelf reloadTableView];
+            
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showError:@"请求失败" toView:self.view];
+        [self endRefreshing];
+    }];
+    
     
    
     _firstDate = [NSDate date];

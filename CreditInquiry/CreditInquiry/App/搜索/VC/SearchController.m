@@ -63,7 +63,7 @@
     NSMutableDictionary *paraDic  = [NSMutableDictionary dictionary];
     [paraDic setObject:@(self.searchType) forKey:@"type"];
 //    [paraDic setObject:@(OurmainType) forKey:@"type"];//test
-    [RequestManager getWithURLString:GetHotKey parameters:paraDic success:^(id responseObject) {
+    [RequestManager QXBGetWithURLString:GetHotKey parameters:paraDic success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         // [MBProgressHUD hideHudToView:self.view animated:YES];
         if ([responseObject[@"result"] integerValue ]==0) {
@@ -114,7 +114,7 @@
         URLStr = GetHotSearch;
     }
     
-    recommendTask = [RequestManager getWithURLString:URLStr parameters:paraDic success:^(id responseObject) {
+    recommendTask = [RequestManager QXBGetWithURLString:URLStr parameters:paraDic success:^(id responseObject) {
         
         //NSLog(@"responseObject= %@",responseObject);
         if ([responseObject[@"result"] integerValue] == 0)
