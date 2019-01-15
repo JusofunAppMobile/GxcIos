@@ -108,6 +108,9 @@
     CGFloat hight = 65;
     CGFloat space = 10;
     CenterButton *lastBtn;
+    
+   // NSArray *imageArray = @[@"",@"",@"",@"",@"",@"",@"",@"",@""];
+    
     for (int i = 0; i<[titleArray count]; i++) {
         int col = i%4;//列数
         int row = i/4;//行数
@@ -120,10 +123,11 @@
         [centButton setTitle:[dic objectForKey:@"menuName"] forState:UIControlStateNormal];
         [centButton setTitleColor:KHexRGB(0x333333) forState:UIControlStateNormal];
         [centButton setTitleColor:KHexRGB(0x666666) forState:UIControlStateDisabled];
-        [centButton setImage:[UIImage imageNamed:@"icon_gudong"] forState:UIControlStateNormal];
+        //[centButton setImage:[UIImage imageNamed:@"icon_gudong"] forState:UIControlStateNormal];
+        [centButton sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"menuImage"]] forState:UIControlStateNormal placeholderImage:KImageName(@"")];
         [centButton addTarget:self action:@selector(goToSearch:) forControlEvents:UIControlEventTouchUpInside];
         [searchView addSubview:centButton];
-        
+        centButton.dataDic = dic;
         if(i == titleArray.count-1)
         {
             lastBtn = centButton;

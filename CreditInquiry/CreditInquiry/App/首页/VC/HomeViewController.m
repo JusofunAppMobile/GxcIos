@@ -121,103 +121,73 @@ static NSString *NewsCellID = @"NewsCellID";
 }
 
 #pragma mark - 分类搜索
-- (void)headerBtnClicked:(UIButton *)button{
+- (void)headerBtnClicked:(CenterButton *)button{
     
-    SearchController *searchVc= [[SearchController alloc]init];
-    switch (button.tag) {
-            //        case 100:{
-            //
-            //            return;
-            //            NSLog(@"附近公司");
-            //            NearController *vc = [NearController new];
-            //            [self.navigationController pushViewController:vc animated:YES];
-            //        }
-                        break;
-        case 100:
-            
-            //[MobClick event:@"Home03"];//首页－股东高管点击数
-            //[[BaiduMobStat defaultStat] logEvent:@"Home03" eventLabel:@"首页－股东高管点击数"];
-            NSLog(@"股东高管");
-            searchVc.searchType = ShareholderType;
-            [self.navigationController pushViewController:searchVc animated:YES];
-            break;
-        case 101:
-            
-            NSLog(@"主营产品");
-            //[MobClick event:@"Home02"];//首页－主营产品点击数
-            //[[BaiduMobStat defaultStat] logEvent:@"Home02" eventLabel:@"首页－主营产品点击数"];
-            
-            searchVc.searchType = OurmainType;
-            [self.navigationController pushViewController:searchVc animated:YES];
-            break;
-        case 102:
-            
-            
-            //return;
-            
-            NSLog(@"地址电话");
-            //[MobClick event:@"Home04"];//首页－地址电话点击数
-            //[[BaiduMobStat defaultStat] logEvent:@"Home04" eventLabel:@"首页－地址电话点击数"];
-            
-            searchVc.searchType = AddressType;
-            [self.navigationController pushViewController:searchVc animated:YES];
-            break;
-        case 103:
-            NSLog(@"失信查询");
-            
-            //[MobClick event:@"Home06"];//首页－失信查询点击数
-            //[[BaiduMobStat defaultStat] logEvent:@"Home06" eventLabel:@"首页－失信查询点击数"];
-            searchVc.searchType = CrackcreditType;
-            [self.navigationController pushViewController:searchVc animated:YES];
-            break;
-        case 104:
-            
-            searchVc.searchType = TaxCodeType;
-            [self.navigationController pushViewController:searchVc animated:YES];
-            break;
-        case 105:
-            
-            searchVc.searchType = JobType;
-            [self.navigationController pushViewController:searchVc animated:YES];
-            break;
-        case 106:
-            NSLog(@"企业通讯录");
-            searchVc.searchType = AddressBookType;
-            [self.navigationController pushViewController:searchVc animated:YES];
-            break;
-        case 107:
-            NSLog(@"股东穿透");
-            searchVc.searchType = PenetrationType;//test
-            [self.navigationController pushViewController:searchVc animated:YES];
-            
-            break;
-        case 108:
-            //查关系
-        {
-            SeekRelationController *vc = [SeekRelationController new];
-            [self.navigationController pushViewController:vc animated:YES];
-            break;
-        }
-            
-        case 109:
-           //风险分析
-            
-        {
-            RiskVipController *vc = [RiskVipController new];
-            [self.navigationController pushViewController:vc animated:YES];
-            break;
-        }
-//            searchVc.searchType = RiskAnalyze;//test
-//            [self.navigationController pushViewController:searchVc animated:YES];
-//
-//            break;
-       
-        default:
-            break;
+    NSDictionary *dic = button.dataDic;
+    //1：股东高管 2：主营产品 3：地址电话 4：失信查询 5：查税号 6：招聘 7：企业通讯录 8：查关系(待定) 9：风险分析(待定) -1: h5跳转
+    int type = [[dic objectForKey:@"menuType"] intValue];
+    if(type == 1)//1：股东高管
+    {
+        SearchController *searchVc= [SearchController new];
+        searchVc.searchType = ShareholderType;
+        [self.navigationController pushViewController:searchVc animated:YES];
     }
-    
-    
-    
+    else if (type == 2)//2：主营产品
+    {
+        SearchController *searchVc= [SearchController new];
+        searchVc.searchType = OurmainType;
+        [self.navigationController pushViewController:searchVc animated:YES];
+    }
+    else if (type == 3)//3：地址电话
+    {
+        SearchController *searchVc= [SearchController new];
+        searchVc.searchType = AddressType;
+        [self.navigationController pushViewController:searchVc animated:YES];
+    }
+    else if (type == 4)//4：失信查询
+    {
+        SearchController *searchVc= [SearchController new];
+        searchVc.searchType = CrackcreditType;
+        [self.navigationController pushViewController:searchVc animated:YES];
+    }
+    else if (type == 5)//5：查税号
+    {
+        SearchController *searchVc= [SearchController new];
+        searchVc.searchType = TaxCodeType;
+        [self.navigationController pushViewController:searchVc animated:YES];
+    }
+    else if (type == 6)//6：招聘
+    {
+        SearchController *searchVc= [SearchController new];
+        searchVc.searchType = JobType;
+        [self.navigationController pushViewController:searchVc animated:YES];
+    }
+    else if (type == 7)//7：企业通讯录
+    {
+        SearchController *searchVc= [SearchController new];
+        searchVc.searchType = AddressBookType;
+        [self.navigationController pushViewController:searchVc animated:YES];
+    }
+    else if (type == 8)//8：查关系(待定)
+    {
+        SeekRelationController *vc = [SeekRelationController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else if (type == 9)//9：风险分析(待定)
+    {
+        RiskVipController *vc = [RiskVipController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else if (type == -1)//-1: h5跳转
+    {
+        SearchController *searchVc= [SearchController new];
+        searchVc.searchType = RiskAnalyze;
+        [self.navigationController pushViewController:searchVc animated:YES];
+       
+//        CommonWebViewController *vc = [CommonWebViewController new];
+//        vc.urlStr = [dic objectForKey:@"menuUrl"];
+//        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 #pragma mark 热词搜索

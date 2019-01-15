@@ -114,7 +114,7 @@
     
     NSURLSessionDataTask *session = [manager GET:URLString parameters:tmpDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (success) {
-           
+           [self getDateWithTask:task];
             NSLog(@"\nGET请求：Request success, URL: %@\n params:%@\n ",
                   [self generateGETAbsoluteURL:URLString params:tmpDic],
                   tmpDic);
@@ -122,7 +122,7 @@
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (failure) {
-          
+          [self getDateWithTask:task];
             NSLog(@"\nGET请求：Request failure, URL: %@\n params:%@\n",
                   [self generateGETAbsoluteURL:URLString params:tmpDic],
                   tmpDic);
@@ -147,7 +147,7 @@
     
     NSURLSessionDataTask *session = [manager GET:URLString parameters:tmpDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (success) {
-           
+           [self getDateWithTask:task];
             NSLog(@"\nGET请求：Request success, URL: %@\n params:%@\n ",
                   [self generateGETAbsoluteURL:URLString params:tmpDic],
                   tmpDic);
@@ -155,7 +155,7 @@
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (failure) {
-           
+           [self getDateWithTask:task];
             NSLog(@"\nGET请求：Request success, URL: %@\n params:%@\n",
                   [self generateGETAbsoluteURL:URLString params:tmpDic],
                   tmpDic);
@@ -180,7 +180,7 @@
     
     NSURLSessionDataTask *session = [manager POST:URLString parameters:tmpDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (success) {
-          
+          [self getDateWithTask:task];
             NSLog(@"\nPOST请求：Request success, URL: %@\n params:%@\n 返回内容：%@",
                   [self generateGETAbsoluteURL:URLString params:tmpDic],
                   tmpDic,responseObject);
@@ -188,7 +188,7 @@
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (failure) {
-           
+           [self getDateWithTask:task];
             NSLog(@"\nPOST请求：Request success, URL: %@\n params:%@\n",
                   [self generateGETAbsoluteURL:URLString params:tmpDic],
                   tmpDic);
@@ -213,7 +213,7 @@
     
     NSURLSessionDataTask *session = [manager POST:URLString parameters:tmpDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (success) {
-            
+            [self getDateWithTask:task];
             NSLog(@"\nPOST请求：Request success, URL: %@\n params:%@\n 返回内容：%@",
                   [self generateGETAbsoluteURL:URLString params:tmpDic],
                   tmpDic,responseObject);
@@ -221,7 +221,7 @@
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (failure) {
-            
+            [self getDateWithTask:task];
             NSLog(@"\nPOST请求：Request success, URL: %@\n params:%@\n",
                   [self generateGETAbsoluteURL:URLString params:tmpDic],
                   tmpDic);
@@ -250,7 +250,7 @@
         {
             session = [manager GET:URLString parameters:tmpDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 if (success) {
-                    
+                    [self getDateWithTask:task];
                     NSLog(@"\nget请求：Request success, URL: %@\n params:%@\n 返回内容：%@",
                           [self generateGETAbsoluteURL:URLString params:parameters],
                           parameters,responseObject);
@@ -258,7 +258,7 @@
                 }
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 if (failure) {
-                   
+                   [self getDateWithTask:task];
                     NSLog(@"\nGET请求：Request success, URL: %@\n params:%@\n",
                           [self generateGETAbsoluteURL:URLString params:parameters],
                           parameters);
@@ -274,7 +274,7 @@
         {
             session = [manager POST:URLString parameters:tmpDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 if (success) {
-                   
+                   [self getDateWithTask:task];
                     NSLog(@"\nPOST请求：Request success, URL: %@\n params:%@\n 返回内容：%@",
                           [self generateGETAbsoluteURL:URLString params:parameters],
                           parameters,responseObject);
@@ -282,7 +282,7 @@
                 }
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 if (failure) {
-                
+                [self getDateWithTask:task];
                     NSLog(@"\nPOST请求：Request success, URL: %@\n params:%@\n",
                           [self generateGETAbsoluteURL:URLString params:parameters],
                           parameters);
@@ -322,10 +322,11 @@
     }
                                           success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                                               if (success) {
-                                                  success(responseObject);
+                                                 [self getDateWithTask:task]; success(responseObject);
                                               }
                                           } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                                               if (failure) {
+                                                  [self getDateWithTask:task];
                                                   failure(error);
                                               }
                                           }];
@@ -337,7 +338,7 @@
 + (NSMutableDictionary*)addDictionary:(NSMutableDictionary*)dic
 {
     NSDate *cdate = [Tools getCurrentTime];
-    CGFloat Offset = [[KUserDefaults objectForKey:@"CurrentTimeToServerOffset"] floatValue];
+    CGFloat Offset = [[KUserDefaults objectForKey:KCurrentTimeToServerOffset] floatValue];
     cdate = [NSDate dateWithTimeInterval:-Offset sinceDate:cdate];
     
     int t = (int)[Tools getCurrentTimeStamp:cdate];
@@ -361,6 +362,17 @@
     return returnDic;
     
 }
+
++(void)getDateWithTask:(NSURLSessionDataTask*)task
+{
+    NSHTTPURLResponse *response = (NSHTTPURLResponse*)task.response;
+    NSString *serverDate =response.allHeaderFields[@"Date"];
+    NSDate *serverTime = [JAddField convertHeaderDateToNSDate:serverDate];
+    NSDate *currentTime = [NSDate date];
+    CGFloat timeoffset = currentTime.timeIntervalSince1970 -serverTime.timeIntervalSince1970;
+    [KUserDefaults setValue:[NSString stringWithFormat:@"%f",timeoffset] forKey:KCurrentTimeToServerOffset];
+}
+
 
 
 // 仅对一级字典结构起作用

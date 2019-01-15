@@ -106,8 +106,6 @@
         [MBProgressHUD hideHudToView:self.view animated:NO];
         if ([responseObject[@"result"] integerValue] == 0) {
             
-          
-            
             [self startTimer];
             
             [MBProgressHUD showSuccess:@"发送验证码成功" toView:self.view];
