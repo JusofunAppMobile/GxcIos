@@ -1079,7 +1079,7 @@
 //股东穿透权限查询
 - (void)checkPenetrationVipType{
 //    [MBProgressHUD showMessag:@"" toView:self.view];
-//    NSString *str = [NSString stringWithFormat:@"%@?userId=%@",KGetShareholerVipType,USER.userID] ;
+//    NSString *str = [NSString stringWithFormat:@"%@?userId=%@",KGetShareholerVipType,KUSER.userId] ;
 //    [RequestManager QXBGetWithURLString:str parameters:nil success:^(id responseObject) {
 //        NSLog(@"responseObject_______%@",responseObject);
 //        [MBProgressHUD hideHudToView:self.view animated:YES];
@@ -1096,7 +1096,7 @@
 //企业报告权限查询
 - (void)checkReportWithModel:(SearchBaseModel *)model forPreview:(BOOL)forPreview{
 //    [MBProgressHUD showMessag:@"" toView:self.view];
-//    NSString *str = [[NSString stringWithFormat:@"%@?entId=%@&userid=%@&entName=%@",KGetReportLink,model.companyid,USER.userID,model.companyname] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    NSString *str = [[NSString stringWithFormat:@"%@?entId=%@&userid=%@&entName=%@",KGetReportLink,model.companyid,KUSER.userId,model.companyname] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 //    [RequestManager QXBGetWithURLString:str parameters:nil success:^(id responseObject) {
 //        [MBProgressHUD hideHudToView:self.view animated:YES];
 //        if([[responseObject objectForKey:@"result"]intValue] == 0){
@@ -1159,7 +1159,7 @@
 //    }
 //
 //    NSString *method = _searchType == PenetrationType?KExportShareholer:KExportReports;
-//    NSString *url = [NSString stringWithFormat:@"%@?userId=%@&entId=%@&email=%@",method,USER.userID,idStr,mail];
+//    NSString *url = [NSString stringWithFormat:@"%@?userId=%@&entId=%@&email=%@",method,KUSER.userId,idStr,mail];
 //    [MBProgressHUD showMessag:@"" toView:self.view];
 //
 //    [RequestManager QXBPostWithURLString:url parameters:nil success:^(id responseObject) {
@@ -1240,7 +1240,7 @@
 
 //查看更多、预览
 - (void)cellPreviewAction:(SearchBaseModel *)exportModel{
-    if (USER.userID.length) {
+    if (KUSER.userId.length) {
         if (_searchType == AddressBookType) {//通讯录预览（查看更多）
 //            DownContactController *vc = [[DownContactController alloc]init];
 //            vc.modelArray =@[(AddressBookModel *)exportModel] ;//AddressBookModel
@@ -1288,7 +1288,7 @@
         [MBProgressHUD showHint:@"请选择需要导出的企业！" toView:self.view];
         return;
     }
-    if (USER.userID.length) {
+    if (KUSER.userId.length) {
         if (_searchType == AddressBookType) {
 //            DownContactController *vc = [[DownContactController alloc]init];
 //            vc.modelArray = [_exportModels allValues].copy;//AddressBookModel

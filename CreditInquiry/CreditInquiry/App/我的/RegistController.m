@@ -43,7 +43,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setBlankBackButton];
-    
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 120;
     
     [self drawView];
     
@@ -51,7 +51,42 @@
 
 -(void)regist
 {
+    if (_phoneTextFld.text.length == 0) {
+        [MBProgressHUD showError:@"请输入手机号" toView:self.view];
+        return;
+    }
+    if (_codeTextFld.text.length == 0) {
+        [MBProgressHUD showError:@"请输入验证码" toView:self.view];
+        return;
+    }
+    if (_pwdTextFld.text.length == 0) {
+        [MBProgressHUD showError:@"请输入密码" toView:self.view];
+        return;
+    }
     
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:_phoneTextFld.text forKey:@"phone"];
+    [params setObject:_codeTextFld.text forKey:@"code"];
+    [params setObject:[JAddField desEncryptWithString:_pwdTextFld.text]  forKey:@"password"];
+    [params setObject:@"123456" forKey:@"regId"];
+    
+    [MBProgressHUD showMessag:@"" toView:self.view];
+    [RequestManager postWithURLString:KRegister parameters:params  success:^(id responseObject) {
+        [MBProgressHUD hideHudToView:self.view animated:NO];
+        if ([responseObject[@"result"] integerValue] == 0) {
+            
+            [self startTimer];
+            
+            [MBProgressHUD showSuccess:@"发送验证码成功" toView:self.view];
+        }else{
+            [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
+            
+            
+        }
+        
+    } failure:^(NSError *error) {
+        [MBProgressHUD showError:@"哎呀，服务器开小差啦，请您稍等，马上回来~" toView:self.view];
+    }];
     
 }
 
@@ -62,11 +97,7 @@
         [MBProgressHUD showError:@"请输入手机号" toView:self.view];
         return;
     }
-    if (_pwdTextFld.text.length == 0) {
-        [MBProgressHUD showError:@"请输入密码" toView:self.view];
-        return;
-    }
-    
+   
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:_phoneTextFld.text forKey:@"phone"];
     [params setObject:@"1" forKey:@"type"];
@@ -76,9 +107,8 @@
         [MBProgressHUD hideHudToView:self.view animated:NO];
         if ([responseObject[@"result"] integerValue] == 0) {
             
-            [self startTimer];
-            
-            [MBProgressHUD showSuccess:@"发送验证码成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"注册成功" toView:nil];
+            [self back];
         }else{
             [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
             

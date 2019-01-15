@@ -254,7 +254,7 @@
     [MBProgressHUD showMessag:@"" toView:self.view];
     //[self showHUDOnView:self.view];
 
-   NSString *url = [NSString stringWithFormat:@"%@?entid=%@&entname=%@&userid=%@",GetEntAtlasData,self.entid,companyName,USER.userID];
+   NSString *url = [NSString stringWithFormat:@"%@?entid=%@&entname=%@&userid=%@",GetEntAtlasData,self.entid,companyName,KUSER.userId];
 
     NSString *requestURL = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"%@",requestURL);
@@ -1073,7 +1073,7 @@
        
         [MBProgressHUD showMessag:@"" toView:self.view];
 
-        NSString *url = [NSString stringWithFormat:@"%@?entid=%@&entname=%@&userid=%@",GetEntAtlasData,[compDic objectForKey:@"entId"],[compDic objectForKey:@"companyName"],USER.userID];
+        NSString *url = [NSString stringWithFormat:@"%@?entid=%@&entname=%@&userid=%@",GetEntAtlasData,[compDic objectForKey:@"entId"],[compDic objectForKey:@"companyName"],KUSER.userId];
 
         NSString *requestURL = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         

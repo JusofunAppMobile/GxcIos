@@ -170,7 +170,7 @@
     [paraDic setObject:@"20" forKey:@"pagesize"];
     [paraDic setObject:self.companyName forKey:@"entname"];
     [paraDic setObject:[NSString stringWithFormat:@"%ld",(long)pageIndex] forKey:@"pageIndex"];
-    [paraDic setObject:USER.userID forKey:@"userid"];
+    [paraDic setObject:KUSER.userId forKey:@"userid"];
      NSString* urlstr = [GetEntBranchOrInvesment stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [RequestManager QXBGetWithURLString:urlstr parameters:paraDic success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:YES];
@@ -347,7 +347,7 @@
         
         [MBProgressHUD showMessag:@"" toView:self.view];
 
-        NSString *url = [NSString stringWithFormat:@"%@?entid=%@&entname=%@&userid=%@",GetEntAtlasData,self.companyId,self.companyName,USER.userID];
+        NSString *url = [NSString stringWithFormat:@"%@?entid=%@&entname=%@&userid=%@",GetEntAtlasData,self.companyId,self.companyName,KUSER.userId];
         NSString *requestURL = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         
         [MBProgressHUD showMessag:@"" toView:self.view];

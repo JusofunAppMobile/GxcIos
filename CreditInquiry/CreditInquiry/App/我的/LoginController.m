@@ -35,6 +35,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+     [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 120;
+    
     [self setBlankBackButton];
     [self drawRightBarButton];
     
@@ -56,8 +59,8 @@
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:_phoneTextFld.text forKey:@"phone"];
-    [params setObject:@"" forKey:@"regId"];
-    [params setObject:[Tools md5:_pwdTextFld.text] forKey:@"password"];
+    [params setObject:@"123" forKey:@"regId"];
+    [params setObject:[JAddField desEncryptWithString:_pwdTextFld.text] forKey:@"password"];
     [MBProgressHUD showMessag:@"" toView:self.view];
     [RequestManager postWithURLString:KLogin parameters:params  success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:NO];
@@ -85,6 +88,12 @@
 {
     
     RegistController *vc = [[RegistController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)forgetPassword
+{
+    FogotPwdController *vc = [FogotPwdController new];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -198,7 +207,7 @@
         [self.backScrollView addSubview:view];
         [view setTitle:@"忘记密码" forState:UIControlStateNormal];
         view.titleLabel.font = KFont(14);
-        [view addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
+        [view addTarget:self action:@selector(forgetPassword) forControlEvents:UIControlEventTouchUpInside];
         [view setTitleColor:KHexRGB(0x8F8F8F) forState:UIControlStateNormal];
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.loginBtn.mas_bottom);

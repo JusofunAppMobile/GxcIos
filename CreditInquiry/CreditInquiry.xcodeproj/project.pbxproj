@@ -61,6 +61,7 @@
 		793D1C8121E0586200C29908 /* OweTaxModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 793D1C8021E0586200C29908 /* OweTaxModel.m */; };
 		793D1C8B21E0588800C29908 /* HotKeyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 793D1C8521E0588800C29908 /* HotKeyModel.m */; };
 		793D1C8D21E0588800C29908 /* NearCompanyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 793D1C8921E0588800C29908 /* NearCompanyModel.m */; };
+		796AE39021ECAF3A00623659 /* NewsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 796AE38F21ECAF3A00623659 /* NewsController.m */; };
 		799F78E421E5C24C000DBB88 /* SeekRelationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F78E321E5C24C000DBB88 /* SeekRelationController.m */; };
 		799F796721E5E9E1000DBB88 /* RiskVipController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F796621E5E9E1000DBB88 /* RiskVipController.m */; };
 		799F796A21E5EE72000DBB88 /* BuyVipController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F796921E5EE72000DBB88 /* BuyVipController.m */; };
@@ -388,6 +389,8 @@
 		793D1C8521E0588800C29908 /* HotKeyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotKeyModel.m; sourceTree = "<group>"; };
 		793D1C8821E0588800C29908 /* NearCompanyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearCompanyModel.h; sourceTree = "<group>"; };
 		793D1C8921E0588800C29908 /* NearCompanyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearCompanyModel.m; sourceTree = "<group>"; };
+		796AE38E21ECAF3A00623659 /* NewsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewsController.h; sourceTree = "<group>"; };
+		796AE38F21ECAF3A00623659 /* NewsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsController.m; sourceTree = "<group>"; };
 		799F78E221E5C24C000DBB88 /* SeekRelationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeekRelationController.h; sourceTree = "<group>"; };
 		799F78E321E5C24C000DBB88 /* SeekRelationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SeekRelationController.m; sourceTree = "<group>"; };
 		799F796521E5E9E1000DBB88 /* RiskVipController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RiskVipController.h; sourceTree = "<group>"; };
@@ -1110,6 +1113,8 @@
 			children = (
 				CA5E00A821DDE61D0040ABE2 /* HomeViewController.h */,
 				CA5E00A921DDE61D0040ABE2 /* HomeViewController.m */,
+				796AE38E21ECAF3A00623659 /* NewsController.h */,
+				796AE38F21ECAF3A00623659 /* NewsController.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -2231,6 +2236,7 @@
 				CADD606F21E4A74300EB01CD /* EditHonorController.m in Sources */,
 				CA5E005C21DDE05E0040ABE2 /* UINavigationBar+Extention.m in Sources */,
 				CADD606021E491C200EB01CD /* CreditEditTextCell.m in Sources */,
+				796AE39021ECAF3A00623659 /* NewsController.m in Sources */,
 				CADD60DC21E775D500EB01CD /* MonitorDynamicCell.m in Sources */,
 				CA5E006B21DDE05E0040ABE2 /* DVPieChart.m in Sources */,
 				79D34EF921E0652000B1CB32 /* SearchCompanyCell.m in Sources */,

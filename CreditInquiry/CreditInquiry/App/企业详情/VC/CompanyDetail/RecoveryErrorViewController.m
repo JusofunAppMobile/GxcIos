@@ -233,7 +233,7 @@
 - (void)loadData{
 
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    NSString *useid = USER.userID?USER.userID:@"";
+    NSString *useid = KUSER.userId?KUSER.userId:@"";
     NSString *str = [NSString stringWithFormat:@"%@?userId=%@",KGetQuestionList,useid];
     KWeakSelf
     [MBProgressHUD showMessag:@"" toView:self.view];
@@ -254,7 +254,7 @@
 }
 
 - (void)submitQuestion:(ErrorModel *)model answerModel:(AnswerModel *)answerModel{
-    NSString *useid = USER.userID?USER.userID:@"";
+    NSString *useid = KUSER.userId?KUSER.userId:@"";
     NSString *str = [NSString stringWithFormat:@"%@?questionid=%@&answerid=%@&userId=%@",KCommitQuestion,model.questionid,answerModel.answerid,useid];
     KWeakSelf
     [MBProgressHUD showMessag:@"" toView:self.view];
@@ -297,8 +297,8 @@
     if (_contactTextField.text) {
         [paraDic setObject:_contactTextField.text forKey:@"contactinformation"];//联系方式
     }
-    if (USER.userID) {
-        [paraDic setObject:USER.userID forKey:@"userid"];
+    if (KUSER.userId) {
+        [paraDic setObject:KUSER.userId forKey:@"userid"];
     }
     [paraDic setObject:self.companyName forKey:@"entname"];
     

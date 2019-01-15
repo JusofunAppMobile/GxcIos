@@ -37,6 +37,9 @@
 //登录
 #define KLogin   @""HOSTURL"/app/UserLogin/loginApp"
 
+//注册
+#define KRegister   @""HOSTURL"/app/UserLogin/RegisterApp"
+
 //发送验证码
 #define KSendMesCode   @""HOSTURL"/app/UserLogin/sendMesCode"
 
