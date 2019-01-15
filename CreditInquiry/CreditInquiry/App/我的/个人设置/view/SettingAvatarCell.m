@@ -39,7 +39,7 @@
                 make.width.height.mas_equalTo(52);
                 make.right.mas_equalTo(self.contentView);
             }];
-            view.image = KImageName(@"me_head_h");
+            [view sd_setImageWithURL:[NSURL URLWithString:KUSER.headIcon] placeholderImage:KImageName(@"me_head_h")];
             view;
         });
     }

@@ -9,14 +9,14 @@
 #import "MsgSettingController.h"
 
 @interface MsgSettingController ()
-
+@property (nonatomic ,strong) UISwitch *switchView;
 @end
 
 @implementation MsgSettingController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setNavigationBarTitle:@"推送消息设置"];
+    [self setNavigationBarTitle:@"消息推送"];
     [self setBlankBackButton];
     
     [self initView];
@@ -24,28 +24,59 @@
 
 - (void)initView{
 
+    self.view.backgroundColor = KHexRGB(0xf5f6f8);
+    
+    UIView *bgView = [UIView new];
+    bgView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:bgView];
+    [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(KNavigationBarHeight+10);
+        make.left.right.mas_equalTo(self.view);
+        make.height.mas_equalTo(52);
+    }];
+    
     UILabel *titleLab = [UILabel new];
-    titleLab.text = @"推送消息设置";
+    titleLab.text = @"接收新消息提醒";
     titleLab.font = KFont(15);
-    [self.view addSubview:titleLab];
+    [bgView addSubview:titleLab];
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(KNavigationBarHeight +20);
-        make.left.mas_equalTo(self.view).offset(15);
+        make.centerY.mas_equalTo(bgView);
+        make.left.mas_equalTo(bgView).offset(15);
     }];
     
-    
-    UISwitch *mySwitch = [UISwitch new];
-    mySwitch.on = YES;
-    [mySwitch addTarget:self action:@selector(valueChanged:) forControlEvents:(UIControlEventValueChanged)];
-    [self.view addSubview:mySwitch];
-    [mySwitch mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(titleLab);
-        make.right.mas_equalTo(self.view).offset(-15);
-    }];
+    self.switchView = ({
+        UISwitch *mySwitch = [UISwitch new];
+        mySwitch.on = KUSER.pushStatus.intValue == 0 ? YES : NO;
+        [mySwitch addTarget:self action:@selector(valueChanged) forControlEvents:(UIControlEventValueChanged)];
+        [bgView addSubview:mySwitch];
+        [mySwitch mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(bgView);
+            make.right.mas_equalTo(bgView).offset(-15);
+        }];
+        mySwitch;
+    });
+   
 }
 
-- (void)valueChanged:(UISwitch *)sender{//加接口
+- (void)valueChanged{//加接口
+    [MBProgressHUD showMessag:@"" toView:self.view];
     
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:KUSER.userId forKey:@"userId"];
+    [params setObject:_switchView.on?@(0):@(1) forKey:@"pushStatus"];
+    
+    [RequestManager postWithURLString:KChangeUserInfo parameters:params success:^(id responseObject) {
+        [MBProgressHUD hideHudToView:self.view animated:YES];
+        if ([responseObject[@"result"] intValue] == 0) {
+            [MBProgressHUD showSuccess:@"修改成功" toView:self.view];
+        }else{
+            [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
+        }
+        
+    } failure:^(NSError *error) {
+        [MBProgressHUD showError:@"哎呀，服务器开小差啦，请您稍等，马上回来~" toView:self.view];
+    }];
+
 }
 
 @end

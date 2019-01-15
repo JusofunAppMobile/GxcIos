@@ -114,7 +114,6 @@ static NSString *PlainID = @"MePlainCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0) {
-        
         if (KUSER.userId.length) {
             PersonalSettingController *vc = [PersonalSettingController new];
             [self.navigationController pushViewController:vc animated:YES];
@@ -122,7 +121,6 @@ static NSString *PlainID = @"MePlainCell";
             LoginController *vc = [LoginController new];
             [self.navigationController pushViewController:vc animated:YES];
         }
-       
     }else if (indexPath.section == 2) {
         if (indexPath.row == 3) {
             SettingViewController *vc = [SettingViewController new];
@@ -173,6 +171,7 @@ static NSString *PlainID = @"MePlainCell";
         [self.navigationController pushViewController:vc animated:YES];
     }else if (index ==1||index==2){
         MyMonitorListController *vc = [MyMonitorListController new];
+        vc.listType = index ==1? ListTypeMyMonitor:ListTypeMyCollection;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

@@ -7,6 +7,8 @@
 //
 
 #import "ModifyPhoneController.h"
+#import "UIButton+Verification.h"
+#import "Tools.h"
 
 @interface ModifyPhoneController ()
 @property (nonatomic ,strong) UITextField *phoneText;
@@ -65,7 +67,6 @@
         make.height.mas_equalTo(.5);
     }];
     
-    KHexRGB(0xeb101e);
     self.codeBtn  = ({
         UIButton *view = [UIButton new];
         [self.view addSubview:view];
@@ -76,6 +77,7 @@
         view.titleLabel.font = KFont(16);
         [view setTitle:@"获取验证码" forState:UIControlStateNormal];
         [view setTitleColor:KHexRGB(0xeb101e) forState:UIControlStateNormal];
+        [view addTarget:self action:@selector(getCodeAction) forControlEvents:UIControlEventTouchUpInside];
         view;
     });
     
@@ -85,7 +87,7 @@
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(_codeBtn);
             make.left.mas_equalTo(_phoneText);
-            make.right.mas_equalTo(_codeBtn.mas_left).offset(20);
+            make.right.mas_lessThanOrEqualTo(_codeBtn.mas_left).offset(-20);
         }];
         view.placeholder = @"请输入验证码";
         view.font = KFont(15);
@@ -108,6 +110,7 @@
     footerBtn.layer.cornerRadius = 20;
     footerBtn.layer.masksToBounds = YES;
     [footerBtn setTitle:@"完成" forState:UIControlStateNormal];
+    [footerBtn addTarget:self action:@selector(commitAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:footerBtn];
     [footerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(35);
@@ -115,9 +118,74 @@
         make.top.mas_equalTo(line2.mas_bottom).offset(45);
         make.height.mas_equalTo(45);
     }];
+}
+
+#pragma mark - 按钮
+- (void)getCodeAction{
+    if (!_phoneText.text.length) {
+        [MBProgressHUD showHint:@"请输入手机号码！" toView:self.view];
+        return;
+    }
+    if (![Tools validatePhoneNumber:_phoneText.text]) {
+        [MBProgressHUD showHint:@"请输入正确的手机号码" toView:self.view];
+        return;
+    }
+    [MBProgressHUD showMessag:@"" toView:self.view];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:_phoneText.text forKey:@"phone"];
+    [params setObject:@"3" forKey:@"type"];
+    
+    [RequestManager postWithURLString:KSendMesCode parameters:params success:^(id responseObject) {
+        [MBProgressHUD hideHudToView:self.view animated:YES];
+        if ([responseObject[@"result"] intValue] == 0) {
+            [_codeBtn startTimeWithDuration:60];
+            [MBProgressHUD showSuccess:@"验证码发送成功" toView:self.view];
+        }else{
+            [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showError:@"哎呀，服务器开小差啦，请您稍等，马上回来~" toView:self.view];
+    }];
     
 }
 
+- (void)commitAction{
+    
+    if (!_phoneText.text.length) {
+        [MBProgressHUD showHint:@"请输入手机号码" toView:self.view];
+        return;
+    }
+    if (!_codeText.text.length) {
+        [MBProgressHUD showHint:@"请输入验证码" toView:self.view];
+        return;
+    }
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:KUSER.userId forKey:@"userId"];
+    [params setObject:_phoneText.text forKey:@"phone"];
+    [params setObject:_codeText.text forKey:@"code"];
+    [RequestManager postWithURLString:KChangePhone parameters:params success:^(id responseObject) {
+        [MBProgressHUD hideHudToView:self.view animated:YES];
+        if ([responseObject[@"result"] intValue] == 0) {
+            [MBProgressHUD showSuccess:@"修改成功" toView:self.view];
+            [self updateUserInfo];
+        }else{
+            [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
+        }
+
+    } failure:^(NSError *error) {
+        [MBProgressHUD showError:@"哎呀，服务器开小差啦，请您稍等，马上回来~" toView:self.view];
+    }];
+}
+- (void)updateUserInfo{
+    KUSER.phone = _phoneText.text;
+    [KUSER update];
+    if (_reloadBlock) {
+        _reloadBlock();
+    }
+    [self back];
+}
+#pragma mark - life cycle
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar fs_setBackgroundColor:[UIColor clearColor]];

@@ -7,6 +7,7 @@
 //
 
 #import "MyMonitorCell.h"
+#import "MyMonitorListModel.h"
 
 @interface MyMonitorCell ()
 @property (nonatomic ,strong) UIImageView *iconView;
@@ -68,6 +69,12 @@
         
     }
     return self;
+}
+
+- (void)setModel:(MyMonitorListModel *)model{
+    _model = model;
+//    [_iconView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:nil];//test,model.companyicon?
+    _nameLab.text = model.companyname;
 }
 
 - (void)monitorAction{

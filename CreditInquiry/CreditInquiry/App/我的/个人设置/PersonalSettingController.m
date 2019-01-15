@@ -11,6 +11,8 @@
 #import "SettingAvatarCell.h"
 #import "ModifyPhoneController.h"
 #import "ModifyInfoController.h"
+#import "GetPhoto.h"
+#import "ChangePwdController.h"
 
 static NSString *CellID1 = @"SettingAvatarCell";
 static NSString *CellID2 = @"SettingPlainCell";
@@ -75,17 +77,56 @@ static NSString *CellID2 = @"SettingPlainCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.section == 0&&indexPath.row ==0) {
+        KWeakSelf
+        [[GetPhoto sharedGetPhoto] getPhotoWithTarget:self success:^(UIImage *image, NSString *imagePath) {
+            NSLog(@"图片___%@",imagePath);
+            [weakSelf uploadHeadImage:imagePath];
+        }];
         
     }else if (indexPath.section == 0&&indexPath.row == 1){
+        KWeakSelf
         ModifyPhoneController *vc = [ModifyPhoneController new];
+        vc.reloadBlock = ^{
+            [weakSelf.tableview reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        };
         [self.navigationController pushViewController:vc animated:YES];
+       
+    }else if (indexPath.section == 0&&indexPath.row == 2){
+        ChangePwdController *vc = [ChangePwdController new];
+        [self.navigationController pushViewController:vc animated:YES];        
     }else{
-        SettingPlainCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        if ((indexPath.section==1&&indexPath.row == 0) && KUSER.company.length) {
+            return;
+        }
         
+        KWeakSelf
+        SettingPlainCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         ModifyInfoController *vc = [ModifyInfoController new];
         vc.typeStr = cell.title;
+        vc.reloadBlock = ^{
+            [weakSelf.tableview reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        };
         [self.navigationController pushViewController:vc animated:YES];
     }
+}
+
+- (void)uploadHeadImage:(NSString *)imagePath{
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:@"" forKey:@"type"];
+    [params setObject:@"" forKey:@""];
+    
+    [RequestManager uploadWithURLString:KUploadImage parameters:params progress:nil uploadParam:nil success:^(id responseObject) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    
+//    [RequestManager postWithURLString:KUploadImage parameters:nil success:^(id responseObject) {
+//
+//    } failure:^(NSError *error) {
+//
+//    }];
 }
 
 

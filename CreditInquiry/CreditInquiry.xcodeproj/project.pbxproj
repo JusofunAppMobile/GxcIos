@@ -134,6 +134,12 @@
 		CA46605D21EC7288005C630F /* UILabel+Alignment.m in Sources */ = {isa = PBXBuildFile; fileRef = CA46605C21EC7288005C630F /* UILabel+Alignment.m */; };
 		CA56111121ECBC7B0052CF38 /* MonitorDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56111021ECBC7B0052CF38 /* MonitorDetailModel.m */; };
 		CA56111721ECBE380052CF38 /* MDSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56111621ECBE380052CF38 /* MDSectionModel.m */; };
+		CA56111D21ED84930052CF38 /* UIButton+Verification.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56111B21ED84920052CF38 /* UIButton+Verification.m */; };
+		CA56112021EDB51F0052CF38 /* ChangePwdController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56111F21EDB51F0052CF38 /* ChangePwdController.m */; };
+		CA56112421EDD0770052CF38 /* MyOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56112321EDD0770052CF38 /* MyOrderModel.m */; };
+		CA56112821EDDACF0052CF38 /* MyMonitorListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56112721EDDACF0052CF38 /* MyMonitorListModel.m */; };
+		CA56113421EDE45F0052CF38 /* SettingFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56113221EDE45F0052CF38 /* SettingFooterView.m */; };
+		CA56113521EDE45F0052CF38 /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56113321EDE45F0052CF38 /* SettingCell.m */; };
 		CA5E005921DDE05E0040ABE2 /* NSNumber+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFB721DDE05D0040ABE2 /* NSNumber+StringValue.m */; };
 		CA5E005A21DDE05E0040ABE2 /* UIColor+Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFB921DDE05D0040ABE2 /* UIColor+Tool.m */; };
 		CA5E005B21DDE05E0040ABE2 /* UIImage+Wechat.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFBB21DDE05D0040ABE2 /* UIImage+Wechat.m */; };
@@ -269,8 +275,6 @@
 		CADD60D621E74A5D00EB01CD /* FogotPwdController.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60D521E74A5D00EB01CD /* FogotPwdController.m */; };
 		CADD60D921E75F5A00EB01CD /* CreditInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60D821E75F5A00EB01CD /* CreditInfoCell.m */; };
 		CADD60DC21E775D500EB01CD /* MonitorDynamicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60DB21E775D500EB01CD /* MonitorDynamicCell.m */; };
-		CADD60E021E833E500EB01CD /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60DF21E833E500EB01CD /* SettingCell.m */; };
-		CADD60E321E8364400EB01CD /* SettingFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60E221E8364400EB01CD /* SettingFooterView.m */; };
 		CADD60E621E838FD00EB01CD /* MsgSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60E521E838FD00EB01CD /* MsgSettingController.m */; };
 		CADD60E921E87E8E00EB01CD /* MonitorDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60E821E87E8E00EB01CD /* MonitorDetailController.m */; };
 		CADD60EC21E884DD00EB01CD /* MonitorDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60EB21E884DD00EB01CD /* MonitorDetailCell.m */; };
@@ -536,6 +540,18 @@
 		CA56111021ECBC7B0052CF38 /* MonitorDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonitorDetailModel.m; sourceTree = "<group>"; };
 		CA56111521ECBE380052CF38 /* MDSectionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDSectionModel.h; sourceTree = "<group>"; };
 		CA56111621ECBE380052CF38 /* MDSectionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDSectionModel.m; sourceTree = "<group>"; };
+		CA56111B21ED84920052CF38 /* UIButton+Verification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Verification.m"; sourceTree = "<group>"; };
+		CA56111C21ED84930052CF38 /* UIButton+Verification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Verification.h"; sourceTree = "<group>"; };
+		CA56111E21EDB51F0052CF38 /* ChangePwdController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangePwdController.h; sourceTree = "<group>"; };
+		CA56111F21EDB51F0052CF38 /* ChangePwdController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangePwdController.m; sourceTree = "<group>"; };
+		CA56112221EDD0770052CF38 /* MyOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyOrderModel.h; sourceTree = "<group>"; };
+		CA56112321EDD0770052CF38 /* MyOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyOrderModel.m; sourceTree = "<group>"; };
+		CA56112621EDDACF0052CF38 /* MyMonitorListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyMonitorListModel.h; sourceTree = "<group>"; };
+		CA56112721EDDACF0052CF38 /* MyMonitorListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyMonitorListModel.m; sourceTree = "<group>"; };
+		CA56113021EDE45E0052CF38 /* SettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingCell.h; sourceTree = "<group>"; };
+		CA56113121EDE45E0052CF38 /* SettingFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingFooterView.h; sourceTree = "<group>"; };
+		CA56113221EDE45F0052CF38 /* SettingFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingFooterView.m; sourceTree = "<group>"; };
+		CA56113321EDE45F0052CF38 /* SettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingCell.m; sourceTree = "<group>"; };
 		CA5E000021DDE05D0040ABE2 /* NSNumber+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Zirkfied.h"; sourceTree = "<group>"; };
 		CA5E000121DDE05D0040ABE2 /* NSNumber+Zirkfied.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Zirkfied.m"; sourceTree = "<group>"; };
 		CA5E000221DDE05D0040ABE2 /* NSString+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Zirkfied.h"; sourceTree = "<group>"; };
@@ -811,10 +827,6 @@
 		CADD60D821E75F5A00EB01CD /* CreditInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreditInfoCell.m; sourceTree = "<group>"; };
 		CADD60DA21E775D500EB01CD /* MonitorDynamicCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MonitorDynamicCell.h; sourceTree = "<group>"; };
 		CADD60DB21E775D500EB01CD /* MonitorDynamicCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonitorDynamicCell.m; sourceTree = "<group>"; };
-		CADD60DE21E833E500EB01CD /* SettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SettingCell.h; path = "CreditInquiry/App/我的/设置/SettingCell.h"; sourceTree = SOURCE_ROOT; };
-		CADD60DF21E833E500EB01CD /* SettingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SettingCell.m; path = "CreditInquiry/App/我的/设置/SettingCell.m"; sourceTree = SOURCE_ROOT; };
-		CADD60E121E8364400EB01CD /* SettingFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SettingFooterView.h; path = "CreditInquiry/App/我的/设置/SettingFooterView.h"; sourceTree = SOURCE_ROOT; };
-		CADD60E221E8364400EB01CD /* SettingFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SettingFooterView.m; path = "CreditInquiry/App/我的/设置/SettingFooterView.m"; sourceTree = SOURCE_ROOT; };
 		CADD60E421E838FD00EB01CD /* MsgSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MsgSettingController.h; sourceTree = "<group>"; };
 		CADD60E521E838FD00EB01CD /* MsgSettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MsgSettingController.m; sourceTree = "<group>"; };
 		CADD60E721E87E8E00EB01CD /* MonitorDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MonitorDetailController.h; sourceTree = "<group>"; };
@@ -1218,6 +1230,35 @@
 			children = (
 				CA46605921EC6460005C630F /* GetPhoto.h */,
 				CA46605821EC6460005C630F /* GetPhoto.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		CA56112121EDD0280052CF38 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CA56112221EDD0770052CF38 /* MyOrderModel.h */,
+				CA56112321EDD0770052CF38 /* MyOrderModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CA56112521EDDA470052CF38 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				CA56112621EDDACF0052CF38 /* MyMonitorListModel.h */,
+				CA56112721EDDACF0052CF38 /* MyMonitorListModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		CA56112921EDE3600052CF38 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				CA56113021EDE45E0052CF38 /* SettingCell.h */,
+				CA56113321EDE45F0052CF38 /* SettingCell.m */,
+				CA56113121EDE45E0052CF38 /* SettingFooterView.h */,
+				CA56113221EDE45F0052CF38 /* SettingFooterView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1657,6 +1698,8 @@
 		CA5EFFB521DDE05D0040ABE2 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				CA56111C21ED84930052CF38 /* UIButton+Verification.h */,
+				CA56111B21ED84920052CF38 /* UIButton+Verification.m */,
 				CA5EFFB621DDE05D0040ABE2 /* NSNumber+StringValue.h */,
 				CA5EFFB721DDE05D0040ABE2 /* NSNumber+StringValue.m */,
 				CA5EFFB821DDE05D0040ABE2 /* UIColor+Tool.h */,
@@ -1888,6 +1931,7 @@
 		CADD609321E5DF0800EB01CD /* 我的订单 */ = {
 			isa = PBXGroup;
 			children = (
+				CA56112121EDD0280052CF38 /* Model */,
 				CADD609421E5DF4100EB01CD /* view */,
 				CADD609621E5DF7D00EB01CD /* MyOrderController.h */,
 				CADD609721E5DF7D00EB01CD /* MyOrderController.m */,
@@ -1907,6 +1951,7 @@
 		CADD609F21E6199F00EB01CD /* 我的监控 */ = {
 			isa = PBXGroup;
 			children = (
+				CA56112521EDDA470052CF38 /* model */,
 				CADD60A321E61EBE00EB01CD /* view */,
 				CADD60A021E61EB500EB01CD /* MyMonitorListController.h */,
 				CADD60A121E61EB500EB01CD /* MyMonitorListController.m */,
@@ -1926,7 +1971,7 @@
 		CADD60A721E6268300EB01CD /* 设置 */ = {
 			isa = PBXGroup;
 			children = (
-				CADD60DD21E8329B00EB01CD /* view */,
+				CA56112921EDE3600052CF38 /* view */,
 				CADD60A821E626AB00EB01CD /* SettingViewController.h */,
 				CADD60A921E626AB00EB01CD /* SettingViewController.m */,
 				CADD60E421E838FD00EB01CD /* MsgSettingController.h */,
@@ -1985,20 +2030,10 @@
 				CADD60CC21E72D7F00EB01CD /* ModifyPhoneController.m */,
 				CADD60CE21E72D9400EB01CD /* ModifyInfoController.h */,
 				CADD60CF21E72D9400EB01CD /* ModifyInfoController.m */,
+				CA56111E21EDB51F0052CF38 /* ChangePwdController.h */,
+				CA56111F21EDB51F0052CF38 /* ChangePwdController.m */,
 			);
 			path = "个人设置";
-			sourceTree = "<group>";
-		};
-		CADD60DD21E8329B00EB01CD /* view */ = {
-			isa = PBXGroup;
-			children = (
-				CADD60DE21E833E500EB01CD /* SettingCell.h */,
-				CADD60DF21E833E500EB01CD /* SettingCell.m */,
-				CADD60E121E8364400EB01CD /* SettingFooterView.h */,
-				CADD60E221E8364400EB01CD /* SettingFooterView.m */,
-			);
-			name = view;
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		E4C77B2863F73FC84D3FFC40 /* Frameworks */ = {
@@ -2140,7 +2175,7 @@
 				CADD60CD21E72D7F00EB01CD /* ModifyPhoneController.m in Sources */,
 				CA5E005921DDE05E0040ABE2 /* NSNumber+StringValue.m in Sources */,
 				CA5E006821DDE05E0040ABE2 /* DLPanableWebView.m in Sources */,
-				CADD60E021E833E500EB01CD /* SettingCell.m in Sources */,
+				CA56111D21ED84930052CF38 /* UIButton+Verification.m in Sources */,
 				79D34E8B21E05DA100B1CB32 /* MyAlertView.m in Sources */,
 				793D1B6821DF699500C29908 /* CompanyDetailModel.m in Sources */,
 				79D34EBB21E05E1F00B1CB32 /* RiskSegmentView.m in Sources */,
@@ -2170,6 +2205,7 @@
 				79D34EE621E0616E00B1CB32 /* FilterSectionHeader.m in Sources */,
 				79D34EEA21E0620E00B1CB32 /* NearSearchCondition.m in Sources */,
 				793D1B5F21DF693600C29908 /* StockCell.m in Sources */,
+				CA56113521EDE45F0052CF38 /* SettingCell.m in Sources */,
 				CA5E00AD21DDE6760040ABE2 /* MonitorViewController.m in Sources */,
 				CA5E015621E433E30040ABE2 /* MonitorFilterView.m in Sources */,
 				799F797621E825A0000DBB88 /* ShowMessageView.m in Sources */,
@@ -2203,6 +2239,7 @@
 				CADD60D921E75F5A00EB01CD /* CreditInfoCell.m in Sources */,
 				CA5E008821DDE05E0040ABE2 /* ZFCirqueChart.m in Sources */,
 				CADD60BC21E6E25900EB01CD /* ObjectionTypeCell.m in Sources */,
+				CA56112821EDDACF0052CF38 /* MyMonitorListModel.m in Sources */,
 				CA5EFFB221DDE0390040ABE2 /* BasicWebViewController.m in Sources */,
 				79D34F2721E347AE00B1CB32 /* DetailMapCell.m in Sources */,
 				CA5E007921DDE05E0040ABE2 /* NSString+Zirkfied.m in Sources */,
@@ -2253,6 +2290,7 @@
 				799F798221EC1B22000DBB88 /* HodelButton.m in Sources */,
 				CADD607921E4B6AC00EB01CD /* CreditScoreController.m in Sources */,
 				79D34F1521E0836100B1CB32 /* HomeSectionHeader.m in Sources */,
+				CA56113421EDE45F0052CF38 /* SettingFooterView.m in Sources */,
 				CADD605D21E482CE00EB01CD /* EditCompanyInfoController.m in Sources */,
 				CADD60C521E723CF00EB01CD /* ObjectionFooterView.m in Sources */,
 				CADD609221E588EC00EB01CD /* MePlainCell.m in Sources */,
@@ -2308,7 +2346,6 @@
 				793D1B1E21DF67E000C29908 /* CompanyDetailController.m in Sources */,
 				CA5E008D21DDE05E0040ABE2 /* ZFHorizontalBarChart.m in Sources */,
 				CADD607F21E4BA1F00EB01CD /* CreditReportController.m in Sources */,
-				CADD60E321E8364400EB01CD /* SettingFooterView.m in Sources */,
 				CA5E013421E433890040ABE2 /* CreditChartLineCell.m in Sources */,
 				79D34EB821E05E1F00B1CB32 /* JobCell.m in Sources */,
 				793D1C8121E0586200C29908 /* OweTaxModel.m in Sources */,
@@ -2350,6 +2387,7 @@
 				793D1B3521DF67E000C29908 /* ZhaoBiaoController.m in Sources */,
 				79D34EBC21E05E1F00B1CB32 /* SalaryQueryCell.m in Sources */,
 				79D34EE721E0616E00B1CB32 /* FilterPlainSeionHeader.m in Sources */,
+				CA56112421EDD0770052CF38 /* MyOrderModel.m in Sources */,
 				CADD60B921E6E22300EB01CD /* ObjectionInfoCell.m in Sources */,
 				793D1B2621DF67E000C29908 /* InvestController.m in Sources */,
 				79D34EB521E05E1F00B1CB32 /* ZhaoBiaoCell.m in Sources */,
@@ -2386,6 +2424,7 @@
 				CA56111121ECBC7B0052CF38 /* MonitorDetailModel.m in Sources */,
 				CADD60BF21E6E27200EB01CD /* ObjectionEntCell.m in Sources */,
 				CADD60D321E73CB100EB01CD /* ModifyInfoCell.m in Sources */,
+				CA56112021EDB51F0052CF38 /* ChangePwdController.m in Sources */,
 				79D34F2121E3267200B1CB32 /* DetailHolderCell.m in Sources */,
 				793D1C7D21E0585D00C29908 /* TrademarkModel.m in Sources */,
 				793D1B3E21DF684900C29908 /* ErrorModel.m in Sources */,

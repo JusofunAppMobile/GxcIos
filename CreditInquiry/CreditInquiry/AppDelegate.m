@@ -28,6 +28,11 @@
 
 
 - (void)setTabControllers{
+    NSArray *array = [User findAll];
+    if(array.count>0){
+        User *user ;
+        user = [array objectAtIndex:0];
+    }
     
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     self.tabBarController=[[BasicTabBarController alloc]init];

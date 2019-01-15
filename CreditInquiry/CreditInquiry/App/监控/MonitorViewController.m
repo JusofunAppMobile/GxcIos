@@ -29,7 +29,7 @@ static NSString *CELLID = @"MonitorDynamicCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    _page = 1;
     [self initView];
     [self loadData:YES];
 }
@@ -81,9 +81,8 @@ static NSString *CELLID = @"MonitorDynamicCell";
         [MBProgressHUD showMessag:@"" toView:self.view];
     }
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:@"7" forKey:@"userId"];//test
-    [params setObject:@"1" forKey:@"pageIndex"];//test
-    [params setObject:@"10" forKey:@"pageSize"];//test
+    [params setObject:KUSER.userId forKey:@"userId"];
+    [params setObject:@(_page) forKey:@"pageIndex"];
 
     [RequestManager postWithURLString:KGetMonitorDynamic parameters:params success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:YES];
@@ -95,9 +94,11 @@ static NSString *CELLID = @"MonitorDynamicCell";
             [_tableview reloadData];
             _page++;
             _moreData = _datalist.count< [responseObject[@"total"] intValue];
+            [self endRefresh];
         }
     } failure:^(NSError *error) {
         [MBProgressHUD hideHudToView:self.view animated:YES];
+        [self endRefresh];
     }];
 }
 #pragma mark - UITableViewDataSource

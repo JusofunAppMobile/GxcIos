@@ -58,13 +58,31 @@
 //监控动态
 #define KGetMonitorDynamic @""HOSTURL"/app/MonitoringDynamics/GetmonitoringDynamics"
 
+
 //企业认证信息接口
 #define KCertification @""HOSTURL"/app/Company/subCompanyMsg"
 
 //  查询企业认证信息接口
 #define KGetCertification @""HOSTURL"/app/Company/getCompanyMsg"
 
+//上传图片
+#define KUploadImage @""HOSTURL"/app/sys/fileupload"
 
+//修改手机号
+#define KChangePhone @""HOSTURL"/app/mineManager/upTelphone"
+
+//修改个人信息
+#define KChangeUserInfo @""HOSTURL"/app/mineManager/upUserInfo"
+
+
+//我的订单
+#define KMyOrderList @""HOSTURL"/app/mineManager/OrderList"
+
+//我的监控列表
+#define KMyMonitorList @""HOSTURL"/app/mineManager/monitorList"
+
+//我的收藏列表
+#define KMyCollectionList @""HOSTURL"/app/mineManager/CollectionList"
 
 
 
