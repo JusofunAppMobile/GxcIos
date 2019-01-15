@@ -7,7 +7,7 @@
 //
 
 #import "MyOrderReportCell.h"
-
+#import "MyOrderModel.h"
 @interface MyOrderReportCell ()
 @property (nonatomic ,strong) UILabel *titleLab;
 @property (nonatomic ,strong) UILabel *statusLab;
@@ -68,7 +68,6 @@
             }];
             view.font = KFont(13);
             view.textColor = KHexRGB(0x303030);
-            view.text = @"小米科技有限责任公司";
             view;
         });
         
@@ -80,7 +79,6 @@
                 make.right.mas_equalTo(-15);
             }];
             view.font = KBlodFont(12);
-            view.text = @"￥233";
             view.textColor = KHexRGB(0xe00018);
             view;
         });
@@ -93,7 +91,7 @@
                 make.top.mas_equalTo(_nameLab.mas_bottom).offset(10);
             }];
             view.font = KFont(13);
-            view.text = @"订单编号：1233321312321545";
+            view.text = @"订单编号：";
             view.textColor = KHexRGB(0x878787);
             view;
         });
@@ -106,7 +104,7 @@
                 make.top.mas_equalTo(_orderLab.mas_bottom).offset(10);
             }];
             view.font = KFont(13);
-            view.text = @"购买时间：2018-12-31 14:21:20";
+            view.text = @"购买时间：";
             view.textColor = KHexRGB(0x878787);
             view;
         });
@@ -119,7 +117,6 @@
                 make.top.mas_equalTo(_dateLab.mas_bottom).offset(10);
             }];
             view.font = KFont(13);
-            view.text = @"接收邮箱：sadsa222@sina.com";
             view.textColor = KHexRGB(0x878787);
             view;
         });
@@ -133,7 +130,7 @@
                 make.height.mas_equalTo(14);
             }];
             view.font = KFont(13);
-            view.text = @"报告格式：PDF";
+            view.text = @"报告格式：";
             view.textColor = KHexRGB(0x878787);
             view;
         });
@@ -193,19 +190,23 @@
     return self;
 }
 
-- (void)setType:(NSInteger)type{
-    _type = type;
-    if (type == 1) {
-        _statusLab.text = @"已生成";
-        _titleLab.text = @"VIP会员服务";
-        _orderLab.attributedText = [self getAttibuteForText:@"订单编号：1233321312321545"];
-        _dateLab.attributedText = [self getAttibuteForText:@"购买时间：2018-12-31 14:21:20"];
-        _emailLab.attributedText = [self getAttibuteForText:@"服务时长：12个月"];
-
+- (void)setModel:(MyOrderModel *)model{
+    _model = model;
+    
+    _titleLab.text = model.title;
+    _nameLab.text = model.name;
+    _priceLab.text = [NSString stringWithFormat:@"￥%@",model.money];//test
+    _orderLab.attributedText = [self getAttibuteForText:[NSString stringWithFormat:@"订单编号：%@",model.no]];
+    _dateLab.attributedText = [self getAttibuteForText:[NSString stringWithFormat:@"购买时间：%@",model.time]];
+    
+    if ([model.type intValue] == 1) {
+        _statusLab.text = model.status.intValue == 0?@"未生成":@"已生成";
+        _emailLab.attributedText = [self getAttibuteForText:[NSString stringWithFormat:@"服务时长：%@",model.duration]];
+        
         _formatLab.hidden = YES;
         _footerBg.hidden = YES;
         _line2.hidden = YES;
-       
+        
         [_formatLab mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(0);
             make.top.mas_equalTo(_emailLab.mas_bottom).offset(0);
@@ -215,17 +216,14 @@
         }];
         
     }else{
-        _statusLab.text = @"已支付";
-        _titleLab.text = @"企业信用报告-专业版";
-        _orderLab.attributedText = [self getAttibuteForText:@"订单编号：1233321312321545"];
-        _dateLab.attributedText = [self getAttibuteForText:@"购买时间：2018-12-31 14:21:20"];
-        _emailLab.attributedText = [self getAttibuteForText:@"接收邮箱：sadsa222@sina.com"];
-        _formatLab.attributedText = [self getAttibuteForText:@"订单编号：1233321312321545"];
-
+        _statusLab.text = model.orderState.intValue == 0?@"未支付":@"已支付";//test 0,1?
+        _emailLab.attributedText = [self getAttibuteForText:[NSString stringWithFormat:@"接收邮箱：%@",model.email]];
+        _formatLab.attributedText = [self getAttibuteForText:[NSString stringWithFormat:@"报告格式：%@",model.format]];
+        
         _formatLab.hidden = NO;
         _footerBg.hidden = NO;
         _line2.hidden = NO;
-       
+        
         [_formatLab mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(14);
             make.top.mas_equalTo(_emailLab.mas_bottom).offset(10);

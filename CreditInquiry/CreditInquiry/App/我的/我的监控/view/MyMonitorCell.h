@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class MyMonitorListModel;
 @interface MyMonitorCell : UITableViewCell
+@property (nonatomic ,strong) MyMonitorListModel *model;
 
 @end
 

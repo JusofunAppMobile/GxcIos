@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class MyOrderModel;
 @interface MyOrderReportCell : UITableViewCell
-@property (nonatomic ,assign) NSInteger type;
+@property (nonatomic ,strong) MyOrderModel *model;
 @end
 
 NS_ASSUME_NONNULL_END

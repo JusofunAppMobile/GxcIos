@@ -70,8 +70,30 @@ static NSString *CellID = @"SettingCell";
         if (indexPath.row == 0) {
             MsgSettingController *vc = [MsgSettingController new];
             [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            [self clearCache];
         }
     }
+}
+
+//清除缓存
+- (void)clearCache{//test
+    KWeakSelf
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [[NSFileManager defaultManager]removeItemAtPath:[weakSelf getPhotoCachePath] error:nil];
+        [[SDImageCache sharedImageCache]clearDiskOnCompletion:^{
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+            [weakSelf.tableview reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        }];
+    });
+}
+
+//相册选取路径
+- (NSString *)getPhotoCachePath{
+    NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentPath = [path objectAtIndex:0];
+    NSString *imageDocPath = [documentPath stringByAppendingPathComponent:@"ImageFile"];
+    return imageDocPath;
 }
 
 #pragma mark - lazy load

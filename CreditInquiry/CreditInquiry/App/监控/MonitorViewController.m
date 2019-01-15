@@ -81,9 +81,8 @@ static NSString *CELLID = @"MonitorDynamicCell";
         [MBProgressHUD showMessag:@"" toView:self.view];
     }
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:@"7" forKey:@"userId"];//test
-    [params setObject:@"1" forKey:@"pageIndex"];//test
-    [params setObject:@"10" forKey:@"pageSize"];//test
+    [params setObject:KUSER.userId forKey:@"userId"];
+    [params setObject:@(_page) forKey:@"pageIndex"];
 
     [RequestManager postWithURLString:KGetMonitorDynamic parameters:params success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:YES];
