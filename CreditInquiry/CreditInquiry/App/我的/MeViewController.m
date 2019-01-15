@@ -115,7 +115,7 @@ static NSString *PlainID = @"MePlainCell";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0) {
         
-        if (USER.userID.length) {
+        if (KUSER.userId.length) {
             PersonalSettingController *vc = [PersonalSettingController new];
             [self.navigationController pushViewController:vc animated:YES];
         }else{
