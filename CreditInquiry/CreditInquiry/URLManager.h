@@ -29,9 +29,16 @@
 #define KIndustryInformation   @""HOSTURL"/app/Home/IndustryInformation"
 
 //企业风险分析
-#define KnterpriseRiskAnalysis   @""HOSTURL"/app/Home/EnterpriseRiskAnalysis"
+#define KeEnterpriseRiskAnalysis   @""HOSTURL"/app/Home/EnterpriseRiskAnalysis"
 
+//企业信息
+#define KGetCorporateInfo   @""HOSTURL"/app/CorporateInfo/GetCorporateInfo"
 
+//   企业收藏/取消收藏
+#define  KCollection @""HOSTURL"/app/mineManager/AddOrCancelCollection"
+
+//  企业添加/取消监控
+#define  KMonitor @""HOSTURL"/app/MonitoringDynamics/AddOrCancelMonitor"
 
 
 //登录
@@ -48,6 +55,21 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////
+
 //企业详情
 #define GetCompanyDetail  [NSString stringWithFormat:@"%@%@",QXBHOSTURL,@"/api/entdetail/GetCompanyDetails_beta"]
 //企业图谱
@@ -59,8 +81,7 @@
 //对外投资和分支机构
 #define GetEntBranchOrInvesment  [NSString stringWithFormat:@"%@%@",QXBHOSTURL,@"/api/entdetail/GetEntBranchOrInvesment"]
 
-//关注公司
-#define  UpDateAttend [NSString stringWithFormat:@"%@%@",QXBHOSTURL,@"/api/Attend/UpDateAttend"]
+
 
 //获取热词
 #define GetHotKey  [NSString stringWithFormat:@"%@%@",QXBHOSTURL,@"/api/Tools/GetHotSearchWord"]

@@ -790,12 +790,12 @@
     
     imageView.tag = KFoldBtnTag *100;
     imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [view addSubview:imageView];
+    //[view addSubview:imageView];
     
     UIButton *phoneFoldBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     phoneFoldBtn.frame = view.frame;
     
-    [phoneFoldBtn addTarget:self action:@selector(foldAction:) forControlEvents:UIControlEventTouchUpInside];
+    //[phoneFoldBtn addTarget:self action:@selector(foldAction:) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:phoneFoldBtn];
     
     UIView *lineView = [[UIView alloc]initWithFrame:KFrame(0, kongView.maxY +44, KDeviceW, 1)];

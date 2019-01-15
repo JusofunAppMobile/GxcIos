@@ -35,13 +35,13 @@
         label.layer.cornerRadius = 2;
         label.layer.borderColor = KHexRGB(0xEF9295).CGColor;
         label.layer.borderWidth = 1;
-       // label.textAlignment = NSTextAlignmentCenter;
+        label.textAlignment = NSTextAlignmentCenter;
         [self addSubview:label];
         
 
         label2 = [[UILabel alloc]initWithFrame:KFrame(imageView.maxX + 10, 5+30, KDeviceW - 30 -imageView.width - label.width -20, 15)];
     
-        label2.textAlignment = NSTextAlignmentCenter;
+        //label2.textAlignment = NSTextAlignmentCenter;
         [self addSubview:label2];
         
         self.selfRiskNum = @"0";
