@@ -26,6 +26,7 @@
     [self setBlankBackButton];
     [self drawTableView];
 
+    [self loadData];
 }
 
 -(void)loadData
@@ -87,11 +88,27 @@
     return cell;
 }
 
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return nil;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return KDeviceW*90/375;
+}
+
+
+-(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    return nil;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return CGFLOAT_MIN;
+}
 
 -(void)drawTableView
 {
-    
-   
     backTableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     backTableView.backgroundColor = [UIColor clearColor];
     backTableView.delegate = self;
@@ -104,7 +121,7 @@
     backTableView.estimatedSectionFooterHeight = 0;
     [self.view addSubview:backTableView];
     [backTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(KNavigationBarHeight);
+        make.top.mas_equalTo(self.view);
         make.left.mas_equalTo(0);
         make.right.mas_equalTo(self.view);
         make.bottom.mas_equalTo(self.view.mas_bottom);
