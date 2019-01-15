@@ -26,8 +26,7 @@
     //self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 
--(void)showLoadDataAnimation{}
--(void)hideLoadDataAnimation{}
+
 
 -(void)setNavigationBarTitle:(NSString *)title
 {
@@ -96,7 +95,19 @@
 
 - (void)showNetFailViewWithFrame:(CGRect)frame{
     
-  
+    [self hideLoadDataAnimation];
+    
+    if (CGRectEqualToRect(CGRectZero, frame)) {
+        frame = self.view.bounds;
+    }
+    if (_netFailView) {
+        [_netFailView removeFromSuperview];
+    }else{
+        _netFailView = [[NetworkFailedView alloc]initWithFrame:frame];
+        _netFailView.delegate = self;
+    }
+    [self.view addSubview:_netFailView];
+    [self.view bringSubviewToFront:_netFailView];
 }
 
 
@@ -105,9 +116,11 @@
  */
 
 - (void)hideNetFailView{
+     [_netFailView removeFromSuperview];
 }
 
 - (void)networkReload{
+     [self abnormalViewReload];
 }
 
 /**
@@ -119,6 +132,36 @@
 }
 
 
+//加载数据动画
+-(void)showLoadDataAnimation
+{
+    [self hideNetFailView];
+    [self.view addSubview:self.loadingAnimationView];
+    [self.view bringSubviewToFront:self.loadingAnimationView];
+    [self.loadingAnimationView startAnimation];
+}
+
+
+-(void)hideLoadDataAnimation
+{
+    [_loadingAnimationView stopAnimation];
+    [_loadingAnimationView removeFromSuperview];
+}
+
+-(LoadingAnimatedView *)loadingAnimationView
+{
+    if (!_loadingAnimationView) {
+        CGFloat width = KDeviceW;
+        CGFloat hight = KDeviceH ;
+        if (width > hight) {
+            _loadingAnimationView = [[LoadingAnimatedView alloc]initWithFrame:CGRectMake(0, 0, hight, width)];
+        }else{
+            _loadingAnimationView = [[LoadingAnimatedView alloc]initWithFrame:CGRectMake(0, 0, width, hight)];
+        }
+    }
+    
+    return _loadingAnimationView;
+}
 
 
 

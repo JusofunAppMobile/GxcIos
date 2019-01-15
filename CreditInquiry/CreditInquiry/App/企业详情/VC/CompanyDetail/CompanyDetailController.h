@@ -19,7 +19,7 @@
 #import "BackgroundController.h"
 #import "OperatingController.h"
 #import "ReportController.h"
-
+#import "LoginController.h"
 #import "AddressBookModel.h"
 @interface CompanyDetailController : BasicViewController<MyAlertViewDelegate,DetailViewDelegate>
 

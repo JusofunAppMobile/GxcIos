@@ -88,6 +88,9 @@
 
 //用户信息修改成功
 #define KModifyUserInfoSuccessNoti @"KModifyUserInfoSuccessNoti"
+//时间纠偏
+#define KCurrentTimeToServerOffset @"CurrentTimeToServerOffset"
+
 
 //////百度地图  com.jusfoun.EnterpriseInquiry1
 #define BaiDu_Appkey      @"ZDGjTGHV0mmAi1jxZCWBBmRHGnvuxnz9"
@@ -133,7 +136,7 @@ typedef NS_ENUM(NSInteger, SearchType) {
     JobType = 7,//招聘
     AddressBookType = 8,//企业通讯录
     PenetrationType = 9,//股东穿透
-    RiskAnalyze,//d风险分析
+    RiskAnalyze,//风险分析
     SeekRelation //查关系
 };
 

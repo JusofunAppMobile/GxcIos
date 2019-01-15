@@ -52,6 +52,7 @@
     [self setBackBtn:@"whiteBack"];
     [self setRightBarBtn];
     [self loadCompanyInfo];
+    [self loadHoldeInfo];
 }
 
 
@@ -163,6 +164,101 @@
   
     [taskArray addObject:task];
 }
+#pragma mark - 股东信息等
+-(void)loadHoldeInfo
+{
+   
+    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    [paraDic setObject:self.companyId forKey:@"companyId"];
+    [paraDic setObject:self.companyName forKey:@"companyName"];
+    [paraDic setObject:KUSER.userId forKey:@"userId"];
+    NSString* urlstr = [KGetCorporateInfo stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    KWeakSelf;
+    NSURLSessionDataTask*task = [RequestManager postWithURLString:urlstr parameters:paraDic success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+       
+        _reportTypeList = [ReportTypeModel mj_objectArrayWithKeyValuesArray:responseObject[@"reportTypeList"]];//test
+        
+        
+        
+        NSMutableDictionary *tmpDic = [NSMutableDictionary dictionaryWithDictionary:responseObject];
+        
+        NSArray *tmpArray = [responseObject objectForKey:@"subclassMenu"];
+        NSMutableArray *saveArray = [NSMutableArray arrayWithCapacity:1];
+        
+        for(NSDictionary *dic in tmpArray)
+        {
+            int type = [[dic objectForKey:@"type"] intValue];
+            for(NSString *detailType in KCompanyDetailGridType)
+            {
+                if(type == [detailType intValue])
+                {
+                    [saveArray addObject:dic];
+                    break;
+                }
+            }
+        }
+        [tmpDic setObject:saveArray forKey:@"subclassMenu"];
+        
+        
+        detailModel = [CompanyDetailModel mj_objectWithKeyValues:tmpDic];
+        
+        
+        if([detailModel.result intValue] == 0)
+        {
+            [weakSelf reloadOhterHeadWithtype:HeaderRiskType hud:NO];
+            [weakSelf reloadOhterHeadWithtype:HeaderManageType hud:NO];
+            [weakSelf reloadOhterHeadWithtype:HeaderMoneyType hud:NO];
+            if([detailModel.hasCompanyData intValue] == 1)//没有数据
+            {
+                SearchResultController *SearchVc = [[SearchResultController alloc]init];
+                SearchVc.btnTitile = self.companyName;
+                SearchVc.searchType = BlurryType;
+                SearchVc.isFromNoData = YES;
+                //SearchVc.delegate = self;
+                [self.navigationController pushViewController:SearchVc animated:YES];
+            }
+            else//正常
+            {
+                focuButton.hidden = NO;
+                shareBarButton.hidden = NO;
+                itemList = [NSMutableArray arrayWithArray:detailModel.subclassMenu];
+                //[infoView reloadInfoView:detailModel];
+                // [self reloadCompanyView];
+                detailView.detailModel = detailModel;
+                if([detailModel.isattention isEqualToString:@"false"]||[detailModel.isattention isEqualToString:@"-"] ||[detailModel.isattention isEqualToString:@""] )
+                {
+                    [self setFoucsBtn:NO];
+                }
+                else
+                {
+                    [self setFoucsBtn:YES];
+                }
+                
+            }
+            
+        }
+        else
+        {
+            focuButton.hidden = YES;
+            shareBarButton.hidden = YES;
+            [self showNetFailViewWithFrame:self.view.bounds];
+            [self setBackBtn:@""];
+        }
+        
+    } failure:^(NSError *error) {
+        focuButton.hidden = YES;
+        shareBarButton.hidden = YES;
+        [self showNetFailViewWithFrame:self.view.bounds];
+        [self setBackBtn:@""];
+    }];
+    
+    
+    [taskArray addObject:task];
+}
+
+
 
 #pragma mark - 请求风险信息/经营状态/无形资产
 -(void)reloadOhterHeadWithtype:(Headerype)type hud:(BOOL)isHud
@@ -256,11 +352,9 @@
 #pragma mark - 关注公司
 -(void)focuCompany:(UIButton*)sender
 {
-    //[MobClick event:@"Detail57"];//企业详情页－关注按钮点击数
-    //[[BaiduMobStat defaultStat] logEvent:@"Detail57" eventLabel:@"企业详情页－关注按钮点击数"];
-
+   //（0：取消收藏  1：添加收藏）
     NSString * type = @"1";
-    
+    KBolckSelf;
     if(sender.tag == 45678)//关注这家企业
     {
         
@@ -271,11 +365,11 @@
         else
         {
             
-//            LoginController *view = [[LoginController alloc]init];
-//            view.loginSuccessBlock = ^{
-//                [blockSelf focuCompany:focuButton];
-//            };
-//            [self.navigationController pushViewController:view animated:YES];
+            LoginController *view = [[LoginController alloc]init];
+            view.loginSuccessBlock = ^{
+                [blockSelf focuCompany:focuButton];
+            };
+            [self.navigationController pushViewController:view animated:YES];
             
             return;
         }
@@ -283,28 +377,26 @@
     else //取消关注企业
     {
         if (KUSER.userId.length>0) {
-            type = @"2";
+            type = @"0";
         }else
         {
-//            LoginController *view = [[LoginController alloc]init];
-//            view.loginSuccessBlock = ^{
-//                [blockSelf focuCompany:focuButton];
-//            };
-//            [self.navigationController pushViewController:view animated:YES];
-            
-            
+            LoginController *view = [[LoginController alloc]init];
+            view.loginSuccessBlock = ^{
+                [blockSelf focuCompany:focuButton];
+            };
+            [self.navigationController pushViewController:view animated:YES];
             return;
         }
         
     }
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
     [paraDic setObject:detailModel.companyid forKey:@"companyid"];
-    [paraDic setObject:type forKey:@"type"];
-    [paraDic setObject:KUSER.userId forKey:@"userid"];
-    [paraDic setObject:self.companyName forKey:@"entname"];
+    [paraDic setObject:type forKey:@"monitorType"];
+    [paraDic setObject:KUSER.userId forKey:@"userId"];
+    [paraDic setObject:self.companyName forKey:@"companyname"];
     [MBProgressHUD showMessag:@"" toView:self.view];
-    NSString* urlstr = [UpDateAttend stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSURLSessionDataTask*task = [RequestManager QXBGetWithURLString:urlstr parameters:paraDic success:^(id responseObject) {
+    NSString* urlstr = [KCollection stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURLSessionDataTask*task = [RequestManager postWithURLString:urlstr parameters:paraDic success:^(id responseObject) {
         
         [MBProgressHUD hideHudToView:self.view animated:YES];
         if([[responseObject objectForKey:@"result"] intValue] == 0)
@@ -347,6 +439,83 @@
         
     }];
      [taskArray addObject:task];
+}
+
+
+#pragma mark - 监控 公司
+-(void)monitorCompany:(UIButton*)sender
+{
+    //（0:取消监控  1：添加监控）
+    NSString * type = @"1";
+    KBolckSelf;
+    if([sender.titleLabel.text isEqualToString:@"监控"])//关注这家企业
+    {
+        
+        if(KUSER.userId.length>0)
+        {
+            type = @"1";
+        }
+        else
+        {
+            
+            LoginController *view = [[LoginController alloc]init];
+            view.loginSuccessBlock = ^{
+                [blockSelf focuCompany:focuButton];
+            };
+            [self.navigationController pushViewController:view animated:YES];
+            
+            return;
+        }
+    }
+    else //取消关注企业
+    {
+        if (KUSER.userId.length>0) {
+            type = @"0";
+        }else
+        {
+            LoginController *view = [[LoginController alloc]init];
+            view.loginSuccessBlock = ^{
+                [blockSelf focuCompany:focuButton];
+            };
+            [self.navigationController pushViewController:view animated:YES];
+            return;
+        }
+        
+    }
+    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    [paraDic setObject:detailModel.companyid forKey:@"companyid"];
+    [paraDic setObject:type forKey:@"monitorType"];
+    [paraDic setObject:KUSER.userId forKey:@"userId"];
+    [paraDic setObject:self.companyName forKey:@"companyname"];
+    [MBProgressHUD showMessag:@"" toView:self.view];
+    NSString* urlstr = [KMonitor stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURLSessionDataTask*task = [RequestManager postWithURLString:urlstr parameters:paraDic success:^(id responseObject) {
+        
+        [MBProgressHUD hideHudToView:self.view animated:YES];
+        if([[responseObject objectForKey:@"result"] intValue] == 0)
+        {
+            if(sender.tag == 45678)
+            {
+                [MBProgressHUD showSuccess:@"添加监控成功" toView:self.view];
+                [sender setTitle:@"已监控" forState:UIControlStateNormal];
+            }
+            else
+            {
+                [MBProgressHUD showSuccess:@"取消监控成功" toView:self.view];
+                [sender setTitle:@"监控" forState:UIControlStateNormal];
+            }
+        }
+        else
+        {
+            [MBProgressHUD showError:[responseObject objectForKey:@"msg"] toView:self.view];
+            
+        }
+        
+    } failure:^(NSError *error) {
+        [MBProgressHUD showError:@"请求失败" toView:self.view];
+        
+    }];
+    [taskArray addObject:task];
 }
 
 -(void)abnormalViewReload
@@ -521,11 +690,11 @@
 #pragma mark - 获取报告/纠错/监控/认证
 -(void)checkReport:(UIButton *)button
 {
-    if(button.tag == KDetailOperationTag)
+    if(button.tag == KDetailOperationTag)//获取报告
     {
         
     }
-    else if (button.tag == KDetailOperationTag+1)
+    else if (button.tag == KDetailOperationTag+1)//纠错
     {
         RecoveryErrorViewController *recoveryErrorView = [[RecoveryErrorViewController alloc] init];
         recoveryErrorView.squearList =  itemList;
@@ -533,11 +702,11 @@
         recoveryErrorView.companyName = self.companyName;
         [self.navigationController pushViewController:recoveryErrorView animated:YES];
     }
-    else if (button.tag == KDetailOperationTag+2)
+    else if (button.tag == KDetailOperationTag+2)//监控
     {
-        
+        [self monitorCompany:button];
     }
-    else //if (button.tag == KDetailOperationTag+2)
+    else //if (button.tag == KDetailOperationTag+2)//认证
     {
         ComCertificationController*recoveryErrorView = [[ComCertificationController alloc] init];
         

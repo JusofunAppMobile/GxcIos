@@ -18,7 +18,7 @@
         CGFloat width = (KDeviceW - 30 -20)/3.0;
         
         NSArray *array = @[@"企业图谱",@"关联关系",@"股权结构"];
-        NSArray *imageArray = @[@"企业图谱",@"企业图谱",@"企业图谱"];
+        NSArray *imageArray = @[@"info_pic_tupu",@"info_pic_guanxi",@"info_pic_jiegou"];
         
 
         for(int i = 0;i<imageArray.count;i++)

@@ -10,12 +10,19 @@
 #import "MBProgressHUD+Add.h"
 #import "UINavigationBar+Extention.h"
 #import "ItemModel.h"
+#import "NetworkFailedView.h"
+#import "LoadingAnimatedView.h"
 
-
-@interface BasicViewController : UIViewController
+@interface BasicViewController : UIViewController<NetworkFailedViewDelegate>
 @property(nonatomic,strong)ItemModel*itemModel;
 
+@property(nonatomic,strong)LoadingAnimatedView *loadingAnimationView;
 
+
+/**
+ *  请求加载失败图
+ */
+@property (nonatomic ,strong) NetworkFailedView *netFailView;
 /**
  *  设置title
  *

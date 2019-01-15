@@ -62,6 +62,8 @@
 		793D1C8B21E0588800C29908 /* HotKeyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 793D1C8521E0588800C29908 /* HotKeyModel.m */; };
 		793D1C8D21E0588800C29908 /* NearCompanyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 793D1C8921E0588800C29908 /* NearCompanyModel.m */; };
 		796AE39021ECAF3A00623659 /* NewsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 796AE38F21ECAF3A00623659 /* NewsController.m */; };
+		796AE39321ED824700623659 /* NetworkFailedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 796AE39221ED824700623659 /* NetworkFailedView.m */; };
+		796AE39621ED827600623659 /* LoadingAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 796AE39521ED827600623659 /* LoadingAnimatedView.m */; };
 		799F78E421E5C24C000DBB88 /* SeekRelationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F78E321E5C24C000DBB88 /* SeekRelationController.m */; };
 		799F796721E5E9E1000DBB88 /* RiskVipController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F796621E5E9E1000DBB88 /* RiskVipController.m */; };
 		799F796A21E5EE72000DBB88 /* BuyVipController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F796921E5EE72000DBB88 /* BuyVipController.m */; };
@@ -229,7 +231,6 @@
 		CA5EFF9321DC59B20040ABE2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFF9221DC59B20040ABE2 /* ViewController.m */; };
 		CA5EFF9621DC59B20040ABE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA5EFF9421DC59B20040ABE2 /* Main.storyboard */; };
 		CA5EFF9821DC59BF0040ABE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA5EFF9721DC59BF0040ABE2 /* Assets.xcassets */; };
-		CA5EFF9B21DC59BF0040ABE2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA5EFF9921DC59BF0040ABE2 /* LaunchScreen.storyboard */; };
 		CA5EFF9E21DC59BF0040ABE2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFF9D21DC59BF0040ABE2 /* main.m */; };
 		CA5EFFB121DDE0390040ABE2 /* BasicNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFAE21DDE0380040ABE2 /* BasicNavigationController.m */; };
 		CA5EFFB221DDE0390040ABE2 /* BasicWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFAF21DDE0380040ABE2 /* BasicWebViewController.m */; };
@@ -393,6 +394,10 @@
 		793D1C8921E0588800C29908 /* NearCompanyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearCompanyModel.m; sourceTree = "<group>"; };
 		796AE38E21ECAF3A00623659 /* NewsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewsController.h; sourceTree = "<group>"; };
 		796AE38F21ECAF3A00623659 /* NewsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsController.m; sourceTree = "<group>"; };
+		796AE39121ED824600623659 /* NetworkFailedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkFailedView.h; sourceTree = "<group>"; };
+		796AE39221ED824700623659 /* NetworkFailedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkFailedView.m; sourceTree = "<group>"; };
+		796AE39421ED827600623659 /* LoadingAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingAnimatedView.h; sourceTree = "<group>"; };
+		796AE39521ED827600623659 /* LoadingAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingAnimatedView.m; sourceTree = "<group>"; };
 		799F78E221E5C24C000DBB88 /* SeekRelationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeekRelationController.h; sourceTree = "<group>"; };
 		799F78E321E5C24C000DBB88 /* SeekRelationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SeekRelationController.m; sourceTree = "<group>"; };
 		799F796521E5E9E1000DBB88 /* RiskVipController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RiskVipController.h; sourceTree = "<group>"; };
@@ -667,7 +672,6 @@
 		CA5EFF9221DC59B20040ABE2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		CA5EFF9521DC59B20040ABE2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CA5EFF9721DC59BF0040ABE2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CA5EFF9A21DC59BF0040ABE2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CA5EFF9C21DC59BF0040ABE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA5EFF9D21DC59BF0040ABE2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CA5EFFA721DDDB7A0040ABE2 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -1140,6 +1144,10 @@
 				79D34F0E21E07EE400B1CB32 /* CenterButton.m */,
 				79D34F1021E07F7200B1CB32 /* SearchButton.h */,
 				79D34F1121E07F7200B1CB32 /* SearchButton.m */,
+				796AE39121ED824600623659 /* NetworkFailedView.h */,
+				796AE39221ED824700623659 /* NetworkFailedView.m */,
+				796AE39421ED827600623659 /* LoadingAnimatedView.h */,
+				796AE39521ED827600623659 /* LoadingAnimatedView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1597,7 +1605,6 @@
 				CA5EFF9221DC59B20040ABE2 /* ViewController.m */,
 				CA5EFF9421DC59B20040ABE2 /* Main.storyboard */,
 				CA5EFF9721DC59BF0040ABE2 /* Assets.xcassets */,
-				CA5EFF9921DC59BF0040ABE2 /* LaunchScreen.storyboard */,
 				CA5EFF9C21DC59BF0040ABE2 /* Info.plist */,
 				CA5EFF9D21DC59BF0040ABE2 /* main.m */,
 				CA5EFFA721DDDB7A0040ABE2 /* PrefixHeader.pch */,
@@ -2071,7 +2078,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA5EFF9B21DC59BF0040ABE2 /* LaunchScreen.storyboard in Resources */,
 				CA5E006E21DDE05E0040ABE2 /* MBProgressHUD.bundle in Resources */,
 				CA5EFF9821DC59BF0040ABE2 /* Assets.xcassets in Resources */,
 				CA5EFF9621DC59B20040ABE2 /* Main.storyboard in Resources */,
@@ -2369,8 +2375,10 @@
 				79D34F3021E3682600B1CB32 /* RiskAnalyzeCell.m in Sources */,
 				79D34F1E21E0AF3700B1CB32 /* NewsCell.m in Sources */,
 				CA46605621EC5952005C630F /* CreditPormiseController.m in Sources */,
+				796AE39621ED827600623659 /* LoadingAnimatedView.m in Sources */,
 				79D34EFF21E0654100B1CB32 /* ExportBar.m in Sources */,
 				CADD60A621E61F5700EB01CD /* MyMonitorCell.m in Sources */,
+				796AE39321ED824700623659 /* NetworkFailedView.m in Sources */,
 				CA5E008B21DDE05E0040ABE2 /* ZFHorizontalAxis.m in Sources */,
 				CA5EFFB321DDE0390040ABE2 /* BasicViewController.m in Sources */,
 				79D34E9D21E05DEF00B1CB32 /* ReportTypeCell.m in Sources */,
@@ -2414,14 +2422,6 @@
 				CA5EFF9521DC59B20040ABE2 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		CA5EFF9921DC59BF0040ABE2 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CA5EFF9A21DC59BF0040ABE2 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -2544,6 +2544,7 @@
 			baseConfigurationReference = 294E3DD41E9EA8A796C14D80 /* Pods-CreditInquiry.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_LINK_OBJC_RUNTIME = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_STYLE = Automatic;
@@ -2572,6 +2573,7 @@
 			baseConfigurationReference = F9DD2AFF454673A827AD096D /* Pods-CreditInquiry.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_LINK_OBJC_RUNTIME = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_STYLE = Automatic;

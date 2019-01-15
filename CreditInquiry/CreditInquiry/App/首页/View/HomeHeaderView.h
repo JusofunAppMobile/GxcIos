@@ -10,6 +10,7 @@
 #import "SearchButton.h"
 #import "CenterButton.h"
 #import <SDCycleScrollView.h>
+#import <UIButton+WebCache.h>
 @protocol HomeHeaderViewDelegate<NSObject>
 
 - (void)headerBtnClicked:(CenterButton *)button;
