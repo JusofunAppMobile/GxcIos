@@ -29,7 +29,7 @@ static NSString *CELLID = @"MonitorDynamicCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    _page = 1;
     [self initView];
     [self loadData:YES];
 }
@@ -94,9 +94,11 @@ static NSString *CELLID = @"MonitorDynamicCell";
             [_tableview reloadData];
             _page++;
             _moreData = _datalist.count< [responseObject[@"total"] intValue];
+            [self endRefresh];
         }
     } failure:^(NSError *error) {
         [MBProgressHUD hideHudToView:self.view animated:YES];
+        [self endRefresh];
     }];
 }
 #pragma mark - UITableViewDataSource

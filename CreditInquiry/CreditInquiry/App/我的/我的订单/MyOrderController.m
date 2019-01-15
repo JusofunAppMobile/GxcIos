@@ -29,6 +29,7 @@ static NSString *CellID1 = @"MyOrderReportCell";
     [self setNavigationBarTitle:@"我的订单"];
     [self setBlankBackButton];
 
+    _page = 1;
     [self initView];
     [self loadData:YES];
 }

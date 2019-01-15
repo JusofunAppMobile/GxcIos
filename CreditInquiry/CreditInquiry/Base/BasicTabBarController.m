@@ -28,6 +28,7 @@
     [super viewDidLoad];
     [self setCustomBar];
     [self setTabControllers];
+    [self setTabBarAppearance];
 }
 
 - (void)setCustomBar{
@@ -39,30 +40,30 @@
     
     self.homeVc= [HomeViewController new];
     _homeVc.tabBarItem.title = @"首页";
-    _homeVc.tabBarItem.selectedImage =[self getOriginalImage:@"tabbar1_h"];
-    _homeVc.tabBarItem.image =[self getOriginalImage:@"tabbar1"];
+    _homeVc.tabBarItem.selectedImage =[self getOriginalImage:@"icon_home_sel"];
+    _homeVc.tabBarItem.image =[self getOriginalImage:@"icon_home"];
     
     BasicNavigationController *homeNavi=[[BasicNavigationController alloc]initWithRootViewController:_homeVc];
     
     self.monitorVc=[[MonitorViewController alloc]init];
     _monitorVc.title = @"监控动态";
-    _monitorVc.tabBarItem.selectedImage =[self getOriginalImage:@"tabbar2_h"];
-    _monitorVc.tabBarItem.image =[self getOriginalImage:@"tabbar2"];
+    _monitorVc.tabBarItem.selectedImage =[self getOriginalImage:@"icon_monitor_sel"];
+    _monitorVc.tabBarItem.image =[self getOriginalImage:@"icon_monitor"];
     
     BasicNavigationController *monitorNavi=[[BasicNavigationController alloc]initWithRootViewController:_monitorVc];
     
     self.creditVc=[[CreditViewController alloc]init];
     _creditVc.title = @"信用服务";
-    _creditVc.tabBarItem.selectedImage = [self getOriginalImage:@"tabbar3_h"];
-    _creditVc.tabBarItem.image =[self getOriginalImage:@"tabbar3"];
+    _creditVc.tabBarItem.selectedImage = [self getOriginalImage:@"icon_service_sel"];
+    _creditVc.tabBarItem.image =[self getOriginalImage:@"icon_service"];
     
     BasicNavigationController *creditNavi=[[BasicNavigationController alloc]initWithRootViewController:_creditVc];
 
     
     self.meVc=[[MeViewController alloc]init];
     _meVc.title = @"我的";
-    _meVc.tabBarItem.selectedImage = [self getOriginalImage:@"tabbar4_h"];
-    _meVc.tabBarItem.image =[self getOriginalImage:@"tabbar4"];
+    _meVc.tabBarItem.selectedImage = [self getOriginalImage:@"icon_mine_sel"];
+    _meVc.tabBarItem.image =[self getOriginalImage:@"icon_mine"];
     
     BasicNavigationController *meNavi=[[BasicNavigationController alloc]initWithRootViewController:_meVc];
 
@@ -78,11 +79,10 @@
 }
 
 - (void)setTabBarAppearance{
-    [[UITabBarItem appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName:KHexRGB(0xb1b1b1)}
+    [[UITabBarItem appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName:KHexRGB(0x9d9d9d)}
                                             forState:UIControlStateNormal];
-    [[UITabBarItem appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName:KHexRGB(0xb1b1b1)}
+    [[UITabBarItem appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName:KHexRGB(0xd60010)}
                                             forState:UIControlStateSelected];
-    [[UITabBar appearance]setTranslucent:NO];
 }
 
 

@@ -28,6 +28,7 @@ static NSString *CellID = @"MyMonitorCell";
     [self setNavigationBarTitle:_listType == ListTypeMyMonitor? @"我的监控":@"我的收藏"];
     [self setBlankBackButton];
 
+    _page = 1;
     [self initView];
     [self loadData:YES];
 }
