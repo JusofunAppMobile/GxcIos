@@ -19,7 +19,7 @@
         
         self.logoImageView = ({
             UIImageView *logoImageView = [[UIImageView alloc]init];
-            logoImageView.image = KImageName(@"tabbar2_h");
+            logoImageView.image = KImageName(@"home_LoadingLogo");
             [self.contentView addSubview:logoImageView];
             [logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.left.mas_equalTo(self.contentView).offset(15);
@@ -92,7 +92,7 @@
 {
     _dataDic = dataDic;
     
-    [_logoImageView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:KImageName(@"")];
+    [_logoImageView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:KImageName(@"home_LoadingLogo")];
     _nameLabel.text = [dataDic objectForKey:@"companyName"];
     _contentLabel.text = [dataDic objectForKey:@""];
     _timeLabel.text = [dataDic objectForKey:@"changeDate"];

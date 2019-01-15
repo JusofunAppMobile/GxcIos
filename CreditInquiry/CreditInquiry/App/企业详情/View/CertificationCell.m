@@ -70,9 +70,10 @@
             self.reloadLabel = ({
                 UILabel *label = [[UILabel alloc]init];
                 label.textColor = [UIColor whiteColor];
-                label.font = KFont(16);
+                label.font = KFont(14);
                 label.text = @"重新上传";
                 label.hidden = YES;
+                label.textAlignment = NSTextAlignmentCenter;
                 label.backgroundColor = [[UIColor blackColor]colorWithAlphaComponent:0.7];
                 [self.addBtn addSubview:label];
                 [label mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -122,6 +123,7 @@
 
 -(void)setIndex:(NSInteger)index
 {
+
     if(index == 0)
     {
         self.nameLabel.text = @"企业名称:";
@@ -134,31 +136,39 @@
     }
     else if (index == 2)
     {
-        self.nameLabel.text = @"职       位:";
-        self.textFld.placeholder = @"请输入您在企业的任职";
+        self.nameLabel.text = @"真实姓名:";
+        self.textFld.placeholder = @"请输入您的真实姓名";
     }
     else if (index == 3)
     {
-        self.nameLabel.text = @"手机号码:";
-        self.textFld.placeholder = @"请输入您的手机号码";
-        self.textFld.text = @"13644811627";
-        self.textFld.enabled = NO;
+        self.nameLabel.text = @"职       位:";
+        self.textFld.placeholder = @"请输入您在企业的任职";
     }
     else if (index == 4)
     {
-        self.nameLabel.text = @"邮       箱:";
-        self.textFld.placeholder = @"请输入您的邮件地址";
+        self.nameLabel.text = @"手机号码:";
+        self.textFld.placeholder = @"请输入您的手机号码";
+        //self.textFld.text = KUSER.phone;
+        //self.textFld.enabled = NO;
     }
     else if (index == 5)
     {
-        self.nameLabel.text = @"营业执照:";
-        self.introLabel.text = @"仅支持JPG、JPEG和PNG格式，大小不超过5兆。文字应清晰可辨。企业名称必须与您填写的名称一致。";
-        
+        self.nameLabel.text = @"邮       箱:";
+        self.textFld.placeholder = @"请输入您的邮件地址";
+        self.textFld.keyboardType = UIKeyboardTypeEmailAddress;
     }
     else if (index == 6)
     {
+        self.nameLabel.text = @"营业执照:";
+        self.introLabel.text = @"仅支持JPG、JPEG和PNG格式，大小不超过5兆。文字应清晰可辨。企业名称必须与您填写的名称一致。";
+        [self.addBtn setImage:KImageName(@"idfanmian") forState:UIControlStateNormal];
+        
+    }
+    else if (index == 7)
+    {
         self.nameLabel.text = @"本人身份证:";
         self.introLabel.text = @"仅支持JPG、JPEG和PNG格式，大小不超过5兆。请手持身份证进行拍照";
+        [self.addBtn setImage:KImageName(@"idzhengmian") forState:UIControlStateNormal];
     }
     
     self.addBtn.tag = KCertificationTag + index;
@@ -172,6 +182,24 @@
     }
 }
 
+-(void)setIsShow:(BOOL)isShow
+{
+    _isShow = isShow;
+    
+    self.textFld.enabled = NO;
+    self.addBtn.enabled = NO;
+}
+
+-(void)setButtonImage:(UIImage*)image
+{
+    [self.addBtn setImage:image forState:UIControlStateNormal];
+    if(!self.isShow)
+    {
+        self.addImageView.hidden = NO;
+        self.reloadLabel.hidden = NO;
+    }
+    
+}
 
 
 - (void)awakeFromNib {

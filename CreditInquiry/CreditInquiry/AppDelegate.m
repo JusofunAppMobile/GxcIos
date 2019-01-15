@@ -17,17 +17,32 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [self setIQKeyboardManager];
+    
+    
     [self setTabControllers];
-    
-    
     return YES;
 }
+
+
 
 - (void)setTabControllers{
     
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     self.tabBarController=[[BasicTabBarController alloc]init];
     self.window.rootViewController=_tabBarController;
+}
+
+#pragma mark - 自动隐藏键盘的第三方类库
+-(void)setIQKeyboardManager
+{
+    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
+    manager.enable = YES;
+    manager.shouldResignOnTouchOutside = YES;
+    manager.shouldToolbarUsesTextFieldTintColor = YES;
+    manager.enableAutoToolbar = YES;
+    manager.shouldShowToolbarPlaceholder = NO;
 }
 
 

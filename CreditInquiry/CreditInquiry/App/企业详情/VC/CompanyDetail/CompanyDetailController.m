@@ -442,7 +442,7 @@
 }
 
 
-#pragma mark - 监控 公司
+#pragma mark - 监控公司
 -(void)monitorCompany:(UIButton*)sender
 {
     //（0:取消监控  1：添加监控）

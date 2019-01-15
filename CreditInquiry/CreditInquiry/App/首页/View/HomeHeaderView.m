@@ -65,7 +65,7 @@
         [self addSubview:kongView];
         
         
-        cycleView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, kongView.maxY, KDeviceW, KDeviceW*90/375) delegate:self placeholderImage:[UIImage imageNamed:@"home_banner"]];
+        cycleView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, kongView.maxY, KDeviceW, KDeviceW*90/375) delegate:self placeholderImage:[UIImage imageNamed:@"home_LoadingBanner"]];
         cycleView.delegate = self;
         //cycleView.imageURLStringsGroup = imageUrlArray;
         cycleView.pageControlStyle = SDCycleScrollViewPageContolStyleClassic;

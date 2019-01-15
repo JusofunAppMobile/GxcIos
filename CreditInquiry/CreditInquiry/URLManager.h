@@ -41,6 +41,11 @@
 #define  KMonitor @""HOSTURL"/app/MonitoringDynamics/AddOrCancelMonitor"
 
 
+// 上传图片接口
+#define  KFileUpload @""HOSTURL"/app/sys/fileupload"
+
+
+
 //登录
 #define KLogin   @""HOSTURL"/app/UserLogin/loginApp"
 
@@ -53,8 +58,11 @@
 //监控动态
 #define KGetMonitorDynamic @""HOSTURL"/app/MonitoringDynamics/GetmonitoringDynamics"
 
+//企业认证信息接口
+#define KCertification @""HOSTURL"/app/Company/subCompanyMsg"
 
-
+//  查询企业认证信息接口
+#define KGetCertification @""HOSTURL"/app/Company/getCompanyMsg"
 
 
 

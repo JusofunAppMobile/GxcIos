@@ -41,6 +41,18 @@ typedef void (^NavigationBarMessageBlock)(NSDictionary *messageDic);
 // 手机号码验证
 +(BOOL)validatePhoneNumber:(NSString *)phoneNumber;
 
+//身份证验证
++ (BOOL)verifyIDCardString:(NSString *)idCardString;
+
+/**
+ 验证邮箱
+ 
+ @param emailStr 邮箱字符串
+ @return yes or no
+ */
++(BOOL)isEmailAddress:(NSString*)emailStr;
+
+
 
 /**
  时间戳转时间
@@ -67,13 +79,6 @@ typedef void (^NavigationBarMessageBlock)(NSDictionary *messageDic);
 //时间转化成 时间戳
 +(NSString*)timeSwitchTimestamp:(NSString *)formatTime andFormatter:(NSString *)format;
 
-/**
- 验证邮箱
-
- @param emailStr 邮箱字符串
- @return yes or no
- */
-+(BOOL)isEmailAddress:(NSString*)emailStr;
 
 
 /**

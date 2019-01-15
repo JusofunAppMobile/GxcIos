@@ -12,7 +12,7 @@
 #import "FogotPwdController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^LoginSuccessBlock)();
+typedef void(^LoginSuccessBlock)(void);
 
 @interface LoginController : BasicViewController
 
