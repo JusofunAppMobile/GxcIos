@@ -229,7 +229,6 @@
 		CA5EFF9321DC59B20040ABE2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFF9221DC59B20040ABE2 /* ViewController.m */; };
 		CA5EFF9621DC59B20040ABE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA5EFF9421DC59B20040ABE2 /* Main.storyboard */; };
 		CA5EFF9821DC59BF0040ABE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA5EFF9721DC59BF0040ABE2 /* Assets.xcassets */; };
-		CA5EFF9B21DC59BF0040ABE2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA5EFF9921DC59BF0040ABE2 /* LaunchScreen.storyboard */; };
 		CA5EFF9E21DC59BF0040ABE2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFF9D21DC59BF0040ABE2 /* main.m */; };
 		CA5EFFB121DDE0390040ABE2 /* BasicNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFAE21DDE0380040ABE2 /* BasicNavigationController.m */; };
 		CA5EFFB221DDE0390040ABE2 /* BasicWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFAF21DDE0380040ABE2 /* BasicWebViewController.m */; };
@@ -667,7 +666,6 @@
 		CA5EFF9221DC59B20040ABE2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		CA5EFF9521DC59B20040ABE2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CA5EFF9721DC59BF0040ABE2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CA5EFF9A21DC59BF0040ABE2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CA5EFF9C21DC59BF0040ABE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA5EFF9D21DC59BF0040ABE2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CA5EFFA721DDDB7A0040ABE2 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -1601,7 +1599,6 @@
 				CA5EFF9221DC59B20040ABE2 /* ViewController.m */,
 				CA5EFF9421DC59B20040ABE2 /* Main.storyboard */,
 				CA5EFF9721DC59BF0040ABE2 /* Assets.xcassets */,
-				CA5EFF9921DC59BF0040ABE2 /* LaunchScreen.storyboard */,
 				CA5EFF9C21DC59BF0040ABE2 /* Info.plist */,
 				CA5EFF9D21DC59BF0040ABE2 /* main.m */,
 				CA5EFFA721DDDB7A0040ABE2 /* PrefixHeader.pch */,
@@ -2071,7 +2068,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA5EFF9B21DC59BF0040ABE2 /* LaunchScreen.storyboard in Resources */,
 				CA5E006E21DDE05E0040ABE2 /* MBProgressHUD.bundle in Resources */,
 				CA5EFF9821DC59BF0040ABE2 /* Assets.xcassets in Resources */,
 				CA5EFF9621DC59B20040ABE2 /* Main.storyboard in Resources */,
@@ -2416,14 +2412,6 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		CA5EFF9921DC59BF0040ABE2 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CA5EFF9A21DC59BF0040ABE2 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -2544,6 +2532,7 @@
 			baseConfigurationReference = 294E3DD41E9EA8A796C14D80 /* Pods-CreditInquiry.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_LINK_OBJC_RUNTIME = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_STYLE = Automatic;
@@ -2572,6 +2561,7 @@
 			baseConfigurationReference = F9DD2AFF454673A827AD096D /* Pods-CreditInquiry.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_LINK_OBJC_RUNTIME = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_STYLE = Automatic;
