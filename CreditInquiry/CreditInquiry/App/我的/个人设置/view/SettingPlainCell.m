@@ -43,6 +43,7 @@
                 make.centerY.mas_equalTo(self.contentView);
                 make.right.mas_equalTo(self.contentView);
             }];
+            view.textAlignment = NSTextAlignmentRight;
             view;
         });
     }
@@ -55,26 +56,32 @@
         if (indexPath.row == 1) {
             _titleLab.text = @"手机";
             _contentLab.placeholder = @"请输入手机号码";
+            _contentLab.text = KUSER.phone;
         }else if (indexPath.row == 2){
             _titleLab.text = @"密码";
             _contentLab.placeholder = @"修改密码";
         }else if (indexPath.row == 3){
             _titleLab.text = @"邮箱";
             _contentLab.placeholder = @"请输入邮箱";
+            _contentLab.text = KUSER.email;
         }
     }else{
         if (indexPath.row == 0) {
             _titleLab.text = @"公司";
             _contentLab.placeholder = @"填写公司";
+            _contentLab.text = KUSER.company;
         }else if (indexPath.row == 1){
             _titleLab.text = @"部门";
             _contentLab.placeholder = @"填写部门";
+            _contentLab.text = KUSER.department;
         }else if (indexPath.row == 2){
             _titleLab.text = @"职务";
             _contentLab.placeholder = @"填写职务";
+            _contentLab.text = KUSER.job;
         }else{
             _titleLab.text = @"行业";
             _contentLab.placeholder = @"填写行业";
+            _contentLab.text = KUSER.trade;
         }
     }
 }

@@ -56,7 +56,12 @@
 #define KOutClolor  KHexRGB(0x1e9efb)
 //企业详情一个格子的宽度
 #define KDetailGridWidth KDeviceW/4.0
-#define KReportExportNum 100 
+#define KReportExportNum 100
+
+/*
+ ================================== 通知 =====================
+ */
+
 //定位
 #define  KUserLocation @"UserLocation"
 //登录成功
@@ -80,6 +85,9 @@
 
 //选取地址
 #define KSelectAddressNoti @"KSelectAddressNoti"
+
+//用户信息修改成功
+#define KModifyUserInfoSuccessNoti @"KModifyUserInfoSuccessNoti"
 
 //////百度地图  com.jusfoun.EnterpriseInquiry1
 #define BaiDu_Appkey      @"ZDGjTGHV0mmAi1jxZCWBBmRHGnvuxnz9"

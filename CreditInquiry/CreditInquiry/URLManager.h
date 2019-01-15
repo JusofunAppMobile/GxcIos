@@ -46,7 +46,14 @@
 //监控动态
 #define KGetMonitorDynamic @""HOSTURL"/app/MonitoringDynamics/GetmonitoringDynamics"
 
+//上传图片
+#define KUploadImage @""HOSTURL"/app/sys/fileupload"
 
+//修改手机号
+#define KChangePhone @""HOSTURL"/app/mineManager/upTelphone"
+
+//修改个人信息
+#define KChangeUserInfo @""HOSTURL"/app/mineManager/upUserInfo"
 
 //企业详情
 #define GetCompanyDetail  [NSString stringWithFormat:@"%@%@",QXBHOSTURL,@"/api/entdetail/GetCompanyDetails_beta"]

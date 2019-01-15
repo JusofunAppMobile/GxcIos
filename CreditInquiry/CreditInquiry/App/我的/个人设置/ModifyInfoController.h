@@ -9,9 +9,11 @@
 #import "BasicViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
+typedef void(^ReloadBlock)(void);
 
 @interface ModifyInfoController : BasicViewController
 @property (nonatomic ,copy) NSString *typeStr;
+@property (nonatomic ,copy) ReloadBlock reloadBlock;
 @end
 
 NS_ASSUME_NONNULL_END

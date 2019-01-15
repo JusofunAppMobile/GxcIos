@@ -10,7 +10,6 @@
 
 
 @interface ModifyInfoCell ()
-@property (nonatomic ,strong) UITextField *textfield;
 @end
 
 @implementation ModifyInfoCell

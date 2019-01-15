@@ -132,6 +132,8 @@
 		CA46605D21EC7288005C630F /* UILabel+Alignment.m in Sources */ = {isa = PBXBuildFile; fileRef = CA46605C21EC7288005C630F /* UILabel+Alignment.m */; };
 		CA56111121ECBC7B0052CF38 /* MonitorDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56111021ECBC7B0052CF38 /* MonitorDetailModel.m */; };
 		CA56111721ECBE380052CF38 /* MDSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56111621ECBE380052CF38 /* MDSectionModel.m */; };
+		CA56111D21ED84930052CF38 /* UIButton+Verification.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56111B21ED84920052CF38 /* UIButton+Verification.m */; };
+		CA56112021EDB51F0052CF38 /* ChangePwdController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56111F21EDB51F0052CF38 /* ChangePwdController.m */; };
 		CA5E005921DDE05E0040ABE2 /* NSNumber+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFB721DDE05D0040ABE2 /* NSNumber+StringValue.m */; };
 		CA5E005A21DDE05E0040ABE2 /* UIColor+Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFB921DDE05D0040ABE2 /* UIColor+Tool.m */; };
 		CA5E005B21DDE05E0040ABE2 /* UIImage+Wechat.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFBB21DDE05D0040ABE2 /* UIImage+Wechat.m */; };
@@ -531,6 +533,10 @@
 		CA56111021ECBC7B0052CF38 /* MonitorDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonitorDetailModel.m; sourceTree = "<group>"; };
 		CA56111521ECBE380052CF38 /* MDSectionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDSectionModel.h; sourceTree = "<group>"; };
 		CA56111621ECBE380052CF38 /* MDSectionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDSectionModel.m; sourceTree = "<group>"; };
+		CA56111B21ED84920052CF38 /* UIButton+Verification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Verification.m"; sourceTree = "<group>"; };
+		CA56111C21ED84930052CF38 /* UIButton+Verification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Verification.h"; sourceTree = "<group>"; };
+		CA56111E21EDB51F0052CF38 /* ChangePwdController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangePwdController.h; sourceTree = "<group>"; };
+		CA56111F21EDB51F0052CF38 /* ChangePwdController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangePwdController.m; sourceTree = "<group>"; };
 		CA5E000021DDE05D0040ABE2 /* NSNumber+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Zirkfied.h"; sourceTree = "<group>"; };
 		CA5E000121DDE05D0040ABE2 /* NSNumber+Zirkfied.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Zirkfied.m"; sourceTree = "<group>"; };
 		CA5E000221DDE05D0040ABE2 /* NSString+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Zirkfied.h"; sourceTree = "<group>"; };
@@ -1650,6 +1656,8 @@
 		CA5EFFB521DDE05D0040ABE2 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				CA56111C21ED84930052CF38 /* UIButton+Verification.h */,
+				CA56111B21ED84920052CF38 /* UIButton+Verification.m */,
 				CA5EFFB621DDE05D0040ABE2 /* NSNumber+StringValue.h */,
 				CA5EFFB721DDE05D0040ABE2 /* NSNumber+StringValue.m */,
 				CA5EFFB821DDE05D0040ABE2 /* UIColor+Tool.h */,
@@ -1978,6 +1986,8 @@
 				CADD60CC21E72D7F00EB01CD /* ModifyPhoneController.m */,
 				CADD60CE21E72D9400EB01CD /* ModifyInfoController.h */,
 				CADD60CF21E72D9400EB01CD /* ModifyInfoController.m */,
+				CA56111E21EDB51F0052CF38 /* ChangePwdController.h */,
+				CA56111F21EDB51F0052CF38 /* ChangePwdController.m */,
 			);
 			path = "个人设置";
 			sourceTree = "<group>";
@@ -2135,6 +2145,7 @@
 				CA5E005921DDE05E0040ABE2 /* NSNumber+StringValue.m in Sources */,
 				CA5E006821DDE05E0040ABE2 /* DLPanableWebView.m in Sources */,
 				CADD60E021E833E500EB01CD /* SettingCell.m in Sources */,
+				CA56111D21ED84930052CF38 /* UIButton+Verification.m in Sources */,
 				79D34E8B21E05DA100B1CB32 /* MyAlertView.m in Sources */,
 				793D1B6821DF699500C29908 /* CompanyDetailModel.m in Sources */,
 				79D34EBB21E05E1F00B1CB32 /* RiskSegmentView.m in Sources */,
@@ -2378,6 +2389,7 @@
 				CA56111121ECBC7B0052CF38 /* MonitorDetailModel.m in Sources */,
 				CADD60BF21E6E27200EB01CD /* ObjectionEntCell.m in Sources */,
 				CADD60D321E73CB100EB01CD /* ModifyInfoCell.m in Sources */,
+				CA56112021EDB51F0052CF38 /* ChangePwdController.m in Sources */,
 				79D34F2121E3267200B1CB32 /* DetailHolderCell.m in Sources */,
 				793D1C7D21E0585D00C29908 /* TrademarkModel.m in Sources */,
 				793D1B3E21DF684900C29908 /* ErrorModel.m in Sources */,

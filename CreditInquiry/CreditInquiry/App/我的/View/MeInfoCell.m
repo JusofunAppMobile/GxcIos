@@ -78,31 +78,44 @@
             make.width.mas_equalTo(80);
         }];
         
-        [self setupViews:2];
+        [self setupViews];
+        [self addLoginObserver];
     }
     return self;
 }
-- (void)setupViews:(NSInteger)type{
-    if (type == 1) {
-        _avatarView.image = KImageName(@"me_head_h");
-        _titleLab.text = @"北京数字星空科技有限公司";
-        _titleLab.hidden = NO;
+- (void)setupViews{
+    
+    NSLog(@"__%@___%@",KUSER.userId,KUSER.phone);
+    if (KUSER.userId.length) {
         _loginLab.hidden = YES;
-        _typeBtn.hidden = NO;
-        _joinBtn.hidden = NO;
-        _statusLab.hidden = YES;
-        _statusIcon.hidden = YES;
-        _vipIcon.hidden = YES;
-    }else if (type == 2){
-        _avatarView.image = KImageName(@"me_head_h");
-        _titleLab.text = @"北京数字星空科技有限公司";
         _titleLab.hidden = NO;
-        _loginLab.hidden = YES;
-        _typeBtn.hidden = YES;
-        _joinBtn.hidden = YES;
-        _statusLab.hidden = NO;
-        _statusIcon.hidden = YES;
-        _vipIcon.hidden = NO;
+        [_avatarView sd_setImageWithURL:[NSURL URLWithString:KUSER.headIcon] placeholderImage:KImageName(@"me_head_h")];
+        
+        if (KUSER.authStatus.intValue == 0) {//未认证
+            _titleLab.text = KUSER.phone;
+            _statusLab.hidden = YES;
+            _statusIcon.hidden = YES;
+        }else if (KUSER.authStatus.intValue == 1){//已认证
+            _titleLab.text = KUSER.company;
+            _statusLab.hidden = NO;
+            _statusIcon.hidden = YES;
+
+        }else{
+            _titleLab.text = KUSER.company;
+            _statusLab.hidden = YES;
+            _statusIcon.hidden = NO;
+
+        }
+        
+        if (KUSER.vipStatus.intValue == 0) {//普通用户
+            _vipIcon.hidden = YES;
+            _typeBtn.hidden = NO;
+            _joinBtn.hidden = KUSER.authStatus.intValue ==2?YES:NO;
+        }else{
+            _vipIcon.hidden = NO;
+            _typeBtn.hidden = YES;
+        }
+        
     }else{
         _avatarView.image = KImageName(@"me_head");
         _titleLab.hidden = YES;
@@ -113,6 +126,33 @@
         _statusIcon.hidden = YES;
         _vipIcon.hidden = YES;
     }
+//    if (type == 1) {
+//        _avatarView.image = KImageName(@"me_head_h");
+//        _titleLab.text = @"北京数字星空科技有限公司";
+//        _titleLab.hidden = NO;
+//        _loginLab.hidden = YES;
+//        _typeBtn.hidden = NO;
+//        _joinBtn.hidden = NO;
+//        _statusLab.hidden = YES;
+//        _statusIcon.hidden = YES;
+//        _vipIcon.hidden = YES;
+//    }else if (type == 2){
+//        _avatarView.image = KImageName(@"me_head_h");
+//        _titleLab.text = @"北京数字星空科技有限公司";
+//        _titleLab.hidden = NO;
+//        _loginLab.hidden = YES;
+//        _typeBtn.hidden = YES;
+//        _joinBtn.hidden = YES;
+//        _statusLab.hidden = NO;
+//        _statusIcon.hidden = YES;
+//        _vipIcon.hidden = NO;
+//    }else{
+//
+//    }
+}
+
+- (void)addLoginObserver{
+    [KNotificationCenter addObserver:self selector:@selector(setupViews) name:KLoginSuccess object:nil];
 }
 
 #pragma mark - lazy load
@@ -189,5 +229,9 @@
     return _vipIcon;
 }
 
+
+- (void)dealloc{
+    [KNotificationCenter removeObserver:self name:KLoginSuccess object:nil];
+}
 
 @end
