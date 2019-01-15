@@ -8,6 +8,7 @@
 
 #import "MonitorDynamicCell.h"
 #import "MonitorListModel.h"
+#import <UIButton+LXMImagePosition.h>
 
 @interface MonitorDynamicCell ()
 @property (nonatomic ,strong) UIImageView *iconView;
@@ -40,23 +41,30 @@
             [self.contentView addSubview:view];
             [view mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.mas_equalTo(self.contentView);
-                make.right.mas_equalTo(self.contentView).offset(-15);
-                make.height.mas_equalTo(26);
+                make.right.mas_equalTo(self.contentView).offset(-20);
+                make.height.mas_equalTo(50);
                 make.width.mas_equalTo(50);
             }];
-            view.layer.borderWidth = .5f;
-            view.layer.borderColor = KHexRGB(0xd93947).CGColor;
-            view.layer.cornerRadius = 2;
-            view.layer.masksToBounds = YES;
-            view.titleLabel.font = KFont(12);
+//            view.layer.borderWidth = .5f;
+//            view.layer.borderColor = KHexRGB(0xd93947).CGColor;
+//            view.layer.cornerRadius = 2;
+//            view.layer.masksToBounds = YES;
+            view.backgroundColor = [UIColor greenColor];
+//            view.selected = YES;
+            view.titleLabel.font = KFont(11);
             [view setTitle:@"监控" forState:UIControlStateNormal];
             [view setTitle:@"取消监控" forState:UIControlStateSelected];
+            [view setImage:KImageName(@"icon_monitor") forState:UIControlStateSelected];
+            [view setImage:KImageName(@"icon_monitor_sel") forState:UIControlStateNormal];
             [view setTitleColor:KHexRGB(0xd93947) forState:UIControlStateNormal];
             [view setTitleColor:KHexRGB(0x909090) forState:UIControlStateSelected];
             [view addTarget:self action:@selector(monitorAction) forControlEvents:UIControlEventTouchUpInside];
             view;
         });
         
+    
+        
+//
         self.nameLab = ({
             UILabel *view = [UILabel new];
             [self.contentView addSubview:view];
@@ -69,7 +77,7 @@
             view.text = @"小米科技有限责任公司";
             view;
         });
-        
+
         self.dynamicLab = ({
             UILabel *view = [UILabel new];
             [self.contentView addSubview:view];
@@ -82,7 +90,7 @@
             view.textColor = KHexRGB(0x909090);
             view;
         });
-        
+
         self.dateLab = ({
             UILabel *view = [UILabel new];
             [self.contentView addSubview:view];
@@ -96,6 +104,8 @@
             view;
         });
         
+        [_monitorBtn layoutIfNeeded];
+        [_monitorBtn setImagePosition:LXMImagePositionTop spacing:7];
     }
     return self;
 }
@@ -115,24 +125,19 @@
 }
 
 - (void)monitorAction{
-    if ([self.delegate respondsToSelector:@selector(didClickMonitorButton:monitor:)]) {
-        [self.delegate didClickMonitorButton:_model monitor:!_monitorBtn.selected];
-    }
+    _monitorBtn.selected = !_monitorBtn.selected;
+//    [_monitorBtn setImagePosition:LXMImagePositionTop spacing:7];
+
+//    if ([self.delegate respondsToSelector:@selector(didClickMonitorButton:monitor:)]) {
+//        [self.delegate didClickMonitorButton:_model monitor:!_monitorBtn.selected];
+//    }
+//    [self setMonitorButtonState:!_monitorBtn.selected];//test
 }
 
 - (void)setMonitorButtonState:(BOOL)selected{
     _monitorBtn.selected = selected;
-    if (_monitorBtn.selected) {
-        _monitorBtn.layer.borderColor = KHexRGB(0x909090).CGColor;
-        [_monitorBtn mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(60);
-        }];
-    }else{
-        _monitorBtn.layer.borderColor = KHexRGB(0xd93947).CGColor;
-        [_monitorBtn mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(50);
-        }];
-    }
 }
+
+
 
 @end

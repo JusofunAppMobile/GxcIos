@@ -37,6 +37,7 @@ static NSString *HeadID = @"MonitorDetailHeader";
 
 #pragma mark - loadData
 - (void)loadData{
+    return;
     [MBProgressHUD showMessag:@"" toView:nil];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];

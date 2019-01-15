@@ -76,7 +76,6 @@ static NSString *CELLID = @"MonitorDynamicCell";
 }
 #pragma mark - loadData
 - (void)loadData:(BOOL)loading{
- 
     if (loading) {
         [MBProgressHUD showMessag:@"" toView:self.view];
     }
@@ -103,7 +102,7 @@ static NSString *CELLID = @"MonitorDynamicCell";
 }
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _datalist.count;
+    return 10;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
