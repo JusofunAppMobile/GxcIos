@@ -42,6 +42,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)NSInteger index;
 
 
+-(void)setButtonImage:(UIImage*)image;
+
+
+@property(nonatomic,assign)BOOL isShow;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

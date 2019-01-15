@@ -950,7 +950,7 @@
 -(void)reportView
 {
     self.toolBar = [[UIView alloc]initWithFrame:KFrame(0, KDeviceH - 55-KBottomHeight-KNavigationBarHeight, KDeviceW, 55+KBottomHeight)];
-    self.toolBar.backgroundColor = KRGB(223, 43, 46);
+    self.toolBar.backgroundColor = KHexRGB(0xEB5C5C);
     self.toolBar.layer.shadowOpacity = 0.5;// 阴影透明度
     self.toolBar.layer.shadowColor = [UIColor grayColor].CGColor;// 阴影的颜色
     self.toolBar.layer.shadowRadius = 3;// 阴影扩散的范围控制
@@ -964,7 +964,7 @@
     
     NSArray *array = @[@"获取报告",@"纠错",@"监控",@"认证"];
     
-    NSArray *imageArray = @[@"icon_vip",@"icon_vip",@"icon_vip",@"icon_vip"];
+    NSArray *imageArray = @[@"info_bot_icon_baogao",@"info_bot_icon_yiyi",@"info_bot_icon_jiankong",@"info_bot_icon_renzheng"];
     for(int i = 0;i<array.count;i++)
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];

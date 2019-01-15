@@ -779,7 +779,8 @@
 
 - (void)drawFilterBtn{
     UIButton *buttonRight = [UIButton buttonWithType:UIButtonTypeCustom];
-    [buttonRight setTitle:@"筛选" forState:UIControlStateNormal];
+    //[buttonRight setTitle:@"筛选" forState:UIControlStateNormal];
+    [buttonRight setImage:KImageName(@"details_icon_shaixuan") forState:UIControlStateNormal];
 //    buttonRight.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, );
 //    buttonRight.titleLabel.textAlignment = NSTextAlignmentRight;
     buttonRight.frame = CGRectMake(0, 0, 60, 44);

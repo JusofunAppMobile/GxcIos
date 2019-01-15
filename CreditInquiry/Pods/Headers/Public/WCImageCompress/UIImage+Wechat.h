@@ -1,0 +1,1 @@
+../../../WCImageCompress/Pod/Classes/UIImage+Wechat.h

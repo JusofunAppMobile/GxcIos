@@ -115,6 +115,14 @@ typedef void (^RequestProgress)(NSProgress *progress);
                                       success:(void (^)(id responseObject))success
                                       failure:(void (^)(NSError *error))failure;
 
+#pragma mark -- 上传图片 --
++ (NSURLSessionDataTask *)uploadWithURLString:(NSString *)URLString
+                                   parameters:(id)parameters
+                                     progress:(RequestProgress)progress
+                                        image:(UIImage *)image
+                                      success:(void (^)(id responseObject))success
+                                      failure:(void (^)(NSError *error))failure;
+
 
 @end
 

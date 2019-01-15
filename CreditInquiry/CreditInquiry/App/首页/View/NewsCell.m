@@ -21,7 +21,7 @@
         
         self.imageView1 = ({
             UIImageView *imageView = [[UIImageView alloc]init];
-            imageView.image = KImageName(@"index_topbg");
+            imageView.image = KImageName(@"home_LoadingPic");
             [self.contentView addSubview:imageView];
             imageView.hidden = YES;
             [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -34,7 +34,7 @@
 
         self.imageView2 = ({
             UIImageView *imageView = [[UIImageView alloc]init];
-            imageView.image = KImageName(@"index_topbg");
+            imageView.image = KImageName(@"home_LoadingPic");
             [self.contentView addSubview:imageView];
             imageView.hidden = YES;
             [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -47,7 +47,7 @@
 
         self.imageView3 = ({
             UIImageView *imageView = [[UIImageView alloc]init];
-            imageView.image = KImageName(@"index_topbg");
+            imageView.image = KImageName(@"home_LoadingPic");
             [self.contentView addSubview:imageView];
             imageView.hidden = YES;
             [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -231,18 +231,18 @@
     if(imageArray.count >= 2)
     {
         self.newsType = NewsMoreImageType;
-        [_imageView1 sd_setImageWithURL:[NSURL URLWithString:imageArray[0]] placeholderImage:KImageName(@"")];
-        [_imageView2 sd_setImageWithURL:[NSURL URLWithString:imageArray[1]] placeholderImage:KImageName(@"")];
+        [_imageView1 sd_setImageWithURL:[NSURL URLWithString:imageArray[0]] placeholderImage:KImageName(@"home_LoadingPic")];
+        [_imageView2 sd_setImageWithURL:[NSURL URLWithString:imageArray[1]] placeholderImage:KImageName(@"home_LoadingPic")];
         if(imageArray.count>=3)
         {
-            [_imageView3 sd_setImageWithURL:[NSURL URLWithString:imageArray[2]] placeholderImage:KImageName(@"")];
+            [_imageView3 sd_setImageWithURL:[NSURL URLWithString:imageArray[2]] placeholderImage:KImageName(@"home_LoadingPic")];
         }
         
     }
     else if (imageArray.count == 1)
     {
         self.newsType = NewsOneImageType;
-        [_imageView1 sd_setImageWithURL:[NSURL URLWithString:imageArray[0]] placeholderImage:KImageName(@"")];
+        [_imageView1 sd_setImageWithURL:[NSURL URLWithString:imageArray[0]] placeholderImage:KImageName(@"home_LoadingPic")];
     }
     else
     {

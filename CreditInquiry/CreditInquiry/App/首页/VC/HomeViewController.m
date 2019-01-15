@@ -277,7 +277,15 @@ static NSString *NewsCellID = @"NewsCellID";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-  
+    
+    if(indexPath.section == 1)
+    {
+        NSArray *array = [dataDic objectForKey:@"news"];
+        NSDictionary *dic = [array objectAtIndex:indexPath.row];
+        CommonWebViewController *vc = [[CommonWebViewController alloc]init];
+        vc.urlStr = [dic objectForKey:@"newsURL"];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 #pragma mark - UIScrollDelegate

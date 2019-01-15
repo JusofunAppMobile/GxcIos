@@ -313,7 +313,7 @@
     AFHTTPSessionManager *manager = [self QXBSharedHTTPSessionManager];
     NSURLSessionDataTask *session = [manager POST:URLString parameters:tmpDic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         NSURL *filepath = [NSURL fileURLWithPath:uploadParam];
-        [formData appendPartWithFileURL:filepath name:@"image" error:nil];
+        [formData appendPartWithFileURL:filepath name:@"file" error:nil];
     } progress:^(NSProgress * _Nonnull uploadProgress){
         if(progress){
             progress(uploadProgress);
@@ -333,6 +333,48 @@
     
     return session;
 }
+
+
+#pragma mark -- 上传图片 --
++ (NSURLSessionDataTask *)uploadWithURLString:(NSString *)URLString
+                                   parameters:(id)parameters
+                                     progress:(RequestProgress)progress
+                                  image:(UIImage *)image
+                                      success:(void (^)(id responseObject))success
+                                      failure:(void (^)(NSError *error))failure {
+    //给每个接口添加t跟m字段
+    NSMutableDictionary *tmpDic = [self addDictionary:parameters];
+    AFHTTPSessionManager *manager = [self sharedHTTPSessionManager:NO];
+    NSURLSessionDataTask *session = [manager POST:URLString parameters:tmpDic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        NSData*imageData =UIImageJPEGRepresentation(image,1);
+        NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+        formatter.dateFormat = @"yyyyMMddHHmmss";
+        NSString *str = [formatter stringFromDate:[NSDate date]];
+        NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
+        //上传的参数(上传图片，以文件流的格式)
+        [formData appendPartWithFileData:imageData
+          name:@"file" fileName:fileName mimeType:@"image/jpeg"];
+       
+    } progress:^(NSProgress * _Nonnull uploadProgress){
+        if(progress){
+            progress(uploadProgress);
+        }
+        
+    }
+                                          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                                              if (success) {
+                                                  [self getDateWithTask:task]; success(responseObject);
+                                              }
+                                          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                              if (failure) {
+                                                  [self getDateWithTask:task];
+                                                  failure(error);
+                                              }
+                                          }];
+    
+    return session;
+}
+
 
 //加密
 + (NSMutableDictionary*)addDictionary:(NSMutableDictionary*)dic
