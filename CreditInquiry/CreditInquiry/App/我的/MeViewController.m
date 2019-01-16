@@ -175,7 +175,6 @@ static NSString *PlainID = @"MePlainCell";
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
-
 #pragma mark - life cycle
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

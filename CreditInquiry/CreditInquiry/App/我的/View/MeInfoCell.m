@@ -80,12 +80,11 @@
         
         [self setupViews];
         [self addLoginObserver];
+        [self addModifyInfoObserver];
     }
     return self;
 }
 - (void)setupViews{
-    
-    NSLog(@"__%@___%@",KUSER.userId,KUSER.phone);
     if (KUSER.userId.length) {
         _loginLab.hidden = YES;
         _titleLab.hidden = NO;
@@ -99,12 +98,10 @@
             _titleLab.text = KUSER.company;
             _statusLab.hidden = NO;
             _statusIcon.hidden = YES;
-
         }else{
             _titleLab.text = KUSER.company;
             _statusLab.hidden = YES;
             _statusIcon.hidden = NO;
-
         }
         
         if (KUSER.vipStatus.intValue == 0) {//普通用户
@@ -126,40 +123,22 @@
         _statusIcon.hidden = YES;
         _vipIcon.hidden = YES;
     }
-//    if (type == 1) {
-//        _avatarView.image = KImageName(@"me_head_h");
-//        _titleLab.text = @"北京数字星空科技有限公司";
-//        _titleLab.hidden = NO;
-//        _loginLab.hidden = YES;
-//        _typeBtn.hidden = NO;
-//        _joinBtn.hidden = NO;
-//        _statusLab.hidden = YES;
-//        _statusIcon.hidden = YES;
-//        _vipIcon.hidden = YES;
-//    }else if (type == 2){
-//        _avatarView.image = KImageName(@"me_head_h");
-//        _titleLab.text = @"北京数字星空科技有限公司";
-//        _titleLab.hidden = NO;
-//        _loginLab.hidden = YES;
-//        _typeBtn.hidden = YES;
-//        _joinBtn.hidden = YES;
-//        _statusLab.hidden = NO;
-//        _statusIcon.hidden = YES;
-//        _vipIcon.hidden = NO;
-//    }else{
-//
-//    }
 }
 
 - (void)addLoginObserver{
     [KNotificationCenter addObserver:self selector:@selector(setupViews) name:KLoginSuccess object:nil];
 }
 
+- (void)addModifyInfoObserver{
+    [KNotificationCenter addObserver:self selector:@selector(setupViews) name:KModifyUserInfoSuccessNoti object:nil];
+}
+
 #pragma mark - lazy load
 - (UIImageView *)avatarView{
     if (!_avatarView) {
         _avatarView = [UIImageView new];
-        _avatarView.image = KImageName(@"me_head");
+        _avatarView.layer.cornerRadius = 27;
+        _avatarView.layer.masksToBounds = YES;
     }
     return _avatarView;
 }
@@ -232,6 +211,7 @@
 
 - (void)dealloc{
     [KNotificationCenter removeObserver:self name:KLoginSuccess object:nil];
+    [KNotificationCenter removeObserver:self name:KModifyUserInfoSuccessNoti object:nil];
 }
 
 @end

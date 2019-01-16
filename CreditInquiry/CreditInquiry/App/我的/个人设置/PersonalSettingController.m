@@ -13,6 +13,7 @@
 #import "ModifyInfoController.h"
 #import "GetPhoto.h"
 #import "ChangePwdController.h"
+#import "UIImage+Wechat.h"
 
 static NSString *CellID1 = @"SettingAvatarCell";
 static NSString *CellID2 = @"SettingPlainCell";
@@ -66,6 +67,7 @@ static NSString *CellID2 = @"SettingPlainCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0&&indexPath.row == 0) {
         SettingAvatarCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID1 forIndexPath:indexPath];
+        [cell reloadHead];
         return cell;
     }else{
         SettingPlainCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID2 forIndexPath:indexPath];
@@ -79,8 +81,8 @@ static NSString *CellID2 = @"SettingPlainCell";
     if (indexPath.section == 0&&indexPath.row ==0) {
         KWeakSelf
         [[GetPhoto sharedGetPhoto] getPhotoWithTarget:self success:^(UIImage *image, NSString *imagePath) {
-            NSLog(@"图片___%@",imagePath);
-            [weakSelf uploadHeadImage:imagePath];
+            UIImage *tempImage = [image wcSessionCompress];
+            [weakSelf uploadHeadImage:tempImage];
         }];
         
     }else if (indexPath.section == 0&&indexPath.row == 1){
@@ -110,23 +112,53 @@ static NSString *CellID2 = @"SettingPlainCell";
     }
 }
 
-- (void)uploadHeadImage:(NSString *)imagePath{
+- (void)uploadHeadImage:(UIImage *)image{
+    
+    [MBProgressHUD showMessag:@"" toView:self.view];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:@"" forKey:@"type"];
-    [params setObject:@"" forKey:@""];
+    [params setObject:@"Icon" forKey:@"type"];
     
-    [RequestManager uploadWithURLString:KUploadImage parameters:params progress:nil uploadParam:nil success:^(id responseObject) {
+    [RequestManager uploadWithURLString:KUploadImage parameters:params progress:nil image:image success:^(id responseObject) {
+        if ([responseObject[@"result"] intValue] == 0) {
+            NSString *tempURL = responseObject[@"data"][@"filepath"];
+            [self commitImageURLToService:tempURL];
+        }else{
+            [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
+        }
         
     } failure:^(NSError *error) {
         
     }];
+}
+
+- (void)commitImageURLToService:(NSString *)tempURL{
+    if (!tempURL) {
+        return;
+    }
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:KUSER.userId forKey:@"userId"];
+    [params setObject:tempURL forKey:@"headIcon"];
     
-//    [RequestManager postWithURLString:KUploadImage parameters:nil success:^(id responseObject) {
-//
-//    } failure:^(NSError *error) {
-//
-//    }];
+    [RequestManager postWithURLString:KChangeUserInfo parameters:params success:^(id responseObject) {
+        [MBProgressHUD hideHudToView:self.view animated:YES];
+        if ([responseObject[@"result"] intValue] == 0) {
+            [MBProgressHUD showSuccess:@"修改成功" toView:self.view];
+            [self updateUserInfo:responseObject[@"data"][@"headUrl"]];
+        }else{
+            [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
+        }
+        
+    } failure:^(NSError *error) {
+        [MBProgressHUD showError:@"哎呀，服务器开小差啦，请您稍等，马上回来~" toView:self.view];
+    }];
+}
+
+- (void)updateUserInfo:(NSString *)tempURL{
+    KUSER.headIcon = tempURL;
+    [KUSER update];
+    [_tableview reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+    [KNotificationCenter postNotificationName:KModifyUserInfoSuccessNoti object:nil];
 }
 
 
