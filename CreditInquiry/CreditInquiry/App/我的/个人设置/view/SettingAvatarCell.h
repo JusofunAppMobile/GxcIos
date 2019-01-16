@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SettingAvatarCell : UITableViewCell
-
+- (void)reloadHead;
 @end
 
 NS_ASSUME_NONNULL_END

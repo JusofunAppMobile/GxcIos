@@ -121,7 +121,6 @@ static NSString *CellID = @"ModifyInfoCell";
 }
 
 - (void)updateUserInfo{
-    
     if ([_typeStr isEqualToString:@"邮箱"]) {
         KUSER.email = _textField.text;
     }else if ([_typeStr isEqualToString:@"公司"]){
