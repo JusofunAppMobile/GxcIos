@@ -123,8 +123,14 @@
         [centButton setTitle:[dic objectForKey:@"menuName"] forState:UIControlStateNormal];
         [centButton setTitleColor:KHexRGB(0x333333) forState:UIControlStateNormal];
         [centButton setTitleColor:KHexRGB(0x666666) forState:UIControlStateDisabled];
-        //[centButton setImage:[UIImage imageNamed:@"icon_gudong"] forState:UIControlStateNormal];
-        [centButton sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"menuImage"]] forState:UIControlStateNormal placeholderImage:KImageName(@"home_DefaultIcon")];
+         [centButton setImage:KImageName(@"home_DefaultIcon") forState:UIControlStateNormal] ;
+        [[SDWebImageManager sharedManager]loadImageWithURL:[NSURL URLWithString:[dic objectForKey:@"menuImage"]] options:SDWebImageLowPriority progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+            ;
+        } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
+            
+            UIImage* newImage = [Tools scaleImage:image size:CGSizeMake(38, 38)];
+            [centButton setImage:newImage forState:UIControlStateNormal] ;
+        }];
         [centButton addTarget:self action:@selector(goToSearch:) forControlEvents:UIControlEventTouchUpInside];
         [searchView addSubview:centButton];
         centButton.dataDic = dic;
@@ -180,7 +186,7 @@
         }
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = KFrame(x, label.y, width+20, label.height);
+        button.frame = KFrame(x, label.y, width+10, label.height);
         button.titleLabel.font = KFont(12);
         [button setTitle:str forState:UIControlStateNormal];
         [button setTitleColor:KRGB(51, 51, 51) forState:UIControlStateNormal];
