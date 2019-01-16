@@ -13,8 +13,8 @@
 -(UIImageView *)searchImageView
 {
     if (_searchImageView == nil) {
-        _searchImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, (self.height - 15)/2, 15, 15)];
-        _searchImageView.image = [UIImage imageNamed:@"home_search"];
+        _searchImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, (self.height - 15)/2.0, 15, 15)];
+        _searchImageView.image = [UIImage imageNamed:@"icon_search"];
     }
     return _searchImageView;
 }
@@ -23,7 +23,7 @@
 -(UILabel *)searchLabel
 {
     if (_searchLabel == nil) {
-        _searchLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_searchImageView.frame) + 5,(self.height - 20)/2, self.frame.size.width -(CGRectGetMaxX(_searchImageView.frame) + 5)-15 , 20)];
+        _searchLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_searchImageView.frame) + 5,(self.height - 15)/2.0, self.frame.size.width -(CGRectGetMaxX(_searchImageView.frame) + 5)-15 , 15)];
         _searchLabel.textColor = KHexRGB(0xCCCCCC);
         _searchLabel.font = KSmallFont;
         
@@ -73,6 +73,19 @@
         
     }
     return self;
+}
+
+
+
+-(void)layoutSubviews
+{
+    CGPoint center = self.searchImageView.center;
+    center.y = self.height/2;
+    self.searchImageView.center = center;
+    
+    CGPoint center2 = self.searchLabel.center;
+    center2.y = self.height/2;
+    self.searchLabel.center = center2;
 }
 
 @end

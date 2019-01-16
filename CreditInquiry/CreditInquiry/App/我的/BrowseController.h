@@ -1,16 +1,16 @@
 //
-//  SettingViewController.h
+//  BrowseController.h
 //  CreditInquiry
 //
-//  Created by JUSFOUN on 2019/1/9.
+//  Created by WangZhipeng on 2019/1/16.
 //  Copyright © 2019年 JUSFOUN. All rights reserved.
 //
 
 #import "BasicViewController.h"
-#import "AboutController.h"
+#import "BrowseCell.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SettingViewController : BasicViewController
+@interface BrowseController : BasicViewController<UIAlertViewDelegate>
 
 @end
 

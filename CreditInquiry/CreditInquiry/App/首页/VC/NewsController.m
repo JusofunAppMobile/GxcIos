@@ -46,6 +46,7 @@
             NSDictionary *dataDic = [responseObject objectForKey:@"data"];
             if (pageIndex == 1) {
                 [dataArray removeAllObjects];
+                dataArray = [NSMutableArray array];
             }
             
             [dataArray addObjectsFromArray:[dataDic objectForKey:@"news"]];
@@ -59,7 +60,7 @@
                 [backTableView.mj_footer endRefreshingWithNoMoreData];
             }
             
-         
+            pageIndex++;
         }else{
             [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
         }

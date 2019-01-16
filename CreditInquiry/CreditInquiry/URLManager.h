@@ -50,6 +50,15 @@
 #define  KMonitor @""HOSTURL"/app/MonitoringDynamics/AddOrCancelMonitor"
 
 
+// 访客
+#define  KVisitorRecord @""HOSTURL"/app/CreditService/visitorRecord"
+
+// 浏览记录
+#define  KBrowseList @""HOSTURL"/app/mineManager/BrowseHistoryList"
+
+// 浏览记录
+#define  KDelBrowseList @""HOSTURL"/app/mineManager/delBrowseHistory"
+
 // 上传图片接口
 #define  KFileUpload @""HOSTURL"/app/sys/fileupload"
 
