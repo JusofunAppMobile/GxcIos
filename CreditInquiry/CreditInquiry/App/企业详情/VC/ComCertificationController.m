@@ -8,7 +8,7 @@
 
 #import "ComCertificationController.h"
 
-@interface ComCertificationController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ComCertificationController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
     UILabel *messageLabel;
     UITableView *backTableView;
@@ -19,6 +19,8 @@
     
     NSString *imagePath1;
     NSString *imagePath2;
+    
+    BOOL isShow;//是否是展示信息
     
 }
 @end
@@ -32,15 +34,16 @@
     [self setBlankBackButton];
     [self drawTableView];
     
-    
+    isShow = YES;
     [self performSelector:@selector(loadData) withObject:nil afterDelay:0.1];
+    
+    
     
 }
 
 -(void)loadData{
     
-    
-    
+    return;
     CertificationCell *cell1 = [self.view viewWithTag:KCertificationCellTag+0];
     CertificationCell *cell2 = [self.view viewWithTag:KCertificationCellTag+1];
     CertificationCell *cell3 = [self.view viewWithTag:KCertificationCellTag+2];
@@ -62,7 +65,7 @@
     
     
     
-    return;
+    
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
     [paraDic setObject:KUSER.userId forKey:@"userId"];
     [paraDic setObject:self.entId forKey:@"EntId"];
@@ -180,6 +183,9 @@
     
 }
 
+
+
+
 // type: certification:营业执照 idcard:本人身份证
 -(void)upLoadImage:(UIImage*)image type:(NSString*)type
 {
@@ -218,6 +224,29 @@
     }];
     
 }
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    [self.view endEditing:YES];
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"provice_city_area" ofType:@"json"];
+    // 将文件数据化
+    NSData *data = [[NSData alloc] initWithContentsOfFile:path];
+    // 对数据进行JSON格式化并返回字典形式
+    NSArray *array =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+    NSLog(@"%@",array);
+    
+    [BRAddressPickerView showAddressPickerWithShowType:BRAddressPickerModeCity dataSource:array defaultSelected:nil isAutoSelect:YES themeColor:nil resultBlock:^(BRProvinceModel *province, BRCityModel *city, BRAreaModel *area) {
+        NSLog(@"%@%@",province.name,city.name);
+    } cancelBlock:^{
+        
+    }];
+    
+    
+    return NO;
+}
+
+
 
 -(void)addImage:(NSInteger)indexPath
 {
@@ -321,11 +350,17 @@
             cell = [[CertificationCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ideterfir type:0];
         }
         
-        cell.isShow = YES;
+        cell.isShow = isShow;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.index = indexPath.row;
         
         cell.tag = KCertificationCellTag+indexPath.row;
+       
+        if(indexPath.row == 3&&!isShow)
+        {
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.textFld.delegate = self;
+        }
     }
    
     

@@ -12,6 +12,8 @@
 {
     UITableView* backTableView;
     int pageIndex;
+    SDCycleScrollView *cycleView;
+    NSArray *rollNewsArray;
 }
 
 @end
@@ -25,8 +27,6 @@
     [self setNavigationBarTitle:@"行业资讯"];
     [self setBlankBackButton];
     [self drawTableView];
-
-    [self loadData];
 }
 
 -(void)loadData
@@ -40,6 +40,10 @@
         [MBProgressHUD hideHudToView:self.view animated:NO];
         [self endRefresh];
         if ([responseObject[@"result"] integerValue] == 0) {
+            NSDictionary *dataDic = [responseObject objectForKey:@"data"];
+            rollNewsArray = [dataDic objectForKey:@"rollNews"];
+            
+            [backTableView reloadData];
          
         }else{
             [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
@@ -56,6 +60,21 @@
 {
     [backTableView.mj_header endRefreshing];
     [backTableView.mj_footer endRefreshing];
+}
+
+-(void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
+{
+    
+    if(rollNewsArray.count >index)
+    {
+        NSDictionary *dic = rollNewsArray[index];
+        
+        CommonWebViewController *vc = [[CommonWebViewController alloc]init];
+        vc.urlStr = [dic objectForKey:@"newsURL"];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+   
 }
 
 
@@ -90,11 +109,32 @@
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return nil;
+    
+    NSMutableArray *imageArray = [NSMutableArray arrayWithCapacity:1];
+    NSMutableArray *titleArray = [NSMutableArray arrayWithCapacity:1];
+    for(NSDictionary *dic in rollNewsArray)
+    {
+        [imageArray addObject:[dic objectForKey:@"newsURL"]];
+        [titleArray addObject:[dic objectForKey:@"newsName"]];
+    }
+    
+    
+    cycleView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 10, KDeviceW, KDeviceW*90/375) delegate:self placeholderImage:[UIImage imageNamed:@"home_LoadingBanner"]];
+    cycleView.delegate = self;
+    //cycleView.imageURLStringsGroup = imageUrlArray;
+    cycleView.pageControlStyle = SDCycleScrollViewPageContolStyleClassic;
+    cycleView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
+    //cycleView.titleLabelBackgroundColor = [UIColor clearColor];
+    cycleView.imageURLStringsGroup = imageArray;
+    cycleView.titleLabelTextAlignment = NSTextAlignmentCenter;
+    cycleView.titlesGroup = titleArray;
+    
+    return cycleView;
+    
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return KDeviceW*90/375;
+    return KDeviceW*90/375 + 10;
 }
 
 
@@ -121,7 +161,7 @@
     backTableView.estimatedSectionFooterHeight = 0;
     [self.view addSubview:backTableView];
     [backTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view);
+        make.top.mas_equalTo(KNavigationBarHeight);
         make.left.mas_equalTo(0);
         make.right.mas_equalTo(self.view);
         make.bottom.mas_equalTo(self.view.mas_bottom);

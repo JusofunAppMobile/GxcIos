@@ -181,6 +181,20 @@
 
         }];
     }
+    else if (_newsType == NewsOnlyImageType)
+    {
+        self.imageView1.hidden = NO;
+        self.timeLabel.hidden = YES;
+        self.nameLabel.hidden = YES;
+        [self.imageView1 mas_remakeConstraints:^(MASConstraintMaker *make) {
+            //make.width.mas_equalTo(KDeviceW - 30);
+            make.right.mas_equalTo(self.contentView.mas_right).offset(-15);
+            make.top.left.mas_equalTo(15);
+            make.height.mas_equalTo(70);
+            make.bottom.mas_equalTo(self.contentView).offset(-15);
+            
+        }];
+    }
     else
     {
         self.imageView1.hidden = YES;
@@ -249,6 +263,10 @@
         self.newsType = NewsNomalType;
     }
     
+    if([[dataDic objectForKey:@"newsType"] intValue] == 1)//直连
+    {
+        self.newsType = NewsOnlyImageType;
+    }
     
 }
 

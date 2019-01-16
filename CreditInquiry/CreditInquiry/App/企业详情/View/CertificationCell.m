@@ -131,7 +131,7 @@
     }
     else if (index == 1)
     {
-        self.nameLabel.text = @"身  份  证:";
+        self.nameLabel.text = @"法人身份证:";
         self.textFld.placeholder = @"请输入您的身份证号码";
     }
     else if (index == 2)
@@ -141,8 +141,9 @@
     }
     else if (index == 3)
     {
-        self.nameLabel.text = @"职       位:";
-        self.textFld.placeholder = @"请输入您在企业的任职";
+        
+        self.nameLabel.text = @"企业注册地址:";
+        self.textFld.placeholder = @"请选择注册地址";
     }
     else if (index == 4)
     {

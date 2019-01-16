@@ -25,6 +25,15 @@
 #define KGetHomeData   @""HOSTURL"/app/Home/GetHomeData"
 
 
+// 搜索关键词接口
+#define  KSearchWord @""HOSTURL"/app/sys/searchWord"
+
+// 插入关键词接口
+#define  KInsertKey @""HOSTURL"/app/sys/insertSearchWord"
+
+//  热门搜索关键词查询接口
+#define  KHotSearchWord @""HOSTURL"/app/sys/hotSearchWord"
+
 //行业资讯
 #define KIndustryInformation   @""HOSTURL"/app/Home/IndustryInformation"
 

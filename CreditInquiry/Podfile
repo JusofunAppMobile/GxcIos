@@ -60,4 +60,5 @@ pod 'UINavigation-SXFixSpace', '~> 1.0.9'
 # 图片压缩 https://github.com/WearFlatShoesToWalkTheWorld/WCImageCompress
 pod 'WCImageCompress', :git => 'https://github.com/WearFlatShoesToWalkTheWorld/WCImageCompress.git'
 
+
 end

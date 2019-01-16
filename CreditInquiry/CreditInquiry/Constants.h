@@ -127,17 +127,17 @@ typedef enum : NSUInteger {
 //搜索的类型
 typedef NS_ENUM(NSInteger, SearchType) {
     BlurryType = 0, //模糊查询
-    OurmainType   =   1,//主营产品查询
-    ShareholderType  =   2,//股东高管查询
+    ShareholderType  =   1,//股东高管查询
+    OurmainType   =   2,//主营产品查询
     AddressType = 3, //地址电话查询
-    CompanyWebType = 4 ,// 企业网址查询
-    CrackcreditType = 5,// 失信查询
-    TaxCodeType = 6,//查税号
-    JobType = 7,//招聘
-    AddressBookType = 8,//企业通讯录
-    PenetrationType = 9,//股东穿透
-    RiskAnalyze,//风险分析
-    SeekRelation //查关系
+    CrackcreditType = 4,// 失信查询
+    TaxCodeType = 5,//查税号
+    JobType = 6,//招聘
+    AddressBookType = 7,//企业通讯录
+    PenetrationType = 8,//股东穿透
+    RiskAnalyze= 9,//风险分析
+    SeekRelation= 10, //查关系
+    CompanyWebType= 11 // 企业网址查询
 };
 
 //自主信息填报类型

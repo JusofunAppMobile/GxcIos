@@ -12,7 +12,8 @@
 typedef NS_ENUM(NSInteger, NewsType) {
     NewsNomalType = 0,
     NewsOneImageType ,
-    NewsMoreImageType
+    NewsMoreImageType,
+    NewsOnlyImageType
 };
 
 NS_ASSUME_NONNULL_BEGIN
