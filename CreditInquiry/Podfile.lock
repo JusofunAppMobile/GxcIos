@@ -14,6 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - AlipaySDK-iOS (15.5.9)
   - BaiduMapKit (4.2.1)
   - BMKLocationKit-NO-IDFA (1.0.1)
   - CAAnimationBlocks (0.0.1)
@@ -43,6 +44,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
+  - AlipaySDK-iOS
   - BaiduMapKit (= 4.2.1)
   - BMKLocationKit-NO-IDFA (~> 1.0.1)
   - CAAnimationBlocks (~> 0.0.1)
@@ -64,6 +66,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
+    - AlipaySDK-iOS
     - BaiduMapKit
     - BMKLocationKit-NO-IDFA
     - CAAnimationBlocks
@@ -93,6 +96,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  AlipaySDK-iOS: 1c5283b30977a24acecc0114662697f7dc78f618
   BaiduMapKit: b7430823de488bb6d082e4e1d356dadf09d3edb2
   BMKLocationKit-NO-IDFA: 9e39cf066c14d8e5dbbe2df0ee9714bdc48ce9c0
   CAAnimationBlocks: 1aaca5fb6447a95d83b20cc786992956ef46e4ee
@@ -112,6 +116,6 @@ SPEC CHECKSUMS:
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: e84af65812c265547eb4ac3a8726cec1a9784db6
+PODFILE CHECKSUM: c0b491596c821224b1e4157ccd06171846f88499
 
 COCOAPODS: 1.5.3

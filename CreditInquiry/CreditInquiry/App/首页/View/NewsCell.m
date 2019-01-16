@@ -190,7 +190,7 @@
             //make.width.mas_equalTo(KDeviceW - 30);
             make.right.mas_equalTo(self.contentView.mas_right).offset(-15);
             make.top.left.mas_equalTo(15);
-            make.height.mas_equalTo(70);
+            make.height.mas_equalTo(70).priorityHigh();
             make.bottom.mas_equalTo(self.contentView).offset(-15);
             
         }];

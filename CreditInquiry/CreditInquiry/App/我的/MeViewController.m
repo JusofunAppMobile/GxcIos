@@ -174,6 +174,11 @@ static NSString *PlainID = @"MePlainCell";
         vc.listType = index ==1? ListTypeMyMonitor:ListTypeMyCollection;
         [self.navigationController pushViewController:vc animated:YES];
     }
+    else if (index == 5)
+    {
+       BuyVipController*vc = [BuyVipController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 #pragma mark - life cycle
 - (void)viewWillAppear:(BOOL)animated{

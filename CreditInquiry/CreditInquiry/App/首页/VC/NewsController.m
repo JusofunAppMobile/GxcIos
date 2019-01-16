@@ -14,6 +14,7 @@
     int pageIndex;
     SDCycleScrollView *cycleView;
     NSArray *rollNewsArray;
+    NSMutableArray *dataArray;
 }
 
 @end
@@ -23,10 +24,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    dataArray = [NSMutableArray array];
     [self setNavigationBarTitle:@"行业资讯"];
     [self setBlankBackButton];
     [self drawTableView];
+    
+    
 }
 
 -(void)loadData
@@ -41,9 +44,21 @@
         [self endRefresh];
         if ([responseObject[@"result"] integerValue] == 0) {
             NSDictionary *dataDic = [responseObject objectForKey:@"data"];
+            if (pageIndex == 1) {
+                [dataArray removeAllObjects];
+            }
+            
+            [dataArray addObjectsFromArray:[dataDic objectForKey:@"news"]];
             rollNewsArray = [dataDic objectForKey:@"rollNews"];
             
             [backTableView reloadData];
+            
+            int count = [[dataDic objectForKey:@"totalCount"] intValue];
+            if(dataArray.count>=count)
+            {
+                [backTableView.mj_footer endRefreshingWithNoMoreData];
+            }
+            
          
         }else{
             [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
@@ -62,6 +77,10 @@
     [backTableView.mj_footer endRefreshing];
 }
 
+
+
+
+
 -(void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
 {
     
@@ -77,6 +96,14 @@
    
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *dic = [dataArray objectAtIndex:indexPath.row];
+    CommonWebViewController *vc = [[CommonWebViewController alloc]init];
+    vc.urlStr = [dic objectForKey:@"newsURL"];;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -85,7 +112,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 27;
+    return dataArray.count;
     
 }
 
@@ -101,7 +128,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 //    cell.newsType = indexPath.row;
 //    NSArray *array = [dataDic objectForKey:@"news"];
-//    cell.dataDic = [array objectAtIndex:indexPath.row];
+    cell.dataDic = [dataArray objectAtIndex:indexPath.row];
     return cell;
     
     return cell;

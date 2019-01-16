@@ -70,11 +70,12 @@
 #define KPushID    @"push_id"
 //退出登录
 #define KLoginOut   @"loginOut"
-#define  LOGIN_SUCCESS_NOTIFICATION @"LOGIN_SUCCESS_NOTIFICATION"
-//第三方登录成功通知
-#define  OTHER_LOGIN_SUCCESS_NOTIFICATION @"OTHER_LOGIN_SUCCESS_NOTIFICATION"
-#define  UserinfoChangedNotification @"UserinfoChangedNotification"
-#define KFocuNumChange  @"FocuNumChange"
+
+//支付成功
+#define KPaySuccess  @"KPaySuccess"
+
+//关注数量变化
+#define  KFocuNumChange  @"KFocuNumChange"
 //搜索
 #define KSearchPlaceholder @"请输入企业名称、人名、品牌等关键字"
 //推送消息
@@ -92,15 +93,6 @@
 #define KCurrentTimeToServerOffset @"CurrentTimeToServerOffset"
 
 
-//////百度地图  com.jusfoun.EnterpriseInquiry1
-#define BaiDu_Appkey      @"ZDGjTGHV0mmAi1jxZCWBBmRHGnvuxnz9"
-
-
-#define FOLLOWSTATES      @[@"已电话沟通",@"拜访中",@"已拜访",@"合作建立",@"正式合作"]
-
-//地图列表事件通知
-#define KANNOLISTCELLACTIONNOTI @"AnnoListCellActionNoti"
-#define KANNOLISTCELLACTIONNOTIForSearch @"AnnoListCellActionNotiForSearch"
 
 //推送消息
 typedef NS_ENUM(NSInteger, PushMessageType) {
@@ -148,6 +140,14 @@ typedef enum : NSUInteger {
     EditTypePartner,//合作伙伴信息
     EditTypeMember,//成员信息
 } CreditEditType;
+
+
+//AppScheme
+#define KAppScheme @"CreditInquiry"
+
+//////百度地图  com.jusfoun.EnterpriseInquiry1
+#define BaiDu_Appkey      @"ZDGjTGHV0mmAi1jxZCWBBmRHGnvuxnz9"
+
 
 
 #endif /* Constants_h */

@@ -53,6 +53,11 @@
 // 上传图片接口
 #define  KFileUpload @""HOSTURL"/app/sys/fileupload"
 
+// 查询价格
+#define  KGetOrderMsg @""HOSTURL"/app/order/getOrderMsg"
+
+// 支付
+#define  KOrderPay @""HOSTURL"/app/order/orderPay"
 
 
 //登录

@@ -22,6 +22,8 @@
     
     NSInteger chooseRow1;
     NSInteger chooseRow2;
+    NSDictionary *dataDic;
+    
 }
 
 
@@ -34,17 +36,43 @@
     [self setBlankBackButton];
     [self drawTableView];
     
-    [self performSelector:@selector(loadData) withObject:nil afterDelay:1];
+    [self loadData];
+    
+    [KNotificationCenter addObserver:self selector:@selector(getPayResult) name:KPaySuccess object:nil];
 }
 
 -(void)loadData
 {
-    [backTableView reloadData];
-    NSIndexPath *indexPath1 = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self tableView:backTableView didSelectRowAtIndexPath:indexPath1];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:KUSER.userId forKey:@"userId"];
+    [params setObject:@"2" forKey:@"type"];
+    [MBProgressHUD showMessag:@"" toView:self.view];
+    [RequestManager postWithURLString:KGetOrderMsg parameters:params  success:^(id responseObject) {
+        [MBProgressHUD hideHudToView:self.view animated:NO];
+       
+        if ([responseObject[@"result"] integerValue] == 0) {
+            dataDic = [responseObject objectForKey:@"data"];
+            
+            [backTableView reloadData];
+            
+            backTableView.tableHeaderView = [self tableHeadView];
+            NSIndexPath *indexPath1 = [NSIndexPath indexPathForRow:0 inSection:0];
+            [self tableView:backTableView didSelectRowAtIndexPath:indexPath1];
+            
+            NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:0 inSection:1];
+            [self tableView:backTableView didSelectRowAtIndexPath:indexPath2];
+            
+            
+        }else{
+            [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
+        }
+        
+    } failure:^(NSError *error) {
+        [MBProgressHUD showError:@"哎呀，服务器开小差啦，请您稍等，马上回来~" toView:self.view];
+       
+    }];
     
-    NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:0 inSection:1];
-    [self tableView:backTableView didSelectRowAtIndexPath:indexPath2];
+    
 }
 
 -(void)buy
@@ -52,12 +80,40 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:chooseRow1  inSection:0];
     BuyVipCell *cell = [backTableView cellForRowAtIndexPath:indexPath];
     NSLog(@"%@%@元",chooseRow2==0?@"支付宝":@"微信支付",cell.curPriceLabel.text.length>2?[cell.curPriceLabel.text substringFromIndex:1]:@"");
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:KUSER.userId forKey:@"userId"];
+    [params setObject:@(chooseRow1+1) forKey:@"levelType"];
+    [params setObject:@(chooseRow2+1) forKey:@"payType"];
+    [MBProgressHUD showMessag:@"" toView:self.view];
+    [RequestManager postWithURLString:KOrderPay parameters:params  success:^(id responseObject) {
+        [MBProgressHUD hideHudToView:self.view animated:NO];
+        
+        if ([responseObject[@"result"] integerValue] == 0) {
+            NSDictionary *dic = [responseObject objectForKey:@"data"];
+            [[AlipaySDK defaultService] payOrder:[dic objectForKey:@"order"] fromScheme:KAppScheme callback:^(NSDictionary *resultDic) {
+                NSLog(@"reslut = %@",resultDic);
+            }];
+            
+        }else{
+            [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
+        }
+        
+    } failure:^(NSError *error) {
+        [MBProgressHUD showError:@"哎呀，服务器开小差啦，请您稍等，马上回来~" toView:self.view];
+        
+    }];
+    
 }
 
 -(void)VIPIntroduce
 {
-    
-   
+
+}
+
+-(void)getPayResult
+{
+    [MBProgressHUD showSuccess:@"支付成功" toView:nil];
+    [self back];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -126,7 +182,7 @@
         cell = [[BuyVipCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ideterfir section:indexPath.section];
     }
     cell.row = indexPath.row;
-    cell.dataDic = @{};
+    cell.dataDic = dataDic;
     return cell;
 }
 
@@ -265,7 +321,7 @@
     UILabel *nameLabel = [[UILabel alloc]init];
     nameLabel.textColor = [UIColor blackColor];
     nameLabel.font = KFont(16);
-    nameLabel.text = @"13744811567";
+    nameLabel.text = KUSER.phone;
     [backView addSubview:nameLabel];
     [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(kongView.mas_bottom).offset(20);
@@ -277,7 +333,7 @@
     UILabel *label2 = [[UILabel alloc]init];
     label2.textColor = KRGB(153, 153, 153);
     label2.font = KFont(14);
-    label2.text = [NSString stringWithFormat:@"VIP剩余天数：%d天",90];
+    label2.text = [NSString stringWithFormat:@"VIP剩余天数：%@天",[dataDic objectForKey:@"vipLastDay"]];
     [backView addSubview:label2];
     [label2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(nameLabel.mas_bottom).offset(10);
@@ -306,6 +362,12 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:barView];
     
 }
+
+- (void)dealloc{
+    [KNotificationCenter removeObserver:self];
+}
+
+
 
 
 
