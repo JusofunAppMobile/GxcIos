@@ -32,19 +32,22 @@
 #pragma mark - set
 - (void)setCompanyInfo:(NSDictionary *)companyInfo{
     _companyInfo = companyInfo;
-   
     
-    int state = [_companyInfo[@"state"] intValue];//test
-    if (state == 0) {
-        [self addSubview:self.cardImageView];
-        [self.bgView setBackgroundColor:[UIColor clearColor]];
-    }else if (state == 1){//已认证
+    [_cardImageView removeFromSuperview];
+    [_changeView removeFromSuperview];
+    [_cardInfoView removeFromSuperview];
+    
+    int state = [_companyInfo[@"state"] intValue];//test 0 1 2 3
+    if (state == 3){//已认证
         [self addSubview:self.cardInfoView];
         [self addSubview:self.changeView];
         [self.bgView setBackgroundColor:KHexRGB(0xd51424)];
-    }else{//审核中
+    }else if(state == 1){//审核中
         [self addSubview:self.cardInfoView];
         [self.bgView setBackgroundColor:KHexRGB(0xd51424)];
+    }else{//认证失败 未认证
+        [self addSubview:self.cardImageView];
+        [self.bgView setBackgroundColor:[UIColor clearColor]];
     }
     
     //view加载完成

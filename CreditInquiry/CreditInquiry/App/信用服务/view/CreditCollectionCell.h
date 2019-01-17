@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class CreditServiceModel;
 @interface CreditCollectionCell : UICollectionViewCell
-
+@property (nonatomic ,strong) CreditServiceModel *model;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -8,17 +8,41 @@
 
 #import "CreditChartLineCell.h"
 #import "XXLineChartView.h"
+#import "CreditVisitorModel.h"
 
+@interface CreditChartLineCell ()
+@property (nonatomic ,strong) XXLineChartView *chartView;
+@end
 @implementation CreditChartLineCell
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
-        self.backgroundColor = [UIColor cyanColor];
-        XXLineChartView *chartView = [[XXLineChartView alloc]initWithValues:@[@52,@64,@35,@100,@78,@70,@61] xTittles:@[@"1月",@"2月",@"3月",@"4月",@"5月",@"6月"] yTittles:@[@"175",@"150",@"125",@"100",@"75",@"50",@"25",@"0"]];//test
-        chartView.frame = CGRectMake(0, 0, self.width, 200);
-        [self.contentView addSubview:chartView];
+        [self.contentView addSubview:self.chartView];
     }
     return self;
 }
+
+- (void)setDataList:(NSArray *)dataList{
+    _dataList = dataList;
+
+    NSMutableArray *values = [NSMutableArray array];
+    NSMutableArray *xTitles = [NSMutableArray array];
+
+    for (int i = 0; i<dataList.count; i++) {
+        CreditVisitorModel *model = _dataList[i];
+        [values addObject:model.count];
+        [xTitles addObject:model.date];
+    }
+    [self .chartView setXTittles:xTitles values:values];
+}
+
+- (XXLineChartView *)chartView{
+    if (!_chartView) {
+        _chartView = [[XXLineChartView alloc]initWithValues:nil xTittles:nil yTittles:@[@"175",@"150",@"125",@"100",@"75",@"50",@"25",@"0"]];
+        _chartView.frame = CGRectMake(0, 0, self.width, 200);
+    }
+    return _chartView;
+}
+
 
 @end

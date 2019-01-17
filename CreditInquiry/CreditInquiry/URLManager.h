@@ -84,14 +84,38 @@
 //我的收藏列表
 #define KMyCollectionList @""HOSTURL"/app/mineManager/CollectionList"
 
+//自主填报-企业信息
+#define KGetCompanyInfo @""HOSTURL"/app/Company/getCompanyInfo"
 
+//自主填报-企业信息编辑
+#define KEditCompanyInfo @""HOSTURL"/app/Company/CompanyInfoEditor"
 
+//自主填报-企业产品
+#define KGetCompanyProduct @""HOSTURL"/app/Company/getProductList"
 
+//自主填报-企业产品编辑
+#define KEditCompanyProduct @""HOSTURL"/app/Company/productEditor"
 
+//自主填报-企业荣誉
+#define KGetCompanyHonor @""HOSTURL"/app/Company/getHonorList"
 
+//自主填报-企业荣誉编辑
+#define KEditCompanyHonor @""HOSTURL"/app/Company/honorEditor"
 
+//自主填报-合作伙伴
+#define KGetCompanyPartner @""HOSTURL"/app/Company/getpartnerList"
 
+//自主填报-合作伙伴编辑
+#define KEditCompanyPartner @""HOSTURL"/app/Company/partnerEditor"
 
+//自主填报-企业成员
+#define KGetCompanyMember @""HOSTURL"/app/Company/getEmployerList"
+
+//自主填报-企业成员编辑
+#define KEditCompanyMember @""HOSTURL"/app/Company/CompanyEmpEditor"
+
+//信用服务-首页
+#define KGetCreditHomeInfo @""HOSTURL"/app/CreditService/GetHomeInfo"
 
 
 ////////////////////////////////////////////////////////

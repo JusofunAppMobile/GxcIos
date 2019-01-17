@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CreditEditTextCell : UITableViewCell
 
-- (void)setContent:(id)content type:(CreditEditType)type;
+- (void)setContent:(NSMutableDictionary *)data type:(CreditEditType)type editable:(BOOL)editable;
 @end
 
 NS_ASSUME_NONNULL_END

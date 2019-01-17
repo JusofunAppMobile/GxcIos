@@ -27,7 +27,13 @@ static NSString *ProCellID = @"CreditProReportCell";
     [self setNavigationBarTitle:@"信用报告"];//test企业名
     [self setBlankBackButton];
     [self setRightNaviButton];
+    
     [self initView];
+    [self loadData];
+}
+#pragma mark - loadData
+- (void)loadData{
+    
 }
 
 #pragma mark - initView

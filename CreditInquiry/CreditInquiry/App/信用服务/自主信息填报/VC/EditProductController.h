@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface EditProductController : BasicViewController
+@property (nonatomic ,copy) NSString *companyName;
 
 @end
 

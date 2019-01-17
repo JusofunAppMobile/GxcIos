@@ -16,6 +16,7 @@
 #import "PersonalSettingController.h"
 #import "FogotPwdController.h"
 #import "LoginController.h"
+#import "ComCertificationController.h"
 
 static NSString *InfoID = @"MeInfoCell";
 static NSString *ItemID = @"MeItemCell";
@@ -172,6 +173,9 @@ static NSString *PlainID = @"MePlainCell";
     }else if (index ==1||index==2){
         MyMonitorListController *vc = [MyMonitorListController new];
         vc.listType = index ==1? ListTypeMyMonitor:ListTypeMyCollection;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (index == 3){
+        ComCertificationController *vc = [ComCertificationController new];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

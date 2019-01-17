@@ -44,6 +44,12 @@
     return self;
 }
 
+- (void)setXTittles:(NSArray *)xTittles values:(NSArray *)values{
+    _xTittles = xTittles;
+    _values = values;
+    [self setNeedsDisplay];
+}
+
 #pragma mark - 动画
 /**
  *  填充动画过程
@@ -65,8 +71,7 @@
 - (void)drawRect:(CGRect)rect {
     if (!self.xTittles.count) {
         return;
-    }
-    
+    }    
     CGFloat width = self.bounds.size.width;
     CGFloat height = self.bounds.size.height;
     
