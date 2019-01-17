@@ -19,9 +19,14 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
 
-        _bgView = [[UIView alloc]initWithFrame:KFrame(0, self.height -50, self.width, 50)];
+        _bgView = [UIView new];
         _bgView.backgroundColor = [UIColor whiteColor];
         [self addSubview:_bgView];
+        [_bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.mas_equalTo(self);
+            make.height.mas_equalTo(50);
+        }];
+        
         
         UIView *vectorLine = [UIView new];
         vectorLine.backgroundColor = KHexRGB(0xda2632);
@@ -63,7 +68,7 @@
 }
 
 - (void)setupHeader:(int)state section:(NSInteger)section{
-    if (state == 1) {//test
+    if (state == 3) {//test
         if (section == 1) {
             _titleLab.text = @"企业服务";
             _line.hidden = NO;

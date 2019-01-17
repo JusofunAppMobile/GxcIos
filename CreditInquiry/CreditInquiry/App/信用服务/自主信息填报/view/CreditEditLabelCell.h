@@ -14,8 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CreditEditLabelCell : UITableViewCell
 
-@property (nonatomic ,assign) BOOL canEdit;
-- (void)setContent:(id)content row:(NSInteger)row editType:(CreditEditType)type;
+- (void)setContent:(NSMutableDictionary *)data row:(NSInteger)row editType:(CreditEditType)type enable:(BOOL)enable;
 
 @end
 

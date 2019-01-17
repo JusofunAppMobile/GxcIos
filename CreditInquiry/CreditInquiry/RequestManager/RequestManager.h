@@ -123,6 +123,13 @@ typedef void (^RequestProgress)(NSProgress *progress);
                                       success:(void (^)(id responseObject))success
                                       failure:(void (^)(NSError *error))failure;
 
+//路径
++ (NSURLSessionDataTask *)uploadWithURLString:(NSString *)URLString
+                                   parameters:(id)parameters
+                                     progress:(RequestProgress)progress
+                                    imagePath:(NSString *)imagePath
+                                      success:(void (^)(id responseObject))success
+                                      failure:(void (^)(NSError *error))failure;
 
 @end
 

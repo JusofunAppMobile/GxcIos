@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CreditChartLineCell : UICollectionViewCell
-
+@property (nonatomic ,strong) NSArray *dataList;
 @end
 
 NS_ASSUME_NONNULL_END

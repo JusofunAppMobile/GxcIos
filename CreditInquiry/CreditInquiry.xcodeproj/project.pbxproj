@@ -151,6 +151,9 @@
 		CA56112821EDDACF0052CF38 /* MyMonitorListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56112721EDDACF0052CF38 /* MyMonitorListModel.m */; };
 		CA56113421EDE45F0052CF38 /* SettingFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56113221EDE45F0052CF38 /* SettingFooterView.m */; };
 		CA56113521EDE45F0052CF38 /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56113321EDE45F0052CF38 /* SettingCell.m */; };
+		CA56114021EF4F600052CF38 /* CreditServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56113F21EF4F600052CF38 /* CreditServiceModel.m */; };
+		CA56114621EF50020052CF38 /* CreditVisitorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56114521EF50020052CF38 /* CreditVisitorModel.m */; };
+		CA56114921EF517E0052CF38 /* CreditHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56114821EF517E0052CF38 /* CreditHomeModel.m */; };
 		CA5E005921DDE05E0040ABE2 /* NSNumber+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFB721DDE05D0040ABE2 /* NSNumber+StringValue.m */; };
 		CA5E005A21DDE05E0040ABE2 /* UIColor+Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFB921DDE05D0040ABE2 /* UIColor+Tool.m */; };
 		CA5E005B21DDE05E0040ABE2 /* UIImage+Wechat.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFBB21DDE05D0040ABE2 /* UIImage+Wechat.m */; };
@@ -585,6 +588,12 @@
 		CA56113121EDE45E0052CF38 /* SettingFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingFooterView.h; sourceTree = "<group>"; };
 		CA56113221EDE45F0052CF38 /* SettingFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingFooterView.m; sourceTree = "<group>"; };
 		CA56113321EDE45F0052CF38 /* SettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingCell.m; sourceTree = "<group>"; };
+		CA56113E21EF4F600052CF38 /* CreditServiceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreditServiceModel.h; sourceTree = "<group>"; };
+		CA56113F21EF4F600052CF38 /* CreditServiceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreditServiceModel.m; sourceTree = "<group>"; };
+		CA56114421EF50020052CF38 /* CreditVisitorModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreditVisitorModel.h; sourceTree = "<group>"; };
+		CA56114521EF50020052CF38 /* CreditVisitorModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreditVisitorModel.m; sourceTree = "<group>"; };
+		CA56114721EF517E0052CF38 /* CreditHomeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreditHomeModel.h; sourceTree = "<group>"; };
+		CA56114821EF517E0052CF38 /* CreditHomeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreditHomeModel.m; sourceTree = "<group>"; };
 		CA5E000021DDE05D0040ABE2 /* NSNumber+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Zirkfied.h"; sourceTree = "<group>"; };
 		CA5E000121DDE05D0040ABE2 /* NSNumber+Zirkfied.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Zirkfied.m"; sourceTree = "<group>"; };
 		CA5E000221DDE05D0040ABE2 /* NSString+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Zirkfied.h"; sourceTree = "<group>"; };
@@ -1352,6 +1361,19 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		CA56113A21EF4EAA0052CF38 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CA56113E21EF4F600052CF38 /* CreditServiceModel.h */,
+				CA56113F21EF4F600052CF38 /* CreditServiceModel.m */,
+				CA56114421EF50020052CF38 /* CreditVisitorModel.h */,
+				CA56114521EF50020052CF38 /* CreditVisitorModel.m */,
+				CA56114721EF517E0052CF38 /* CreditHomeModel.h */,
+				CA56114821EF517E0052CF38 /* CreditHomeModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		CA5E000A21DDE05D0040ABE2 /* Component */ = {
 			isa = PBXGroup;
 			children = (
@@ -1637,6 +1659,7 @@
 		CA5E013721E433A40040ABE2 /* 自主信息填报 */ = {
 			isa = PBXGroup;
 			children = (
+				CA56113A21EF4EAA0052CF38 /* Model */,
 				CADD605A21E47EC200EB01CD /* VC */,
 				CA5E013A21E433A40040ABE2 /* view */,
 			);
@@ -2331,6 +2354,7 @@
 				CA5EFFB121DDE0390040ABE2 /* BasicNavigationController.m in Sources */,
 				793D1B3B21DF681C00C29908 /* CustomAlert.m in Sources */,
 				CA5E006D21DDE05E0040ABE2 /* MBProgressHUD+Add.m in Sources */,
+				CA56114021EF4F600052CF38 /* CreditServiceModel.m in Sources */,
 				CADD608C21E5887C00EB01CD /* MeInfoCell.m in Sources */,
 				79D34EE521E0616E00B1CB32 /* FilterCollectionCell.m in Sources */,
 				CA5E009221DDE05E0040ABE2 /* ZFPieChart.m in Sources */,
@@ -2341,6 +2365,7 @@
 				CADD60BC21E6E25900EB01CD /* ObjectionTypeCell.m in Sources */,
 				CA56112821EDDACF0052CF38 /* MyMonitorListModel.m in Sources */,
 				CA5EFFB221DDE0390040ABE2 /* BasicWebViewController.m in Sources */,
+				CA56114621EF50020052CF38 /* CreditVisitorModel.m in Sources */,
 				79D34F2721E347AE00B1CB32 /* DetailMapCell.m in Sources */,
 				CA5E007921DDE05E0040ABE2 /* NSString+Zirkfied.m in Sources */,
 				793D1B2321DF67E000C29908 /* PatentController.m in Sources */,
@@ -2534,6 +2559,7 @@
 				CADD60D321E73CB100EB01CD /* ModifyInfoCell.m in Sources */,
 				CA56112021EDB51F0052CF38 /* ChangePwdController.m in Sources */,
 				79D34F2121E3267200B1CB32 /* DetailHolderCell.m in Sources */,
+				CA56114921EF517E0052CF38 /* CreditHomeModel.m in Sources */,
 				793D1C7D21E0585D00C29908 /* TrademarkModel.m in Sources */,
 				793D1B3E21DF684900C29908 /* ErrorModel.m in Sources */,
 				793D1B5C21DF692800C29908 /* CommonWebViewController.m in Sources */,

@@ -368,6 +368,42 @@
                                               if (success) {
                                                   [self verifyToekn:responseObject];
                                                   [self getDateWithTask:task]; success(responseObject);
+                                                  NSLog(@"\nPOST请求：Request success, URL: %@\n params:%@\n 返回内容：%@",
+                                                        [self generateGETAbsoluteURL:URLString params:parameters],
+                                                        parameters,responseObject);
+                                              }
+                                          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                              if (failure) {
+                                                  [self getDateWithTask:task];
+                                                  failure(error);
+                                              }
+                                          }];
+    
+    return session;
+}
+
++ (NSURLSessionDataTask *)uploadWithURLString:(NSString *)URLString
+                                   parameters:(id)parameters
+                                     progress:(RequestProgress)progress
+                                    imagePath:(NSString *)imagePath
+                                      success:(void (^)(id responseObject))success
+                                      failure:(void (^)(NSError *error))failure {
+    //给每个接口添加t跟m字段
+    //给每个接口添加t跟m字段
+    NSMutableDictionary *tmpDic = [self addDictionary:parameters];
+    AFHTTPSessionManager *manager = [self sharedHTTPSessionManager:NO];
+    NSURLSessionDataTask *session = [manager POST:URLString parameters:tmpDic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        NSURL *filepath = [NSURL fileURLWithPath:imagePath];
+        [formData appendPartWithFileURL:filepath name:@"file" error:nil];
+    } progress:^(NSProgress * _Nonnull uploadProgress){
+        if(progress){
+            progress(uploadProgress);
+        }
+        
+    }
+                                          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                                              if (success) {
+                                                  [self getDateWithTask:task]; success(responseObject);
                                               }
                                           } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                                               if (failure) {

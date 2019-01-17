@@ -49,7 +49,7 @@
 //            view.layer.borderColor = KHexRGB(0xd93947).CGColor;
 //            view.layer.cornerRadius = 2;
 //            view.layer.masksToBounds = YES;
-            view.backgroundColor = [UIColor greenColor];
+//            view.backgroundColor = [UIColor greenColor];
 //            view.selected = YES;
             view.titleLabel.font = KFont(11);
             [view setTitle:@"监控" forState:UIControlStateNormal];

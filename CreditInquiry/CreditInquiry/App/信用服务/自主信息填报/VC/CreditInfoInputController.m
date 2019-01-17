@@ -77,18 +77,23 @@ static NSString *CellID = @"CreditInfoInputCell";
 - (void)didClickEditButton:(NSInteger)section{
     if (section == 0) {
         EditCompanyInfoController *vc = [EditCompanyInfoController new];
+        vc.companyName = @"";//test
         [self.navigationController pushViewController:vc animated:YES];
     }else if (section == 1){
         EditProductController *vc = [EditProductController new];
+        vc.companyName = @"";//test
         [self.navigationController pushViewController:vc animated:YES];
     }else if (section == 2){
         EditHonorController *vc = [EditHonorController new];
+        vc.companyName = @"";//test
         [self.navigationController pushViewController:vc animated:YES];
     }else if (section == 3){
         EditPartnerController *vc = [EditPartnerController new];
+        vc.companyName = @"";//test
         [self.navigationController pushViewController:vc animated:YES];
     }else{
         EditMemberController *vc = [EditMemberController new];
+        vc.companyName = @"";//test
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

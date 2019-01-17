@@ -27,6 +27,7 @@
 @property (nonatomic, strong) UIColor *lineColor;
 @property (nonatomic, strong) UIColor *downColor;
 
+- (void)setXTittles:(NSArray *)xTittles values:(NSArray *)values;
 
 
 @end

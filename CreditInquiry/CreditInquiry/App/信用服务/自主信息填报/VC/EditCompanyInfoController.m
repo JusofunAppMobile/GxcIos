@@ -10,17 +10,21 @@
 #import "CreditEditLabelCell.h"
 #import "CreditEditTextCell.h"
 #import "CreditEditImageCell.h"
+#import "GetPhoto.h"
 
 static NSString *LabelCellID = @"CreditEditLabelCell";
 static NSString *ImageCellID = @"CreditEditImageCell";
 static NSString *TextCellID = @"CreditEditTextCell";
 
 
-@interface EditCompanyInfoController ()<UITableViewDelegate,UITableViewDataSource>
+@interface EditCompanyInfoController ()<UITableViewDelegate,UITableViewDataSource,CreditEditImageCellDelegate>
 @property (nonatomic ,strong) UIButton *rightBtn;
 @property (nonatomic ,strong) UITableView *tableview;
 @property (nonatomic ,strong) NSArray *titleArr;
 @property (nonatomic ,assign) BOOL canEdit;
+@property (nonatomic ,strong) NSMutableDictionary *dataDic;
+@property (nonatomic ,strong) UIImage *uploadImage;
+
 @end
 
 @implementation EditCompanyInfoController
@@ -32,6 +36,7 @@ static NSString *TextCellID = @"CreditEditTextCell";
     [self setRightNaviButton];
         
     [self initView];
+    [self loadData];
 }
 #pragma mark - initView
 - (void)initView{
@@ -47,7 +52,6 @@ static NSString *TextCellID = @"CreditEditTextCell";
     [_tableview registerClass:[CreditEditLabelCell class] forCellReuseIdentifier:LabelCellID];
     [_tableview registerClass:[CreditEditImageCell class] forCellReuseIdentifier:ImageCellID];
     [_tableview registerClass:[CreditEditTextCell class] forCellReuseIdentifier:TextCellID];
-
 }
 
 - (void)setRightNaviButton{
@@ -63,6 +67,65 @@ static NSString *TextCellID = @"CreditEditTextCell";
     
     UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:barView];
     self.navigationItem.rightBarButtonItem = item;
+}
+
+#pragma mark - loadData
+- (void)loadData{
+    [MBProgressHUD showMessag:@"" toView:self.view];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:KUSER.userId forKey:@"userId"];
+    
+    [RequestManager postWithURLString:KGetCompanyInfo parameters:params success:^(id responseObject) {
+        [MBProgressHUD hideHudToView:self.view animated:YES];
+        if ([responseObject[@"result"] intValue] == 0) {
+            [self.dataDic setDictionary:responseObject[@"data"]];
+            [_tableview reloadData];
+        }else{
+            [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+- (void)uploadHeadImage:(UIImage *)image{
+    [MBProgressHUD showMessag:@"" toView:self.view];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:@"logo" forKey:@"type"];
+    
+    [RequestManager uploadWithURLString:KUploadImage parameters:params progress:nil image:image success:^(id responseObject) {
+        [MBProgressHUD hideHudToView:self.view animated:YES];
+        if ([responseObject[@"result"] intValue] == 0) {
+            NSString *filepath = responseObject[@"data"][@"filepath"];
+            NSString *imageURL = responseObject[@"data"][@"filehttp"];
+            [self.dataDic setObject:filepath forKey:@"logo"];
+            [self.dataDic setObject:imageURL forKey:@"logoHttp"];
+            [_tableview reloadData];
+        }else{
+            [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
+        }
+        
+    } failure:^(NSError *error) {
+        [MBProgressHUD hideHudToView:self.view animated:YES];
+    }];
+}
+
+- (void)commitEditInfo{
+    [MBProgressHUD showMessag:@"" toView:self.view];
+    [RequestManager postWithURLString:KEditCompanyInfo parameters:self.dataDic success:^(id responseObject) {
+        [MBProgressHUD hideHudToView:self.view animated:YES];
+        if ([responseObject[@"result"] intValue] == 0) {
+            [MBProgressHUD showSuccess:@"提交成功" toView:self.view];
+            _canEdit = _rightBtn.selected = NO;
+            [_tableview reloadData];
+        }else{
+            [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD hideHudToView:self.view animated:YES];
+    }];
 }
 
 #pragma mark - UITableViewDataSource
@@ -81,7 +144,7 @@ static NSString *TextCellID = @"CreditEditTextCell";
     if (section == 0) {
         return CGFLOAT_MIN;
     }
-    return 30;
+    return 10;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -92,23 +155,52 @@ static NSString *TextCellID = @"CreditEditTextCell";
     if (indexPath.section == 0) {
         if (indexPath.row == 4) {
             CreditEditImageCell *cell = [tableView dequeueReusableCellWithIdentifier:ImageCellID forIndexPath:indexPath];
+            [cell setContent:self.dataDic type:EditTypeInfo];
+            cell.delegate = self;
             return cell;
         }else{
             CreditEditLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:LabelCellID forIndexPath:indexPath];
-            [cell setContent:@"" row:indexPath.row editType:EditTypeInfo];
-            cell.canEdit = _canEdit;
+            [cell setContent:self.dataDic row:indexPath.row editType:EditTypeInfo enable:_canEdit];
             return cell;
         }
     }else{
         CreditEditTextCell *cell = [tableView dequeueReusableCellWithIdentifier:TextCellID forIndexPath:indexPath];
-        [cell setContent:nil type:EditTypeInfo];
+        [cell setContent:self.dataDic type:EditTypeInfo editable:_canEdit];
         return cell;
     }
 }
 
-- (void)rightAction{
-    _rightBtn.selected = !_rightBtn.selected;
-    _canEdit = _rightBtn.selected;
-    [_tableview reloadData];
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    [self.view endEditing:YES];
 }
+
+- (void)rightAction{//对齐标签的bug
+    [self.view endEditing:YES];
+    if (_rightBtn.selected) {
+        [self commitEditInfo];
+        NSLog(@"b内容___%@",self.dataDic);
+    }else{
+        _canEdit = _rightBtn.selected = YES;
+        [_tableview reloadData];
+    }
+}
+#pragma mark - CreditEditImageCellDelegate 添加图片
+- (void)didClickAddImageView{
+    [[GetPhoto sharedGetPhoto] getPhotoWithTarget:self success:^(UIImage *image, NSString *imagePath) {
+        [self uploadHeadImage:image];
+    }];
+}
+
+
+
+#pragma mark - lazy load
+- (NSMutableDictionary *)dataDic{
+    if (!_dataDic) {
+        _dataDic = [NSMutableDictionary dictionary];
+        [_dataDic setObject:_companyName forKey:@"companyName"];
+        [_dataDic setObject:KUSER.userId forKey:@"userId"];
+    }
+    return _dataDic;
+}
+
 @end
