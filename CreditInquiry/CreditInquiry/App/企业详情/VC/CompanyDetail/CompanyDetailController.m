@@ -494,7 +494,7 @@
         [MBProgressHUD hideHudToView:self.view animated:YES];
         if([[responseObject objectForKey:@"result"] intValue] == 0)
         {
-            if(sender.tag == 45678)
+            if([sender.titleLabel.text isEqualToString:@"监控"])
             {
                 [MBProgressHUD showSuccess:@"添加监控成功" toView:self.view];
                 [sender setTitle:@"已监控" forState:UIControlStateNormal];
@@ -510,7 +510,7 @@
             [MBProgressHUD showError:[responseObject objectForKey:@"msg"] toView:self.view];
             
         }
-        
+        [sender setImagePosition:LXMImagePositionTop spacing:5];
     } failure:^(NSError *error) {
         [MBProgressHUD showError:@"请求失败" toView:self.view];
         

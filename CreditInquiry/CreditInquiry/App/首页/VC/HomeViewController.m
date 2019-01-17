@@ -229,6 +229,7 @@ static NSString *NewsCellID = @"NewsCellID";
     }
     else
     {
+       
         NSArray *array = [dataDic objectForKey:@"news"];
         return array.count;
     }
@@ -249,7 +250,7 @@ static NSString *NewsCellID = @"NewsCellID";
     {
         NewsCell *cell = [tableView dequeueReusableCellWithIdentifier:NewsCellID forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.newsType = indexPath.row;
+      //  cell.newsType = indexPath.row;
         NSArray *array = [dataDic objectForKey:@"news"];
         cell.dataDic = [array objectAtIndex:indexPath.row];
         return cell;

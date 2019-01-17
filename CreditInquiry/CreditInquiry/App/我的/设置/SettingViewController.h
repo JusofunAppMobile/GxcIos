@@ -7,7 +7,7 @@
 //
 
 #import "BasicViewController.h"
-
+#import "AboutController.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SettingViewController : BasicViewController

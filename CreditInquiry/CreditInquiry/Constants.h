@@ -70,11 +70,12 @@
 #define KPushID    @"push_id"
 //退出登录
 #define KLoginOut   @"loginOut"
-#define  LOGIN_SUCCESS_NOTIFICATION @"LOGIN_SUCCESS_NOTIFICATION"
-//第三方登录成功通知
-#define  OTHER_LOGIN_SUCCESS_NOTIFICATION @"OTHER_LOGIN_SUCCESS_NOTIFICATION"
-#define  UserinfoChangedNotification @"UserinfoChangedNotification"
-#define KFocuNumChange  @"FocuNumChange"
+
+//支付成功
+#define KPaySuccess  @"KPaySuccess"
+
+//关注数量变化
+#define  KFocuNumChange  @"KFocuNumChange"
 //搜索
 #define KSearchPlaceholder @"请输入企业名称、人名、品牌等关键字"
 //推送消息
@@ -92,15 +93,6 @@
 #define KCurrentTimeToServerOffset @"CurrentTimeToServerOffset"
 
 
-//////百度地图  com.jusfoun.EnterpriseInquiry1
-#define BaiDu_Appkey      @"ZDGjTGHV0mmAi1jxZCWBBmRHGnvuxnz9"
-
-
-#define FOLLOWSTATES      @[@"已电话沟通",@"拜访中",@"已拜访",@"合作建立",@"正式合作"]
-
-//地图列表事件通知
-#define KANNOLISTCELLACTIONNOTI @"AnnoListCellActionNoti"
-#define KANNOLISTCELLACTIONNOTIForSearch @"AnnoListCellActionNotiForSearch"
 
 //推送消息
 typedef NS_ENUM(NSInteger, PushMessageType) {
@@ -127,17 +119,17 @@ typedef enum : NSUInteger {
 //搜索的类型
 typedef NS_ENUM(NSInteger, SearchType) {
     BlurryType = 0, //模糊查询
-    OurmainType   =   1,//主营产品查询
-    ShareholderType  =   2,//股东高管查询
+    ShareholderType  =   1,//股东高管查询
+    OurmainType   =   2,//主营产品查询
     AddressType = 3, //地址电话查询
-    CompanyWebType = 4 ,// 企业网址查询
-    CrackcreditType = 5,// 失信查询
-    TaxCodeType = 6,//查税号
-    JobType = 7,//招聘
-    AddressBookType = 8,//企业通讯录
-    PenetrationType = 9,//股东穿透
-    RiskAnalyze,//风险分析
-    SeekRelation //查关系
+    CrackcreditType = 4,// 失信查询
+    TaxCodeType = 5,//查税号
+    JobType = 6,//招聘
+    AddressBookType = 7,//企业通讯录
+    PenetrationType = 8,//股东穿透
+    RiskAnalyze= 9,//风险分析
+    SeekRelation= 10, //查关系
+    CompanyWebType= 11 // 企业网址查询
 };
 
 //自主信息填报类型
@@ -148,6 +140,14 @@ typedef enum : NSUInteger {
     EditTypePartner,//合作伙伴信息
     EditTypeMember,//成员信息
 } CreditEditType;
+
+
+//AppScheme
+#define KAppScheme @"CreditInquiry"
+
+//////百度地图  com.jusfoun.EnterpriseInquiry1
+#define BaiDu_Appkey      @"ZDGjTGHV0mmAi1jxZCWBBmRHGnvuxnz9"
+
 
 
 #endif /* Constants_h */

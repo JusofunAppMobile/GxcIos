@@ -62,8 +62,9 @@
     
     NSMutableDictionary *paraDic  = [NSMutableDictionary dictionary];
     [paraDic setObject:@(self.searchType) forKey:@"type"];
+    [paraDic setObject:KUSER.userId forKey:@"userId"];
 //    [paraDic setObject:@(OurmainType) forKey:@"type"];//test
-    [RequestManager QXBGetWithURLString:GetHotKey parameters:paraDic success:^(id responseObject) {
+    [RequestManager postWithURLString:KSearchWord parameters:paraDic success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         // [MBProgressHUD hideHudToView:self.view animated:YES];
         if ([responseObject[@"result"] integerValue ]==0) {

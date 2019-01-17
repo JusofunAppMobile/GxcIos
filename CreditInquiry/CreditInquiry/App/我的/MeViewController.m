@@ -126,7 +126,14 @@ static NSString *PlainID = @"MePlainCell";
         if (indexPath.row == 3) {
             SettingViewController *vc = [SettingViewController new];
             [self.navigationController pushViewController:vc animated:YES];
-        }else{
+        }else if (indexPath.row == 0) {
+            
+            
+            BrowseController *vc = [BrowseController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        else
+        {
             FogotPwdController *vc = [FogotPwdController new];
             [self.navigationController pushViewController:vc animated:YES];
         }
@@ -176,6 +183,11 @@ static NSString *PlainID = @"MePlainCell";
         [self.navigationController pushViewController:vc animated:YES];
     }else if (index == 3){
         ComCertificationController *vc = [ComCertificationController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else if (index == 5)
+    {
+       BuyVipController*vc = [BuyVipController new];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

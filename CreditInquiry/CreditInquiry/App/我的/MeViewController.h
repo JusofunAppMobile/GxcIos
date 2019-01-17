@@ -7,7 +7,9 @@
 //
 
 #import "BasicViewController.h"
-
+#import "BuyVipController.h"
+#import "VisitorController.h"
+#import "BrowseController.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MeViewController : BasicViewController

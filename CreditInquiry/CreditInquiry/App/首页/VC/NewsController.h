@@ -8,9 +8,11 @@
 
 #import "BasicViewController.h"
 #import "NewsCell.h"
+#import <SDCycleScrollView.h>
+#import "CommonWebViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NewsController : BasicViewController<UITableViewDelegate,UITableViewDataSource>
+@interface NewsController : BasicViewController<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate>
 
 @end
 

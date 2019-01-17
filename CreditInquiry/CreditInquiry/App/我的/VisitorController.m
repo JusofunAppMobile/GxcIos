@@ -12,6 +12,8 @@
 {
     UITableView* backTableView;
     UILabel *countLabel;
+    int pageIndex;
+    NSMutableArray *dataArray;
 }
 
 @end
@@ -26,19 +28,60 @@
     [self setWhiteBackButton];
     [self drawTableView];
     
-    
-    [self performSelector:@selector(loadData) withObject:nil afterDelay:1];
+
 }
+
 
 -(void)loadData
 {
-    [self setCount];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:KUSER.userId forKey:@"userId"];
+    [params setObject:@"20" forKey:@"pageSize"];
+    [params setObject:[NSString stringWithFormat:@"%d",pageIndex] forKey:@"pageIndex"];
+    [MBProgressHUD showMessag:@"" toView:self.view];
+    [RequestManager postWithURLString:KVisitorRecord parameters:params  success:^(id responseObject) {
+        [MBProgressHUD hideHudToView:self.view animated:NO];
+        [self endRefresh];
+        if ([responseObject[@"result"] integerValue] == 0) {
+            NSDictionary *dataDic = [responseObject objectForKey:@"data"];
+            if (pageIndex == 1) {
+                [dataArray removeAllObjects];
+                dataArray = [NSMutableArray array];
+            }
+            
+            [dataArray addObjectsFromArray:[dataDic objectForKey:@"news"]];
+          
+            [self setCount:[[responseObject objectForKey:@"data"] objectForKey:@"count"]];
+            [backTableView reloadData];
+            
+            int count = [[dataDic objectForKey:@"count"] intValue];
+            if(dataArray.count>=count)
+            {
+                [backTableView.mj_footer endRefreshingWithNoMoreData];
+            }
+            pageIndex++;
+            
+        }else{
+            [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
+        }
+        
+    } failure:^(NSError *error) {
+        [MBProgressHUD showError:@"哎呀，服务器开小差啦，请您稍等，马上回来~" toView:self.view];
+        [self endRefresh];
+    }];
 }
 
--(void)setCount
+
+-(void)endRefresh
+{
+    [backTableView.mj_header endRefreshing];
+    [backTableView.mj_footer endRefreshing];
+}
+
+-(void)setCount:(NSString *)count
 {
     NSString *str1 = @"用户访问：";
-    NSString *countStr = [NSString stringWithFormat:@"%@",@"341"];
+    NSString *countStr = [NSString stringWithFormat:@"%@",count];
     NSString *str2  = @"次";
     
     NSString *str3 = [NSString stringWithFormat:@"%@%@%@",str1,countStr,str2];
@@ -70,7 +113,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 27;
+    return dataArray.count;
     
 }
 
@@ -83,14 +126,21 @@
     {
         cell = [[VistorCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ideterfir ];
     }
-    cell.nameLabel.text = @"江苏145名儿童接种过期疫苗 3人被免职5人被立案调查";
-    cell.timeLabel.text = @"2018-12-30 12:20";
+    NSDictionary *dic = [dataArray objectAtIndex:indexPath.row];
+    cell.nameLabel.text = [dic objectForKey:@"name"];
+    cell.timeLabel.text = [dic objectForKey:@"date"];
    
     return cell;
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    
+    if(dataArray.count == 0)
+    {
+        return nil;
+    }
+    
     //把 view2 的 左下角 和 右下角的直角切成圆角
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(15,0,KDeviceW-30,10)];
     view.backgroundColor = [UIColor whiteColor];
@@ -105,6 +155,8 @@
     view.layer.mask = maskLayer;
 
     return view;
+    
+    
 
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -153,10 +205,15 @@
         make.bottom.mas_equalTo(self.view.mas_bottom);
     }];
     
-//    CAShapeLayer *maskLayer = [CAShapeLayer layer];
-//    maskLayer.path = [UIBezierPath bezierPathWithRoundedRect:backTableView.bounds byRoundingCorners: UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii: (CGSize){5.0f, 5.0f}].CGPath;
-//    backTableView.layer.masksToBounds = YES;
-//    backTableView.layer.mask = maskLayer;
+    backTableView.mj_header =  [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        pageIndex = 1;
+        [self loadData];
+    }];
+    [backTableView.mj_header beginRefreshing];
+    backTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [self loadData];
+    }];
+    
     
 }
 

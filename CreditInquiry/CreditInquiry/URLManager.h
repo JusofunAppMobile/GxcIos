@@ -25,6 +25,15 @@
 #define KGetHomeData   @""HOSTURL"/app/Home/GetHomeData"
 
 
+// 搜索关键词接口
+#define  KSearchWord @""HOSTURL"/app/sys/searchWord"
+
+// 插入关键词接口
+#define  KInsertKey @""HOSTURL"/app/sys/insertSearchWord"
+
+//  热门搜索关键词查询接口
+#define  KHotSearchWord @""HOSTURL"/app/sys/hotSearchWord"
+
 //行业资讯
 #define KIndustryInformation   @""HOSTURL"/app/Home/IndustryInformation"
 
@@ -41,9 +50,23 @@
 #define  KMonitor @""HOSTURL"/app/MonitoringDynamics/AddOrCancelMonitor"
 
 
+// 访客
+#define  KVisitorRecord @""HOSTURL"/app/CreditService/visitorRecord"
+
+// 浏览记录
+#define  KBrowseList @""HOSTURL"/app/mineManager/BrowseHistoryList"
+
+// 浏览记录
+#define  KDelBrowseList @""HOSTURL"/app/mineManager/delBrowseHistory"
+
 // 上传图片接口
 #define  KFileUpload @""HOSTURL"/app/sys/fileupload"
 
+// 查询价格
+#define  KGetOrderMsg @""HOSTURL"/app/order/getOrderMsg"
+
+// 支付
+#define  KOrderPay @""HOSTURL"/app/order/orderPay"
 
 
 //登录

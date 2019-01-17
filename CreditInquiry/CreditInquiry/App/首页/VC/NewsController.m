@@ -12,6 +12,9 @@
 {
     UITableView* backTableView;
     int pageIndex;
+    SDCycleScrollView *cycleView;
+    NSArray *rollNewsArray;
+    NSMutableArray *dataArray;
 }
 
 @end
@@ -21,12 +24,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    dataArray = [NSMutableArray array];
     [self setNavigationBarTitle:@"行业资讯"];
     [self setBlankBackButton];
     [self drawTableView];
-
-    [self loadData];
+    
+    
 }
 
 -(void)loadData
@@ -40,7 +43,24 @@
         [MBProgressHUD hideHudToView:self.view animated:NO];
         [self endRefresh];
         if ([responseObject[@"result"] integerValue] == 0) {
-         
+            NSDictionary *dataDic = [responseObject objectForKey:@"data"];
+            if (pageIndex == 1) {
+                [dataArray removeAllObjects];
+                dataArray = [NSMutableArray array];
+            }
+            
+            [dataArray addObjectsFromArray:[dataDic objectForKey:@"news"]];
+            rollNewsArray = [dataDic objectForKey:@"rollNews"];
+            
+            [backTableView reloadData];
+            
+            int count = [[dataDic objectForKey:@"totalCount"] intValue];
+            if(dataArray.count>=count)
+            {
+                [backTableView.mj_footer endRefreshingWithNoMoreData];
+            }
+            
+            pageIndex++;
         }else{
             [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
         }
@@ -59,6 +79,33 @@
 }
 
 
+
+
+
+-(void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
+{
+    
+    if(rollNewsArray.count >index)
+    {
+        NSDictionary *dic = rollNewsArray[index];
+        
+        CommonWebViewController *vc = [[CommonWebViewController alloc]init];
+        vc.urlStr = [dic objectForKey:@"newsURL"];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+   
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *dic = [dataArray objectAtIndex:indexPath.row];
+    CommonWebViewController *vc = [[CommonWebViewController alloc]init];
+    vc.urlStr = [dic objectForKey:@"newsURL"];;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -66,7 +113,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 27;
+    return dataArray.count;
     
 }
 
@@ -82,7 +129,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 //    cell.newsType = indexPath.row;
 //    NSArray *array = [dataDic objectForKey:@"news"];
-//    cell.dataDic = [array objectAtIndex:indexPath.row];
+    cell.dataDic = [dataArray objectAtIndex:indexPath.row];
     return cell;
     
     return cell;
@@ -90,11 +137,32 @@
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return nil;
+    
+    NSMutableArray *imageArray = [NSMutableArray arrayWithCapacity:1];
+    NSMutableArray *titleArray = [NSMutableArray arrayWithCapacity:1];
+    for(NSDictionary *dic in rollNewsArray)
+    {
+        [imageArray addObject:[dic objectForKey:@"newsURL"]];
+        [titleArray addObject:[dic objectForKey:@"newsName"]];
+    }
+    
+    
+    cycleView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 10, KDeviceW, KDeviceW*90/375) delegate:self placeholderImage:[UIImage imageNamed:@"home_LoadingBanner"]];
+    cycleView.delegate = self;
+    //cycleView.imageURLStringsGroup = imageUrlArray;
+    cycleView.pageControlStyle = SDCycleScrollViewPageContolStyleClassic;
+    cycleView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
+    //cycleView.titleLabelBackgroundColor = [UIColor clearColor];
+    cycleView.imageURLStringsGroup = imageArray;
+    cycleView.titleLabelTextAlignment = NSTextAlignmentCenter;
+    cycleView.titlesGroup = titleArray;
+    
+    return cycleView;
+    
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return KDeviceW*90/375;
+    return KDeviceW*90/375 + 10;
 }
 
 
@@ -121,7 +189,7 @@
     backTableView.estimatedSectionFooterHeight = 0;
     [self.view addSubview:backTableView];
     [backTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view);
+        make.top.mas_equalTo(KNavigationBarHeight);
         make.left.mas_equalTo(0);
         make.right.mas_equalTo(self.view);
         make.bottom.mas_equalTo(self.view.mas_bottom);

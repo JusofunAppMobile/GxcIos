@@ -190,35 +190,41 @@
 -(void)setDataDic:(NSDictionary *)dataDic
 {
     _dataDic = dataDic;
+    
+    if(dataDic.count == 0)
+    {
+        return;
+    }
+    
     if(self.section == 0)
     {
         if(self.row == 0)
         {
-            int oriPrice = 699;
-            CGFloat curPrice = 365;
-            CGFloat dayPrice = curPrice/365.0;
-            self.oriPriceLabel.text = [NSString stringWithFormat:@"¥%d",oriPrice];
-            self.dayLabel.text = [NSString stringWithFormat:@"低至¥%.2f/天",dayPrice];
-            self.curPriceLabel.text = [NSString stringWithFormat:@"¥%.2f",curPrice];
+            NSString * oriPrice = [dataDic objectForKey:@"oneOriPrice"];
+            NSString * curPrice = [dataDic objectForKey:@"oneCurPrice"];;
+            NSString * dayPrice = [dataDic objectForKey:@"oneDayPrice"];;
+            self.oriPriceLabel.text = [NSString stringWithFormat:@"¥%@",oriPrice];
+            self.dayLabel.text = [NSString stringWithFormat:@"低至¥%@/天",dayPrice];
+            self.curPriceLabel.text = [NSString stringWithFormat:@"¥%@",curPrice];
         }
         else if (self.row == 1)
         {
-            int oriPrice = 999;
-            CGFloat curPrice = 665;
-            CGFloat dayPrice = curPrice/(365.0*2);
-            self.oriPriceLabel.text = [NSString stringWithFormat:@"¥%d",oriPrice];
-            self.dayLabel.text = [NSString stringWithFormat:@"低至¥%.2f/天",dayPrice];
-            self.curPriceLabel.text = [NSString stringWithFormat:@"¥%.2f",curPrice];
+            NSString * oriPrice = [dataDic objectForKey:@"twoOriPrice"];
+            NSString * curPrice = [dataDic objectForKey:@"twoCurPrice"];;
+            NSString * dayPrice = [dataDic objectForKey:@"twoDayPrice"];;
+            self.oriPriceLabel.text = [NSString stringWithFormat:@"¥%@",oriPrice];
+            self.dayLabel.text = [NSString stringWithFormat:@"低至¥%@/天",dayPrice];
+            self.curPriceLabel.text = [NSString stringWithFormat:@"¥%@",curPrice];
         }
         else
         {
             
-            int oriPrice = 1299;
-            CGFloat curPrice = 865;
-            CGFloat dayPrice = curPrice/(365.0*3);
-            self.oriPriceLabel.text = [NSString stringWithFormat:@"¥%d",oriPrice];
-            self.dayLabel.text = [NSString stringWithFormat:@"低至¥%.2f/天",dayPrice];
-            self.curPriceLabel.text = [NSString stringWithFormat:@"¥%.2f",curPrice];
+            NSString * oriPrice = [dataDic objectForKey:@"threeOriPrice"];
+            NSString * curPrice = [dataDic objectForKey:@"threeCurPrice"];;
+            NSString * dayPrice = [dataDic objectForKey:@"threeDayPrice"];;
+            self.oriPriceLabel.text = [NSString stringWithFormat:@"¥%@",oriPrice];
+            self.dayLabel.text = [NSString stringWithFormat:@"低至¥%@/天",dayPrice];
+            self.curPriceLabel.text = [NSString stringWithFormat:@"¥%@",curPrice];
         }
         
     }

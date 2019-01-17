@@ -74,6 +74,13 @@ static NSString *CellID = @"SettingCell";
             [self clearCache];
         }
     }
+    else
+    {
+        if (indexPath.row == 2) {
+            AboutController *vc = [AboutController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }
 }
 
 //清除缓存
