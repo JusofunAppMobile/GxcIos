@@ -79,6 +79,9 @@
 //注册
 #define KRegister   @""HOSTURL"/app/UserLogin/RegisterApp"
 
+//忘记密码
+#define KForgetPassword   @""HOSTURL"/app/UserLogin/forgetPassword"
+
 //发送验证码
 #define KSendMesCode   @""HOSTURL"/app/UserLogin/sendMesCode"
 
