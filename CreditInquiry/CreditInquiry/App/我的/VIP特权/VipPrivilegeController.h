@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface VipPrivilegeController : BasicWebViewController
-
+@property (nonatomic ,assign) BuyVipFromType fromType;
 @end
 
 NS_ASSUME_NONNULL_END

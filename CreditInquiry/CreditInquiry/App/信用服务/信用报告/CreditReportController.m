@@ -139,23 +139,21 @@ static NSString *ProCellID = @"CreditProReportCell";
 - (void)didClickSendReportButton:(int)cellType{
     
     if (KUSER.vipStatus.intValue == 1) {
-        NSString *reportType = cellType == 0? @"企业信用报告-标准版":@"企业信用报告-专业版";
         NSString *price =  cellType == 0?_reportInfo[@"basicVersionDownloadAmount"]:_reportInfo[@"professionVersionDownloadAmount"];
         
         ConfirmOrderController *vc = [ConfirmOrderController new];
-        vc.reportName = reportType;
-        vc.companyName = _companyName;
         vc.price = price;
+        vc.reportType = cellType == 0?1:2;
+        vc.companyName = _companyName;
+        vc.companyId = _companyid;
         [self.navigationController pushViewController:vc animated:YES];
     }else{
-//        KWeakSelf
-//        [[ShowMessageView alloc]initWithType:ShowMessageVIPType action:^{
-//            VipPrivilegeController *vc = [VipPrivilegeController new];
-//            [weakSelf.navigationController pushViewController:vc animated:YES];
-//        }];
-        
-        BuyVipController *vc = [BuyVipController new];
-        [self.navigationController pushViewController:vc animated:YES];
+        KWeakSelf
+        [[ShowMessageView alloc]initWithType:ShowMessageVIPType action:^{
+            VipPrivilegeController *vc = [VipPrivilegeController new];
+            vc.fromType = BuyVipFromReportList;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        }];
     }
 }
 

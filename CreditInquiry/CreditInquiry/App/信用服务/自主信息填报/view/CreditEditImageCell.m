@@ -32,6 +32,7 @@
             }];
             view.font = KFont(15);
             view.textColor = KHexRGB(0x303030);
+            view.backgroundColor = [UIColor greenColor];
             view;
         });
         
@@ -79,7 +80,7 @@
     if (![string hasPrefix:@"http://"]) {
         string = type == EditTypeInfo?data[@"logoHttp"]:data[@"imageHttp"];
     }
-    [_iconView sd_setImageWithURL:[NSURL URLWithString:string] placeholderImage:nil];
+    [_iconView sd_setImageWithURL:[NSURL URLWithString:string] placeholderImage:KImageName(@"uploadDefault")];
     
     if (type == EditTypeInfo) {
         _titleLab.text = @"LOGO：";

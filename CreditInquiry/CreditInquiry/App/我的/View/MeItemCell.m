@@ -15,14 +15,14 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
         NSArray *icons = @[@"mine_dingdan",@"mine_jiankong",@"mine_shoucang",
-                           @"mine_renzheng",@"mine_tequan",@"mine_zengsong"];
-        NSArray *titles = @[@"我的订单",@"我的监控",@"我的收藏",@"认证企业",@"VIP特权",
-                            @"赠送好友VIP"];
+                           @"mine_renzheng",@"mine_tequan"/*,@"mine_zengsong"*/];
+        NSArray *titles = @[@"我的订单",@"我的监控",@"我的收藏",@"认证企业",@"VIP特权"/*,
+                                                                     @"赠送好友VIP"*/];
         
         CGFloat width = (KDeviceW -15*2)/4;
         CGFloat height = 50;
         CGFloat lineSpace = 17;
-        for (int i = 0; i<6; i++) {
+        for (int i = 0; i < icons.count; i++) {
             UIButton *item = [[UIButton alloc]initWithFrame:KFrame(width*(i%4), 20+(i/4)*(height+lineSpace), width, 50)];
             item.tag = BASE_TAG+i;
             item.titleLabel.font = KFont(14);

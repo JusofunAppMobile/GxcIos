@@ -29,8 +29,15 @@ static NSString *CellID3 = @"ObjectionInfoCell";
     [self setBlankBackButton];
     
     [self initView];
+    [self loadData];
 }
 
+#pragma mark - loadData
+- (void)loadData{
+    
+}
+
+#pragma mark - initView
 - (void)initView{
     self.tableview = ({
         UITableView *view = [[UITableView alloc]initWithFrame:KFrame(0, KNavigationBarHeight, KDeviceW, KDeviceH-KNavigationBarHeight) style:UITableViewStyleGrouped];

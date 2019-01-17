@@ -158,6 +158,15 @@
 //信用报告
 #define KGetCreditReportList @""HOSTURL"/app/CorporateInfo/CreditReport"
 
+//发送报告
+#define KSendCreditReport   @""HOSTURL"/app/CorporateInfo/createCreditWord"
+
+
+//信用承诺上传
+#define KUploadPromise     @""HOSTURL"/app/CreditService/uploadLetter"
+
+//信用承诺模版
+#define KGetPromiseSample  @""HOSTURL"/app/CreditService/getTemplateByEmail"
 
 ////////////////////////////////////////////////////////
 
