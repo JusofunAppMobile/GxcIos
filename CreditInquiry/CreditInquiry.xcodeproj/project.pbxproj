@@ -154,6 +154,8 @@
 		CA56114021EF4F600052CF38 /* CreditServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56113F21EF4F600052CF38 /* CreditServiceModel.m */; };
 		CA56114621EF50020052CF38 /* CreditVisitorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56114521EF50020052CF38 /* CreditVisitorModel.m */; };
 		CA56114921EF517E0052CF38 /* CreditHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56114821EF517E0052CF38 /* CreditHomeModel.m */; };
+		CA56114C21F0277A0052CF38 /* ReportPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56114B21F0277A0052CF38 /* ReportPreviewController.m */; };
+		CA56115021F057B00052CF38 /* VipPrivilegeController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56114F21F057B00052CF38 /* VipPrivilegeController.m */; };
 		CA5E005921DDE05E0040ABE2 /* NSNumber+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFB721DDE05D0040ABE2 /* NSNumber+StringValue.m */; };
 		CA5E005A21DDE05E0040ABE2 /* UIColor+Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFB921DDE05D0040ABE2 /* UIColor+Tool.m */; };
 		CA5E005B21DDE05E0040ABE2 /* UIImage+Wechat.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFBB21DDE05D0040ABE2 /* UIImage+Wechat.m */; };
@@ -594,6 +596,10 @@
 		CA56114521EF50020052CF38 /* CreditVisitorModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreditVisitorModel.m; sourceTree = "<group>"; };
 		CA56114721EF517E0052CF38 /* CreditHomeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreditHomeModel.h; sourceTree = "<group>"; };
 		CA56114821EF517E0052CF38 /* CreditHomeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreditHomeModel.m; sourceTree = "<group>"; };
+		CA56114A21F0277A0052CF38 /* ReportPreviewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReportPreviewController.h; sourceTree = "<group>"; };
+		CA56114B21F0277A0052CF38 /* ReportPreviewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReportPreviewController.m; sourceTree = "<group>"; };
+		CA56114E21F057B00052CF38 /* VipPrivilegeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VipPrivilegeController.h; sourceTree = "<group>"; };
+		CA56114F21F057B00052CF38 /* VipPrivilegeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VipPrivilegeController.m; sourceTree = "<group>"; };
 		CA5E000021DDE05D0040ABE2 /* NSNumber+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Zirkfied.h"; sourceTree = "<group>"; };
 		CA5E000121DDE05D0040ABE2 /* NSNumber+Zirkfied.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Zirkfied.m"; sourceTree = "<group>"; };
 		CA5E000221DDE05D0040ABE2 /* NSString+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Zirkfied.h"; sourceTree = "<group>"; };
@@ -1374,6 +1380,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		CA56114D21F057560052CF38 /* VIP特权 */ = {
+			isa = PBXGroup;
+			children = (
+				CA56114E21F057B00052CF38 /* VipPrivilegeController.h */,
+				CA56114F21F057B00052CF38 /* VipPrivilegeController.m */,
+			);
+			path = "VIP特权";
+			sourceTree = "<group>";
+		};
 		CA5E000A21DDE05D0040ABE2 /* Component */ = {
 			isa = PBXGroup;
 			children = (
@@ -1603,6 +1618,7 @@
 		CA5E00A721DDE5E30040ABE2 /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
+				CA56114D21F057560052CF38 /* VIP特权 */,
 				CADD60C621E728A000EB01CD /* 个人设置 */,
 				CADD60A721E6268300EB01CD /* 设置 */,
 				CADD609F21E6199F00EB01CD /* 我的监控 */,
@@ -2027,6 +2043,8 @@
 				CADD60F421E8A32F00EB01CD /* ReportSendSuccessController.m */,
 				CADD60F621E8A88800EB01CD /* ConfirmOrderController.h */,
 				CADD60F721E8A88800EB01CD /* ConfirmOrderController.m */,
+				CA56114A21F0277A0052CF38 /* ReportPreviewController.h */,
+				CA56114B21F0277A0052CF38 /* ReportPreviewController.m */,
 			);
 			path = "信用报告";
 			sourceTree = "<group>";
@@ -2304,6 +2322,7 @@
 				793D1B4121DF685700C29908 /* AnswerModel.m in Sources */,
 				79D34ED221E05E5600B1CB32 /* AddressBookModel.m in Sources */,
 				79D34F0F21E07EE500B1CB32 /* CenterButton.m in Sources */,
+				CA56114C21F0277A0052CF38 /* ReportPreviewController.m in Sources */,
 				79D34F4D21E4B7FA00B1CB32 /* ComCertificationController.m in Sources */,
 				793D1B2121DF67E000C29908 /* OrganizationController.m in Sources */,
 				793D1B3321DF67E000C29908 /* QuestionItem.m in Sources */,
@@ -2465,6 +2484,7 @@
 				CA5E008521DDE05E0040ABE2 /* ZFBar.m in Sources */,
 				CA5E009A21DDE05E0040ABE2 /* ZJDatePickerView.m in Sources */,
 				793D1B3221DF67E000C29908 /* OweTaxController.m in Sources */,
+				CA56115021F057B00052CF38 /* VipPrivilegeController.m in Sources */,
 				CA5E008E21DDE05E0040ABE2 /* ZFCircle.m in Sources */,
 				CA5E007621DDE05E0040ABE2 /* YBRectConst.m in Sources */,
 				799F796721E5E9E1000DBB88 /* RiskVipController.m in Sources */,

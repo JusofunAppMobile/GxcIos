@@ -140,6 +140,9 @@
 //信用服务-首页
 #define KGetCreditHomeInfo @""HOSTURL"/app/CreditService/GetHomeInfo"
 
+//信用报告
+#define KGetCreditReportList @""HOSTURL"/app/CorporateInfo/CreditReport"
+
 
 ////////////////////////////////////////////////////////
 

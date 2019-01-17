@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CreditReportCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
+
 @interface CreditProReportCell : UITableViewCell
+@property (nonatomic ,strong) NSDictionary *reportInfo;
+@property (nonatomic ,weak) id <CreditReportCellDelegate>delegate;
 
 @end
 

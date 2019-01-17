@@ -12,13 +12,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol CreditReportCellDelegate <NSObject>
 
-- (void)didClickPreviewButton;
-- (void)didClickSendReportButton;
+- (void)didClickPreviewButton:(int)cellType;
+- (void)didClickSendReportButton:(int)cellType;
 
 @end
 
 @interface CreditReportCell : UITableViewCell
 @property (nonatomic ,weak) id <CreditReportCellDelegate>delegate;
+@property (nonatomic ,strong) NSDictionary *reportInfo;
 @end
 
 NS_ASSUME_NONNULL_END

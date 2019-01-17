@@ -7,6 +7,7 @@
 //
 
 #import "ReportSendSuccessController.h"
+#import "MyOrderController.h"
 
 @interface ReportSendSuccessController ()
 
@@ -25,13 +26,11 @@
 - (void)initView{
     
     UIImageView *iconView = [UIImageView new];
-    iconView.backgroundColor = [UIColor greenColor];
+    iconView.image = KImageName(@"icon_success");
     [self.view addSubview:iconView];
     [iconView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
         make.top.mas_equalTo(KNavigationBarHeight+60);
-        make.width.mas_equalTo(160);
-        make.height.mas_equalTo(55);
     }];
     
     UILabel *titleLab = [UILabel new];
@@ -68,6 +67,7 @@
     doneBtn.titleLabel.font = KFont(15);
     [doneBtn setTitle:@"完成" forState:UIControlStateNormal];
     [doneBtn setTitleColor:KHexRGB(0x8e8f90) forState:UIControlStateNormal];
+    [doneBtn addTarget:self action:@selector(doneAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:doneBtn];
     [doneBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(67);
@@ -83,6 +83,7 @@
     checkBtn.backgroundColor = KHexRGB(0xd31023);
     checkBtn.titleLabel.font = KFont(15);
     [checkBtn setTitle:@"查看订单" forState:UIControlStateNormal];
+    [checkBtn addTarget:self action:@selector(checkAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:checkBtn];
     [checkBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(doneBtn);
@@ -90,5 +91,16 @@
         make.height.mas_equalTo(45);
     }];
 }
+
+- (void)doneAction{
+    NSArray *vcs = self.navigationController.viewControllers;
+    [self.navigationController popToViewController:vcs[vcs.count -3] animated:YES];
+}
+
+- (void)checkAction{
+    MyOrderController *vc = [MyOrderController new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 @end

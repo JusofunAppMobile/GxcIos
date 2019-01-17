@@ -40,19 +40,10 @@
             }];
             view.font = KFont(12);
             view.textColor = KHexRGB(0xf77f00);
-            view.text = @"$50";
             view;
         });
         
         NSString *title = @"企业信用报告-标准版";
-        NSArray *component = [title componentsSeparatedByString:@"-"];
-        NSRange rangeName = [title rangeOfString:component[1]];
-        
-        NSMutableAttributedString * attr = [[NSMutableAttributedString alloc] initWithString:title];
-        [attr addAttribute:NSForegroundColorAttributeName
-                     value:KHexRGB(0xf77f00)
-                     range:rangeName];
-
         self.nameLab = ({
             UILabel *view = [UILabel new];
             [contentBg addSubview:view];
@@ -62,7 +53,7 @@
                 make.right.mas_lessThanOrEqualTo(_priceLab.mas_left).offset(-10);
             }];
             view.font = KFont(15);
-            view.attributedText = attr;
+            view.attributedText = [self getAttibureWithString:title attrString:@"标准版"];
             view;
         });
         
@@ -73,7 +64,6 @@
                 make.left.mas_equalTo(_nameLab);
                 make.top.mas_equalTo(_nameLab.mas_bottom).offset(10);
             }];
-            view.text = @"今天剩余50次下载机会";
             view.font = KFont(13);
             view.textColor = KHexRGB(0x505050);
             view;
@@ -142,21 +132,43 @@
             make.top.bottom.width.height.mas_equalTo(reportBtn);
             make.right.mas_equalTo(reportBtn.mas_left).offset(-15);
         }];
-        
     }
     return self;
 }
 
-- (void)sendReportAction{
-    if ([self.delegate respondsToSelector:@selector(didClickSendReportButton)]) {
-        [self.delegate didClickSendReportButton];
+#pragma mark - set
+- (void)setReportInfo:(NSDictionary *)reportInfo{
+    _reportInfo = reportInfo;
+    if (!reportInfo) {
+        return;
     }
-    
+    NSString *times = [NSString stringWithFormat:@"今天剩余%d次下载机会",[reportInfo[@"basicVersionDownloadNum"] intValue]];
+    _timesLab.attributedText = [self getAttibureWithString:times attrString:reportInfo[@"basicVersionDownloadNum"]];
+    _priceLab.text = [NSString stringWithFormat:@"¥%@",reportInfo[@"basicVersionDownloadAmount"]];
+}
+
+- (NSAttributedString *)getAttibureWithString:(NSString *)string attrString:(NSString *)attrString{
+    if (!attrString) {
+        attrString = @"0";
+    }
+    NSMutableAttributedString * attr = [[NSMutableAttributedString alloc] initWithString:string];
+    NSRange range = [string rangeOfString:attrString];
+    [attr addAttribute:NSForegroundColorAttributeName
+                 value:KHexRGB(0xf77f00)
+                 range:range];
+    return attr;
+}
+
+
+- (void)sendReportAction{
+    if ([self.delegate respondsToSelector:@selector(didClickSendReportButton:)]) {
+        [self.delegate didClickSendReportButton:0];
+    }
 }
 
 - (void)previewAction{
-    if ([self.delegate respondsToSelector:@selector(didClickPreviewButton)]) {
-        [self.delegate didClickSendReportButton];
+    if ([self.delegate respondsToSelector:@selector(didClickPreviewButton:)]) {
+        [self.delegate didClickPreviewButton:0];
     }
 }
 

@@ -17,6 +17,7 @@
 #import "FogotPwdController.h"
 #import "LoginController.h"
 #import "ComCertificationController.h"
+#import "VipPrivilegeController.h"
 
 static NSString *InfoID = @"MeInfoCell";
 static NSString *ItemID = @"MeItemCell";
@@ -184,9 +185,10 @@ static NSString *PlainID = @"MePlainCell";
     }else if (index == 3){
         ComCertificationController *vc = [ComCertificationController new];
         [self.navigationController pushViewController:vc animated:YES];
-    }
-    else if (index == 5)
-    {
+    }else if (index == 4){
+        VipPrivilegeController *vc = [VipPrivilegeController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (index == 5){
        BuyVipController*vc = [BuyVipController new];
         [self.navigationController pushViewController:vc animated:YES];
     }
