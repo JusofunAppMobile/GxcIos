@@ -106,7 +106,7 @@
         reportBtn.layer.cornerRadius = 2;
         reportBtn.layer.masksToBounds = YES;
         reportBtn.backgroundColor = KHexRGB(0xd60e23);
-        reportBtn.titleLabel.font = [UIFont boldSystemFontOfSize:12];
+        reportBtn.titleLabel.font = KFont(12);
         [reportBtn setTitle:@"获取报告" forState:UIControlStateNormal];
         [reportBtn addTarget:self action:@selector(sendReportAction) forControlEvents:UIControlEventTouchUpInside];
         [contentBg addSubview:reportBtn];
@@ -123,7 +123,7 @@
         preViewBtn.layer.masksToBounds = YES;
         preViewBtn.layer.borderWidth = 1;
         preViewBtn.layer.borderColor = KHexRGB(0xd93947).CGColor;
-        preViewBtn.titleLabel.font =[UIFont boldSystemFontOfSize:12];
+        preViewBtn.titleLabel.font = KFont(12);
         [preViewBtn setTitle:@"样本预览" forState:UIControlStateNormal];
         [preViewBtn setTitleColor:KHexRGB(0xd93947) forState:UIControlStateNormal];
         [preViewBtn addTarget:self action:@selector(previewAction) forControlEvents:UIControlEventTouchUpInside];

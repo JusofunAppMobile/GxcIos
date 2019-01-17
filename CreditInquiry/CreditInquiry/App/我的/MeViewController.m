@@ -188,9 +188,6 @@ static NSString *PlainID = @"MePlainCell";
     }else if (index == 4){
         VipPrivilegeController *vc = [VipPrivilegeController new];
         [self.navigationController pushViewController:vc animated:YES];
-    }else if (index == 5){
-       BuyVipController*vc = [BuyVipController new];
-        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 #pragma mark - life cycle

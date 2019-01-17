@@ -149,6 +149,11 @@ typedef enum : NSUInteger {
     EditTypeMember,//成员信息
 } CreditEditType;
 
+//push进入购买vip页的控制器
+typedef enum : NSUInteger {
+    BuyVipFromMine,//我的
+    BuyVipFromReportList,//信用报告列表
+} BuyVipFromType;
 
 //AppScheme
 #define KAppScheme @"CreditInquiry"

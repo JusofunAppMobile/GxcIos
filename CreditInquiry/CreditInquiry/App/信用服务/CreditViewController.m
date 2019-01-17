@@ -77,7 +77,6 @@ static NSString *ChartID = @"CreditChartLineCell";
             _creditModel.inquiryList = arr2;
             
             //===========
-            
              NSMutableArray *arr3 = [NSMutableArray array];
             NSArray *title3 = @[@"100",@"64",@"75",@"150",@"78",@"70"];
             for (int i = 0; i < 6; i++) {
@@ -230,6 +229,7 @@ static NSString *ChartID = @"CreditChartLineCell";
             [self.navigationController pushViewController:vc animated:YES];
         }else if (indexPath.row ==3){
             CreditPormiseController *vc = [CreditPormiseController new];
+            vc.companyName = _creditModel.companyInfo[@"companyName"];
             [self.navigationController pushViewController:vc animated:YES];
         }
     }

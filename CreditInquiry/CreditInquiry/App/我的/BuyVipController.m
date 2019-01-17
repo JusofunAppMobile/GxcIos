@@ -113,7 +113,12 @@
 -(void)getPayResult
 {
     [MBProgressHUD showSuccess:@"支付成功" toView:nil];
-    [self back];
+    if (_fromType == BuyVipFromMine) {
+        [self back];
+    }else{
+        NSArray *vcs = self.navigationController.viewControllers;
+        [self.navigationController popToViewController:vcs[vcs.count - 3] animated:YES];
+    }
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

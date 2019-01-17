@@ -7,6 +7,7 @@
 //
 
 #import "CreditInfoCell.h"
+#import "ContentInsetsLabel.h"
 
 @interface CreditInfoCell ()
 @property (nonatomic ,strong) UIView *cardInfoView;
@@ -17,6 +18,7 @@
 @property (nonatomic ,strong) UIView *bgView;
 @property (nonatomic ,strong) UIView *changeView;
 @property (nonatomic ,strong) UILabel *changeNumLab;
+@property (nonatomic ,strong) ContentInsetsLabel *statusLab;
 @end
 
 @implementation CreditInfoCell
@@ -32,7 +34,9 @@
 #pragma mark - set
 - (void)setCompanyInfo:(NSDictionary *)companyInfo{
     _companyInfo = companyInfo;
-    
+    if (!_companyInfo) {
+        return;
+    }
     [_cardImageView removeFromSuperview];
     [_changeView removeFromSuperview];
     [_cardInfoView removeFromSuperview];
@@ -42,9 +46,11 @@
         [self addSubview:self.cardInfoView];
         [self addSubview:self.changeView];
         [self.bgView setBackgroundColor:KHexRGB(0xd51424)];
+        _statusLab.hidden = YES;
     }else if(state == 1){//审核中
         [self addSubview:self.cardInfoView];
         [self.bgView setBackgroundColor:KHexRGB(0xd51424)];
+        _statusLab.hidden = NO;
     }else{//认证失败 未认证
         [self addSubview:self.cardImageView];
         [self.bgView setBackgroundColor:[UIColor clearColor]];
@@ -54,6 +60,7 @@
     _nameLab.text = _companyInfo[@"companyName"];
     _codeLab.text = _companyInfo[@"code"];
     _typeLab.text = _companyInfo[@"type"];
+    _changeNumLab.text = _companyInfo[@"changeNum"];
 }
 
 #pragma mark - lazy load
@@ -123,11 +130,28 @@
         _cardInfoView.layer.shadowColor =  [UIColor lightGrayColor].CGColor;;
         
         _nameLab = [UILabel new];
-        _nameLab.text = @"长沙市大洋科技有限公司";
         _nameLab.font = KFont(16);
         [_cardInfoView addSubview:_nameLab];
         [_nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.mas_equalTo(15);
+        }];
+        
+        _statusLab = [ContentInsetsLabel new];
+        _statusLab.font = KFont(14);
+        _statusLab.text = @"审核中";
+        _statusLab.contentInsets = UIEdgeInsetsMake(0, 5, 0, 5);
+        _statusLab.textColor = KHexRGB(0xd30e26);
+        _statusLab.textAlignment = NSTextAlignmentCenter;
+        _statusLab.backgroundColor = KHexRGB(0xffefe7);
+        _statusLab.layer.cornerRadius = 2;
+        _statusLab.layer.masksToBounds = YES;
+        _statusLab.hidden = YES;
+        [_cardInfoView addSubview:_statusLab];
+        [_statusLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(_nameLab.mas_right).offset(5);
+            make.centerY.mas_equalTo(_nameLab);
+            make.right.mas_lessThanOrEqualTo(_cardInfoView).offset(-15);
+            make.height.mas_equalTo(20);
         }];
         
         UILabel *codeTitle = [UILabel new];
