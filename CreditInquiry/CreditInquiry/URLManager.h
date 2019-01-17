@@ -46,6 +46,7 @@
 //  企业添加/取消监控
 #define  KMonitor @""HOSTURL"/app/MonitoringDynamics/AddOrCancelMonitor"
 
+
 //获取热词
 #define KGetHotKey  @""HOSTURL"/app/sys/hotSearchWord"
 
@@ -84,6 +85,11 @@
 //监控动态
 #define KGetMonitorDynamic @""HOSTURL"/app/MonitoringDynamics/GetmonitoringDynamics"
 
+//监控动态详情
+#define KDynamicDetail @""HOSTURL"/app/MonitoringDynamics/DynamicDetails"
+
+//监控动态筛选条件
+#define KDynamicFilter @""HOSTURL"/app/MonitoringDynamics/GetFilterCondition"
 
 //企业认证信息接口
 #define KCertification @""HOSTURL"/app/Company/subCompanyMsg"

@@ -177,11 +177,15 @@ static NSString *PlainID = @"MePlainCell";
     if (index == 0) {
         MyOrderController *vc = [MyOrderController new];
         [self.navigationController pushViewController:vc animated:YES];
-    }else if (index ==1||index==2){
+    }
+    else if (index ==1||index==2)
+    {
         MyMonitorListController *vc = [MyMonitorListController new];
         vc.listType = index ==1? ListTypeMyMonitor:ListTypeMyCollection;
         [self.navigationController pushViewController:vc animated:YES];
-    }else if (index == 3){
+    }
+    else if (index == 3)
+    {
         ComCertificationController *vc = [ComCertificationController new];
         [self.navigationController pushViewController:vc animated:YES];
     }

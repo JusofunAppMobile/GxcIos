@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MonitorListModel : NSObject
 @property (nonatomic ,copy) NSString *companyName;
 @property (nonatomic ,copy) NSString *companyId;
-@property (nonatomic ,copy) NSString *changeNum;
+@property (nonatomic ,copy) NSString *changeCount;
 @property (nonatomic ,copy) NSString *changeDate;
 @property (nonatomic ,copy) NSString *isUserMonitor;
 @property (nonatomic ,copy) NSString *companyIcon;

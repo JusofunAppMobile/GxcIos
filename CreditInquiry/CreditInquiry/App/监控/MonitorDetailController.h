@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MonitorDetailController : BasicViewController
 
+@property (nonatomic ,copy) NSString *companyId;
+
+@property (nonatomic ,copy) NSString *companyName;
+
 @end
 
 NS_ASSUME_NONNULL_END

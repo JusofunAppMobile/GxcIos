@@ -11,7 +11,7 @@
 #import "MonitorHeaderView.h"
 #import "MonitorTableHeader.h"
 #import "MonitorFilterView.h"
-#import "MonitorDynamicCell.h"
+
 #import "MonitorDetailController.h"
 
 static NSString *CELLID = @"MonitorDynamicCell";
@@ -34,6 +34,128 @@ static NSString *CELLID = @"MonitorDynamicCell";
     [self loadData:YES];
 }
 
+#pragma mark - loadData
+- (void)loadData:(BOOL)loading{
+    if (loading) {
+        [MBProgressHUD showMessag:@"" toView:self.view];
+    }
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:KUSER.userId forKey:@"userId"];
+    [params setObject:@(_page) forKey:@"pageIndex"];
+    [params setObject:@(20) forKey:@"pageSize"];
+    [RequestManager postWithURLString:KGetMonitorDynamic parameters:params success:^(id responseObject) {
+        [MBProgressHUD hideHudToView:self.view animated:YES];
+        if ([responseObject[@"result"] intValue] == 0) {
+            if (_page == 1) {
+                [_datalist removeAllObjects];
+            }
+            [self.datalist addObjectsFromArray: [MonitorListModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"monitor"]]];
+            [_tableview reloadData];
+            _page++;
+            _moreData = _datalist.count< [responseObject[@"total"] intValue];
+            [self endRefresh];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD hideHudToView:self.view animated:YES];
+        [self endRefresh];
+    }];
+}
+
+#pragma mark - 添加监控
+-(void)didClickMonitorButton:(MonitorListModel *)model cell:(UITableViewCell*)cell
+{
+    MonitorDynamicCell* cell1 = (MonitorDynamicCell*)cell;
+    
+    //（0:取消监控  1：添加监控）
+    NSString * type = @"1";
+    KBolckSelf;
+    if(!cell1.monitorBtn.selected)
+    {
+        if(KUSER.userId.length>0)
+        {
+            type = @"1";
+        }
+        else
+        {
+            LoginController *view = [[LoginController alloc]init];
+            view.loginSuccessBlock = ^{
+                [blockSelf didClickMonitorButton:model cell:cell];
+            };
+            [self.navigationController pushViewController:view animated:YES];
+            return;
+        }
+    }
+    else
+    {
+        if (KUSER.userId.length>0) {
+            type = @"0";
+        }else
+        {
+            LoginController *view = [[LoginController alloc]init];
+            view.loginSuccessBlock = ^{
+                 [blockSelf didClickMonitorButton:model cell:cell];
+            };
+            [self.navigationController pushViewController:view animated:YES];
+            return;
+        }
+        
+    }
+    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    [paraDic setObject:model.companyId forKey:@"companyid"];
+    [paraDic setObject:type forKey:@"monitorType"];
+    [paraDic setObject:KUSER.userId forKey:@"userId"];
+    [paraDic setObject:model.companyName forKey:@"companyname"];
+    [MBProgressHUD showMessag:@"" toView:self.view];
+    NSString* urlstr = [KMonitor stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [RequestManager postWithURLString:urlstr parameters:paraDic success:^(id responseObject) {
+        
+        [MBProgressHUD hideHudToView:self.view animated:YES];
+        if([[responseObject objectForKey:@"result"] intValue] == 0)
+        {
+            [cell1 setMonitorButtonState:!cell1.monitorBtn.selected];
+        }
+        else
+        {
+            [MBProgressHUD showError:[responseObject objectForKey:@"msg"] toView:self.view];
+            
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showError:@"请求失败" toView:self.view];
+        
+    }];
+}
+
+#pragma mark - UITableViewDataSource
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    MonitorListModel *model = [self.datalist objectAtIndex:indexPath.row];
+    MonitorDetailController *vc = [MonitorDetailController new];
+    vc.companyName = model.companyName;
+    vc.companyId = model.companyId;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.datalist.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    MonitorDynamicCell *cell = [tableView dequeueReusableCellWithIdentifier:CELLID forIndexPath:indexPath];
+    cell.delegate = self;
+    MonitorListModel *model = [self.datalist objectAtIndex:indexPath.row];
+    cell.model = model;
+    return cell;
+}
+
+
+
+#pragma mark - 筛选
+- (void)didClickFilterButton{
+    NSLog(@"筛选");
+    [self.filterView showChooseView];
+}
+
+
 #pragma mark - initView
 - (void)initView{
     self.tableview = ({
@@ -51,7 +173,7 @@ static NSString *CELLID = @"MonitorDynamicCell";
         view;
     });
     [_tableview registerClass:[MonitorDynamicCell class] forCellReuseIdentifier:CELLID];
-   
+    
     [self addRefreshView];
 }
 
@@ -74,52 +196,7 @@ static NSString *CELLID = @"MonitorDynamicCell";
         [_tableview.mj_footer endRefreshingWithNoMoreData];
     }
 }
-#pragma mark - loadData
-- (void)loadData:(BOOL)loading{
-    if (loading) {
-        [MBProgressHUD showMessag:@"" toView:self.view];
-    }
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:KUSER.userId forKey:@"userId"];
-    [params setObject:@(_page) forKey:@"pageIndex"];
 
-    [RequestManager postWithURLString:KGetMonitorDynamic parameters:params success:^(id responseObject) {
-        [MBProgressHUD hideHudToView:self.view animated:YES];
-        if ([responseObject[@"result"] intValue] == 0) {
-            if (_page == 1) {
-                [_datalist removeAllObjects];
-            }
-            [self.datalist addObjectsFromArray: [MonitorListModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"monitor"]]];
-            [_tableview reloadData];
-            _page++;
-            _moreData = _datalist.count< [responseObject[@"total"] intValue];
-            [self endRefresh];
-        }
-    } failure:^(NSError *error) {
-        [MBProgressHUD hideHudToView:self.view animated:YES];
-        [self endRefresh];
-    }];
-}
-#pragma mark - UITableViewDataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    MonitorDynamicCell *cell = [tableView dequeueReusableCellWithIdentifier:CELLID forIndexPath:indexPath];
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    MonitorDetailController *vc = [MonitorDetailController new];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-#pragma mark - 筛选
-- (void)didClickFilterButton{
-    NSLog(@"筛选");
-    [self.filterView showChooseView];
-}
 
 #pragma mark - life cycle
 - (void)viewWillAppear:(BOOL)animated{

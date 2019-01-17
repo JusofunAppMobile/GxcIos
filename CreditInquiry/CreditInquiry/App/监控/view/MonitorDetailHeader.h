@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MDSectionModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol MonitorDetailHeaderDelegate <NSObject>
@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MonitorDetailHeader : UITableViewHeaderFooterView
 @property (nonatomic ,assign) NSInteger section;
 @property (nonatomic ,weak) id <MonitorDetailHeaderDelegate>delegate;
+
+@property(nonatomic,strong)MDSectionModel*model;
 @end
 
 NS_ASSUME_NONNULL_END

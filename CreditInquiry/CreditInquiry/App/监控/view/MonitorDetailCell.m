@@ -26,7 +26,7 @@
                 make.left.top.mas_equalTo(self.contentView).offset(15);
                 make.right.mas_equalTo(-15);
             }];
-            view.text = @"新增专利：一种控制只能家居设备的方法及装置控制只能家居的方法及装备与设置";
+            view.text = @"";
             view.numberOfLines = 0;
             view.font = KFont(15);
             view.textColor = KHexRGB(0x303030);
@@ -34,7 +34,7 @@
             view;
         });
         
-        self.contentLab = ({
+        self.dateLab = ({
             UILabel *view = [UILabel new];
             [self.contentView addSubview:view];
             [view mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -42,7 +42,7 @@
                 make.top.mas_equalTo(_contentLab.mas_bottom).offset(10);
                 make.bottom.mas_equalTo(self.contentView).offset(-15);
             }];
-            view.text = @"2018-12-30";
+            view.text = @"";
             view.font = KFont(10);
             view.textColor = KHexRGB(0x909090);
             view;
