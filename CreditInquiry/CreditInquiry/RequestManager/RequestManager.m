@@ -213,6 +213,7 @@
     
     NSURLSessionDataTask *session = [manager POST:URLString parameters:tmpDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (success) {
+            [self verifyToekn:responseObject];
             [self getDateWithTask:task];
             NSLog(@"\nPOST请求：Request success, URL: %@\n params:%@\n 返回内容：%@",
                   [self generateGETAbsoluteURL:URLString params:tmpDic],
@@ -274,6 +275,7 @@
         {
             session = [manager POST:URLString parameters:tmpDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 if (success) {
+                    
                    [self getDateWithTask:task];
                     NSLog(@"\nPOST请求：Request success, URL: %@\n params:%@\n 返回内容：%@",
                           [self generateGETAbsoluteURL:URLString params:parameters],
@@ -322,6 +324,7 @@
     }
                                           success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                                               if (success) {
+                                                  [self verifyToekn:responseObject];
                                                  [self getDateWithTask:task]; success(responseObject);
                                               }
                                           } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -363,6 +366,7 @@
     }
                                           success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                                               if (success) {
+                                                  [self verifyToekn:responseObject];
                                                   [self getDateWithTask:task]; success(responseObject);
                                                   NSLog(@"\nPOST请求：Request success, URL: %@\n params:%@\n 返回内容：%@",
                                                         [self generateGETAbsoluteURL:URLString params:parameters],
@@ -451,6 +455,14 @@
     [KUserDefaults setValue:[NSString stringWithFormat:@"%f",timeoffset] forKey:KCurrentTimeToServerOffset];
 }
 
+
++(void)verifyToekn:(id)responseObject
+{
+    if([[responseObject objectForKey:@"result"] intValue] == 2019)
+    {
+        [KNotificationCenter postNotificationName:KTokenInvalid object:nil];
+    }
+}
 
 
 // 仅对一级字典结构起作用

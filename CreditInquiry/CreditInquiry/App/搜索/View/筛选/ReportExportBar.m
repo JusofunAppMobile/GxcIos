@@ -111,10 +111,10 @@
 - (void)setTipsWithNum:(NSString *)num type:(SearchType)type{
     NSString *tips = @"";
     NSRange range;
-    if (type == TaxCodeType) {
+    if (type == SearchTaxCodeType) {
         tips = [NSString stringWithFormat:@"搜索到%@家公司",num];
         range = NSMakeRange(3, [num length]);
-    }else if(type == JobType){
+    }else if(type == SearchJobType){
         tips = [NSString stringWithFormat:@"共搜索到%@个招聘",num];
         range = NSMakeRange(4, [num length]);
     }else{

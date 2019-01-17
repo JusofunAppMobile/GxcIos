@@ -23,7 +23,6 @@
     NSURLSessionDataTask *recommendTask;
 }
 
-@property (nonatomic ,strong)NSArray *saveKeys;
 
 @end
 
@@ -33,17 +32,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _saveKeys = @[@"homeSearch",
-                  @"Ourmainlocaldata",
-                  @"Shareholderlocaldata",
-                  @"Addresslocaldata",
-                  @"CompanyWeblocaldata",
-                  @"Crackcreditlocaldata",
-                  @"TaxCodeData",
-                  @"JobSearchData",
-                  @"AddressBookData",
-                  @"ShareholderPenetrationData",
-                  @"RiskAnalyzeData"];
     
     [self setBackBtn:@""];
     [self setTitleView];
@@ -61,39 +49,41 @@
 -(void)loadHotData{
     
     NSMutableDictionary *paraDic  = [NSMutableDictionary dictionary];
-    [paraDic setObject:@(self.searchType) forKey:@"type"];
+    [paraDic setObject:@(self.searchType) forKey:@"menuType"];
     [paraDic setObject:KUSER.userId forKey:@"userId"];
-//    [paraDic setObject:@(OurmainType) forKey:@"type"];//test
-    [RequestManager postWithURLString:KSearchWord parameters:paraDic success:^(id responseObject) {
+    [RequestManager postWithURLString:KGetHotKey parameters:paraDic success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         // [MBProgressHUD hideHudToView:self.view animated:YES];
         if ([responseObject[@"result"] integerValue ]==0) {
             [hotArray removeAllObjects];
-            hotArray = [NSMutableArray arrayWithCapacity:1];
-            NSArray *array = responseObject[@"hotlist"];
+           
+            hotArray = [NSMutableArray arrayWithArray:[responseObject[@"data"] objectForKey:@"keywords"]];
             
-            for (int i = 0; i<[array count]; i++) {
-                
-                NSString *hotKey =  [NSString stringWithFormat:@"%@",[[array objectAtIndex:i] valueForKey:@"hotword"]] ;
-                if (hotKey == nil || [hotKey isEqualToString:@"null"] || [hotKey isEqualToString:@"<null>"]  ) {
-                    
-                }else{
-                    [hotArray addObject:hotKey];
-                    
-                }
-            }
             [historyTableView reloadData];
         }
         
         
     } failure:^(NSError *error) {
         NSLog(@"%@",error.description);
-        //  [MBProgressHUD showError:@"网络异常" toView:self.view];
+    
+    }];
+}
+
+#pragma mark 插入热词
+-(void)insertHotKey:(NSString*)key{
+    
+    NSMutableDictionary *paraDic  = [NSMutableDictionary dictionary];
+    [paraDic setObject:@(self.searchType) forKey:@"menuType"];
+    [paraDic setObject:key forKey:@"keyWord"];
+    [paraDic setObject:KUSER.userId forKey:@"userId"];
+    [RequestManager postWithURLString:KInsertHotKey parameters:paraDic success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error.description);
         
     }];
-    
-    
 }
+
 
 #pragma  mark - 根据输入词搜索热词
 -(void)loadRecommendData:(NSString*)searchKey
@@ -106,7 +96,7 @@
     [paraDic setObject:searchKey forKey:@"searchkey"];
     
     NSString *URLStr ;
-    if(self.searchType == CrackcreditType)
+    if(self.searchType == SearchCrackcreditType)
     {
         URLStr = SXGetHotSearch;
     }
@@ -148,6 +138,8 @@
 #pragma mark - 跳到详情页
 -(void)pushToResult:(NSString*)searchStr
 {
+    [self insertHotKey:searchStr];
+    
     companySearchBar.text = searchStr;
     SearchResultController *SearchVc = [[SearchResultController alloc]init];
     SearchVc.btnTitile = searchStr;
@@ -168,14 +160,9 @@
 -(void)getHistoryData
 {
     histotyArray = [NSMutableArray arrayWithCapacity:1];
-    NSArray *array;
-    
-    if (self.searchType<[_saveKeys count]) {
-        
-        array  = [KUserDefaults objectForKey:_saveKeys[self.searchType]];
-        [histotyArray addObjectsFromArray:array];
-        [historyTableView reloadData];
-    }
+    NSArray *array = [KUserDefaults objectForKey:[NSString stringWithFormat:@"SearchHistory%d",(int)self.searchType]];;
+    [histotyArray addObjectsFromArray:array];
+    [historyTableView reloadData];
     
 }
 
@@ -198,11 +185,7 @@
             [histotyArray removeLastObject];
         }
         
-        NSString *saveKey ;
-        if (self.searchType<[_saveKeys count]) {
-            saveKey = _saveKeys[self.searchType];
-            [KUserDefaults setObject:histotyArray forKey:saveKey];
-        }
+        [KUserDefaults setObject:histotyArray forKey:[NSString stringWithFormat:@"SearchHistory%d",(int)self.searchType]];
         [historyTableView reloadData];
     }
     
@@ -212,14 +195,11 @@
 #pragma mark - 清除历史记录
 -(void)clearHistory
 {
-    NSString *saveKey ;
     
-    if (self.searchType<[_saveKeys count]) {
-        saveKey = _saveKeys[self.searchType];
-        [histotyArray removeAllObjects];
-        [KUserDefaults setObject:@[] forKey:saveKey];
-        [historyTableView reloadData];
-    }
+    [histotyArray removeAllObjects];
+    [KUserDefaults setObject:@[] forKey:[NSString stringWithFormat:@"SearchHistory%d",(int)self.searchType]];
+    [historyTableView reloadData];
+    
 }
 
 #pragma mark - searchBar 代理
@@ -566,35 +546,30 @@
     
     
     switch (self.searchType ) {
-        case BlurryType:
+        case SearchBlurryType:
             companySearchBar.placeholder = KSearchPlaceholder;
             break;
-        case OurmainType:
+        case SearchOurmainType:
             companySearchBar.placeholder = @"请输入主营产品服务";
             break;
-        case ShareholderType:
+        case SearchShareholderType:
             companySearchBar.placeholder = @"请输入股东法人姓名";
             break;
-        case AddressType:
+        case SearchAddressType:
             companySearchBar.placeholder = @"请输入企业地址或电话";
             break;
-        case CompanyWebType:
-            companySearchBar.placeholder = @"请输入企业网址";
-            break;
-        case CrackcreditType:
+        case SearchCrackcreditType:
             companySearchBar.placeholder = @"请输入涉诉人名、证件号或企业名称";
             break;
-        case TaxCodeType:
+        case SearchTaxCodeType:
             companySearchBar.placeholder = @"请输入企业名称或统一信用代码";
             break;
-        case JobType:
+        case SearchJobType:
             companySearchBar.placeholder = @"请输入企业名称或职位";
             break;
-        case AddressBookType:
-        case PenetrationType:
-            companySearchBar.placeholder = @"请输入企业名称";
+        case SearchAddressBookType:
             break;
-        case RiskAnalyze:
+        case SearchRiskAnalyzeType:
             companySearchBar.placeholder = @"请输入企业名称";
             break;
         default:

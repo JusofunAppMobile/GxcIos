@@ -45,6 +45,9 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)setButtonImage:(UIImage*)image;
 
 
+/**
+ 是否是仅用于展示
+ */
 @property(nonatomic,assign)BOOL isShow;
 
 

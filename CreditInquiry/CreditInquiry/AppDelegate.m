@@ -18,6 +18,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    
+    [KNotificationCenter addObserver:self selector:@selector(tokenInvalid) name:KTokenInvalid object:nil];
+    
     [self setIQKeyboardManager];
     
     
@@ -37,6 +40,14 @@
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     self.tabBarController=[[BasicTabBarController alloc]init];
     self.window.rootViewController=_tabBarController;
+}
+
+#pragma mark - 失效
+-(void)tokenInvalid
+{
+    [MBProgressHUD showHint:@"token失效，请重新登录" toView:nil];
+    KUSER.userId = @"";
+    [User clearTable];
 }
 
 #pragma mark - 自动隐藏键盘的第三方类库

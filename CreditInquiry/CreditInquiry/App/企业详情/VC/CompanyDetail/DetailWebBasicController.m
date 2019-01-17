@@ -76,7 +76,7 @@
             SearchResultController *SearchVc = [[SearchResultController alloc]init];
             SearchVc.popType = PopNormal;
             SearchVc.btnTitile = dic[@"name"];
-            SearchVc.searchType = ShareholderType;
+            SearchVc.searchType = SearchShareholderType;
             [self.navigationController pushViewController:SearchVc animated:YES];
         }
         
