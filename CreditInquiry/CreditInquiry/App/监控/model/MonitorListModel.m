@@ -10,4 +10,18 @@
 
 @implementation MonitorListModel
 
+-(NSString *)changeCount
+{
+    if(_changeCount)
+    {
+        return _changeCount;
+    }
+    else
+    {
+        return @"0";
+    }
+}
+
+
+
 @end

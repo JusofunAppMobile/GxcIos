@@ -51,7 +51,7 @@ static NSString *PlainID = @"MePlainCell";
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
             make.right.mas_equalTo(-15);
-            make.top.mas_equalTo(self.view);
+            make.top.mas_equalTo(KNavigationBarHeight);
             make.bottom.mas_equalTo(-KTabBarHeight);
         }];
         view.backgroundColor = [UIColor clearColor];
@@ -178,12 +178,17 @@ static NSString *PlainID = @"MePlainCell";
     if (index == 0) {
         MyOrderController *vc = [MyOrderController new];
         [self.navigationController pushViewController:vc animated:YES];
-    }else if (index ==1||index==2){
+    }
+    else if (index ==1||index==2)
+    {
         MyMonitorListController *vc = [MyMonitorListController new];
         vc.listType = index ==1? ListTypeMyMonitor:ListTypeMyCollection;
         [self.navigationController pushViewController:vc animated:YES];
-    }else if (index == 3){
+    }
+    else if (index == 3)
+    {
         ComCertificationController *vc = [ComCertificationController new];
+        vc.isShow = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }else if (index == 4){
         VipPrivilegeController *vc = [VipPrivilegeController new];

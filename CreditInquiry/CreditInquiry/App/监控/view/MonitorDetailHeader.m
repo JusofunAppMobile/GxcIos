@@ -84,18 +84,39 @@
     }
 }
 
+-(void)setModel:(MDSectionModel *)model
+{
+    _model = model;
+    _titleLab.text = model.monitor_name;
+    _numLab.text = [NSString stringWithFormat:@"共%@条",model.total];
+    if([model.icon intValue] == 2)//1：变更信息    2：警示信息 3：利好信息
+    {
+        _tagLab.textColor = KHexRGB(0xDC212A);
+        _tagLab.layer.borderColor = KHexRGB(0xDC212A).CGColor;
+        _tagLab.text = @"警示信息";
+    }
+    else if ([model.icon intValue] == 3)
+    {
+        _tagLab.textColor = KHexRGB(0x4FB037);
+        _tagLab.layer.borderColor = KHexRGB(0x4FB037).CGColor;
+        _tagLab.text = @"利好信息";
+    }
+    else
+    {
+        _tagLab.textColor = KHexRGB(0x1187E4);
+        _tagLab.layer.borderColor = KHexRGB(0x1187E4).CGColor;
+        _tagLab.text = @"提示信息";
+    }
+}
+
 - (void)setSection:(NSInteger)section{
     _section = section;
     if (section == 0) {
         _titleLab.text = @"法律诉讼";
-        _tagLab.textColor = KHexRGB(0xd80827);
-        _tagLab.layer.borderColor = KHexRGB(0xd80827).CGColor;
-        _tagLab.text = @"警示信息";
+       
     }else{
         _titleLab.text = @"专利信息";
-        _tagLab.textColor = KHexRGB(0x1373e9);
-        _tagLab.layer.borderColor = KHexRGB(0x1373e9).CGColor;
-        _tagLab.text = @"利好信息";
+       
     }
     _numLab.text = @"共3条";
 }

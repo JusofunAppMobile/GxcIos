@@ -69,7 +69,7 @@
         }
         
     } failure:^(NSError *error) {
-        [MBProgressHUD showError:@"哎呀，服务器开小差啦，请您稍等，马上回来~" toView:self.view];
+        [MBProgressHUD showError:@"请求失败" toView:self.view];
         [self endRefresh];
     }];
 }
@@ -93,7 +93,7 @@
         }
         
     } failure:^(NSError *error) {
-        [MBProgressHUD showError:@"哎呀，服务器开小差啦，请您稍等，马上回来~" toView:self.view];
+        [MBProgressHUD showError:@"请求失败" toView:self.view];
         [self endRefresh];
     }];
 }

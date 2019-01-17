@@ -36,20 +36,19 @@
     [self setBlankBackButton];
     [self drawTableView];
     
-    _isShow = NO;
-    [self performSelector:@selector(loadData) withObject:nil afterDelay:0.1];
     
-    
+    if(_isShow)
+    {
+        [self loadData];
+    }
     
 }
 
 -(void)loadData{
     
-    return;
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
     [paraDic setObject:KUSER.userId forKey:@"userId"];
-    [paraDic setObject:self.entId forKey:@"EntId"];
-    
+  
     [MBProgressHUD showMessag:@"" toView:self.view];
     [RequestManager postWithURLString:KGetCertification parameters:paraDic success:^(id responseObject) {
         NSLog(@"%@",responseObject);
@@ -70,7 +69,7 @@
             cell1.textFld.text = [dic objectForKey:@"companyname"];
             cell2.textFld.text = [dic objectForKey:@"idcard"];
             cell3.textFld.text = [dic objectForKey:@"name"];
-            cell4.textFld.text = [dic objectForKey:@""];
+            cell4.textFld.text = [NSString stringWithFormat:@"%@%@",[dic objectForKey:@"provinceName"],[dic objectForKey:@"cityName"]] ;
             cell5.textFld.text = [dic objectForKey:@"phone"];
             cell6.textFld.text = [dic objectForKey:@"email"];
             
@@ -166,7 +165,8 @@
         [MBProgressHUD hideHudToView:self.view animated:YES];
         if([[responseObject objectForKey:@"result"] intValue] == 0)
         {
-            [MBProgressHUD showSuccess:@"认证成功" toView:nil];
+            [MBProgressHUD showSuccess:@"提交信息成功，请等待审核" toView:nil];
+            [self back];
         }
         else
         {
@@ -209,7 +209,7 @@
             NSIndexPath *indexPath=[NSIndexPath indexPathForRow:chooseIndex inSection:0];
             CertificationCell *cell = [backTableView cellForRowAtIndexPath:indexPath];
             [cell setButtonImage:image];
-            [MBProgressHUD showSuccess:@"上传成功" toView:self.view];
+           // [MBProgressHUD showSuccess:@"上传成功" toView:self.view];
         }
         else
         {
@@ -344,6 +344,11 @@
             cell = [[CertificationCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ideterfir type:0];
         }
         
+        if(indexPath.row == 0)
+        {
+            cell.textFld.text = self.companyName;
+        }
+        
         cell.isShow = _isShow;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.index = indexPath.row;
@@ -384,7 +389,6 @@
 -(void)drawTableView
 {
     
-    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setBackgroundColor:KRGB(238, 37, 32)];
     [button setTitle:@"提交认证" forState:UIControlStateNormal];
@@ -402,7 +406,10 @@
     }];
     [button addTarget:self action:@selector(certification) forControlEvents:UIControlEventTouchUpInside];
     
-    
+    if(self.isShow)
+    {
+        button.hidden = YES;
+    }
 
     backTableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     backTableView.delegate = self;
@@ -417,7 +424,15 @@
         make.top.mas_equalTo(KNavigationBarHeight);
         make.left.mas_equalTo(0);
         make.width.mas_equalTo(KDeviceW);
-        make.bottom.mas_equalTo(button.mas_top).offset(-10);
+        
+        if(self.isShow)
+        {
+            make.bottom.mas_equalTo(self.view);
+        }
+        else
+        {
+            make.bottom.mas_equalTo(button.mas_top).offset(-10);
+        }
     }];
     
    

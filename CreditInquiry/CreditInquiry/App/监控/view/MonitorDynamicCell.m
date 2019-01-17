@@ -15,7 +15,7 @@
 @property (nonatomic ,strong) UILabel *nameLab;
 @property (nonatomic ,strong) UILabel *dynamicLab;
 @property (nonatomic ,strong) UILabel *dateLab;
-@property (nonatomic ,strong) UIButton *monitorBtn;
+
 @end
 
 @implementation MonitorDynamicCell
@@ -26,13 +26,13 @@
         
         self.iconView = ({
             UIImageView *view = [UIImageView new];
+            view.image = KImageName(@"home_icon_gongsi");
             [self.contentView addSubview:view];
             [view mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.mas_equalTo(self.contentView);
                 make.width.height.mas_equalTo(40);
                 make.left.mas_equalTo(10);
             }];
-            view.backgroundColor = [UIColor greenColor];
             view;
         });
         
@@ -45,12 +45,6 @@
                 make.height.mas_equalTo(50);
                 make.width.mas_equalTo(50);
             }];
-//            view.layer.borderWidth = .5f;
-//            view.layer.borderColor = KHexRGB(0xd93947).CGColor;
-//            view.layer.cornerRadius = 2;
-//            view.layer.masksToBounds = YES;
-//            view.backgroundColor = [UIColor greenColor];
-//            view.selected = YES;
             view.titleLabel.font = KFont(11);
             [view setTitle:@"监控" forState:UIControlStateNormal];
             [view setTitle:@"取消监控" forState:UIControlStateSelected];
@@ -116,26 +110,37 @@
     _dateLab.text = model.changeDate;
     [self setMonitorButtonState:[model.isUserMonitor boolValue]];
     
-    NSString *dynamicStr = [NSString stringWithFormat:@"共%@条动态",model.changeNum];
+    NSString *dynamicStr = [NSString stringWithFormat:@"共%@条动态",model.changeCount];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc]initWithString:dynamicStr];
     [attr addAttribute:NSForegroundColorAttributeName value:KHexRGB(0xe8603b) range:NSMakeRange(1, dynamicStr.length - 4)];
     _dynamicLab.attributedText = attr;
     
-    [_iconView sd_setImageWithURL:[NSURL URLWithString:model.companyIcon] placeholderImage:KImageName(@"")];//test
+   // [_iconView sd_setImageWithURL:[NSURL URLWithString:model.companyIcon] placeholderImage:KImageName(@"")];//test
 }
 
 - (void)monitorAction{
-    _monitorBtn.selected = !_monitorBtn.selected;
-//    [_monitorBtn setImagePosition:LXMImagePositionTop spacing:7];
-
-//    if ([self.delegate respondsToSelector:@selector(didClickMonitorButton:monitor:)]) {
-//        [self.delegate didClickMonitorButton:_model monitor:!_monitorBtn.selected];
-//    }
-//    [self setMonitorButtonState:!_monitorBtn.selected];//test
+    
+    if ([self.delegate respondsToSelector:@selector(didClickMonitorButton:cell:)]) {
+        [self.delegate didClickMonitorButton:_model cell:self];
+    }
 }
 
-- (void)setMonitorButtonState:(BOOL)selected{
+- (void)setMonitorButtonState:(BOOL)selected
+{
     _monitorBtn.selected = selected;
+    
+    if(_monitorBtn.selected)
+    {
+        [_monitorBtn setTitle:@"取消监控" forState:UIControlStateNormal];
+        [_monitorBtn setImage:KImageName(@"icon_monitor") forState:UIControlStateNormal];
+    }
+    else
+    {
+        [_monitorBtn setTitle:@"监控" forState:UIControlStateNormal];
+        [_monitorBtn setImage:KImageName(@"icon_monitor_sel") forState:UIControlStateNormal];
+    }
+    [_monitorBtn setImagePosition:LXMImagePositionTop spacing:7];
+    
 }
 
 

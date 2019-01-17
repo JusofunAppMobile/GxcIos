@@ -484,6 +484,59 @@
 }
 
 
+#pragma mark -  查询企业认证
+-(void)checkAuthStatus
+{
+    [MBProgressHUD showMessag:@"" toView:self.view];
+    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    [paraDic setObject:KUSER.userId forKey:@"userId"];
+    NSURLSessionDataTask*task = [RequestManager postWithURLString:KGetIdentVip parameters:paraDic success:^(id responseObject) {
+        [MBProgressHUD hideHudToView:self.view animated:YES];
+        if([[responseObject objectForKey:@"result"] intValue] == 0)
+        {
+            NSDictionary *dic = [responseObject objectForKey:@"data"];
+           // 0：未认证  1：审核中 2：审核失败 3：审核成功
+            int status = [[dic objectForKey:@"authStatus"] intValue];
+            if(status == 0||status == 2)
+            {
+                ComCertificationController *vc = [[ComCertificationController alloc]init];
+                vc.companyName = self.companyName;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            else
+            {
+                NSString *companyName = [dic objectForKey:@"authCompany"];
+                if([companyName isEqualToString:self.companyName])
+                {
+                    ComCertificationController *vc = [[ComCertificationController alloc]init];
+                    vc.isShow = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                else
+                {
+                    if(status == 1)
+                    {
+                        [MBProgressHUD showHint:@"您的认证正在审核中" toView:self.view];
+                    }
+                    else if(status == 3)
+                    {
+                        [MBProgressHUD showHint:@"您已有认证企业" toView:self.view];
+                    }
+                }
+            }
+        }
+        else
+        {
+            [MBProgressHUD showError:[responseObject objectForKey:@"msg"] toView:self.view];
+            
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showError:@"请求失败" toView:self.view];
+        
+    }];
+    [taskArray addObject:task];
+}
+
 
 -(void)abnormalViewReload
 {
@@ -675,11 +728,11 @@
     }
     else //if (button.tag == KDetailOperationTag+2)//认证
     {
-        ComCertificationController*recoveryErrorView = [[ComCertificationController alloc] init];
-        
-        [self.navigationController pushViewController:recoveryErrorView animated:YES];
+        [self checkAuthStatus];
     }
 }
+
+
 
 -(void)loginSuccessCheckReport:(NSString *)reportType
  {
