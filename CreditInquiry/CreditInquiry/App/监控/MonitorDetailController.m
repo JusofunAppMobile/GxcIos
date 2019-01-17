@@ -70,7 +70,10 @@ static NSString *HeadID = @"MonitorDetailHeader";
         [MBProgressHUD showMessag:@"" toView:self.view];
     }
     [RequestManager postWithURLString:KDynamicFilter parameters:params success:^(id responseObject) {
-        [MBProgressHUD hideHudToView:self.view animated:YES];
+        if (loading) {
+            [MBProgressHUD hideHudToView:self.view animated:YES];
+        }
+        
         if ([responseObject[@"result"] intValue] == 0) {
            
             NSArray *array = [[responseObject objectForKey:@"data"] objectForKey:@"filter"];
@@ -87,7 +90,9 @@ static NSString *HeadID = @"MonitorDetailHeader";
             }
         }
     } failure:^(NSError *error) {
-        [MBProgressHUD hideHudToView:self.view animated:YES];
+        if (loading) {
+            [MBProgressHUD hideHudToView:self.view animated:YES];
+        }
     }];
 }
 

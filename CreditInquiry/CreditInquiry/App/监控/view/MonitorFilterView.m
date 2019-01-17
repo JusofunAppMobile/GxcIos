@@ -139,15 +139,15 @@
     NSDictionary *dic = [self.dataArray objectAtIndex:indexPath.row];
     NSString *str = [dic objectForKey:@"monitor_condition_name"];
     
-    return CGSizeMake([self getTextWidth:str]+12*2, 40);
+    return CGSizeMake([self getTextWidth:str]+12*2, 30);
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
-    return CGSizeMake(KChooseWidth, 34);
+    return CGSizeMake(KChooseWidth, 75);
 }
 
 - (CGFloat)getTextWidth:(NSString *)text{
-    CGRect rect = [text boundingRectWithSize:CGSizeMake(MAXFLOAT, 40) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil];
+    CGRect rect = [text boundingRectWithSize:CGSizeMake(MAXFLOAT, 30) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil];
     return rect.size.width;
 }
 

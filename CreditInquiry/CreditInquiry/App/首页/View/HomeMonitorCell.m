@@ -33,7 +33,7 @@
             UILabel *nameLabel = [[UILabel alloc]init];
             nameLabel.textColor = KRGB(51, 51, 51);
             nameLabel.font = KFont(16);
-            nameLabel.text = @"九次方大数据信息集团有限公司";
+            nameLabel.text = @"";
             [self.contentView addSubview:nameLabel];
             [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(self.logoImageView.mas_right).offset(15);
@@ -48,7 +48,7 @@
             UILabel *timeLabel = [[UILabel alloc]init];
             timeLabel.textColor = KRGB(153, 153, 153);
             timeLabel.font = KFont(12);
-            timeLabel.text = @"今天18：00";
+            timeLabel.text = @"";
             [self.contentView addSubview:timeLabel];
             [timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.height.mas_equalTo(self.nameLabel);
@@ -62,7 +62,7 @@
             UILabel *contentLabel = [[UILabel alloc]init];
             contentLabel.textColor = KRGB(51, 51, 51);
             contentLabel.font = KFont(12);
-            contentLabel.text = @"变更开庭公告等3条动态";
+            contentLabel.text = @"";
             [self.contentView addSubview:contentLabel];
             [contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.height.mas_equalTo(self.nameLabel);
@@ -92,10 +92,14 @@
 {
     _dataDic = dataDic;
     
-    [_logoImageView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:KImageName(@"home_LoadingLogo")];
+   //[_logoImageView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:KImageName(@"home_LoadingLogo")];
     _nameLabel.text = [dataDic objectForKey:@"companyName"];
-    _contentLabel.text = [dataDic objectForKey:@""];
     _timeLabel.text = [dataDic objectForKey:@"changeDate"];
+    
+    NSString *dynamicStr = [NSString stringWithFormat:@"共%@条动态",[dataDic objectForKey:@"changeCount"]];
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc]initWithString:dynamicStr];
+    [attr addAttribute:NSForegroundColorAttributeName value:KHexRGB(0xe8603b) range:NSMakeRange(1, dynamicStr.length - 4)];
+    _contentLabel.attributedText = attr;
     
 }
 

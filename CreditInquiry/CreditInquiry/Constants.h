@@ -121,6 +121,7 @@ typedef enum : NSUInteger {
 #define KUserLocationKey @"userLocation"
 //搜索的类型
 typedef NS_ENUM(NSInteger, SearchType) {
+    SearchWebType = -1, //H5页面
     SearchBlurryType = 0, //模糊查询
     SearchShareholderType  =   1,//股东高管查询
     SearchOurmainType   =   2,//主营产品查询

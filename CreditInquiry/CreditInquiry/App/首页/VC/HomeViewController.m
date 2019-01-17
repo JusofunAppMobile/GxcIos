@@ -7,7 +7,7 @@
 //
 
 #import "HomeViewController.h"
-
+#import "AppDelegate.h"
 
 static NSString *HomeSetionHeaderID = @"HomeSectionHeader";
 static NSString *MonitorCellID = @"MonitorCellID";
@@ -108,13 +108,15 @@ static NSString *NewsCellID = @"NewsCellID";
 #pragma mark - section 更多
 -(void)sectionHeaderMoreBtnClicked:(NSString *)title
 {
-    if ([title isEqualToString:@"监控动态"]) {
+    if ([title isEqualToString:@"监控动态"])
+    {
+        AppDelegate * appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        appDelegate.tabBarController.selectedIndex = 1;
     
-        
     }
-    if ([title isEqualToString:@"行业资讯"]) {
+    if ([title isEqualToString:@"行业资讯"])
+    {
         NewsController *vc = [[NewsController alloc]init];
-        
         [self.navigationController pushViewController:vc animated:YES];
     }
     
@@ -285,6 +287,15 @@ static NSString *NewsCellID = @"NewsCellID";
         NSDictionary *dic = [array objectAtIndex:indexPath.row];
         CommonWebViewController *vc = [[CommonWebViewController alloc]init];
         vc.urlStr = [dic objectForKey:@"newsURL"];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else if (indexPath.section == 0)
+    {
+        NSArray *array = [dataDic objectForKey:@"monitor"];
+        NSDictionary *dic = [array objectAtIndex:indexPath.row];
+        MonitorDetailController *vc = [MonitorDetailController new];
+        vc.companyName = [dic objectForKey:@"companyName"];
+        vc.companyId = [dic objectForKey:@"companyId"];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
