@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ComCertificationController : BasicViewController<CertificationDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,
 UIImagePickerControllerDelegate>
 
-@property(nonatomic,copy)NSString *entId;
+@property(nonatomic,copy)NSString *companyName;
 
 //是否是展示信息
 @property(nonatomic,assign)BOOL isShow;

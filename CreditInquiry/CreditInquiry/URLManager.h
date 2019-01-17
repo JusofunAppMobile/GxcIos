@@ -46,6 +46,9 @@
 //  企业添加/取消监控
 #define  KMonitor @""HOSTURL"/app/MonitoringDynamics/AddOrCancelMonitor"
 
+//  查询企业认证、VIP状态接口
+#define  KGetIdentVip @""HOSTURL"/app/Company/getIdentVip"
+
 
 //获取热词
 #define KGetHotKey  @""HOSTURL"/app/sys/hotSearchWord"
