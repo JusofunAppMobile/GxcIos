@@ -43,11 +43,11 @@
                 make.centerY.mas_equalTo(self);
                 make.left.mas_equalTo(_tips.mas_right).offset(20);
             }];
-            [view setTitle:@"导出报告" forState:UIControlStateNormal];
-            [view setTitle:@"取消导出" forState:UIControlStateSelected];
+           // [view setTitle:@"导出报告" forState:UIControlStateNormal];
+           // [view setTitle:@"取消导出" forState:UIControlStateSelected];
             [view setTitleColor:KHexRGB(0xfc7b2b) forState:UIControlStateNormal];
             [view setTitleColor:KHexRGB(0x999999) forState:UIControlStateSelected];
-            [view addTarget:self action:@selector(editAction) forControlEvents:UIControlEventTouchUpInside];
+            //[view addTarget:self action:@selector(editAction) forControlEvents:UIControlEventTouchUpInside];
             view.titleLabel.font = KFont(14);
             view;
         });

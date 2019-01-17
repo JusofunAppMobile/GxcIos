@@ -21,6 +21,11 @@ UIImagePickerControllerDelegate>
 //是否是展示信息
 @property(nonatomic,assign)BOOL isShow;
 
+/**
+ // 0：未认证 1：审核中 2：审核失败 3：审核成功
+ */
+@property(nonatomic,copy)NSString *status;
+
 @end
 
 NS_ASSUME_NONNULL_END
