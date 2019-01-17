@@ -11,6 +11,11 @@
 #import "CreditProReportCell.h"
 #import "CreditReportHeader.h"
 #import "ConfirmOrderController.h"
+#import "ReportPreviewController.h"
+#import "MyOrderController.h"
+#import "ShowMessageView.h"
+#import "VipPrivilegeController.h"
+#import "BuyVipController.h"
 
 static NSString *CellID = @"CreditReportCell";
 static NSString *ProCellID = @"CreditProReportCell";
@@ -18,6 +23,7 @@ static NSString *ProCellID = @"CreditProReportCell";
 @interface CreditReportController ()<UITableViewDataSource,UITableViewDelegate,CreditReportCellDelegate>
 @property (nonatomic ,strong) UITableView *tableview;
 @property (nonatomic ,strong) CreditReportHeader *header;
+@property (nonatomic ,strong) NSDictionary *reportInfo;
 @end
 
 @implementation CreditReportController
@@ -31,9 +37,35 @@ static NSString *ProCellID = @"CreditProReportCell";
     [self initView];
     [self loadData];
 }
+
 #pragma mark - loadData
 - (void)loadData{
     
+    [MBProgressHUD showMessag:@"" toView:self.view];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:KUSER.userId forKey:@"userId"];
+    [params setObject:_companyid forKey:@"companyid"];
+    [params setObject:_companyName forKey:@"companyname"];
+
+    [RequestManager postWithURLString:KGetCreditReportList parameters:params success:^(id responseObject) {
+        [MBProgressHUD hideHudToView:self.view animated:YES];
+        if ([responseObject[@"result"] intValue] == 0) {
+            _reportInfo = responseObject[@"data"];
+            [_tableview reloadData];
+            [self updateUserInfo];//更新用户状态
+        }else{
+            [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD hideHudToView:self.view animated:YES];
+    }];
+}
+
+- (void)updateUserInfo{
+    if (_reportInfo[@"isVIP"]) {
+        KUSER.vipStatus = _reportInfo[@"isVIP"];
+    }
 }
 
 #pragma mark - initView
@@ -88,26 +120,51 @@ static NSString *ProCellID = @"CreditProReportCell";
     if (indexPath.section ==0) {
         CreditReportCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID forIndexPath:indexPath];
         cell.delegate = self;
+        cell.reportInfo = _reportInfo;
         return cell;
     }else{
         CreditProReportCell *cell = [tableView dequeueReusableCellWithIdentifier:ProCellID forIndexPath:indexPath];
+        cell.reportInfo = _reportInfo;
+        cell.delegate = self;
         return cell;
     }
 }
 
 #pragma mark - 我的订单
 - (void)rightAction{
-    NSLog(@"我的订单");
-}
-
-#pragma mark - 预览 获取报告
-- (void)didClickSendReportButton{
-    ConfirmOrderController *vc = [ConfirmOrderController new];
+    MyOrderController *vc = [MyOrderController new];
     [self.navigationController pushViewController:vc animated:YES];
 }
-
-- (void)didClickPreviewButton{
+#pragma mark - 预览 获取报告
+- (void)didClickSendReportButton:(int)cellType{
     
+    if (KUSER.vipStatus.intValue == 1) {
+        NSString *reportType = cellType == 0? @"企业信用报告-标准版":@"企业信用报告-专业版";
+        NSString *price =  cellType == 0?_reportInfo[@"basicVersionDownloadAmount"]:_reportInfo[@"professionVersionDownloadAmount"];
+        
+        ConfirmOrderController *vc = [ConfirmOrderController new];
+        vc.reportName = reportType;
+        vc.companyName = _companyName;
+        vc.price = price;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+//        KWeakSelf
+//        [[ShowMessageView alloc]initWithType:ShowMessageVIPType action:^{
+//            VipPrivilegeController *vc = [VipPrivilegeController new];
+//            [weakSelf.navigationController pushViewController:vc animated:YES];
+//        }];
+        
+        BuyVipController *vc = [BuyVipController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+- (void)didClickPreviewButton:(int)cellType{
+    NSString *url = cellType== 0?_reportInfo[@"basicVersionSamplePreview"]:_reportInfo[@"professionVersionSamplePreview"];
+
+    ReportPreviewController *vc = [ReportPreviewController new];
+    vc.url = url;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - lazy load

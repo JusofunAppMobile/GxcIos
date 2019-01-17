@@ -24,10 +24,11 @@
         self.cellButotn = ({
             UIButton *view = [UIButton new];
             view.titleLabel.font = KFont(14);
+            view.enabled = NO;
             [view setImage:KImageName(@"icon_shuiwu") forState:UIControlStateNormal];
             [view setTitle:@"税务案件" forState:UIControlStateNormal];
             [view setTitleColor:KHexRGB(0x303030) forState:UIControlStateNormal];
-            [view addTarget:self action:@selector(cellAction) forControlEvents:UIControlEventTouchUpInside];
+//            [view addTarget:self action:@selector(cellAction) forControlEvents:UIControlEventTouchUpInside];
             [self.contentView addSubview:view];
             [view mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.edges.mas_equalTo(self.contentView).insets(UIEdgeInsetsMake(20, 0, 0, 0));

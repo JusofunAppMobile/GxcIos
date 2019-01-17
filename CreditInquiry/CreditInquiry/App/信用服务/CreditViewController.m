@@ -219,6 +219,8 @@ static NSString *ChartID = @"CreditChartLineCell";
     if (indexPath.section == 1 && state==3) {
         if (indexPath.row == 0) {
             CreditReportController *vc = [CreditReportController new];
+            vc.companyid = _creditModel.companyInfo[@"companyId"];
+            vc.companyName = _creditModel.companyInfo[@"companyName"];
             [self.navigationController pushViewController:vc animated:YES];
         }else if (indexPath.row == 1){
             CreditInfoInputController *vc = [CreditInfoInputController new];

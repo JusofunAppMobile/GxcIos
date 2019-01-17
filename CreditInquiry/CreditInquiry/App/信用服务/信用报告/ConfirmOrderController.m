@@ -32,7 +32,7 @@
     self.view.backgroundColor = KHexRGB(0xebf0f3);
     
     UIImageView *iconBg1 = [UIImageView new];
-    iconBg1.backgroundColor = [UIColor yellowColor];
+    iconBg1.image = KImageName(@"menu_bg01");
     [self.view addSubview:iconBg1];
     [iconBg1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
@@ -48,15 +48,16 @@
     [typeTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(iconBg1).offset(20);
         make.top.mas_equalTo(iconBg1).offset(35);
+        make.height.mas_equalTo(17);
     }];
     
     UILabel *typeLab = [UILabel new];
-    typeLab.text = @"企业信用报告-标准版";
+    typeLab.text = _reportName;
     typeLab.font = KFont(15);
     [iconBg1 addSubview:typeLab];
     [typeLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(typeTitle.mas_right);
-        make.top.mas_equalTo(typeTitle);
+        make.centerY.mas_equalTo(typeTitle);
         make.right.mas_lessThanOrEqualTo(iconBg1).offset(-20);
     }];
     
@@ -68,23 +69,24 @@
     [goalTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(typeTitle);
         make.top.mas_equalTo(typeTitle.mas_bottom).offset(21);
+        make.height.mas_equalTo(17);
+        make.bottom.mas_equalTo(iconBg1.mas_bottom).offset(-20);
     }];
     
     
     UILabel *goalLab = [UILabel new];
-    goalLab.text = @"小米科技责任有限公司";
+    goalLab.text = _companyName;
     goalLab.font = KFont(15);
     goalLab.numberOfLines = 0;
     [iconBg1 addSubview:goalLab];
     [goalLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(goalTitle.mas_right);
-        make.top.mas_equalTo(goalTitle);
+        make.centerY.mas_equalTo(goalTitle);
         make.right.mas_equalTo(iconBg1).offset(-20);
-        make.bottom.mas_equalTo(iconBg1.mas_bottom).offset(-20);
     }];
     
     UIImageView *iconBg2 = [UIImageView new];
-    iconBg2.backgroundColor = [UIColor cyanColor];
+    iconBg2.image = KImageName(@"menu_bg02");
     [self.view addSubview:iconBg2];
     [iconBg2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(iconBg1);
@@ -92,8 +94,18 @@
         make.height.mas_equalTo((20.f/345)*(KDeviceW-15*2));
     }];
     
+    UIView *line = [UIView new];
+    line.backgroundColor = KHexRGB(0xe6e6e6);
+    [iconBg2 addSubview:line];
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(iconBg2).offset(20);
+        make.right.mas_equalTo(iconBg2).offset(-20);
+        make.centerY.mas_equalTo(iconBg2);
+        make.height.mas_equalTo(1);
+    }];
+    
     UIImageView *iconBg3 = [UIImageView new];
-    iconBg3.backgroundColor = [UIColor greenColor];
+    iconBg3.image = KImageName(@"menu_bg03");
     iconBg3.userInteractionEnabled = YES;
     [self.view addSubview:iconBg3];
     [iconBg3 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -123,6 +135,7 @@
     [formatLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(textField);
         make.top.mas_equalTo(textField.mas_bottom).offset(23);
+        make.height.mas_equalTo(17);
     }];
     
     self.leftBtn = ({
@@ -197,7 +210,7 @@
             make.left.mas_equalTo(priceTitle.mas_right);
         }];
         view.font = KFont(12);
-        view.text = @"￥0";
+        view.text = [NSString stringWithFormat:@"￥%@",_price];
         view.textColor = KHexRGB(0xd20b1e);
         view;
     });

@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CreditReportController : BasicViewController
-
+@property (nonatomic ,copy) NSString *companyid;
+@property (nonatomic ,copy) NSString *companyName;
 @end
 
 NS_ASSUME_NONNULL_END
