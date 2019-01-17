@@ -45,13 +45,19 @@ static NSString *PlainID = @"MePlainCell";
         make.height.mas_equalTo((444.f/750)*KDeviceW);
     }];
     
+    CGFloat y = 0;
+    
+    if (@available(iOS 11.0, *)){
+        y = KNavigationBarHeight;
+    }
+    
     self.tableview = ({
         UITableView *view = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
         [self.view addSubview:view];
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
             make.right.mas_equalTo(-15);
-            make.top.mas_equalTo(KNavigationBarHeight);
+            make.top.mas_equalTo(y);
             make.bottom.mas_equalTo(-KTabBarHeight);
         }];
         view.backgroundColor = [UIColor clearColor];
