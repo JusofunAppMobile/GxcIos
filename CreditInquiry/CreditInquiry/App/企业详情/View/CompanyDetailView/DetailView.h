@@ -21,8 +21,9 @@
 typedef NS_ENUM(NSInteger, Headerype) {
     HeaderRiskType = 5638, //风险信息
     HeaderManageType  ,//经营状况
-    HeaderMoneyType //无形资产
-    
+    HeaderMoneyType, //无形资产
+    HeaderHodelType,//股东
+    HeaderGGType//高管
 };
 
 

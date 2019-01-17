@@ -14,7 +14,7 @@
 
 @interface CompanyDetailController()
 {
-    UITableView *backTableView;
+    
     CompanyDetailModel * detailModel;
     NSMutableArray  *itemList;//菜单列表
     DetailView *detailView;
@@ -34,6 +34,9 @@
     
     int refreshNum;
     NSMutableArray *taskArray;
+    
+    NSMutableArray *holderArray;//股东
+    NSMutableArray *ggArray;//高管
     
 }
 @property (nonatomic ,strong) NSArray *reportTypeList;
@@ -121,7 +124,7 @@
             {
                 SearchResultController *SearchVc = [[SearchResultController alloc]init];
                 SearchVc.btnTitile = self.companyName;
-                SearchVc.searchType = BlurryType;
+                SearchVc.searchType = SearchBlurryType;
                 SearchVc.isFromNoData = YES;
                 //SearchVc.delegate = self;
                 [self.navigationController pushViewController:SearchVc animated:YES];
@@ -178,80 +181,42 @@
     NSURLSessionDataTask*task = [RequestManager postWithURLString:urlstr parameters:paraDic success:^(id responseObject) {
         NSLog(@"%@",responseObject);
        
-        _reportTypeList = [ReportTypeModel mj_objectArrayWithKeyValuesArray:responseObject[@"reportTypeList"]];//test
-        
-        
-        
-        NSMutableDictionary *tmpDic = [NSMutableDictionary dictionaryWithDictionary:responseObject];
-        
-        NSArray *tmpArray = [responseObject objectForKey:@"subclassMenu"];
-        NSMutableArray *saveArray = [NSMutableArray arrayWithCapacity:1];
-        
-        for(NSDictionary *dic in tmpArray)
+        if ([responseObject[@"result"] integerValue] == 0)
         {
-            int type = [[dic objectForKey:@"type"] intValue];
-            for(NSString *detailType in KCompanyDetailGridType)
+            NSDictionary *dic = [[responseObject objectForKey:@"data"] objectForKey:@"companyInfo"];
+            if([[dic objectForKey:@"isCollect"] intValue] == 0)
             {
-                if(type == [detailType intValue])
-                {
-                    [saveArray addObject:dic];
-                    break;
-                }
+                [self setFoucsBtn:NO];
             }
-        }
-        [tmpDic setObject:saveArray forKey:@"subclassMenu"];
-        
-        
-        detailModel = [CompanyDetailModel mj_objectWithKeyValues:tmpDic];
-        
-        
-        if([detailModel.result intValue] == 0)
-        {
-            [weakSelf reloadOhterHeadWithtype:HeaderRiskType hud:NO];
-            [weakSelf reloadOhterHeadWithtype:HeaderManageType hud:NO];
-            [weakSelf reloadOhterHeadWithtype:HeaderMoneyType hud:NO];
-            if([detailModel.hasCompanyData intValue] == 1)//没有数据
+            else
             {
-                SearchResultController *SearchVc = [[SearchResultController alloc]init];
-                SearchVc.btnTitile = self.companyName;
-                SearchVc.searchType = BlurryType;
-                SearchVc.isFromNoData = YES;
-                //SearchVc.delegate = self;
-                [self.navigationController pushViewController:SearchVc animated:YES];
+                [self setFoucsBtn:YES];
             }
-            else//正常
+            
+            if([[dic objectForKey:@"monitorType"] intValue] == 0)
             {
-                focuButton.hidden = NO;
-                shareBarButton.hidden = NO;
-                itemList = [NSMutableArray arrayWithArray:detailModel.subclassMenu];
-                //[infoView reloadInfoView:detailModel];
-                // [self reloadCompanyView];
-                detailView.detailModel = detailModel;
-                if([detailModel.isattention isEqualToString:@"false"]||[detailModel.isattention isEqualToString:@"-"] ||[detailModel.isattention isEqualToString:@""] )
-                {
-                    [self setFoucsBtn:NO];
-                }
-                else
-                {
-                    [self setFoucsBtn:YES];
-                }
-                
+                [self setMonitorBtn:NO];
             }
+            else
+            {
+                [self setMonitorBtn:YES];
+            }
+            
+            holderArray = [NSMutableArray arrayWithArray:[dic objectForKey:@"shareholder"]];
+            ggArray = [NSMutableArray arrayWithArray:[dic objectForKey:@"mainStaff"]];
+            
+            [detailView reloadViewWithType:HeaderHodelType gridArray:holderArray animate:NO];
+            [detailView reloadViewWithType:HeaderGGType gridArray:ggArray animate:NO];
+            
             
         }
         else
         {
-            focuButton.hidden = YES;
-            shareBarButton.hidden = YES;
-            [self showNetFailViewWithFrame:self.view.bounds];
-            [self setBackBtn:@""];
+             [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
         }
         
     } failure:^(NSError *error) {
-        focuButton.hidden = YES;
-        shareBarButton.hidden = YES;
-        [self showNetFailViewWithFrame:self.view.bounds];
-        [self setBackBtn:@""];
+       [MBProgressHUD showHint:@"请求失败" toView:self.view];
     }];
     
     
@@ -497,12 +462,12 @@
             if([sender.titleLabel.text isEqualToString:@"监控"])
             {
                 [MBProgressHUD showSuccess:@"添加监控成功" toView:self.view];
-                [sender setTitle:@"已监控" forState:UIControlStateNormal];
+                [self setMonitorBtn:YES];
             }
             else
             {
                 [MBProgressHUD showSuccess:@"取消监控成功" toView:self.view];
-                [sender setTitle:@"监控" forState:UIControlStateNormal];
+                [self setMonitorBtn:NO];
             }
         }
         else
@@ -517,6 +482,8 @@
     }];
     [taskArray addObject:task];
 }
+
+
 
 -(void)abnormalViewReload
 {
@@ -895,6 +862,22 @@
     {
         [focuButton setImage:KImageName(@"详情收藏_h") forState:UIControlStateNormal];
         focuButton.tag = 45677;
+    }
+}
+
+//设置关注按钮的标题文字
+-(void)setMonitorBtn:(BOOL)isMonitor
+{
+    UIButton *sender = [self.view viewWithTag:KDetailOperationTag+2];
+    
+    if(!isMonitor)
+    {
+        [sender setTitle:@"监控" forState:UIControlStateNormal];
+        
+    }
+    else
+    {
+        [sender setTitle:@"已监控" forState:UIControlStateNormal];
     }
 }
 

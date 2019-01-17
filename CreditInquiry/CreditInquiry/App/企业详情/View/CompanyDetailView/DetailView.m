@@ -24,10 +24,13 @@
     NSArray *riskArray;
     NSArray *manageArray;
     NSArray *moneyArray;
+    NSArray *holderArray;
+    NSArray *ggArray;
     
     BOOL isShowCompanyRisk;//企业风险
     BOOL isShowHoldel;//股东
     BOOL isShowMap;//国信企业图谱
+    
     
     NSMutableArray *headArray;
     
@@ -54,8 +57,7 @@
         isShowManage = NO;
         isShowMoney = NO;
         isShowCompanyRisk = NO;
-        isShowHoldel = NO;
-        isShowMap = NO;
+       
         headArray = [NSMutableArray arrayWithObjects:@"企业详情",@"联系信息",@"股东",@"企业风险",@"国信企业图谱",@"企业背景",@"风险信息",@"企业风险预警",@"经营状况", @"无形资产",nil];
         
         [self addSubview:self.backTableView];
@@ -224,7 +226,7 @@
 -(void)reloadViewWithType:(Headerype)type gridArray:(NSArray *)array animate:(BOOL)animate
 {
     
-    NSInteger section ;
+    NSInteger section = 0 ;
     if (type == HeaderRiskType)//风险信息
     {
         isShowRisk = !isShowRisk;
@@ -237,11 +239,21 @@
         section =  [headArray indexOfObject:@"经营状况"];;
         manageArray = array;
     }
-    else //if (button.tag == KFoldBtnTag +5)//无形资产
+    else if (type == HeaderMoneyType)//无形资产
     {
         isShowMoney = !isShowMoney;
         section =  [headArray indexOfObject:@"无形资产"];;
         moneyArray = array;
+    }
+    else if (type == HeaderHodelType)//股东
+    {
+        section =  [headArray indexOfObject:@"股东"];;
+        holderArray = array;
+    }
+    else//高管
+    {
+        section = [headArray indexOfObject:@"股东"];;
+        ggArray = array;
     }
     
     [self.backTableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
@@ -486,8 +498,8 @@
             cell = [[DetailHolderCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        cell.hodelArray = @[];
-        cell.executivesArray = @[];
+        cell.hodelArray = holderArray;
+        cell.executivesArray = ggArray;
         return cell;
     }
     else if ([headStr isEqualToString:@"企业风险"])

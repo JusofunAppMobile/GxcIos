@@ -139,22 +139,22 @@
     self.navigationItem.titleView = self.searchView;
     
     //绘制筛选按钮
-    if (self.searchType != TaxCodeType&&self.searchType != JobType&&self.searchType != RiskAnalyze ) {
+    if (self.searchType != SearchTaxCodeType&&self.searchType != SearchJobType&&self.searchType != SearchRiskAnalyzeType ) {
         [self drawFilterBtn];//绘制筛选按钮
         [KeyWindow addSubview:self.filterView];//添加筛选列表
     }
     
     //是否显示排序
-    if (self.searchType != TaxCodeType && self.searchType != RiskAnalyze) {
-        _sortBarH = self.searchType== CrackcreditType?36:51;
-        if (self.searchType == AddressBookType||self.searchType == PenetrationType) {
+    if (self.searchType != SearchTaxCodeType && self.searchType != SearchRiskAnalyzeType) {
+        _sortBarH = self.searchType== SearchCrackcreditType?36:51;
+        if (self.searchType == SearchAddressBookType||self.searchType == SearchPenaltyType) {
             [self drawExportBar];
         }else{
             [self drawSortView];
         }
     }
     //搜索结果数
-    if (self.searchType != CrackcreditType) {
+    if (self.searchType != SearchCrackcreditType) {
         [self drawTipsView];
     }
     
@@ -188,22 +188,22 @@
     [searchAllWebView removeFromSuperview];
     
     HttpRequestType requestType;
-    if(self.searchType == CrackcreditType)
+    if(self.searchType == SearchCrackcreditType)
     {
         urlStr = BlackListSearch;
         [paraDic setObject:[NSString stringWithFormat:@"%d",(int)loseCreditType] forKey:@"type"];
         requestType = HttpRequestTypePost;
-    }else if (self.searchType == TaxCodeType){
+    }else if (self.searchType == SearchTaxCodeType){
         
         urlStr = KGetSearByRegCode;
         requestType = HttpRequestTypeGet;
 
-    }else if (self.searchType == JobType){
+    }else if (self.searchType == SearchJobType){
         urlStr = KGetCompInJobPage;
         requestType = HttpRequestTypeGet;
         [paraDic setObject:self.btnTitile forKey:@"entName"];
 
-    }else if (self.searchType == AddressBookType){
+    }else if (self.searchType == SearchAddressBookType){
         urlStr = KSearchEntContact;
         requestType = HttpRequestTypeGet;
         sortType= sortType?:TimeDownSortType;
@@ -213,7 +213,7 @@
     }else{
         urlStr = GetSear;
         sortType= sortType?:TimeDownSortType;
-        int type = _searchType == PenetrationType?6:_searchType;
+        int type = _searchType == SearchSeekRelationType?6:_searchType;
 
         [paraDic setObject:@(type) forKey:@"type"];
         [paraDic setObject:@(sortType) forKey:@"sequence"];
@@ -238,7 +238,7 @@
             
         }
         
-        if(self.searchType == BlurryType)
+        if(self.searchType == SearchBlurryType)
         {
             //[MobClick event:@"Search29"];//企业总搜索次数
             //[[BaiduMobStat defaultStat] logEvent:@"Search29" eventLabel:@"企业总搜索次数"];
@@ -270,18 +270,18 @@
 //                [self.companySearchTableView setContentOffset:CGPointMake(0,0) animated:YES];
             }
             
-            if(self.searchType == CrackcreditType)
+            if(self.searchType == SearchCrackcreditType)
             {
                 SearchLoseCreitARRModel *loseCreitArrModel = [SearchLoseCreitARRModel mj_objectWithKeyValues:responseObject];
                 tmpArray = [NSArray arrayWithArray:loseCreitArrModel.dishonestylist];
-            }else if (self.searchType == TaxCodeType){
+            }else if (self.searchType == SearchTaxCodeType){
                 
                 tmpArray = [SearchTaxCodeModel mj_objectArrayWithKeyValuesArray:responseObject[@"dataResult"]];
 
-            }else if (self.searchType == JobType){
+            }else if (self.searchType == SearchJobType){
                 
                 tmpArray = [SearchJobModel mj_objectArrayWithKeyValuesArray:responseObject[@"dataResult"]];
-            }else if (self.searchType == AddressBookType){
+            }else if (self.searchType == SearchAddressBookType){
                 
                 tmpArray = [AddressBookModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
                 [weakSelf setSelectState:tmpArray];//设置选中状态
@@ -295,24 +295,24 @@
             [weakSelf.companyAllArr addObjectsFromArray:tmpArray];
             
             if(weakSelf.companyAllArr.count == 0 && weakSelf.currpage == 1){
-                if( weakSelf.searchType == BlurryType){
+                if( weakSelf.searchType == SearchBlurryType){
                     //[MobClick event:@"Search30"];//企业搜索无结果次数
                     //[[BaiduMobStat defaultStat] logEvent:@"Search30" eventLabel:@"企业搜索无结果次数"];
                     NSLog(@"搜索无结果");
-                }else if( weakSelf.searchType == CrackcreditType)//只有失信查询才弹出提示框
+                }else if( weakSelf.searchType == SearchCrackcreditType)//只有失信查询才弹出提示框
                 {
                     [MBProgressHUD showError:@"没有相关数据" toView:self.view];
                 }
             }
             
-            if(self.searchType == CrackcreditType)
+            if(self.searchType == SearchCrackcreditType)
             {
                 BOOL ismore = [[responseObject objectForKey:@"ismore"] boolValue];
                 if(!ismore){
                     [weakSelf.companySearchTableView.mj_footer endRefreshingWithNoMoreData];
                     isShowLoseFootView = YES;
                 }
-            }else if (self.searchType == TaxCodeType||self.searchType == JobType||self.searchType == AddressBookType){
+            }else if (self.searchType == SearchTaxCodeType||self.searchType == SearchJobType||self.searchType == SearchAddressBookType){
                 
                 [_reportExportBar setTipsWithNum:responseObject[@"totalCount"] type:self.searchType];//设置搜索结果数
                 
@@ -466,7 +466,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(self.searchType == CrackcreditType)
+    if(self.searchType == SearchCrackcreditType)
     {
         static NSString* cellID = @"cell";
         LoseCreditCell* cell = [tableView dequeueReusableCellWithIdentifier:cellID];
@@ -477,7 +477,7 @@
         cell.LoseCreditModel = _companyAllArr[indexPath.row];
         return cell;
         
-    }else if (self.searchType == TaxCodeType){
+    }else if (self.searchType == SearchTaxCodeType){
         SearchTaxCodeCell *cell = [tableView dequeueReusableCellWithIdentifier:SearchTaxID];
         if (!cell) {
             cell = [[SearchTaxCodeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SearchTaxID];
@@ -485,14 +485,14 @@
         cell.model = _companyAllArr[indexPath.row];
         return cell;
     }
-    else if (self.searchType == JobType){
+    else if (self.searchType == SearchJobType){
         SearchJobCell *cell = [tableView dequeueReusableCellWithIdentifier:SearchJobID];
         if (!cell) {
             cell = [[SearchJobCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SearchJobID];
         }
         cell.model = _companyAllArr[indexPath.row];
         return cell;
-    }else if (self.searchType == AddressBookType){
+    }else if (self.searchType == SearchAddressBookType){
         AddressBookCell *cell = [tableView dequeueReusableCellWithIdentifier:AddressBookID];
         if (!cell) {
             cell = [[AddressBookCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:AddressBookID];
@@ -500,7 +500,7 @@
         }
         [cell setModel:_companyAllArr[indexPath.row] checkboxShow:_showCheckbox];
         return cell;
-    }else if (self.searchType == PenetrationType){
+    }else if (self.searchType == SearchSeekRelationType){
         ShareholderCell *cell = [tableView dequeueReusableCellWithIdentifier:ShareholderID];
         if (!cell) {
             cell = [[ShareholderCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ShareholderID];
@@ -509,7 +509,7 @@
         [cell setModel:_companyAllArr[indexPath.row] showCheckbox:_showCheckbox];
         return cell;
     }
-    else if (self.searchType == RiskAnalyze){
+    else if (self.searchType == SearchRiskAnalyzeType){
         RiskAnalyzeCell *cell = [tableView dequeueReusableCellWithIdentifier:ShareholderID];
         if (!cell) {
             cell = [[RiskAnalyzeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ShareholderID];
@@ -532,7 +532,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if(self.searchType == CrackcreditType && isShowLoseFootView &&_companyAllArr.count >0)
+    if(self.searchType == SearchCrackcreditType && isShowLoseFootView &&_companyAllArr.count >0)
     {
         return 60;
     }
@@ -553,7 +553,7 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    if(self.searchType == CrackcreditType && isShowLoseFootView&&_companyAllArr.count >0)
+    if(self.searchType == SearchCrackcreditType && isShowLoseFootView&&_companyAllArr.count >0)
     {
         UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, KDeviceH - 60, KDeviceW, 60)];
         bottomView.backgroundColor = [UIColor clearColor];
@@ -634,7 +634,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if(self.searchType == CrackcreditType)
+    if(self.searchType == SearchCrackcreditType)
     {
         //[MobClick event:@"Search28"];//失信查询页－有结果－结果点击数
         //[[BaiduMobStat defaultStat] logEvent:@"Search28" eventLabel:@"失信查询页－有结果－结果点击数"];
@@ -644,7 +644,7 @@
         commonWeb.titleStr = @"失信详情";
         commonWeb.urlStr = creditModel.url;
         [self.navigationController pushViewController:commonWeb animated:YES];
-    }else if (self.searchType == JobType){
+    }else if (self.searchType == SearchJobType){
      
         SearchJobModel *model = self.companyAllArr[indexPath.row];
         
@@ -653,7 +653,7 @@
         commomwevView.urlStr = model.url;
         commomwevView.dataDic = model.mj_keyValues;
         [self.navigationController pushViewController:commomwevView animated:YES];
-    }else if (self.searchType == AddressBookType){
+    }else if (self.searchType == SearchAddressBookType){
         AddressBookModel *model = self.companyAllArr[indexPath.row];
         if (_showCheckbox) {
             model.selected = !model.selected;
@@ -664,7 +664,7 @@
             vc.companyName = model.companyname;
             [self.navigationController pushViewController:vc animated:YES];
         }
-    }else if (self.searchType == RiskAnalyze){
+    }else if (self.searchType == SearchRiskAnalyzeType){
         RiskAnalyzeController *vc = [RiskAnalyzeController new];
        
         [self.navigationController pushViewController:vc animated:YES];
@@ -703,7 +703,7 @@
     sortBackView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:sortBackView];
     
-    if(self.searchType == CrackcreditType)
+    if(self.searchType == SearchCrackcreditType)
     {
         NSArray *titleArray = @[@"全部",@"失信人",@"失信企业"];
         for(int i = 0;i<titleArray.count;i++)
@@ -795,7 +795,7 @@
 - (void)drawTipsView{
     _tipsBarH = 30;
     _reportExportBar = [[ReportExportBar alloc]initWithFrame:KFrame(0, KNavigationBarHeight+_sortBarH, KDeviceW, _tipsBarH)];
-    _reportExportBar.barType = (_searchType == AddressBookType||_searchType == PenetrationType||_searchType == TaxCodeType||_searchType == JobType||_searchType == RiskAnalyze)?1:0;
+    _reportExportBar.barType = (_searchType == SearchAddressBookType||_searchType == SearchSeekRelationType||_searchType == SearchTaxCodeType||_searchType == SearchJobType||_searchType == SearchRiskAnalyzeType)?1:0;
     _reportExportBar.delegate = self;
     [self.view addSubview:_reportExportBar];
 }
@@ -1047,7 +1047,7 @@
         _companySearchTableView.backgroundColor = [UIColor whiteColor];
         _companySearchTableView.delegate = self;
         _companySearchTableView.dataSource = self;
-        _companySearchTableView.separatorStyle =self.searchType == CrackcreditType? :UITableViewCellSeparatorStyleNone;
+        _companySearchTableView.separatorStyle =self.searchType == SearchCrackcreditType? :UITableViewCellSeparatorStyleNone;
         _companySearchTableView.estimatedRowHeight = 200;//设置太小，导致reload时候，cell向下tiao dong
         _companySearchTableView.rowHeight = UITableViewAutomaticDimension;
     }
@@ -1056,7 +1056,7 @@
 
 - (FilterView *)filterView{
     if (!_filterView) {
-        _filterView = [[FilterView alloc]initWithFrame:KFrame(0, 0, KDeviceW, KDeviceH) isSX:self.searchType == CrackcreditType];
+        _filterView = [[FilterView alloc]initWithFrame:KFrame(0, 0, KDeviceW, KDeviceH) isSX:self.searchType == SearchCrackcreditType];
         _filterView.delegate = self;
     }
     return _filterView;
@@ -1183,7 +1183,7 @@
     for (int i= 0; i < tempArr.count; i++) {
         SearchBaseModel *model = tempArr[i];
         if (_allSelected) {
-            if (self.exportModels.allValues.count >= KReportExportNum && _searchType != AddressBookType) {//选中已达最大数量，则无需设置
+            if (self.exportModels.allValues.count >= KReportExportNum && _searchType != SearchAddressBookType) {//选中已达最大数量，则无需设置
                 break;
             }
             SearchBaseModel *model = tempArr[i];
@@ -1216,7 +1216,7 @@
         [self.exportModels removeObjectForKey:model.companyid];
     }
     
-    if (self.exportModels.count == KReportExportNum && _searchType != AddressBookType) {
+    if (self.exportModels.count == KReportExportNum && _searchType != SearchAddressBookType) {
         self.allSelected = YES;
     }else if (self.exportModels.count == self.companyAllArr.count){
         self.allSelected = YES;
@@ -1232,7 +1232,7 @@
 //点击单个cell，改变全选按钮的选中状态
 - (void)changeAllSelectBtnState{
     
-    if (_searchType == AddressBookType||_searchType == PenetrationType) {
+    if (_searchType == SearchAddressBookType||_searchType == SearchSeekRelationType) {
         _exportBar.selectAllBtn.selected = _allSelected;
     }else{
         _reportExportBar.selectAllBtn.selected = _allSelected;
@@ -1242,11 +1242,11 @@
 //查看更多、预览
 - (void)cellPreviewAction:(SearchBaseModel *)exportModel{
     if (KUSER.userId.length) {
-        if (_searchType == AddressBookType) {//通讯录预览（查看更多）
+        if (_searchType == SearchAddressBookType) {//通讯录预览（查看更多）
 //            DownContactController *vc = [[DownContactController alloc]init];
 //            vc.modelArray =@[(AddressBookModel *)exportModel] ;//AddressBookModel
 //            [self.navigationController pushViewController:vc animated:YES];
-        }else if (_searchType == PenetrationType){//股东穿透预览
+        }else if (_searchType == SearchSeekRelationType){//股东穿透预览
             NSLog(@"股东穿透预览");
         }else{//企业报告预览
             [self checkReportWithModel:exportModel forPreview:YES];//获取权限
@@ -1263,7 +1263,7 @@
 - (void)exportBarSelectAllAction:(BOOL)selected{
     if (selected) {
         for (int i = 0; i < self.companyAllArr.count; i++) {
-            if (self.exportModels.allValues.count == KReportExportNum && _searchType != AddressBookType) {//加载更多的新数据为add，老数据的状态保存不变
+            if (self.exportModels.allValues.count == KReportExportNum && _searchType != SearchAddressBookType) {//加载更多的新数据为add，老数据的状态保存不变
                 break;
             }
             SearchBaseModel *model = _companyAllArr[i];
@@ -1290,13 +1290,14 @@
         return;
     }
     if (KUSER.userId.length) {
-        if (_searchType == AddressBookType) {
+        if (_searchType == SearchAddressBookType) {
 //            DownContactController *vc = [[DownContactController alloc]init];
 //            vc.modelArray = [_exportModels allValues].copy;//AddressBookModel
 //            [self.navigationController pushViewController:vc animated:YES];
-        }else if (_searchType == PenetrationType){//查看股东穿透权限
-            [self checkPenetrationVipType];
         }
+//        else if (_searchType == PenetrationType){//查看股东穿透权限
+//            [self checkPenetrationVipType];
+//        }
         else{//导出企业报告 test
             SearchBaseModel *model = [_exportModels allValues][0];//取第一个model就行
             [self checkReportWithModel:model forPreview:NO];

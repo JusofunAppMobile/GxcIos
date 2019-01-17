@@ -25,9 +25,6 @@
 #define KGetHomeData   @""HOSTURL"/app/Home/GetHomeData"
 
 
-// 搜索关键词接口
-#define  KSearchWord @""HOSTURL"/app/sys/searchWord"
-
 // 插入关键词接口
 #define  KInsertKey @""HOSTURL"/app/sys/insertSearchWord"
 
@@ -48,6 +45,12 @@
 
 //  企业添加/取消监控
 #define  KMonitor @""HOSTURL"/app/MonitoringDynamics/AddOrCancelMonitor"
+
+//获取热词
+#define KGetHotKey  @""HOSTURL"/app/sys/hotSearchWord"
+
+//插入热词
+#define KInsertHotKey  @""HOSTURL"/app/sys/insertSearchWord"
 
 
 // 访客
@@ -132,8 +135,7 @@
 
 
 
-//获取热词
-#define GetHotKey  [NSString stringWithFormat:@"%@%@",QXBHOSTURL,@"/api/Tools/GetHotSearchWord"]
+
 
 //搜索
 

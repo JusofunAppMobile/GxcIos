@@ -75,7 +75,7 @@ static NSString *NewsCellID = @"NewsCellID";
     //[MobClick event:@"Home01"];//首页－名称搜索框点击数,0
     //[[BaiduMobStat defaultStat] logEvent:@"Home01" eventLabel:@"首页－名称搜索框点击数"];
     SearchController *SearchVc = [[SearchController alloc]init];
-    SearchVc.searchType = BlurryType;
+    SearchVc.searchType = SearchBlurryType;
     [self.navigationController pushViewController:SearchVc animated:YES];
 }
 
@@ -126,54 +126,54 @@ static NSString *NewsCellID = @"NewsCellID";
     NSDictionary *dic = button.dataDic;
     //1：股东高管 2：主营产品 3：地址电话 4：失信查询 5：查税号 6：招聘 7：企业通讯录 8：查关系(待定) 9：风险分析(待定) -1: h5跳转
     int type = [[dic objectForKey:@"menuType"] intValue];
-    if(type == 1)//1：股东高管
+    if(type == SearchShareholderType)//1：股东高管
     {
         SearchController *searchVc= [SearchController new];
-        searchVc.searchType = ShareholderType;
+        searchVc.searchType = SearchShareholderType;
         [self.navigationController pushViewController:searchVc animated:YES];
     }
-    else if (type == 2)//2：主营产品
+    else if (type == SearchOurmainType)//2：主营产品
     {
         SearchController *searchVc= [SearchController new];
-        searchVc.searchType = OurmainType;
+        searchVc.searchType = SearchOurmainType;
         [self.navigationController pushViewController:searchVc animated:YES];
     }
-    else if (type == 3)//3：地址电话
+    else if (type == SearchAddressType)//：地址电话
     {
         SearchController *searchVc= [SearchController new];
-        searchVc.searchType = AddressType;
+        searchVc.searchType = SearchAddressType;
         [self.navigationController pushViewController:searchVc animated:YES];
     }
-    else if (type == 4)//4：失信查询
+    else if (type == SearchCrackcreditType)//：失信查询
     {
         SearchController *searchVc= [SearchController new];
-        searchVc.searchType = CrackcreditType;
+        searchVc.searchType = SearchCrackcreditType;
         [self.navigationController pushViewController:searchVc animated:YES];
     }
-    else if (type == 5)//5：查税号
+    else if (type == SearchTaxCodeType)//：查税号
     {
         SearchController *searchVc= [SearchController new];
-        searchVc.searchType = TaxCodeType;
+        searchVc.searchType = SearchTaxCodeType;
         [self.navigationController pushViewController:searchVc animated:YES];
     }
-    else if (type == 6)//6：招聘
+    else if (type == SearchJobType)//：招聘
     {
         SearchController *searchVc= [SearchController new];
-        searchVc.searchType = JobType;
+        searchVc.searchType = SearchJobType;
         [self.navigationController pushViewController:searchVc animated:YES];
     }
-    else if (type == 7)//7：企业通讯录
+    else if (type == SearchAddressBookType)//：企业通讯录
     {
         SearchController *searchVc= [SearchController new];
-        searchVc.searchType = AddressBookType;
+        searchVc.searchType = SearchAddressBookType;
         [self.navigationController pushViewController:searchVc animated:YES];
     }
-    else if (type == 8)//8：查关系(待定)
+    else if (type == SearchSeekRelationType)//：查关系(待定)
     {
         SeekRelationController *vc = [SeekRelationController new];
         [self.navigationController pushViewController:vc animated:YES];
     }
-    else if (type == 9)//9：风险分析(待定)
+    else if (type == SearchRiskAnalyzeType)//9：风险分析(待定)
     {
         RiskVipController *vc = [RiskVipController new];
         [self.navigationController pushViewController:vc animated:YES];
@@ -181,7 +181,7 @@ static NSString *NewsCellID = @"NewsCellID";
     else if (type == -1)//-1: h5跳转
     {
         SearchController *searchVc= [SearchController new];
-        searchVc.searchType = RiskAnalyze;
+        //searchVc.searchType = SearchRiskAnalyze;
         [self.navigationController pushViewController:searchVc animated:YES];
        
 //        CommonWebViewController *vc = [CommonWebViewController new];
@@ -195,7 +195,7 @@ static NSString *NewsCellID = @"NewsCellID";
 {
     SearchResultController *searchVc = [[SearchResultController alloc]init];
     searchVc.btnTitile = hotKey;
-    searchVc.searchType = BlurryType;
+    searchVc.searchType = SearchBlurryType;
     [self.navigationController pushViewController:searchVc animated:YES];
 }
 

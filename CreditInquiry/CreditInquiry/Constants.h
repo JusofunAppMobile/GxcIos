@@ -71,6 +71,9 @@
 //退出登录
 #define KLoginOut   @"loginOut"
 
+//Token 失效
+#define KTokenInvalid   @"KTokenInvalid"
+
 //支付成功
 #define KPaySuccess  @"KPaySuccess"
 
@@ -118,18 +121,23 @@ typedef enum : NSUInteger {
 #define KUserLocationKey @"userLocation"
 //搜索的类型
 typedef NS_ENUM(NSInteger, SearchType) {
-    BlurryType = 0, //模糊查询
-    ShareholderType  =   1,//股东高管查询
-    OurmainType   =   2,//主营产品查询
-    AddressType = 3, //地址电话查询
-    CrackcreditType = 4,// 失信查询
-    TaxCodeType = 5,//查税号
-    JobType = 6,//招聘
-    AddressBookType = 7,//企业通讯录
-    PenetrationType = 8,//股东穿透
-    RiskAnalyze= 9,//风险分析
-    SeekRelation= 10, //查关系
-    CompanyWebType= 11 // 企业网址查询
+    SearchBlurryType = 0, //模糊查询
+    SearchShareholderType  =   1,//股东高管查询
+    SearchOurmainType   =   2,//主营产品查询
+    SearchCrackcreditType = 3,// 失信查询
+    SearchTaxCodeType = 4,//查税号
+    SearchJobType = 5,//招聘
+    SearchAddressBookType = 6,//企业通讯录
+    SearchSeekRelationType = 7, //查关系
+    SearchRiskAnalyzeType = 8,//风险分析
+    SearchAddressType = 11, //地址电话查询
+    SearchPromisenType = 12, //信用承诺，
+    SearchVisitorType = 13, //访客，
+    SearchsubmitType = 14, //自主填报，
+    SearchBidType = 15, //中标信息
+    SearchJudgementType = 16, //裁判文书
+    SearchPenaltyType = 17, //行政处罚
+    SearchBrandType = 18, //商标查询
 };
 
 //自主信息填报类型

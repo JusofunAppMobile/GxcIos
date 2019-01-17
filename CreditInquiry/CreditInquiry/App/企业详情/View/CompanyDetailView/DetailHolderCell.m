@@ -114,16 +114,25 @@
     }
     
     
-    for(int i=0;i<7;i++)
+    for(int i=0;i<hodelArray.count;i++)
     {
+        NSDictionary *dic = [hodelArray objectAtIndex:i];
         HodelButton *button = [[HodelButton alloc]initWithFrame:KFrame(5*i+130*i, 0, 130, 80)];
-        button.nameLabel.text = @"九次方大数据信息集团";
-        button.jobLabel.text = @"大股东";
-        button.contentLabel.text = @"持股比例20%";
+        button.nameLabel.text = [dic objectForKey:@"name"];
+        if([[dic objectForKey:@"strongHolder"] intValue]  == 1)
+        {
+            button.jobLabel.text = @"大股东";
+        }
+        else
+        {
+            button.jobLabel.text = @"";
+        }
+        
+        button.contentLabel.text = [NSString stringWithFormat:@"持股比例%@%%",[dic objectForKey:@"holdRatio"]];
          button.nameImageView.image = [self getImage:button.nameLabel.text];
         [self.scrollView1 addSubview:button];
         
-        if(i == 6)
+        if(i == hodelArray.count-1)
         {
             HodelMoreButton *button2 = [[HodelMoreButton alloc]initWithFrame:KFrame(button.maxX +5, 0, 50, 80)];
             
@@ -148,15 +157,16 @@
         [view removeFromSuperview];
     }
     
-    for(int i=0;i<7;i++)
+    for(int i=0;i<executivesArray.count;i++)
     {
+        NSDictionary *dic = [executivesArray objectAtIndex:i];
         HodelButton *button = [[HodelButton alloc]initWithFrame:KFrame(5*i+130*i, 0, 130, 80)];
-        button.nameLabel.text = @"王叁寿";
-        button.jobLabel.text = @"总经理";
+        button.nameLabel.text = [dic objectForKey:@"name"];;
+        button.jobLabel.text = [dic objectForKey:@"job"];;
         button.nameImageView.image = [self getImage:button.nameLabel.text];
         [self.scrollView2 addSubview:button];
         
-        if(i == 6)
+        if(i == executivesArray.count-1)
         {
             HodelMoreButton *button2 = [[HodelMoreButton alloc]initWithFrame:KFrame(button.maxX +5, 0, 50, 80)];
             

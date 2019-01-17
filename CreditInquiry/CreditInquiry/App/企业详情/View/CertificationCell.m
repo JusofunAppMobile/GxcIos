@@ -187,8 +187,16 @@
 {
     _isShow = isShow;
     
-    self.textFld.enabled = NO;
-    self.addBtn.enabled = NO;
+    if(isShow)
+    {
+        self.textFld.enabled = NO;
+        self.addBtn.enabled = NO;
+    }
+    else
+    {
+        self.textFld.enabled = YES;
+        self.addBtn.enabled = YES;
+    }
 }
 
 -(void)setButtonImage:(UIImage*)image

@@ -20,7 +20,9 @@
     NSString *imagePath1;
     NSString *imagePath2;
     
-    BOOL isShow;//是否是展示信息
+    BRProvinceModel *provinceModel;
+    BRCityModel *cityModel;
+    
     
 }
 @end
@@ -34,7 +36,7 @@
     [self setBlankBackButton];
     [self drawTableView];
     
-    isShow = YES;
+    _isShow = NO;
     [self performSelector:@selector(loadData) withObject:nil afterDelay:0.1];
     
     
@@ -44,40 +46,36 @@
 -(void)loadData{
     
     return;
-    CertificationCell *cell1 = [self.view viewWithTag:KCertificationCellTag+0];
-    CertificationCell *cell2 = [self.view viewWithTag:KCertificationCellTag+1];
-    CertificationCell *cell3 = [self.view viewWithTag:KCertificationCellTag+2];
-    CertificationCell *cell4 = [self.view viewWithTag:KCertificationCellTag+3];
-    CertificationCell *cell5 = [self.view viewWithTag:KCertificationCellTag+4];
-    CertificationCell *cell6 = [self.view viewWithTag:KCertificationCellTag+5];
-    CertificationCell *cell7 = [self.view viewWithTag:KCertificationCellTag+6];
-    CertificationCell *cell8 = [self.view viewWithTag:KCertificationCellTag+7];
-    
-    cell1.textFld.text = @"1";
-    cell2.textFld.text = @"2";
-    cell3.textFld.text = @"3";
-    cell4.textFld.text = @"4";
-    cell5.textFld.text = @"5";
-    cell6.textFld.text = @"6";
-    
-    [cell7 setButtonImage:KImageName(@"home_LoadingLogo")];
-    [cell8 setButtonImage:KImageName(@"home_LoadingPic")];
-    
-    
-    
-    
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
     [paraDic setObject:KUSER.userId forKey:@"userId"];
     [paraDic setObject:self.entId forKey:@"EntId"];
-
+    
     [MBProgressHUD showMessag:@"" toView:self.view];
     [RequestManager postWithURLString:KGetCertification parameters:paraDic success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         [MBProgressHUD hideHudToView:self.view animated:YES];
         if([[responseObject objectForKey:@"result"] intValue] == 0)
         {
+            NSDictionary *dic = [responseObject objectForKey:@"data"];
             
+            CertificationCell *cell1 = [self.view viewWithTag:KCertificationCellTag+0];
+            CertificationCell *cell2 = [self.view viewWithTag:KCertificationCellTag+1];
+            CertificationCell *cell3 = [self.view viewWithTag:KCertificationCellTag+2];
+            CertificationCell *cell4 = [self.view viewWithTag:KCertificationCellTag+3];
+            CertificationCell *cell5 = [self.view viewWithTag:KCertificationCellTag+4];
+            CertificationCell *cell6 = [self.view viewWithTag:KCertificationCellTag+5];
+            CertificationCell *cell7 = [self.view viewWithTag:KCertificationCellTag+6];
+            CertificationCell *cell8 = [self.view viewWithTag:KCertificationCellTag+7];
             
+            cell1.textFld.text = [dic objectForKey:@"companyname"];
+            cell2.textFld.text = [dic objectForKey:@"idcard"];
+            cell3.textFld.text = [dic objectForKey:@"name"];
+            cell4.textFld.text = [dic objectForKey:@""];
+            cell5.textFld.text = [dic objectForKey:@"phone"];
+            cell6.textFld.text = [dic objectForKey:@"email"];
+            
+            [cell7.addBtn sd_setImageWithURL:[NSURL URLWithString:@"licenseImage"] forState:UIControlStateNormal placeholderImage:KImageName(@"home_LoadingLogo")];
+            [cell8.addBtn sd_setImageWithURL:[NSURL URLWithString:@"idcardImage"] forState:UIControlStateNormal placeholderImage:KImageName(@"home_LoadingPic")];
             
             
         }
@@ -103,10 +101,7 @@
     CertificationCell *cell5 = [self.view viewWithTag:KCertificationCellTag+4];
     CertificationCell *cell6 = [self.view viewWithTag:KCertificationCellTag+5];
     
-    
-    
-   
-    
+
     if (cell1.textFld.text.length == 0) {
         [MBProgressHUD showError:@"请输入企业名称" toView:self.view];
         return;
@@ -157,9 +152,10 @@
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
     [paraDic setObject:KUSER.userId forKey:@"userId"];
     [paraDic setObject:cell1.textFld.text forKey:@"companyname"];
-    [paraDic setObject:cell2.textFld.text forKey:@"id"];
+    [paraDic setObject:cell2.textFld.text forKey:@"idcard"];
     [paraDic setObject:cell3.textFld.text forKey:@"name"];
-    [paraDic setObject:cell4.textFld.text forKey:@"job"];
+    [paraDic setObject:provinceModel.code forKey:@"provinceId"];
+    [paraDic setObject:cityModel.code forKey:@"cityId"];
     [paraDic setObject:cell5.textFld.text forKey:@"phone"];
     [paraDic setObject:cell6.textFld.text forKey:@"email"];
     [paraDic setObject:imagePath1 forKey:@"licenseImage"];
@@ -238,6 +234,11 @@
     
     [BRAddressPickerView showAddressPickerWithShowType:BRAddressPickerModeCity dataSource:array defaultSelected:nil isAutoSelect:YES themeColor:nil resultBlock:^(BRProvinceModel *province, BRCityModel *city, BRAreaModel *area) {
         NSLog(@"%@%@",province.name,city.name);
+        provinceModel = province;
+        cityModel = city;
+        
+         CertificationCell *cell4 = [self.view viewWithTag:KCertificationCellTag+3];
+        cell4.textFld.text = [NSString stringWithFormat:@"%@%@",province.name,city.name];
     } cancelBlock:^{
         
     }];
@@ -251,14 +252,7 @@
 -(void)addImage:(NSInteger)indexPath
 {
     chooseIndex = indexPath;
-    if(indexPath == 5)//营业执照
-    {
-        
-    }
-    else//企业名称
-    {
-        
-    }
+    
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil
                                                        delegate:self
                                               cancelButtonTitle:@"取消"
@@ -350,13 +344,13 @@
             cell = [[CertificationCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ideterfir type:0];
         }
         
-        cell.isShow = isShow;
+        cell.isShow = _isShow;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.index = indexPath.row;
         
         cell.tag = KCertificationCellTag+indexPath.row;
        
-        if(indexPath.row == 3&&!isShow)
+        if(indexPath.row == 3&&!_isShow)
         {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.textFld.delegate = self;
