@@ -189,7 +189,6 @@ static NSString *PlainID = @"MePlainCell";
     else if (index == 3)
     {
         ComCertificationController *vc = [ComCertificationController new];
-        vc.isShow = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }else if (index == 4){
         VipPrivilegeController *vc = [VipPrivilegeController new];

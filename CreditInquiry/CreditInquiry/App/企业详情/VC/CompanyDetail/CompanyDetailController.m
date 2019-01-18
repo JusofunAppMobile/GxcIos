@@ -36,8 +36,7 @@
     int refreshNum;
     NSMutableArray *taskArray;
     
-    NSMutableArray *holderArray;//股东
-    NSMutableArray *ggArray;//高管
+    NSDictionary*holderDic;
     
 }
 @property (nonatomic ,strong) NSArray *reportTypeList;
@@ -177,14 +176,14 @@
     [paraDic setObject:self.companyName forKey:@"companyName"];
     [paraDic setObject:KUSER.userId forKey:@"userId"];
     NSString* urlstr = [KGetCorporateInfo stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
-    KWeakSelf;
     NSURLSessionDataTask*task = [RequestManager postWithURLString:urlstr parameters:paraDic success:^(id responseObject) {
         NSLog(@"%@",responseObject);
        
         if ([responseObject[@"result"] integerValue] == 0)
         {
             NSDictionary *dic = [[responseObject objectForKey:@"data"] objectForKey:@"companyInfo"];
+            detailView.holderDic = dic;
+            holderDic = dic;
             if([[dic objectForKey:@"isCollect"] intValue] == 0)
             {
                 [self setFoucsBtn:NO];
@@ -193,7 +192,7 @@
             {
                 [self setFoucsBtn:YES];
             }
-            
+           
             if([[dic objectForKey:@"monitorType"] intValue] == 0)
             {
                 [self setMonitorBtn:NO];
@@ -202,14 +201,6 @@
             {
                 [self setMonitorBtn:YES];
             }
-            
-            holderArray = [NSMutableArray arrayWithArray:[dic objectForKey:@"shareholder"]];
-            ggArray = [NSMutableArray arrayWithArray:[dic objectForKey:@"mainStaff"]];
-            
-            [detailView reloadViewWithType:HeaderHodelType gridArray:holderArray animate:NO];
-            [detailView reloadViewWithType:HeaderGGType gridArray:ggArray animate:NO];
-            
-            
         }
         else
         {
@@ -497,35 +488,7 @@
         {
             NSDictionary *dic = [responseObject objectForKey:@"data"];
            // 0：未认证  1：审核中 2：审核失败 3：审核成功
-            int status = [[dic objectForKey:@"authStatus"] intValue];
-            if(status == 0||status == 2)
-            {
-                ComCertificationController *vc = [[ComCertificationController alloc]init];
-                vc.companyName = self.companyName;
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-            else
-            {
-                NSString *companyName = [dic objectForKey:@"authCompany"];
-                if([companyName isEqualToString:self.companyName])
-                {
-                    ComCertificationController *vc = [[ComCertificationController alloc]init];
-                    vc.isShow = YES;
-                    vc.status = [dic objectForKey:@"authStatus"];
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-                else
-                {
-                    if(status == 1)
-                    {
-                        [MBProgressHUD showHint:@"您的认证正在审核中" toView:self.view];
-                    }
-                    else if(status == 3)
-                    {
-                        [MBProgressHUD showHint:@"您已有认证企业" toView:self.view];
-                    }
-                }
-            }
+            
         }
         else
         {
@@ -717,6 +680,18 @@
 #pragma mark - 获取报告/纠错/监控/认证
 -(void)checkReport:(UIButton *)button
 {
+    if(KUSER.userId.length == 0)
+    {
+        KBolckSelf;
+        LoginController *view = [[LoginController alloc]init];
+        view.loginSuccessBlock = ^{
+            [blockSelf checkReport:button];
+        };
+        [self.navigationController pushViewController:view animated:YES];
+        
+        return;
+    }
+    
     if(button.tag == KDetailOperationTag)//获取报告
     {
         
@@ -740,6 +715,28 @@
     else //if (button.tag == KDetailOperationTag+2)//认证
     {
         [self checkAuthStatus];
+        /**
+         // 0：未认证 1：审核中 2：审核失败 3：审核成功
+         */
+        int status = [KUSER.authStatus intValue];
+        if(status == 0||status == 2)
+        {
+            ComCertificationController *vc = [[ComCertificationController alloc]init];
+            vc.companyName = self.companyName;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        else
+        {
+            if(status == 1)
+            {
+                [MBProgressHUD showHint:@"您的认证正在审核中" toView:self.view];
+            }
+            else if(status == 3)
+            {
+                [MBProgressHUD showHint:@"您已有认证企业" toView:self.view];
+            }
+        }
+        
     }
 }
 
@@ -848,20 +845,42 @@
     
 }
 
+#pragma mark -  股东高管查看更多
+-(void)detailHolderCheckMore:(DetailHolderType)type
+{
+    int idType = type == DetailHolderGDType?2:3;
+    for(NSDictionary *dic in itemList)
+    {
+        if([[dic objectForKey:@"menuid"] intValue] == idType)
+        {
+            ItemModel *sqModel = [ItemModel mj_objectWithKeyValues:dic];
+            [self gridButtonClick:sqModel cellSection:2];
+            break;
+        }
+    }
+}
+
+
 #pragma mark 企业图谱/关联关系 /股权结构
 - (void)detailMapButtonClick:(UIButton *)button
 {
     if(button.tag == KDetailMapBtnTag)//企业图谱
     {
-        
+        CommonWebViewController *view = [[CommonWebViewController alloc]init];
+        view.urlStr = [holderDic objectForKey:@"AtlasH5Address"];
+        [self.navigationController pushViewController:view animated:YES];
     }
     else if(button.tag == KDetailMapBtnTag+1)//关联关系
     {
-        
+        CommonWebViewController *view = [[CommonWebViewController alloc]init];
+        view.urlStr = [holderDic objectForKey:@"CorrelationH5Address"];
+        [self.navigationController pushViewController:view animated:YES];
     }
     else//股权结构
     {
-        
+        CommonWebViewController *view = [[CommonWebViewController alloc]init];
+        view.urlStr = [holderDic objectForKey:@"OwnershipStructureH5Address"];
+        [self.navigationController pushViewController:view animated:YES];
     }
 }
 #pragma mark 企业风险
@@ -873,6 +892,9 @@
 -(void)checkDetailMoreInfo
 {
     
+    CommonWebViewController *view = [[CommonWebViewController alloc]init];
+    view.urlStr = [holderDic objectForKey:@"InfoH5Address"];
+    [self.navigationController pushViewController:view animated:YES];
 }
 
 #pragma mark - 网址
@@ -936,12 +958,14 @@
     
     if(!isMonitor)
     {
-        [sender setTitle:@"监控" forState:UIControlStateNormal];
         
+       // [sender setTitle:@"监控" forState:UIControlStateNormal];
+        [sender setImage:KImageName(@"icon_monitor") forState:UIControlStateNormal];
     }
     else
     {
-        [sender setTitle:@"已监控" forState:UIControlStateNormal];
+        [sender setImage:KImageName(@"icon_monitor_sel") forState:UIControlStateNormal];
+        //[sender setTitle:@"已监控" forState:UIControlStateNormal];
     }
 }
 
@@ -982,7 +1006,7 @@
     
    // [buttonArray addObject:errorItem];
     [buttonArray addObject:focuItem];
-    [buttonArray addObject:shareItem];
+    //[buttonArray addObject:shareItem];
     
     self.navigationItem.rightBarButtonItems = buttonArray;
 }

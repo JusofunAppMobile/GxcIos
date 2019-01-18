@@ -183,11 +183,11 @@
     }
 }
 
--(void)setIsShow:(BOOL)isShow
+-(void)setEditEnable:(BOOL)editEnable
 {
-    _isShow = isShow;
+    _editEnable = editEnable;
     
-    if(isShow)
+    if(!editEnable)
     {
         self.textFld.enabled = NO;
         self.addBtn.enabled = NO;
@@ -199,10 +199,11 @@
     }
 }
 
+
 -(void)setButtonImage:(UIImage*)image
 {
     [self.addBtn setImage:image forState:UIControlStateNormal];
-    if(!self.isShow)
+    if(self.editEnable)
     {
         self.addImageView.hidden = NO;
         self.reloadLabel.hidden = NO;

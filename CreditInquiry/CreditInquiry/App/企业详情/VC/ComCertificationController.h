@@ -18,7 +18,7 @@ UIImagePickerControllerDelegate>
 
 @property(nonatomic,copy)NSString *companyName;
 
-//是否是展示信息
+
 @property(nonatomic,assign)BOOL isShow;
 
 /**

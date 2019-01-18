@@ -58,7 +58,14 @@
         isShowMoney = NO;
         isShowCompanyRisk = NO;
        
-        headArray = [NSMutableArray arrayWithObjects:@"企业详情",@"联系信息",@"股东",@"企业风险",@"国信企业图谱",@"企业背景",@"风险信息",@"企业风险预警",@"经营状况", @"无形资产",nil];
+        headArray = [NSMutableArray arrayWithObjects:@"企业详情",@"联系信息",@"股东",@"企业背景",@"风险信息",@"经营状况", @"无形资产",nil];
+        
+        if([KUSER.vipStatus intValue] == 1)
+        {
+            [headArray insertObject:@"企业风险" atIndex:3];
+            [headArray insertObject:@"国信企业图谱" atIndex:4];
+        }
+        
         
         [self addSubview:self.backTableView];
         [self reportView];
@@ -118,8 +125,6 @@
         {
             return;
         }
-        
-      
         
         ItemModel *sqModel = [ItemModel mj_objectWithKeyValues:button.buttonDic];
         [self.delegate gridButtonClick:sqModel cellSection:section];
@@ -294,6 +299,17 @@
     }
 }
 
+
+-(void)setHolderDic:(NSDictionary *)holderDic
+{
+    _holderDic = holderDic;
+    
+    [self reloadViewWithType:HeaderHodelType gridArray:[holderDic objectForKey:@"shareholder"] animate:NO];
+    [self reloadViewWithType:HeaderGGType gridArray:[holderDic objectForKey:@"mainStaff"] animate:NO];
+    
+    [_backTableView reloadData];
+}
+
 #pragma mark - 展开联系方式
 -(void)showPhone
 {
@@ -306,7 +322,14 @@
     }
     
 }
-
+-(void)detailHolderCheckMore:(DetailHolderType)type
+{
+    if(self.delegate && [self.delegate respondsToSelector:@selector(detailHolderCheckMore:)])
+    {
+        [self.delegate detailHolderCheckMore:type];
+    }
+    
+}
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *headStr = [headArray objectAtIndex:indexPath.section];
@@ -448,7 +471,7 @@
         }
         [cell.refreshBtn addTarget:self action:@selector(refreshCompany) forControlEvents:UIControlEventTouchUpInside];
         cell.detailModel = _detailModel;
-        
+        [cell setCreditScore:[self.holderDic objectForKey:@"creditScore"]];
         return cell;
     }
     else if ([headStr isEqualToString:@"联系信息"])
@@ -497,6 +520,7 @@
         {
             cell = [[DetailHolderCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.delegate = self;
         }
         cell.hodelArray = holderArray;
         cell.executivesArray = ggArray;
@@ -511,6 +535,10 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             //cell.detailGridDelegate = self;
         }
+        
+        [cell setSelfRiskNum:[self.holderDic objectForKey:@"ownRisk"]];
+        [cell setRelateRiskNum:[self.holderDic objectForKey:@"relateRisk"]];
+        
        
         return cell;
     }
@@ -871,11 +899,6 @@
     label.textColor = KHexRGB(0x333333);
     label.font = KBlodFont(14);
     [view addSubview:label];
-    
-    
-    
-    
-    
 
     return view;
 }
@@ -962,7 +985,7 @@
 -(void)reportView
 {
     self.toolBar = [[UIView alloc]initWithFrame:KFrame(0, KDeviceH - 55-KBottomHeight-KNavigationBarHeight, KDeviceW, 55+KBottomHeight)];
-    self.toolBar.backgroundColor = KHexRGB(0xEB5C5C);
+    self.toolBar.backgroundColor = KHexRGB(0xEA5B5C);
     self.toolBar.layer.shadowOpacity = 0.5;// 阴影透明度
     self.toolBar.layer.shadowColor = [UIColor grayColor].CGColor;// 阴影的颜色
     self.toolBar.layer.shadowRadius = 3;// 阴影扩散的范围控制
@@ -976,14 +999,14 @@
     
     NSArray *array = @[@"获取报告",@"纠错",@"监控",@"认证"];
     
-    NSArray *imageArray = @[@"info_bot_icon_baogao",@"info_bot_icon_yiyi",@"info_bot_icon_jiankong",@"info_bot_icon_renzheng"];
+    NSArray *imageArray = @[@"info_bot_icon_baogao",@"info_bot_icon_yiyi",@"icon_monitor",@"info_bot_icon_renzheng"];
     for(int i = 0;i<array.count;i++)
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = KFrame(KDeviceW/4*i+0.5*i, 0, KDeviceW/4, 55);
         button.backgroundColor = KRGB(220, 39, 42);;
         [button setTitle:array[i] forState:UIControlStateNormal];
-        button.titleLabel.font = KFont(15);
+        button.titleLabel.font = KFont(14);
         [button setImage:KImageName(imageArray[i]) forState:UIControlStateNormal];
         [button addTarget:self action:@selector(checkReport:) forControlEvents:UIControlEventTouchUpInside];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

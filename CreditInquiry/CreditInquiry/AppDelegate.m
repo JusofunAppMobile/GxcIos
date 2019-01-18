@@ -54,12 +54,12 @@
 -(void)setIQKeyboardManager
 {
     IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
-    manager.keyboardDistanceFromTextField = 120;
     manager.enable = YES;
     manager.shouldResignOnTouchOutside = YES;
     manager.shouldToolbarUsesTextFieldTintColor = YES;
     manager.enableAutoToolbar = YES;
     manager.shouldShowToolbarPlaceholder = NO;
+    manager.keyboardDistanceFromTextField = 120;
 }
 
 

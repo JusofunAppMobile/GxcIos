@@ -24,9 +24,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
     dataArray = [NSMutableArray array];
-    [self setNavigationBarTitle:@"行业资讯"];
-    [self setBlankBackButton];
+    
+    
     [self drawTableView];
     
     
@@ -137,7 +138,6 @@
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    
     NSMutableArray *imageArray = [NSMutableArray arrayWithCapacity:1];
     NSMutableArray *titleArray = [NSMutableArray arrayWithCapacity:1];
     for(NSDictionary *dic in rollNewsArray)
@@ -146,18 +146,26 @@
         [titleArray addObject:[dic objectForKey:@"newsName"]];
     }
     
+    UIView *view = [[UIView alloc]initWithFrame:KFrame(0, 0, KDeviceW, KDeviceW*165/345.0+10+10)];
+    view.backgroundColor = KHexRGB(0xF8F8FA);
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:KFrame(0, 0, KDeviceW, KDeviceW*165/345.0/2.0)];
+    imageView.image = KImageName(@"bg2");
+    [view addSubview:imageView];
     
-    cycleView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 10, KDeviceW, KDeviceW*90/375) delegate:self placeholderImage:[UIImage imageNamed:@"home_LoadingBanner"]];
+    
+    cycleView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(15, 10, KDeviceW-30, KDeviceW*165/345.0) delegate:self placeholderImage:[UIImage imageNamed:@"home_LoadingBanner"]];
     cycleView.delegate = self;
     //cycleView.imageURLStringsGroup = imageUrlArray;
     cycleView.pageControlStyle = SDCycleScrollViewPageContolStyleClassic;
     cycleView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
-    //cycleView.titleLabelBackgroundColor = [UIColor clearColor];
+    cycleView.titleLabelBackgroundColor = [UIColor clearColor];
     cycleView.imageURLStringsGroup = imageArray;
     cycleView.titleLabelTextAlignment = NSTextAlignmentCenter;
     cycleView.titlesGroup = titleArray;
     
-    return cycleView;
+    [view addSubview:cycleView];
+    
+    return view;
     
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -207,7 +215,12 @@
   
 }
 
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController.navigationBar fs_setBackgroundColor:KHexRGB(0xE43433)];
+    [self setNavigationBarTitle:@"行业资讯" andTextColor:[UIColor whiteColor]];
+    [self setWhiteBackButton];
+}
 
 
 @end

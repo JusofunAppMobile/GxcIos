@@ -165,18 +165,7 @@
  
     _nameLabel.text = str;
 
-    NSString *str1 = @"信用分：";
-    NSString *str2  = @"890";
-    NSString *str3 = [NSString stringWithFormat:@"%@%@",str1,str2];
-    NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:str3];
     
-    [AttributedStr addAttribute:NSFontAttributeName
-                          value:[UIFont systemFontOfSize:14.0]
-                          range:NSMakeRange(0, str1.length)];
-    [AttributedStr addAttribute:NSFontAttributeName
-                          value:[UIFont systemFontOfSize:17.0]
-                          range:NSMakeRange(str1.length, str2.length)];
-    _creditLabel.attributedText = AttributedStr;
     
     _stateLabel.text = detailModel.states;
     if(![detailModel.states isEqualToString:@"未公布"] || ![detailModel.states isEqualToString:@"--"])
@@ -210,6 +199,29 @@
     [_attentionBtn setTitle:[NSString stringWithFormat:@"  (%@)",detailModel.browsecount]  forState:UIControlStateNormal];
     
     [self reloadFrame];
+}
+
+-(void)setCreditScore:(NSString*)score
+{
+    if(!score||score.length==0)
+    {
+        _creditLabel.text = @"信用分：暂无";
+    }
+    else
+    {
+        NSString *str1 = @"信用分：";
+        NSString *str2  = score;
+        NSString *str3 = [NSString stringWithFormat:@"%@%@",str1,str2];
+        NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:str3];
+        
+        [AttributedStr addAttribute:NSFontAttributeName
+                              value:[UIFont systemFontOfSize:14.0]
+                              range:NSMakeRange(0, str1.length)];
+        [AttributedStr addAttribute:NSFontAttributeName
+                              value:[UIFont systemFontOfSize:17.0]
+                              range:NSMakeRange(str1.length, str2.length)];
+        _creditLabel.attributedText = AttributedStr;
+    }
 }
 
 

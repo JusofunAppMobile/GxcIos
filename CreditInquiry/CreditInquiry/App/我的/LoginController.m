@@ -36,7 +36,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-     [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 120;
+    
     
     [self setBlankBackButton];
     [self drawRightBarButton];

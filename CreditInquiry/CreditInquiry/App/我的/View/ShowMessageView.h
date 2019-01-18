@@ -11,7 +11,8 @@
 //推送消息
 typedef NS_ENUM(NSInteger, ShowMessageType) {
     ShowMessageVIPType = 0, //VIP介绍
-    PushMessageAutiType   =   1,//企业认证
+    ShowMessageAutiType   =   1,//企业认证
+    ShowMessageCheckType   =   2//检查更新
 };
 
 NS_ASSUME_NONNULL_BEGIN

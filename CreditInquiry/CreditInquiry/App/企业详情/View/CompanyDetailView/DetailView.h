@@ -51,19 +51,21 @@ typedef NS_ENUM(NSInteger, Headerype) {
 
 -(void)checkDetailMoreInfo;
 
-
+-(void)detailHolderCheckMore:(DetailHolderType)type;
 
 @end
 
 
 
-@interface DetailView : UIView<UITableViewDelegate,UITableViewDataSource,DetailGridDelegate,DetailMapDelegate>
+@interface DetailView : UIView<UITableViewDelegate,UITableViewDataSource,DetailGridDelegate,DetailMapDelegate,DetailHolderDelegate>
 
 @property(nonatomic,assign)id<DetailViewDelegate>delegate;
 
 @property(nonatomic,strong)UITableView *backTableView;
 
 @property(nonatomic,strong)CompanyDetailModel *detailModel;
+
+@property(nonatomic,strong)NSDictionary *holderDic;//股东信息
 
 
 -(void)reloadViewWithType:(Headerype)type gridArray:(NSArray*)array animate:(BOOL)animate;

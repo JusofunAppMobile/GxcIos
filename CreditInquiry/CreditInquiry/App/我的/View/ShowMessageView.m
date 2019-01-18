@@ -34,10 +34,17 @@
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(close:)];
         [self addGestureRecognizer:tap];
         
-        
         self.ShowMessageAction = action;
         
-        [KeyWindow addSubview:self];
+        if(showType == ShowMessageCheckType)
+        {
+            [self checkUpdate];
+            
+        }
+        else
+        {
+            [KeyWindow addSubview:self];
+        }
         
         CGFloat width = 280;
         CGFloat x = (KDeviceW - 280)/2.0;
@@ -60,9 +67,13 @@
             {
                 view.image = KImageName(@"tanchuang_pic_vip");
             }
-            else
+            else if(showType == ShowMessageAutiType)
             {
                 view.image = KImageName(@"tanchuang_pic_renzheng");
+            }
+            else
+            {
+                view.image = KImageName(@"tanchuang_pic_gengxin");
             }
            // view.contentMode = UIViewContentModeScaleAspectFit;
             [view mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -83,9 +94,13 @@
             {
                 view.text = @"开通VIP后获得权限";
             }
-            else
+            else if(showType == ShowMessageAutiType)
             {
                 view.text = @"认证后后获得权限";
+            }
+            else
+            {
+                
             }
             
             [view mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -107,10 +122,16 @@
             {
                 view.text = @"· 查看企业关系图，透视公司关联关系\n· 查看企业股权关系图，清晰企业股权结构\n· 获得专业政府认证企业信用分\n";
             }
-            else
+            else if(showType == ShowMessageAutiType)
             {
                 view.text = @"· 企业官方维护自身信息，展现企业全貌，提升信用\n· 专属认证标识，提升企业商誉\n· 获得专业政府认证企业信用分\n· 获得专业信用报告，对您企业信用进行管理";
             }
+            else{
+                view.text = @"";
+            }
+            
+            [self setContent:view.text];
+            
             NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
             paragraphStyle.lineSpacing = 10 ;
             NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
@@ -133,9 +154,13 @@
             {
                 [view setTitle:@"立即开通" forState:UIControlStateNormal];
             }
-            else
+            else if(showType == ShowMessageAutiType)
             {
                 [view setTitle:@"前往认证" forState:UIControlStateNormal];
+            }
+            else
+            {
+                [view setTitle:@"立即更新" forState:UIControlStateNormal];
             }
             [view addTarget:self action:@selector(buttonClick) forControlEvents:UIControlEventTouchUpInside];
             [view setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -176,6 +201,47 @@
 
     return self;
 }
+
+
+-(void)checkUpdate
+{
+    
+    NSString *urlStr = [NSString stringWithFormat:@"http://itunes.apple.com/lookup?id=%@",KAppleID];
+    [RequestManager QXBGetWithURLString:urlStr parameters:nil success:^(id responseObject) {
+        // NSLog(@"%@",responseObject);
+        
+        NSArray *dataArray = [responseObject objectForKey:@"results"];
+        if(dataArray.count >0)
+        {
+            NSDictionary *dic = [dataArray objectAtIndex:0];
+            NSString *appStoreVersion = dic[@"version"];
+            appStoreVersion = [appStoreVersion stringByReplacingOccurrencesOfString:@"." withString:@""];
+            
+            NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+            appVersion = [appVersion stringByReplacingOccurrencesOfString:@"." withString:@""];
+            if([appStoreVersion intValue]>[appVersion intValue])
+            {
+                self.titleLabel.text = [NSString stringWithFormat:@"版本功能(V%@)",dic[@"version"]];
+                [self setContent:[dic objectForKey:@"releaseNotes"]];
+                
+                [KeyWindow addSubview:self];
+            }
+        }
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+-(void)setContent:(NSString*)contentStr
+{
+    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+    paragraphStyle.lineSpacing = 10 ;
+    NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
+    [attributes setObject:paragraphStyle forKey:NSParagraphStyleAttributeName];
+    self.contentLabel.attributedText = [[NSAttributedString alloc] initWithString:contentStr attributes:attributes];
+}
+
 
 -(void)close:(UITapGestureRecognizer*)tap
 {

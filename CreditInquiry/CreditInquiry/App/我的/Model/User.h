@@ -43,7 +43,9 @@ SingletonH(User);
 
 @property(nonatomic,copy)NSString *headIcon;
 
-//认证状态 0：未认证 1：已认证
+/**
+ // 0：未认证 1：审核中 2：审核失败 3：审核成功
+ */
 @property(nonatomic,copy)NSString *authStatus;
 
 //用户vip状态 0：普通用户 1：vip用户

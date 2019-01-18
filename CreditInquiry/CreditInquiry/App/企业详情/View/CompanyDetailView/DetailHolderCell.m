@@ -101,7 +101,15 @@
     return self;
 }
 
-
+-(void)checkMore:(UIButton*)button
+{
+    
+    if(self.delegate && [self.delegate respondsToSelector:@selector(detailHolderCheckMore:)])
+    {
+        [self.delegate detailHolderCheckMore:button.tag == 3456?DetailHolderGDType:DetailHolderGGType];
+    }
+    
+}
 
 
 -(void)setHodelArray:(NSArray *)hodelArray
@@ -128,14 +136,21 @@
             button.jobLabel.text = @"";
         }
         
-        button.contentLabel.text = [NSString stringWithFormat:@"持股比例%@%%",[dic objectForKey:@"holdRatio"]];
+        //button.contentLabel.text = [NSString stringWithFormat:@"持股比例%@%%",[dic objectForKey:@"holdRatio"]];
+        
+        NSString *dynamicStr = [NSString stringWithFormat:@"持股比例%@%%",[dic objectForKey:@"holdRatio"]];
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc]initWithString:dynamicStr];
+        [attr addAttribute:NSForegroundColorAttributeName value:KRGB(255, 158, 53) range:NSMakeRange(4, dynamicStr.length - 4)];
+        button.contentLabel.attributedText = attr;
+        
          button.nameImageView.image = [self getImage:button.nameLabel.text];
         [self.scrollView1 addSubview:button];
         
         if(i == hodelArray.count-1)
         {
             HodelMoreButton *button2 = [[HodelMoreButton alloc]initWithFrame:KFrame(button.maxX +5, 0, 50, 80)];
-            
+            button2.tag = 3456;
+            [button2 addTarget:self action:@selector(checkMore:) forControlEvents:UIControlEventTouchUpInside];
             [self.scrollView1 addSubview:button2];
             
             self.scrollView1.contentSize = CGSizeMake(button2.maxX +10, 0);
@@ -163,13 +178,15 @@
         HodelButton *button = [[HodelButton alloc]initWithFrame:KFrame(5*i+130*i, 0, 130, 80)];
         button.nameLabel.text = [dic objectForKey:@"name"];;
         button.jobLabel.text = [dic objectForKey:@"job"];;
+        button.jobLabel.textColor = KRGB(51, 51, 51);
         button.nameImageView.image = [self getImage:button.nameLabel.text];
         [self.scrollView2 addSubview:button];
         
         if(i == executivesArray.count-1)
         {
             HodelMoreButton *button2 = [[HodelMoreButton alloc]initWithFrame:KFrame(button.maxX +5, 0, 50, 80)];
-            
+            button2.tag = 3457;
+            [button2 addTarget:self action:@selector(checkMore:) forControlEvents:UIControlEventTouchUpInside];
             [self.scrollView2 addSubview:button2];
             
             self.scrollView2.contentSize = CGSizeMake(button2.maxX +10, 0);
@@ -178,18 +195,12 @@
     
 }
 
-
-
 - (UIImage *)getImage:(NSString *)name
 {
-    UIColor *color = KHexRGB(0xDF242C);  //获取随机颜色
-    CGRect rect = CGRectMake(0.0f, 0.0f, 30, 30);
-    UIGraphicsBeginImageContext(rect.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(context, [color CGColor]);
-    CGContextFillRect(context, rect);
-    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
+    style.alignment = NSTextAlignmentCenter;
+    NSDictionary *dic = @{NSFontAttributeName:[UIFont systemFontOfSize:18],NSParagraphStyleAttributeName:style,NSForegroundColorAttributeName:[UIColor whiteColor]};
     
     NSString *headerName = nil;
     if (name.length == 1) {
@@ -197,34 +208,42 @@
     }else{
         headerName = [name substringToIndex:1];
     }
-    UIImage *headerimg = [self imageToAddText:img withText:headerName];
+    UIImage *headerimg = [self zd_imageWithColor:KHexRGB(0xDF242C) size:CGSizeMake(30, 30) text:headerName textAttributes:dic circular:NO];
     return headerimg;
 }
 
 
-//把文字绘制到图片上
-- (UIImage *)imageToAddText:(UIImage *)img withText:(NSString *)text
+- (UIImage *)zd_imageWithColor:(UIColor *)color
+                          size:(CGSize)size
+                          text:(NSString *)text
+                textAttributes:(NSDictionary *)textAttributes
+                      circular:(BOOL)isCircular
 {
-    //1.获取上下文
-    UIGraphicsBeginImageContext(img.size);
-    //2.绘制图片
-    [img drawInRect:CGRectMake(0, 0, img.size.width, img.size.height)];
-    //3.绘制文字
-    CGRect rect = CGRectMake(0,3, img.size.width, img.size.height);
-    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
-    style.alignment = NSTextAlignmentCenter;
-    //文字的属性
-    NSDictionary *dic = @{NSFontAttributeName:[UIFont systemFontOfSize:18],NSParagraphStyleAttributeName:style,NSForegroundColorAttributeName:[UIColor whiteColor]};
-    //将文字绘制上去
-    [text drawInRect:rect withAttributes:dic];
-    //4.获取绘制到得图片
-    UIImage *watermarkImg = UIGraphicsGetImageFromCurrentImageContext();
-    //5.结束图片的绘制
-    UIGraphicsEndImageContext();
+    if (!color || size.width <= 0 || size.height <= 0) return nil;
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
     
-    return watermarkImg;
+    // circular
+    if (isCircular) {
+        CGPathRef path = CGPathCreateWithEllipseInRect(rect, NULL);
+        CGContextAddPath(context, path);
+        CGContextClip(context);
+        CGPathRelease(path);
+    }
+    
+    // color
+    CGContextSetFillColorWithColor(context, color.CGColor);
+    CGContextFillRect(context, rect);
+    
+    // text
+    CGSize textSize = [text sizeWithAttributes:textAttributes];
+    [text drawInRect:CGRectMake((size.width - textSize.width) / 2, (size.height - textSize.height) / 2, textSize.width, textSize.height) withAttributes:textAttributes];
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
 }
-
 
 - (void)awakeFromNib {
     [super awakeFromNib];

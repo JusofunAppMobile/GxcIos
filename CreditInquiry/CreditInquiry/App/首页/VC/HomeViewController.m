@@ -30,7 +30,7 @@ static NSString *NewsCellID = @"NewsCellID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    [self checkUpdate];
     
     [self drawView];
     
@@ -81,6 +81,10 @@ static NSString *NewsCellID = @"NewsCellID";
 
 -(void)joinVIP
 {
+    
+   
+   
+    
     LoginController *vc = [[LoginController alloc]init];
     
     // BuyVipController*vc = [[BuyVipController alloc]init];
@@ -88,10 +92,7 @@ static NSString *NewsCellID = @"NewsCellID";
     
     return;
     
-    [[ShowMessageView alloc]initWithType:PushMessageAutiType action:^{
-        NSLog(@"点击");
-    }];
-    return;
+    
     VisitorController *vc2 = [[VisitorController alloc]init];
    
    // BuyVipController*vc = [[BuyVipController alloc]init];
@@ -201,6 +202,14 @@ static NSString *NewsCellID = @"NewsCellID";
     [self.navigationController pushViewController:searchVc animated:YES];
 }
 
+-(void)checkUpdate
+{
+    [[ShowMessageView alloc]initWithType:ShowMessageCheckType action:^{
+        NSString *urlStr = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/cn/app/id%@?mt=8",KAppleID];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+        
+    }];
+}
 
 #pragma mark - 下拉刷新
 -(void)endRefreshing{
@@ -385,7 +394,7 @@ static NSString *NewsCellID = @"NewsCellID";
     
     
     //下拉刷新背景
-    UIImageView *gifRefreshBg = [[UIImageView alloc]initWithFrame:CGRectMake(0, scrolly, KDeviceW, self.headerView.height)];
+    UIImageView *gifRefreshBg = [[UIImageView alloc]initWithFrame:CGRectMake(0, scrolly, KDeviceW, KDeviceH-KTabBarHeight)];
     gifRefreshBg.backgroundColor = KNavigationBarRedColor;
     //gifRefreshBg.image = KImageName(@"index_topbg");
     [self.view insertSubview:gifRefreshBg atIndex:0];
