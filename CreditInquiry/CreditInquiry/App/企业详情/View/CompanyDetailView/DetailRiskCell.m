@@ -86,13 +86,26 @@
 
 -(void)setSelfRiskNum:(NSString *)selfRiskNum
 {
+    
+    
+    if(!selfRiskNum)
+    {
+        selfRiskNum = @"0";
+    }
     _selfRiskNum = selfRiskNum;
+    
     [self setLabelContent];
 }
 
 -(void)setRelateRiskNum:(NSString *)relateRiskNum
 {
+    
+    if(!relateRiskNum)
+    {
+        relateRiskNum = @"0";
+    }
     _relateRiskNum = relateRiskNum;
+   
     [self setLabelContent];
 }
 

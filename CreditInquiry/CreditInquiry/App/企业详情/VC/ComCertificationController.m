@@ -14,6 +14,7 @@
     UITableView *backTableView;
    
     NSMutableArray *dataArray;
+    UIButton *submitBtn;
  
     NSInteger chooseIndex;
     
@@ -37,7 +38,7 @@
     [self drawTableView];
     
     
-    if(_isShow)
+    if([self.status intValue] == 1||[self.status intValue] == 2||[self.status intValue] == 3)
     {
         [self loadData];
     }
@@ -76,7 +77,8 @@
             [cell7.addBtn sd_setImageWithURL:[NSURL URLWithString:@"licenseImage"] forState:UIControlStateNormal placeholderImage:KImageName(@"home_LoadingLogo")];
             [cell8.addBtn sd_setImageWithURL:[NSURL URLWithString:@"idcardImage"] forState:UIControlStateNormal placeholderImage:KImageName(@"home_LoadingPic")];
             
-            
+            self.status = [[responseObject objectForKey:@"data"] objectForKey:@"status"];
+             [self setStatusLabel];
         }
         else
         {
@@ -263,6 +265,28 @@
     
 }
 
+-(void)setStatusLabel
+{
+    if([self.status intValue] == 1)//1：审核中
+    {
+        messageLabel.text = @"     资料已提交、审核中";
+        submitBtn.hidden = YES;
+    }
+    else if ([self.status intValue] == 2)//2：审核失败
+    {
+        messageLabel.text = @"     认证状态已被驳回，请重新填写认证信息";
+    }
+    else if ([self.status intValue] == 3)//3：审核成功
+    {
+        messageLabel.text = @"     审核成功";
+        submitBtn.hidden = YES;
+    }
+    else
+    {
+        messageLabel.text = @"     填写身份证信息，快速认证企业";
+    }
+}
+
 
 #pragma mark -- actionsheet代理
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -348,14 +372,21 @@
         {
             cell.textFld.text = self.companyName;
         }
-        
-        cell.isShow = _isShow;
+        if([self.status intValue] == 0||[self.status intValue] == 2)
+        {
+             cell.editEnable = YES;
+        }
+        else
+        {
+            cell.editEnable = NO;
+        }
+       
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.index = indexPath.row;
         
         cell.tag = KCertificationCellTag+indexPath.row;
        
-        if(indexPath.row == 3&&!_isShow)
+        if(indexPath.row == 3&&cell.editEnable)
         {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.textFld.delegate = self;
@@ -372,26 +403,10 @@
     label.backgroundColor = KRGB(252, 244, 244);
     label.textColor = KRGB(238, 37, 32);
     label.font = KFont(14);
-    
-    if([self.status intValue] == 1)//1：审核中
-    {
-        label.text = @"     资料已提交、审核中";
-    }
-    else if ([self.status intValue] == 2)//2：审核失败
-    {
-        label.text = @"     认证状态已被驳回，请重新填写认证信息";
-    }
-    else if ([self.status intValue] == 3)//3：审核成功
-    {
-        label.text = @"     审核成功";
-    }
-    else
-    {
-        label.text = @"     填写身份证信息，快速认证企业";
-    }
-    
-    
     messageLabel = label;
+    
+    [self setStatusLabel];
+    
     return label;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -414,7 +429,7 @@
     button.layer.cornerRadius = 5;
     button.clipsToBounds = YES;
     [self.view addSubview:button];
-    
+    submitBtn = button;
     [button mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.view).offset(-10);
         make.height.mas_equalTo(45);
@@ -424,11 +439,6 @@
     }];
     [button addTarget:self action:@selector(certification) forControlEvents:UIControlEventTouchUpInside];
     
-    if(self.isShow)
-    {
-        button.hidden = YES;
-    }
-
     backTableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     backTableView.delegate = self;
     backTableView.dataSource = self;
@@ -443,14 +453,16 @@
         make.left.mas_equalTo(0);
         make.width.mas_equalTo(KDeviceW);
         
-        if(self.isShow)
-        {
-            make.bottom.mas_equalTo(self.view);
-        }
-        else
-        {
-            make.bottom.mas_equalTo(button.mas_top).offset(-10);
-        }
+        make.bottom.mas_equalTo(button.mas_top).offset(-10);
+        
+//        if(self.isShow)
+//        {
+//            make.bottom.mas_equalTo(self.view);
+//        }
+//        else
+//        {
+//            make.bottom.mas_equalTo(button.mas_top).offset(-10);
+//        }
     }];
     
    

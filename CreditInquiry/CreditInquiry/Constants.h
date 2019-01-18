@@ -168,6 +168,7 @@ typedef enum : NSUInteger {
 //////百度地图  com.jusfoun.EnterpriseInquiry1
 #define BaiDu_Appkey      @"ZDGjTGHV0mmAi1jxZCWBBmRHGnvuxnz9"
 
-
+//apple id
+#define KAppleID  @"1055909468"
 
 #endif /* Constants_h */

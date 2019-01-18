@@ -58,7 +58,14 @@
         isShowMoney = NO;
         isShowCompanyRisk = NO;
        
-        headArray = [NSMutableArray arrayWithObjects:@"企业详情",@"联系信息",@"股东",@"企业风险",@"国信企业图谱",@"企业背景",@"风险信息",@"经营状况", @"无形资产",nil];
+        headArray = [NSMutableArray arrayWithObjects:@"企业详情",@"联系信息",@"股东",@"企业背景",@"风险信息",@"经营状况", @"无形资产",nil];
+        
+        if([KUSER.vipStatus intValue] == 1)
+        {
+            [headArray insertObject:@"企业风险" atIndex:3];
+            [headArray insertObject:@"国信企业图谱" atIndex:4];
+        }
+        
         
         [self addSubview:self.backTableView];
         [self reportView];
@@ -292,6 +299,17 @@
     }
 }
 
+
+-(void)setHolderDic:(NSDictionary *)holderDic
+{
+    _holderDic = holderDic;
+    
+    [self reloadViewWithType:HeaderHodelType gridArray:[holderDic objectForKey:@"shareholder"] animate:NO];
+    [self reloadViewWithType:HeaderGGType gridArray:[holderDic objectForKey:@"mainStaff"] animate:NO];
+    
+    [_backTableView reloadData];
+}
+
 #pragma mark - 展开联系方式
 -(void)showPhone
 {
@@ -453,7 +471,7 @@
         }
         [cell.refreshBtn addTarget:self action:@selector(refreshCompany) forControlEvents:UIControlEventTouchUpInside];
         cell.detailModel = _detailModel;
-        
+        [cell setCreditScore:[self.holderDic objectForKey:@"creditScore"]];
         return cell;
     }
     else if ([headStr isEqualToString:@"联系信息"])
@@ -517,6 +535,10 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             //cell.detailGridDelegate = self;
         }
+        
+        [cell setSelfRiskNum:[self.holderDic objectForKey:@"ownRisk"]];
+        [cell setRelateRiskNum:[self.holderDic objectForKey:@"relateRisk"]];
+        
        
         return cell;
     }
@@ -877,11 +899,6 @@
     label.textColor = KHexRGB(0x333333);
     label.font = KBlodFont(14);
     [view addSubview:label];
-    
-    
-    
-    
-    
 
     return view;
 }
@@ -982,7 +999,7 @@
     
     NSArray *array = @[@"获取报告",@"纠错",@"监控",@"认证"];
     
-    NSArray *imageArray = @[@"info_bot_icon_baogao",@"info_bot_icon_yiyi",@"info_bot_icon_jiankong",@"info_bot_icon_renzheng"];
+    NSArray *imageArray = @[@"info_bot_icon_baogao",@"info_bot_icon_yiyi",@"icon_monitor",@"info_bot_icon_renzheng"];
     for(int i = 0;i<array.count;i++)
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];

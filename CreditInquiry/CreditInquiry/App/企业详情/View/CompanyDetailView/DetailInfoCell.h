@@ -88,7 +88,7 @@
 
 
 
-
+-(void)setCreditScore:(NSString*)score;
 
 
 @end

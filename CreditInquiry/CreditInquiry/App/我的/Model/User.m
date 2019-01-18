@@ -26,7 +26,7 @@ SingletonM(User);
 {
     if(_userId == nil)
     {
-        return @"123";
+        return @"";
     }
     else
     {

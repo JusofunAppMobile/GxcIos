@@ -65,6 +65,8 @@ typedef NS_ENUM(NSInteger, Headerype) {
 
 @property(nonatomic,strong)CompanyDetailModel *detailModel;
 
+@property(nonatomic,strong)NSDictionary *holderDic;//股东信息
+
 
 -(void)reloadViewWithType:(Headerype)type gridArray:(NSArray*)array animate:(BOOL)animate;
 
