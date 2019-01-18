@@ -86,7 +86,7 @@
     if(_monitorBtn.selected)
     {
         NSString *title = _type == ListTypeMyMonitor?@"取消监控":@"取消收藏";
-        NSString *imageName = _type == ListTypeMyMonitor?@"icon_monitor":@"取消收藏";
+        NSString *imageName = _type == ListTypeMyMonitor?@"icon_monitor":@"取消收藏";//test
 
         
         [_monitorBtn setTitle:title forState:UIControlStateNormal];
@@ -95,9 +95,10 @@
     else
     {
         NSString *title = _type == ListTypeMyMonitor?@"监控":@"收藏";
+        NSString *imageName = _type == ListTypeMyMonitor?@"icon_monitor_sel":@"";//test
 
-        [_monitorBtn setTitle:@"监控" forState:UIControlStateNormal];
-        [_monitorBtn setImage:KImageName(@"icon_monitor_sel") forState:UIControlStateNormal];
+        [_monitorBtn setTitle:title forState:UIControlStateNormal];
+        [_monitorBtn setImage:KImageName(imageName) forState:UIControlStateNormal];
     }
     [_monitorBtn setImagePosition:LXMImagePositionTop spacing:7];
     
