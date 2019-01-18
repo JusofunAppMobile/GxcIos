@@ -17,9 +17,10 @@
         
         UIButton *footerBtn = [UIButton new];
         footerBtn.backgroundColor = KHexRGB(0xeb101e);
-        footerBtn.layer.cornerRadius = 20;
+        footerBtn.layer.cornerRadius = 22.5;
         footerBtn.layer.masksToBounds = YES;
         [footerBtn setTitle:@"确认" forState:UIControlStateNormal];
+        [footerBtn addTarget:self action:@selector(footerAction) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:footerBtn];
         [footerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
@@ -30,6 +31,12 @@
         
     }
     return self;
+}
+
+- (void)footerAction{
+    if ([self.delegate respondsToSelector:@selector(didClickCommitButton)]) {
+        [self.delegate didClickCommitButton];
+    }
 }
 
 @end

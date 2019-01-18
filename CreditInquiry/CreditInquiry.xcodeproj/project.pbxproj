@@ -156,6 +156,8 @@
 		CA56114921EF517E0052CF38 /* CreditHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56114821EF517E0052CF38 /* CreditHomeModel.m */; };
 		CA56114C21F0277A0052CF38 /* ReportPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56114B21F0277A0052CF38 /* ReportPreviewController.m */; };
 		CA56115021F057B00052CF38 /* VipPrivilegeController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56114F21F057B00052CF38 /* VipPrivilegeController.m */; };
+		CA56115421F16C5D0052CF38 /* ObjectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56115321F16C5D0052CF38 /* ObjectionModel.m */; };
+		CA56115721F16D320052CF38 /* ObjectionMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56115621F16D320052CF38 /* ObjectionMenuModel.m */; };
 		CA5E005921DDE05E0040ABE2 /* NSNumber+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFB721DDE05D0040ABE2 /* NSNumber+StringValue.m */; };
 		CA5E005A21DDE05E0040ABE2 /* UIColor+Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFB921DDE05D0040ABE2 /* UIColor+Tool.m */; };
 		CA5E005B21DDE05E0040ABE2 /* UIImage+Wechat.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFBB21DDE05D0040ABE2 /* UIImage+Wechat.m */; };
@@ -600,6 +602,10 @@
 		CA56114B21F0277A0052CF38 /* ReportPreviewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReportPreviewController.m; sourceTree = "<group>"; };
 		CA56114E21F057B00052CF38 /* VipPrivilegeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VipPrivilegeController.h; sourceTree = "<group>"; };
 		CA56114F21F057B00052CF38 /* VipPrivilegeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VipPrivilegeController.m; sourceTree = "<group>"; };
+		CA56115221F16C5D0052CF38 /* ObjectionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectionModel.h; sourceTree = "<group>"; };
+		CA56115321F16C5D0052CF38 /* ObjectionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectionModel.m; sourceTree = "<group>"; };
+		CA56115521F16D320052CF38 /* ObjectionMenuModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectionMenuModel.h; sourceTree = "<group>"; };
+		CA56115621F16D320052CF38 /* ObjectionMenuModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectionMenuModel.m; sourceTree = "<group>"; };
 		CA5E000021DDE05D0040ABE2 /* NSNumber+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Zirkfied.h"; sourceTree = "<group>"; };
 		CA5E000121DDE05D0040ABE2 /* NSNumber+Zirkfied.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Zirkfied.m"; sourceTree = "<group>"; };
 		CA5E000221DDE05D0040ABE2 /* NSString+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Zirkfied.h"; sourceTree = "<group>"; };
@@ -1389,6 +1395,17 @@
 			path = "VIP特权";
 			sourceTree = "<group>";
 		};
+		CA56115121F169450052CF38 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				CA56115221F16C5D0052CF38 /* ObjectionModel.h */,
+				CA56115321F16C5D0052CF38 /* ObjectionModel.m */,
+				CA56115521F16D320052CF38 /* ObjectionMenuModel.h */,
+				CA56115621F16D320052CF38 /* ObjectionMenuModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		CA5E000A21DDE05D0040ABE2 /* Component */ = {
 			isa = PBXGroup;
 			children = (
@@ -2132,6 +2149,7 @@
 		CADD60B221E6DBFB00EB01CD /* 信用异议 */ = {
 			isa = PBXGroup;
 			children = (
+				CA56115121F169450052CF38 /* model */,
 				CADD60B621E6E1DE00EB01CD /* view */,
 				CADD60B321E6DC7700EB01CD /* ObjectionAppealController.h */,
 				CADD60B421E6DC7700EB01CD /* ObjectionAppealController.m */,
@@ -2339,6 +2357,7 @@
 				CADD60A221E61EB500EB01CD /* MyMonitorListController.m in Sources */,
 				CA5E007221DDE05E0040ABE2 /* UUDatePicker.m in Sources */,
 				CA5E007121DDE05E0040ABE2 /* TimePickerView.m in Sources */,
+				CA56115421F16C5D0052CF38 /* ObjectionModel.m in Sources */,
 				793D1B5921DF690300C29908 /* ButtonModel.m in Sources */,
 				CADD60D621E74A5D00EB01CD /* FogotPwdController.m in Sources */,
 				CA5E009721DDE05E0040ABE2 /* ZFWave.m in Sources */,
@@ -2524,6 +2543,7 @@
 				79D34ED121E05E5600B1CB32 /* SearchJobModel.m in Sources */,
 				CADD60C221E6E34200EB01CD /* ObjectionItem.m in Sources */,
 				CADD609B21E5E1A500EB01CD /* MyOrderReportCell.m in Sources */,
+				CA56115721F16D320052CF38 /* ObjectionMenuModel.m in Sources */,
 				CADD608821E4CC9F00EB01CD /* CreditReportHeader.m in Sources */,
 				CA5E009121DDE05E0040ABE2 /* ZFPie.m in Sources */,
 				CA5E006321DDE05E0040ABE2 /* MyTextField.m in Sources */,

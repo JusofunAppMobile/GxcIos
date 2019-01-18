@@ -13,6 +13,8 @@
 #import <MJRefresh.h>
 #import "ItemView.h"
 #import "AnimalTableView.h"
+#import "ObjectionAppealController.h"
+
 //#import "RefreshHeader.h"
 
 
@@ -140,12 +142,18 @@
 -(void)hrefToError
 {
     
-    RecoveryErrorViewController *recoverError = [[RecoveryErrorViewController alloc] init];
-    recoverError.squearList = _sqiareList;
-    recoverError.companyId = self.companyId;
-    recoverError.currentSquareModel = self.squareModel;
-    recoverError.companyName = self.companyName;
-    [self.navigationController pushViewController:recoverError animated:YES];
+//    RecoveryErrorViewController *recoverError = [[RecoveryErrorViewController alloc] init];
+//    recoverError.squearList = _sqiareList;
+//    recoverError.companyId = self.companyId;
+//    recoverError.currentSquareModel = self.squareModel;
+//    recoverError.companyName = self.companyName;
+//    [self.navigationController pushViewController:recoverError animated:YES];
+    
+    ObjectionAppealController *vc = [ObjectionAppealController new];
+    vc.companyName = self.companyName;
+    vc.objectionType = ObjectionTypeError;
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 #pragma mark -对外投资-分支机构

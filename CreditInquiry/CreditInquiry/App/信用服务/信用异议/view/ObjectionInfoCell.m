@@ -10,11 +10,13 @@
 #import "UITextView+Placeholder.h"
 #import "ObjectionItem.h"
 #import "MyTextField.h"
+#import "ObjectionModel.h"
+#import "ObjectionMenuModel.h"
 
 static int BASE_TAG = 2019;
+static int Text_TAG = 3003;
 
-
-@interface ObjectionInfoCell ()
+@interface ObjectionInfoCell ()<UITextFieldDelegate,UITextViewDelegate>
 
 @property (nonatomic ,strong) UILabel *nameLab;
 @property (nonatomic ,strong) UILabel *codeLab;
@@ -22,9 +24,12 @@ static int BASE_TAG = 2019;
 @property (nonatomic ,strong) UIView *itemBg;
 @property (nonatomic ,strong) UIView *inputBg;
 @property (nonatomic ,strong) UITextView *textView;
-@property (nonatomic ,strong) NSArray *titles;
-@property (nonatomic ,assign) NSInteger type;
 @property (nonatomic ,strong) NSArray *holderTexts;
+
+@property (nonatomic ,assign) ObjectionType type;
+@property (nonatomic ,strong) ObjectionModel *model;
+
+@property (nonatomic ,strong) NSMutableDictionary *params;
 @end
 
 @implementation ObjectionInfoCell
@@ -97,25 +102,22 @@ static int BASE_TAG = 2019;
             view.layer.cornerRadius = 5;
             view.layer.borderColor = KHexRGB(0xd4d4d4).CGColor;
             view.layer.borderWidth = .5;
+            view.delegate = self;
             view.placeholder = @"我们会收集您提交的请求，并在3～5个工作日回复";
             view;
         });
-        
-//        UIButton *footerBtn = [UIButton new];
-//        [self.contentView addSubview:footerBtn];
-//        [footerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.top.mas_equalTo()
-//        }];
-        
-       
     }
     return self;
 }
 
-
-- (void)setTitles:(NSArray *)titles type:(NSInteger)type{
-    _titles = titles;
-    _type = type;
+- (void)setModel:(ObjectionModel *)model type:(ObjectionType)objectionType{
+    _model = model;
+    _type = objectionType;
+    if (objectionType == ObjectionTypeCredit) {
+        _textView.placeholder = @"我们会收集您提交的请求，并在3～5个工作日回复";
+    }else{
+        _textView.placeholder = @"感谢您使用“异议申诉”功能，并对国信查功能提出宝贵意见（字数为25-1000字）";
+    }
     
     [self initItems];
     [self initInputViews];
@@ -126,28 +128,35 @@ static int BASE_TAG = 2019;
     CGFloat lineSpace = 10;
     CGFloat width = (KDeviceW - 15*2 - space*3)/4;
     CGFloat height = 30;
+    [_itemBg.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj removeFromSuperview];
+    }];
     
-    for (int i = 0; i<_titles.count; i++) {
+    for (int i = 0; i<_model.menuList.count; i++) {
+        
+        ObjectionMenuModel *model = _model.menuList[i];
+        
         ObjectionItem *item = [[ObjectionItem alloc]initWithFrame:KFrame(15 + (width+space)*(i%4),10+(lineSpace+height)*(i/4) , width, height)];
         item.tag = BASE_TAG+i;
-        [item setTitle:_titles[i] forState:UIControlStateNormal];
+        [item setTitle:model.menuName forState:UIControlStateNormal];
         [item addTarget:self action:@selector(itemAction:) forControlEvents:UIControlEventTouchUpInside];
+        item.selected = model.selected;
         [_itemBg addSubview:item];
         
-        if (i == _titles.count-1) {
-            [_itemBg mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.height.mas_equalTo(item.maxY);
+        if (i == _model.menuList.count - 1) {
+            [_itemBg mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(item.maxY).priorityHigh(1000);
             }];
         }
     }
 }
 
 - (void)initInputViews{
-    if (_type == 0) {
-        [_inputBg mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(0);
+    if (_type == ObjectionTypeError) {
+        [_inputBg.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [obj removeFromSuperview];
         }];
-    }else{
+        
         CGFloat space = 10;
         CGFloat height = 40;
         for (int i = 0; i<4; i++) {
@@ -157,28 +166,71 @@ static int BASE_TAG = 2019;
             view.layer.borderWidth = 1;
             view.layer.cornerRadius = 5;
             view.font = KFont(12);
+            view.delegate = self;
+            view.tag = Text_TAG+i;
             [_inputBg addSubview:view];
+            
             if (i == 3) {
-                [_inputBg mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.height.mas_equalTo(view.maxY);
+                [_inputBg mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.height.mas_equalTo(view.maxY).priorityHigh(1000);
                 }];
             }
         }
+    }else{
+        [_inputBg mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
+        }];
     }
 }
 
-
-- (void)itemAction:(UIButton *)sender{
-    [_itemBg.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj isKindOfClass:[ObjectionItem class]]) {
-            ObjectionItem *button = (ObjectionItem *)obj;
-            if ([obj isEqual:sender]) {
-                button.selected = YES;
-            }else{
-                button.selected = NO;
-            }
+#pragma mark - UITextFieldDelegate
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    if (textField.text) {
+        NSInteger index = textField.tag - Text_TAG;
+        NSString *key = nil;
+        if (index == 0) {
+            key = @"name";
+        }else if (index == 1){
+            key = @"IDCard";
+        }else if (index == 2){
+            key = @"phone";
+        }else{
+            key = @"Email";
         }
-    }];
+        [self.params setObject:textField.text forKey:key];
+    }
+    if ([self.delegate respondsToSelector:@selector(infoCellDidEndEditing:)]) {
+        [self.delegate infoCellDidEndEditing:self.params];
+    }
 }
+
+- (void)textViewDidEndEditing:(UITextView *)textView{
+    if (textView.text) {
+        [self.params setObject:textView.text forKey:@"errorMsg"];
+    }
+    if ([self.delegate respondsToSelector:@selector(infoCellDidEndEditing:)]) {
+        [self.delegate infoCellDidEndEditing:self.params];
+    }
+}
+
+- (void)itemAction:(UIButton *)sender{//多选问题
+    sender.selected = !sender.selected;
+    
+    ObjectionMenuModel *model = _model.menuList[sender.tag - BASE_TAG];
+    model.selected = sender.selected;
+    
+    if ([self.delegate respondsToSelector:@selector(infoCellDidClickMenu:select:)]) {
+        [self.delegate infoCellDidClickMenu:model select:sender.selected];
+    }
+}
+
+#pragma mark - delegate
+- (NSMutableDictionary *)params{
+    if (!_params) {
+        _params = [NSMutableDictionary dictionary];
+    }
+    return _params;
+}
+
 
 @end

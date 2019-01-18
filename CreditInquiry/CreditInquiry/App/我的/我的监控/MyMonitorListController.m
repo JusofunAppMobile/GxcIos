@@ -91,9 +91,10 @@ static NSString *CellID = @"MyMonitorCell";
             NSArray *arr =[MyMonitorListModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"list"]];
             [self.datalist addObjectsFromArray: arr];
             [_tableview reloadData];
-            _numLab.attributedText = [self getAttibuteForText:[NSString stringWithFormat:@"数量：%li条",_datalist.count]];//更新条数
+            _numLab.attributedText = [self getAttibuteForText:[NSString stringWithFormat:@"数量：%@条",responseObject[@"totalCount"]]];//更新条数
+            
+            _moreData = _datalist.count < [responseObject[@"totalCount"] intValue];
             _page++;
-            _moreData = arr.count >= 20;
             [self endRefresh];
         }
     } failure:^(NSError *error) {
@@ -122,20 +123,14 @@ static NSString *CellID = @"MyMonitorCell";
     [MBProgressHUD showMessag:@"" toView:self.view];
 
     [RequestManager postWithURLString:urlstr parameters:paraDic success:^(id responseObject) {
-        
         [MBProgressHUD hideHudToView:self.view animated:YES];
-        if([[responseObject objectForKey:@"result"] intValue] == 0)
-        {
+        if([[responseObject objectForKey:@"result"] intValue] == 0){
             [cell1 setMonitorButtonState:!cell1.monitorBtn.selected];
-        }
-        else
-        {
+        }else{
             [MBProgressHUD showError:[responseObject objectForKey:@"msg"] toView:self.view];
-            
         }
     } failure:^(NSError *error) {
         [MBProgressHUD showError:@"请求失败" toView:self.view];
-        
     }];
 }
 

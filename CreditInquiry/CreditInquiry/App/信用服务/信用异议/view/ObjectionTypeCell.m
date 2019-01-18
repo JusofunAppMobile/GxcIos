@@ -8,6 +8,7 @@
 
 #import "ObjectionTypeCell.h"
 #import "ObjectionItem.h"
+#import "ObjectionModel.h"
 
 static int BASE_TAG = 2019;
 
@@ -53,28 +54,38 @@ static int BASE_TAG = 2019;
     return self;
 }
 
-- (void)setTitles:(NSArray *)titles{
-    _titles = titles;
+- (void)setTypeList:(NSArray *)typeList{
+    _typeList = typeList;
+    
+    [_itemBg.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj removeFromSuperview];
+    }];
     
     CGFloat space = 5;
     CGFloat lineSpace = 10;
     CGFloat width = (KDeviceW - 15*2 - space*3)/4;
     CGFloat height = 30;
-
-    for (int i = 0; i<_titles.count; i++) {
+    
+    for (int i = 0; i < _typeList.count; i++) {
+        ObjectionModel *menuModel = _typeList[i];
+        
         ObjectionItem *item = [[ObjectionItem alloc]initWithFrame:KFrame(15 + (width+space)*(i%4),10+(lineSpace+height)*(i/4) , width, height)];
         item.tag = BASE_TAG+i;
-        [item setTitle:titles[i] forState:UIControlStateNormal];
+        [item setTitle:menuModel.typeName forState:UIControlStateNormal];
         [item addTarget:self action:@selector(itemAction:) forControlEvents:UIControlEventTouchUpInside];
         [_itemBg addSubview:item];
-
-        if (i == _titles.count-1) {
-            [_itemBg mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.height.mas_equalTo(item.maxY+10);
+        
+        if (i == _typeList.count-1) {
+            [_itemBg mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(item.maxY+10).priorityHigh(1000);
             }];
         }
     }
+    
+    UIButton *button = [self viewWithTag:BASE_TAG+0];
+    [self itemAction:button];
 }
+
 
 - (void)itemAction:(UIButton *)sender{
     [_itemBg.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -87,6 +98,11 @@ static int BASE_TAG = 2019;
             }
         }
     }];
+    
+    if ([self.delegate respondsToSelector:@selector(didSelectObjectionTypeMenu:)]) {
+        [self.delegate didSelectObjectionTypeMenu:_typeList[sender.tag - BASE_TAG]];
+    }
+    
 }
 
 

@@ -228,6 +228,8 @@ static NSString *ChartID = @"CreditChartLineCell";
             [self.navigationController pushViewController:vc animated:YES];
         }else if (indexPath.row == 2){
             ObjectionAppealController *vc = [ObjectionAppealController new];
+            vc.objectionType = ObjectionTypeCredit;
+            vc.companyName = _creditModel.companyInfo[@"companyName"];;
             [self.navigationController pushViewController:vc animated:YES];
         }else if (indexPath.row ==3){
             CreditPormiseController *vc = [CreditPormiseController new];

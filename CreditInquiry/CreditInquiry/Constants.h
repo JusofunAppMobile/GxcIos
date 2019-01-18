@@ -161,6 +161,10 @@ typedef enum : NSUInteger {
     ListTypeMyCollection,//我的收藏
 } ListType;
 
+typedef enum : NSUInteger {
+    ObjectionTypeError,//异议纠错
+    ObjectionTypeCredit,//信用异议
+} ObjectionType;
 
 //AppScheme
 #define KAppScheme @"CreditInquiry"

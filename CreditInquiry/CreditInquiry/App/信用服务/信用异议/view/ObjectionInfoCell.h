@@ -10,8 +10,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ObjectionModel;
+@class ObjectionMenuModel;
+
+@protocol ObjectionInfoCellDelegate <NSObject>
+
+- (void)infoCellDidClickMenu:(ObjectionMenuModel *)menuModel select:(BOOL)select;
+- (void)infoCellDidEndEditing:(NSDictionary *)params;
+@end
+
 @interface ObjectionInfoCell : UITableViewCell
-- (void)setTitles:(NSArray *)titles type:(NSInteger)type;
+- (void)setModel:(ObjectionModel *)model type:(ObjectionType)objectionType;
+@property (nonatomic ,weak) id <ObjectionInfoCellDelegate>delegate;
 @end
 
 NS_ASSUME_NONNULL_END

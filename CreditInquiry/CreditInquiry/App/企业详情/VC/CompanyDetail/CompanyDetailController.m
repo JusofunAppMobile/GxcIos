@@ -11,6 +11,7 @@
 #import "RiskContainerController.h"
 #import "AssetsContainerController.h"
 #import "ReportTypeModel.h"
+#import "ObjectionAppealController.h"
 
 @interface CompanyDetailController()
 {
@@ -548,11 +549,16 @@
 #pragma mark- 纠错
 -(void)errorCorrection
 {
-    RecoveryErrorViewController *recoveryErrorView = [[RecoveryErrorViewController alloc] init];
-    recoveryErrorView.squearList =  itemList;
-    recoveryErrorView.companyId = detailModel.companyid;
-    recoveryErrorView.companyName = self.companyName;
-    [self.navigationController pushViewController:recoveryErrorView animated:YES];
+//    RecoveryErrorViewController *recoveryErrorView = [[RecoveryErrorViewController alloc] init];
+//    recoveryErrorView.squearList =  itemList;
+//    recoveryErrorView.companyId = detailModel.companyid;
+//    recoveryErrorView.companyName = self.companyName;
+//    [self.navigationController pushViewController:recoveryErrorView animated:YES];
+    
+    ObjectionAppealController *vc = [ObjectionAppealController new];
+    vc.companyName = self.companyName;
+    vc.objectionType = ObjectionTypeError;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 分享
@@ -717,11 +723,15 @@
     }
     else if (button.tag == KDetailOperationTag+1)//纠错
     {
-        RecoveryErrorViewController *recoveryErrorView = [[RecoveryErrorViewController alloc] init];
-        recoveryErrorView.squearList =  itemList;
-        recoveryErrorView.companyId = detailModel.companyid;
-        recoveryErrorView.companyName = self.companyName;
-        [self.navigationController pushViewController:recoveryErrorView animated:YES];
+//        RecoveryErrorViewController *recoveryErrorView = [[RecoveryErrorViewController alloc] init];
+//        recoveryErrorView.squearList =  itemList;
+//        recoveryErrorView.companyId = detailModel.companyid;
+//        recoveryErrorView.companyName = self.companyName;
+//        [self.navigationController pushViewController:recoveryErrorView animated:YES];
+        ObjectionAppealController *vc = [ObjectionAppealController new];
+        vc.companyName = self.companyName;
+        vc.objectionType = ObjectionTypeError;
+        [self.navigationController pushViewController:vc animated:YES];
     }
     else if (button.tag == KDetailOperationTag+2)//监控
     {

@@ -7,7 +7,7 @@
 //
 
 #import "DetailBasicController.h"
-
+#import "ObjectionAppealController.h"
 @interface DetailBasicController ()
 {
     //item的背景
@@ -136,12 +136,17 @@
 {
     //[MobClick event:@"Businessdetails01"];//企业详情-纠错点击数
     //[[BaiduMobStat defaultStat] logEvent:@"Businessdetails01" eventLabel:@"企业详情-纠错点击数"];
-    RecoveryErrorViewController *recoverError = [[RecoveryErrorViewController alloc] init];
-    recoverError.squearList = self.itemArray;
-    recoverError.companyId = self.companyId;
-    recoverError.currentSquareModel = self.itemModel;
-    recoverError.companyName = self.companyName;
-    [self.navigationController pushViewController:recoverError animated:YES];
+//    RecoveryErrorViewController *recoverError = [[RecoveryErrorViewController alloc] init];
+//    recoverError.squearList = self.itemArray;
+//    recoverError.companyId = self.companyId;
+//    recoverError.currentSquareModel = self.itemModel;
+//    recoverError.companyName = self.companyName;
+//    [self.navigationController pushViewController:recoverError animated:YES];
+    
+    ObjectionAppealController *vc = [ObjectionAppealController new];
+    vc.companyName = self.companyName;
+    vc.objectionType = ObjectionTypeError;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)back

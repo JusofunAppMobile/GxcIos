@@ -10,8 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol ObjectionFooterViewDelegate <NSObject>
+
+- (void)didClickCommitButton;
+
+@end
+
 @interface ObjectionFooterView : UIView
 
+@property (nonatomic ,weak) id <ObjectionFooterViewDelegate>delegate;
 @end
 
 NS_ASSUME_NONNULL_END

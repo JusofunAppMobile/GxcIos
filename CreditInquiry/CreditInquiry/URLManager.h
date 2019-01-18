@@ -171,6 +171,12 @@
 //获取信用异议
 #define KGetObjectionInfo  @""HOSTURL"/app/errorTypeService/getErrorTypeList"
 
+//提交异议纠错
+#define KCommitObjectionError @""HOSTURL"/app/CorporateInfo/ObjectionError"
+
+//提交信用异议
+#define KCommitObjectionCredit @""HOSTURL"/app/CreditService/creditError"
+
 
 ////////////////////////////////////////////////////////
 

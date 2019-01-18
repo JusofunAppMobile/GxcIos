@@ -56,8 +56,6 @@
         make.right.mas_equalTo(-10);
     }];
     
-  
-    
     
     UIButton *doneBtn = [UIButton new];
     doneBtn.layer.borderWidth = 1;

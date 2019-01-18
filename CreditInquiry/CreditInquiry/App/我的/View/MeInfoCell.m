@@ -47,6 +47,7 @@
     [_joinBtn removeFromSuperview];
     [_statusLab removeFromSuperview];
     
+    
     if (KUSER.userId.length) {
         [_avatarView sd_setImageWithURL:[NSURL URLWithString:KUSER.headIcon] placeholderImage:KImageName(@"me_head_h")];
 

@@ -69,7 +69,7 @@
     _type = type;
     
     _nameLab.text = model.companyName;
-    [_iconView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:KImageName(@"home_LoadingLogo")];//test,model.companyicon?
+    [_iconView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:KImageName(@"home_icon_gongsi")];//test,model.companyicon?
     [self setMonitorButtonState:[model.isUserMonitor boolValue]];
 }
 
