@@ -19,13 +19,14 @@
 #import "CreditServiceModel.h"
 #import "CreditVisitorModel.h"
 #import "CreditHomeModel.h"
+#import "MonitorDetailController.h"
 
 static NSString *InfoID = @"CreditInfoCell";
 static NSString *CellID = @"CreditCollectionCell";
 static NSString *HeaderID = @"CreditSectionHeader";
 static NSString *ChartID = @"CreditChartLineCell";
 
-@interface CreditViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,ULBCollectionViewDelegateFlowLayout>
+@interface CreditViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,ULBCollectionViewDelegateFlowLayout,CreditInfoCellDelegate>
 @property (nonatomic ,strong) NSDictionary *companyInfo;
 @property (nonatomic ,strong) UICollectionView *collectionview;
 @property (nonatomic ,strong) CreditHomeModel *creditModel;
@@ -148,6 +149,7 @@ static NSString *ChartID = @"CreditChartLineCell";
         if (indexPath.section == 0) {
             CreditInfoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:InfoID forIndexPath:indexPath];
             cell.companyInfo = _creditModel.companyInfo;
+            cell.delegate = self;
             return cell;
         }if (indexPath.section ==3) {
             CreditChartLineCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ChartID forIndexPath:indexPath];
@@ -234,6 +236,14 @@ static NSString *ChartID = @"CreditChartLineCell";
         }
     }
  
+}
+
+#pragma mark - 近期三个月变化
+- (void)didClickChangeButton{
+    MonitorDetailController *vc = [MonitorDetailController new];
+    vc.companyName = _creditModel.companyInfo[@"companyName"];
+    vc.companyId = _creditModel.companyInfo[@"companyId"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - life cycle

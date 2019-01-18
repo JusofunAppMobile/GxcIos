@@ -62,9 +62,14 @@
     _typeLab.text = _companyInfo[@"type"];
     _changeNumLab.text = _companyInfo[@"changeNum"];
 }
+#pragma mark - 近三个月变化
+- (void)changeAction{
+    if ([self.delegate respondsToSelector:@selector(didClickChangeButton)]) {
+        [self.delegate didClickChangeButton];
+    }
+}
 
 #pragma mark - lazy load
-
 - (UIView *)changeView{
     if (!_changeView) {
         _changeView = [[UIView alloc]initWithFrame:KFrame(15, self.cardInfoView.maxY+10,self.width-15*2, 47)];
@@ -106,6 +111,10 @@
             make.right.mas_equalTo(nextIcon.mas_left).offset(-6);
             make.height.width.mas_equalTo(20);
         }];
+        
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(changeAction)];
+        [_changeView addGestureRecognizer:tap];
         
     }
     return _changeView;

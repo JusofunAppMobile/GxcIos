@@ -10,8 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol CreditInfoCellDelegate <NSObject>
+
+- (void)didClickChangeButton;
+
+@end
+
 @interface CreditInfoCell : UICollectionViewCell
 @property (nonatomic ,strong) NSDictionary *companyInfo;
+@property (nonatomic ,weak) id <CreditInfoCellDelegate>delegate;
 
 @end
 

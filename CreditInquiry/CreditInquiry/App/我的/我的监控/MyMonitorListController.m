@@ -111,12 +111,16 @@ static NSString *CellID = @"MyMonitorCell";
     NSString * type = cell1.monitorBtn.selected?@"0":@"1";
    
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
-    [paraDic setObject:model.companyId forKey:@"companyid"];
-    [paraDic setObject:type forKey:@"monitorType"];
     [paraDic setObject:KUSER.userId forKey:@"userId"];
+    [paraDic setObject:model.companyId forKey:@"companyid"];
     [paraDic setObject:model.companyName forKey:@"companyname"];
+    [paraDic setObject:type forKey:@"monitorType"];
+    
+    NSString *method = _listType == ListTypeMyMonitor?KMonitor:KCollection;
+    NSString* urlstr = [method stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
     [MBProgressHUD showMessag:@"" toView:self.view];
-    NSString* urlstr = [KMonitor stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
     [RequestManager postWithURLString:urlstr parameters:paraDic success:^(id responseObject) {
         
         [MBProgressHUD hideHudToView:self.view animated:YES];
@@ -155,7 +159,7 @@ static NSString *CellID = @"MyMonitorCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MyMonitorCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID forIndexPath:indexPath];
     cell.delegate = self;
-    cell.model = _datalist[indexPath.section];
+    [cell setModel:_datalist[indexPath.section] type:_listType];
     return cell;
 }
 
