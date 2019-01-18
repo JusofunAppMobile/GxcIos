@@ -53,6 +53,7 @@ static NSString *PlainID = @"MePlainCell";
             make.right.mas_equalTo(-15);
             make.top.mas_equalTo(0);
             make.bottom.mas_equalTo(self.view).offset(-KTabBarHeight);
+            make.bottom.mas_equalTo(-KTabBarHeight);
         }];
         view.backgroundColor = [UIColor clearColor];
         view.delegate = self;

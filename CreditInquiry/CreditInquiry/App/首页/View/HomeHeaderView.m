@@ -101,7 +101,7 @@
 -(void)reloadSearchView:(NSArray *)titleArray
 {
     [searchView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    
+    titleArray = [self dealMenuData:titleArray];
     CGFloat orginx = 15;
     CGFloat width = (KDeviceW - 30)/4;
     CGFloat orginy = 15;
@@ -232,6 +232,25 @@
         
     }
 }
+
+
+-(NSMutableArray*)dealMenuData:(NSArray*)menuArray
+{
+    NSArray *allTypeArray = @[@(SearchWebType),@(SearchBlurryType),@(SearchShareholderType),@(SearchOurmainType),@(SearchCrackcreditType),@(SearchTaxCodeType ),@(SearchJobType),@(SearchAddressBookType) ,@(SearchSeekRelationType),@(SearchRiskAnalyzeType),@(SearchAddressType),@(SearchPromisenType),@(SearchVisitorType),@(SearchsubmitType ),@(SearchBidType),@( SearchJudgementType),@(SearchPenaltyType), @(SearchBrandType)];
+    NSMutableArray *array = [NSMutableArray array];
+    for(NSDictionary *dic in menuArray)
+    {
+        int menuType = [[dic objectForKey:@"menuType"] intValue];
+        if([allTypeArray containsObject:@(menuType)] )
+        {
+            [array addObject:dic];
+        }
+    }
+    
+    return array;
+    
+}
+
 
 
 @end

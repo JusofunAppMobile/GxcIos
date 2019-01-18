@@ -173,10 +173,10 @@
     
     
     bigBtn = [[UIButton alloc]init];
-    [bigBtn setTitle:@" 点击查看大图" forState:UIControlStateNormal];
+    [bigBtn setTitle:@"  点击查看大图" forState:UIControlStateNormal];
     [bigBtn setTitleColor:KRGB(231, 0, 11) forState:UIControlStateNormal];
     bigBtn.titleLabel.font = KFont(12);
-    [bigBtn setImage:KImageName(@"更新icon") forState:UIControlStateNormal];
+    [bigBtn setImage:KImageName(@"fangda-2") forState:UIControlStateNormal];
     bigBtn.layer.cornerRadius = 5;
     bigBtn.clipsToBounds = YES;
     [bigBtn addTarget:self action:@selector(showBig) forControlEvents:UIControlEventTouchUpInside];

@@ -510,6 +510,7 @@
                 {
                     ComCertificationController *vc = [[ComCertificationController alloc]init];
                     vc.isShow = YES;
+                    vc.status = [dic objectForKey:@"authStatus"];
                     [self.navigationController pushViewController:vc animated:YES];
                 }
                 else

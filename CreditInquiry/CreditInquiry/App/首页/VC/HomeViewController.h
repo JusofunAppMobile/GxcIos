@@ -19,7 +19,7 @@
 #import "ShowMessageView.h"
 #import "LoginController.h"
 #import "NewsController.h"
-
+#import "MonitorDetailController.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HomeViewController : BasicViewController<UITableViewDelegate,UITableViewDataSource,HomeHeaderViewDelegate,SectionHeaderDelegate>

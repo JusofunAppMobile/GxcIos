@@ -372,7 +372,25 @@
     label.backgroundColor = KRGB(252, 244, 244);
     label.textColor = KRGB(238, 37, 32);
     label.font = KFont(14);
-    label.text = @"     填写身份证信息，快速认证企业";
+    
+    if([self.status intValue] == 1)//1：审核中
+    {
+        label.text = @"     资料已提交、审核中";
+    }
+    else if ([self.status intValue] == 2)//2：审核失败
+    {
+        label.text = @"     认证状态已被驳回，请重新填写认证信息";
+    }
+    else if ([self.status intValue] == 3)//3：审核成功
+    {
+        label.text = @"     审核成功";
+    }
+    else
+    {
+        label.text = @"     填写身份证信息，快速认证企业";
+    }
+    
+    
     messageLabel = label;
     return label;
 }
