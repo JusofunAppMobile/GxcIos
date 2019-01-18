@@ -38,6 +38,8 @@
     NSMutableArray *holderArray;//股东
     NSMutableArray *ggArray;//高管
     
+    NSString *detailUrlStr;
+    
 }
 @property (nonatomic ,strong) NSArray *reportTypeList;
 @end
@@ -176,8 +178,6 @@
     [paraDic setObject:self.companyName forKey:@"companyName"];
     [paraDic setObject:KUSER.userId forKey:@"userId"];
     NSString* urlstr = [KGetCorporateInfo stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
-    KWeakSelf;
     NSURLSessionDataTask*task = [RequestManager postWithURLString:urlstr parameters:paraDic success:^(id responseObject) {
         NSLog(@"%@",responseObject);
        
@@ -192,7 +192,7 @@
             {
                 [self setFoucsBtn:YES];
             }
-            
+            detailUrlStr = [dic objectForKey:@"InfoH5Address"];
             if([[dic objectForKey:@"monitorType"] intValue] == 0)
             {
                 [self setMonitorBtn:NO];
@@ -838,12 +838,36 @@
     
 }
 
+#pragma mark -  股东高管查看更多
+-(void)detailHolderCheckMore:(DetailHolderType)type
+{
+    int idType = type == DetailHolderGDType?2:3;
+    for(NSDictionary *dic in itemList)
+    {
+        if([[dic objectForKey:@"menuid"] intValue] == idType)
+        {
+            ItemModel *sqModel = [ItemModel mj_objectWithKeyValues:dic];
+            [self gridButtonClick:sqModel cellSection:2];
+            break;
+        }
+    }
+}
+
+
 #pragma mark 企业图谱/关联关系 /股权结构
 - (void)detailMapButtonClick:(UIButton *)button
 {
     if(button.tag == KDetailMapBtnTag)//企业图谱
     {
-        
+        for(NSDictionary *dic in itemList)
+        {
+            if([[dic objectForKey:@"type"] intValue] == 2)//企业图谱
+            {
+                ItemModel *sqModel = [ItemModel mj_objectWithKeyValues:dic];
+                [self gridButtonClick:sqModel cellSection:2];
+                break;
+            }
+        }
     }
     else if(button.tag == KDetailMapBtnTag+1)//关联关系
     {
@@ -862,7 +886,9 @@
 #pragma mark 更多信息
 -(void)checkDetailMoreInfo
 {
-    
+    CommonWebViewController *view = [[CommonWebViewController alloc]init];
+    view.urlStr = detailUrlStr;
+    [self.navigationController pushViewController:view animated:YES];
 }
 
 #pragma mark - 网址
@@ -972,7 +998,7 @@
     
    // [buttonArray addObject:errorItem];
     [buttonArray addObject:focuItem];
-    [buttonArray addObject:shareItem];
+    //[buttonArray addObject:shareItem];
     
     self.navigationItem.rightBarButtonItems = buttonArray;
 }

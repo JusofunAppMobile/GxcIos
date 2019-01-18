@@ -11,8 +11,20 @@
 #import "HodelButton.h"
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSInteger, DetailHolderType) {
+    DetailHolderGDType = 1, //股东
+    DetailHolderGGType = 2, //高管
+};
+
+@protocol DetailHolderDelegate <NSObject>
+
+-(void)detailHolderCheckMore:(DetailHolderType)type;
+
+@end
+
 @interface DetailHolderCell : UITableViewCell
 
+@property(nonatomic,assign)id<DetailHolderDelegate>delegate;
 
 @property(nonatomic,strong)NSArray*hodelArray;
 

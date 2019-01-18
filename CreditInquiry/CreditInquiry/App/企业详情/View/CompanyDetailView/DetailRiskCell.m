@@ -30,7 +30,7 @@
         
         UILabel*label = [[UILabel alloc]initWithFrame:KFrame(KDeviceW -70-15, 5+27.5, 70, 20)];
         label.text = @"查看风险";
-        label.textColor = KHexRGB(0xEF9295);
+        label.textColor = KRGB(235, 62, 58);
         label.font = KFont(14);
         label.layer.cornerRadius = 2;
         label.layer.borderColor = KHexRGB(0xEF9295).CGColor;
@@ -55,9 +55,9 @@
 
 -(void)setLabelContent
 {
-    NSString *str1 = @"自身风险:";
+    NSString *str1 = @"自身风险：";
     NSString *countStr = [NSString stringWithFormat:@"%@条",self.selfRiskNum];
-    NSString *str2  = @"关联风险:";
+    NSString *str2  = @"关联风险：";
     NSString *countStr2 = [NSString stringWithFormat:@"%@条",self.relateRiskNum];;
     NSString *str3 = [NSString stringWithFormat:@"%@%@  %@%@",str1,countStr,str2,countStr2];
     NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:str3];
@@ -70,13 +70,13 @@
     
     [AttributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(str1.length+countStr.length, str2.length)];
     
-    [AttributedStr addAttribute:NSBackgroundColorAttributeName value:KRGB(255, 243, 236) range:NSMakeRange(str1.length, countStr.length)];
+    [AttributedStr addAttribute:NSBackgroundColorAttributeName value:KRGB(255, 241, 235) range:NSMakeRange(str1.length, countStr.length)];
     
-    [AttributedStr addAttribute:NSBackgroundColorAttributeName value:KRGB(255, 243, 236) range:NSMakeRange(str1.length+countStr.length+str2.length+2, countStr2.length)];
+    [AttributedStr addAttribute:NSBackgroundColorAttributeName value:KRGB(255, 241, 235) range:NSMakeRange(str1.length+countStr.length+str2.length+2, countStr2.length)];
     
-    [AttributedStr addAttribute:NSForegroundColorAttributeName value:KRGB(230, 36, 65) range:NSMakeRange(str1.length, countStr.length)];
+    [AttributedStr addAttribute:NSForegroundColorAttributeName value:KRGB(235, 62, 58) range:NSMakeRange(str1.length, countStr.length)];
     
-    [AttributedStr addAttribute:NSForegroundColorAttributeName value:KRGB(230, 36, 65) range:NSMakeRange(str1.length+countStr.length+str2.length+2, countStr2.length)];
+    [AttributedStr addAttribute:NSForegroundColorAttributeName value:KRGB(235, 62, 58) range:NSMakeRange(str1.length+countStr.length+str2.length+2, countStr2.length)];
     
     
     

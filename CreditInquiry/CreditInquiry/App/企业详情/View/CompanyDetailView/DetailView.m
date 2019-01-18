@@ -58,7 +58,7 @@
         isShowMoney = NO;
         isShowCompanyRisk = NO;
        
-        headArray = [NSMutableArray arrayWithObjects:@"企业详情",@"联系信息",@"股东",@"企业风险",@"国信企业图谱",@"企业背景",@"风险信息",@"企业风险预警",@"经营状况", @"无形资产",nil];
+        headArray = [NSMutableArray arrayWithObjects:@"企业详情",@"联系信息",@"股东",@"企业风险",@"国信企业图谱",@"企业背景",@"风险信息",@"经营状况", @"无形资产",nil];
         
         [self addSubview:self.backTableView];
         [self reportView];
@@ -118,8 +118,6 @@
         {
             return;
         }
-        
-      
         
         ItemModel *sqModel = [ItemModel mj_objectWithKeyValues:button.buttonDic];
         [self.delegate gridButtonClick:sqModel cellSection:section];
@@ -306,7 +304,14 @@
     }
     
 }
-
+-(void)detailHolderCheckMore:(DetailHolderType)type
+{
+    if(self.delegate && [self.delegate respondsToSelector:@selector(detailHolderCheckMore:)])
+    {
+        [self.delegate detailHolderCheckMore:type];
+    }
+    
+}
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *headStr = [headArray objectAtIndex:indexPath.section];
@@ -497,6 +502,7 @@
         {
             cell = [[DetailHolderCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.delegate = self;
         }
         cell.hodelArray = holderArray;
         cell.executivesArray = ggArray;
@@ -962,7 +968,7 @@
 -(void)reportView
 {
     self.toolBar = [[UIView alloc]initWithFrame:KFrame(0, KDeviceH - 55-KBottomHeight-KNavigationBarHeight, KDeviceW, 55+KBottomHeight)];
-    self.toolBar.backgroundColor = KHexRGB(0xEB5C5C);
+    self.toolBar.backgroundColor = KHexRGB(0xEA5B5C);
     self.toolBar.layer.shadowOpacity = 0.5;// 阴影透明度
     self.toolBar.layer.shadowColor = [UIColor grayColor].CGColor;// 阴影的颜色
     self.toolBar.layer.shadowRadius = 3;// 阴影扩散的范围控制
@@ -983,7 +989,7 @@
         button.frame = KFrame(KDeviceW/4*i+0.5*i, 0, KDeviceW/4, 55);
         button.backgroundColor = KRGB(220, 39, 42);;
         [button setTitle:array[i] forState:UIControlStateNormal];
-        button.titleLabel.font = KFont(15);
+        button.titleLabel.font = KFont(14);
         [button setImage:KImageName(imageArray[i]) forState:UIControlStateNormal];
         [button addTarget:self action:@selector(checkReport:) forControlEvents:UIControlEventTouchUpInside];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
