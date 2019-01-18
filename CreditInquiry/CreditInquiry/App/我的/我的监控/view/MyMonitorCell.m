@@ -8,11 +8,13 @@
 
 #import "MyMonitorCell.h"
 #import "MyMonitorListModel.h"
+#import <UIButton+LXMImagePosition.h>
 
 @interface MyMonitorCell ()
 @property (nonatomic ,strong) UIImageView *iconView;
 @property (nonatomic ,strong) UILabel *nameLab;
-@property (nonatomic ,strong) UIButton *monitorBtn;
+@property (nonatomic ,strong) MyMonitorListModel *model;
+@property (nonatomic ,assign) ListType type;
 @end
 @implementation MyMonitorCell
 
@@ -27,7 +29,6 @@
                 make.left.mas_equalTo(15);
                 make.width.height.mas_equalTo(25);
             }];
-            view.backgroundColor = [UIColor grayColor];
             view;
         });
         
@@ -39,7 +40,6 @@
                 make.left.mas_equalTo(_iconView.mas_right).offset(15);
             }];
             view.font = KFont(16);
-            view.text = @"小米科技股份有限公司";
             view.textColor = KHexRGB(0x303030);
             view;
         });
@@ -50,48 +50,59 @@
             [view mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.mas_equalTo(self.contentView);
                 make.right.mas_equalTo(self.contentView).offset(-15);
-                make.height.mas_equalTo(26);
-                make.width.mas_equalTo(65);
+                make.height.mas_equalTo(50);
+                make.width.mas_equalTo(50);
             }];
-            view.selected = YES;
-            view.layer.borderWidth = .5f;
-            view.layer.borderColor = KHexRGB(0x909090).CGColor;
-            view.layer.cornerRadius = 2;
-            view.layer.masksToBounds = YES;
-            view.titleLabel.font = KFont(14);
-            [view setTitle:@"监控" forState:UIControlStateNormal];
-            [view setTitle:@"取消监控" forState:UIControlStateSelected];
+            view.titleLabel.font = KFont(11);
             [view setTitleColor:KHexRGB(0xd93947) forState:UIControlStateNormal];
             [view setTitleColor:KHexRGB(0x909090) forState:UIControlStateSelected];
             [view addTarget:self action:@selector(monitorAction) forControlEvents:UIControlEventTouchUpInside];
             view;
         });
-        
     }
     return self;
 }
 
-- (void)setModel:(MyMonitorListModel *)model{
+
+- (void)setModel:(MyMonitorListModel *)model type:(ListType)type{
     _model = model;
-//    [_iconView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:nil];//test,model.companyicon?
-    _nameLab.text = model.companyname;
+    _type = type;
+    
+    _nameLab.text = model.companyName;
+    [_iconView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:KImageName(@"home_LoadingLogo")];//test,model.companyicon?
+    [self setMonitorButtonState:[model.isUserMonitor boolValue]];
 }
 
 - (void)monitorAction{
-    _monitorBtn.selected = !_monitorBtn.selected;
-    if (_monitorBtn.selected) {
-        _monitorBtn.layer.borderColor = KHexRGB(0x909090).CGColor;
-        [_monitorBtn mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(65);
-        }];
-    }else{
-        _monitorBtn.layer.borderColor = KHexRGB(0xd93947).CGColor;
-        [_monitorBtn mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(50);
-        }];
+    if ([self.delegate respondsToSelector:@selector(didClickMonitorButton:cell:)]) {
+        [self.delegate didClickMonitorButton:_model cell:self];
     }
+}
+
+- (void)setMonitorButtonState:(BOOL)selected
+{
+    _monitorBtn.selected = selected;
+    
+    if(_monitorBtn.selected)
+    {
+        NSString *title = _type == ListTypeMyMonitor?@"取消监控":@"取消收藏";
+        NSString *imageName = _type == ListTypeMyMonitor?@"icon_monitor":@"取消收藏";
+
+        
+        [_monitorBtn setTitle:title forState:UIControlStateNormal];
+        [_monitorBtn setImage:KImageName(imageName) forState:UIControlStateNormal];
+    }
+    else
+    {
+        NSString *title = _type == ListTypeMyMonitor?@"监控":@"收藏";
+
+        [_monitorBtn setTitle:@"监控" forState:UIControlStateNormal];
+        [_monitorBtn setImage:KImageName(@"icon_monitor_sel") forState:UIControlStateNormal];
+    }
+    [_monitorBtn setImagePosition:LXMImagePositionTop spacing:7];
     
 }
+
 
 
 

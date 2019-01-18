@@ -10,8 +10,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 @class MyMonitorListModel;
+
+@protocol MyMonitorCellDelegate <NSObject>
+- (void)didClickMonitorButton:(MyMonitorListModel *)model cell:(UITableViewCell*)cell;
+@end
+
 @interface MyMonitorCell : UITableViewCell
-@property (nonatomic ,strong) MyMonitorListModel *model;
+@property (nonatomic ,weak) id <MyMonitorCellDelegate> delegate;
+@property (nonatomic ,strong) UIButton *monitorBtn;
+
+- (void)setModel:(MyMonitorListModel *)model type:(ListType)type;
+- (void)setMonitorButtonState:(BOOL)selected;
 
 @end
 

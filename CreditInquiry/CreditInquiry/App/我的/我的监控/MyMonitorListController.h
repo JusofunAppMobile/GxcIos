@@ -9,10 +9,6 @@
 #import "BasicViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
-typedef enum : NSUInteger {
-    ListTypeMyMonitor = 0,
-    ListTypeMyCollection,
-} ListType;
 
 @interface MyMonitorListController : BasicViewController
 @property (nonatomic ,assign) ListType listType;

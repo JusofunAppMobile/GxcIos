@@ -155,6 +155,12 @@ typedef enum : NSUInteger {
     BuyVipFromReportList,//信用报告列表
 } BuyVipFromType;
 
+typedef enum : NSUInteger {
+    ListTypeMyMonitor = 0,//我的监听列表
+    ListTypeMyCollection,//我的收藏
+} ListType;
+
+
 //AppScheme
 #define KAppScheme @"CreditInquiry"
 

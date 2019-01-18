@@ -168,6 +168,10 @@
 //信用承诺模版
 #define KGetPromiseSample  @""HOSTURL"/app/CreditService/getTemplateByEmail"
 
+//获取信用异议
+#define KGetObjectionInfo  @""HOSTURL"/app/errorTypeService/getErrorTypeList"
+
+
 ////////////////////////////////////////////////////////
 
 //企业详情

@@ -12,7 +12,7 @@
 
 static NSString *CellID = @"MyMonitorCell";
 
-@interface MyMonitorListController ()<UITableViewDelegate,UITableViewDataSource>
+@interface MyMonitorListController ()<UITableViewDelegate,UITableViewDataSource,MyMonitorCellDelegate>
 @property (nonatomic ,strong) UITableView *tableview;
 @property (nonatomic ,strong) UIView *header;
 @property (nonatomic ,strong) UILabel *numLab;
@@ -42,7 +42,7 @@ static NSString *CellID = @"MyMonitorCell";
         view.delegate = self;
         view.dataSource = self;
         view.tableHeaderView = self.header;
-        view.rowHeight = 52;
+        view.rowHeight = 60;
         view;
     });
     [_tableview registerClass:[MyMonitorCell class] forCellReuseIdentifier:CellID];
@@ -78,7 +78,8 @@ static NSString *CellID = @"MyMonitorCell";
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
     [params setObject:@(_page) forKey:@"pageIndex"];
-    
+    [params setObject:@(20) forKey:@"pageSize"];
+
     NSString *urlStr = _listType == ListTypeMyMonitor?KMyMonitorList:KMyCollectionList;
     
     [RequestManager postWithURLString:urlStr parameters:params success:^(id responseObject) {
@@ -87,12 +88,12 @@ static NSString *CellID = @"MyMonitorCell";
             if (_page == 1) {
                 [_datalist removeAllObjects];
             }
-            [self.datalist addObjectsFromArray: [MyMonitorListModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"list"]]];
+            NSArray *arr =[MyMonitorListModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"list"]];
+            [self.datalist addObjectsFromArray: arr];
             [_tableview reloadData];
-            _page++;
-            _moreData = _datalist.count< [responseObject[@"data"][@"totalCount"] intValue];
-            
             _numLab.attributedText = [self getAttibuteForText:[NSString stringWithFormat:@"数量：%li条",_datalist.count]];//更新条数
+            _page++;
+            _moreData = arr.count >= 20;
             [self endRefresh];
         }
     } failure:^(NSError *error) {
@@ -100,6 +101,38 @@ static NSString *CellID = @"MyMonitorCell";
         [self endRefresh];
     }];
     
+}
+
+#pragma mark -
+- (void)didClickMonitorButton:(MyMonitorListModel *)model cell:(UITableViewCell *)cell{
+    MyMonitorCell* cell1 = (MyMonitorCell*)cell;
+    
+    //（0:取消监控  1：添加监控）
+    NSString * type = cell1.monitorBtn.selected?@"0":@"1";
+   
+    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    [paraDic setObject:model.companyId forKey:@"companyid"];
+    [paraDic setObject:type forKey:@"monitorType"];
+    [paraDic setObject:KUSER.userId forKey:@"userId"];
+    [paraDic setObject:model.companyName forKey:@"companyname"];
+    [MBProgressHUD showMessag:@"" toView:self.view];
+    NSString* urlstr = [KMonitor stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [RequestManager postWithURLString:urlstr parameters:paraDic success:^(id responseObject) {
+        
+        [MBProgressHUD hideHudToView:self.view animated:YES];
+        if([[responseObject objectForKey:@"result"] intValue] == 0)
+        {
+            [cell1 setMonitorButtonState:!cell1.monitorBtn.selected];
+        }
+        else
+        {
+            [MBProgressHUD showError:[responseObject objectForKey:@"msg"] toView:self.view];
+            
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showError:@"请求失败" toView:self.view];
+        
+    }];
 }
 
 #pragma mark - UITableViewDataSource
@@ -121,6 +154,8 @@ static NSString *CellID = @"MyMonitorCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MyMonitorCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID forIndexPath:indexPath];
+    cell.delegate = self;
+    cell.model = _datalist[indexPath.section];
     return cell;
 }
 
@@ -137,7 +172,7 @@ static NSString *CellID = @"MyMonitorCell";
             make.centerY.mas_equalTo(_header);
             make.left.mas_equalTo(_header).offset(15);
         }];
-        _numLab.attributedText = [self getAttibuteForText:@"数量：2条"];
+        _numLab.attributedText = [self getAttibuteForText:@"数量：0条"];
     }
     return _header;
 }
