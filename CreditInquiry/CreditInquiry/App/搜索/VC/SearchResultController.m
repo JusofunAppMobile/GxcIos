@@ -215,6 +215,26 @@
         sortType= sortType?:TimeDownSortType;
         int type = _searchType == SearchSeekRelationType?6:_searchType;
 
+        if(self.searchType == SearchOurmainType)
+        {
+            type = 1;
+        }
+        else if(self.searchType == SearchShareholderType)
+        {
+            type = 2;
+        }
+        else if(self.searchType == SearchAddressType)
+        {
+            type = 3;
+        }
+        else if(self.searchType == SearchCrackcreditType)
+        {
+            type = 5;
+        }
+        else
+        {
+            type = 0;
+        }
         [paraDic setObject:@(type) forKey:@"type"];
         [paraDic setObject:@(sortType) forKey:@"sequence"];
         requestType = HttpRequestTypeGet;
@@ -351,7 +371,7 @@
                 }
             }
         }
-        [ weakSelf.companySearchTableView reloadData];
+        [weakSelf.companySearchTableView reloadData];
         
     } failure:^(NSError *error) {
         [weakSelf endRefresh];
