@@ -61,6 +61,35 @@ static NSString *CellID3 = @"ObjectionInfoCell";
     }];
 }
 
+#pragma mark - 提交异议
+- (void)didClickCommitButton{
+    [self.view endEditing:YES];
+    if ([self isParamsEmpty]) {
+        return;
+    }
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:KUSER.userId forKey:@"userId"];
+    [params setObject:_companyName forKey:@"CompanyName"];
+    [params addEntriesFromDictionary:[self getMenuInfo]];
+    [params addEntriesFromDictionary:self.userInfo];
+    
+    NSString *method = _objectionType == ObjectionTypeCredit?KCommitObjectionCredit:KCommitObjectionError;
+    
+    [MBProgressHUD showMessag:@"" toView:self.view];
+    [RequestManager postWithURLString:method parameters:params success:^(id responseObject) {
+        [MBProgressHUD hideHudToView:self.view animated:YES];
+        if ([responseObject[@"result"] intValue] == 0) {
+            [MBProgressHUD showSuccess:@"异议信息已提交，感谢您的反馈意见！" toView:nil];
+            [self back];
+        }else{
+            [MBProgressHUD showHint:responseObject[@"msg"] toView:nil];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD hideHudToView:self.view animated:YES];
+    }];
+}
+
 #pragma mark - initView
 - (void)initView{
     self.tableview = ({
@@ -116,34 +145,7 @@ static NSString *CellID3 = @"ObjectionInfoCell";
     }
 }
 
-#pragma mark - 提交异议
-- (void)didClickCommitButton{
-    if ([self isParamsEmpty]) {
-        return;
-    }
-    
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:KUSER.userId forKey:@"userId"];
-    [params setObject:_companyName forKey:@"CompanyName"];
-    [params addEntriesFromDictionary:[self getMenuInfo]];
-    [params addEntriesFromDictionary:self.userInfo];
-    
-    NSString *method = _objectionType == ObjectionTypeCredit?KCommitObjectionCredit:KCommitObjectionError;
-    
-    [MBProgressHUD showMessag:@"" toView:self.view];
-    [RequestManager postWithURLString:method parameters:params success:^(id responseObject) {
-        [MBProgressHUD hideHudToView:self.view animated:YES];
-        if ([responseObject[@"result"] intValue] == 0) {
-            [MBProgressHUD showSuccess:@"异议信息已提交，感谢您的反馈意见！" toView:nil];
-            [self back];
-        }else{
-            [MBProgressHUD showHint:responseObject[@"msg"] toView:nil];
-        }
-    } failure:^(NSError *error) {
-        [MBProgressHUD hideHudToView:self.view animated:YES];
-    }];
-}
-
+#pragma mark - unit
 - (NSDictionary *)getMenuInfo{
     
     NSMutableString *keyString = [NSMutableString string];

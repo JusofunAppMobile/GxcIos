@@ -36,12 +36,12 @@
     _codeLab.text = _companyInfo[@"code"];
     _typeLab.text = _companyInfo[@"type"];
     
-    int state = [_companyInfo[@"state"] intValue];//test
-    if (state == 0) {
+    int status = [_companyInfo[@"status"] intValue];//test
+    if (status == 0) {
         [self addSubview:self.cardImageView];
         [self.bgView setBackgroundColor:[UIColor whiteColor]];
         [self setFrame:KFrame(0, self.y, self.width, _cardImageView.maxY+5)];
-    }else if (state == 1){//已认证
+    }else if (status == 1){//已认证
         [self addSubview:self.cardInfoView];
         [self addSubview:self.changeView];
         [self.bgView setBackgroundColor:KHexRGB(0xd51424)];

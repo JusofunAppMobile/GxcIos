@@ -20,6 +20,7 @@
 #import "CreditVisitorModel.h"
 #import "CreditHomeModel.h"
 #import "MonitorDetailController.h"
+#import "SearchController.h"
 
 static NSString *InfoID = @"CreditInfoCell";
 static NSString *CellID = @"CreditCollectionCell";
@@ -55,7 +56,7 @@ static NSString *ChartID = @"CreditChartLineCell";
             
             _creditModel = [CreditHomeModel new];
             _creditModel.companyInfo = _companyInfo;
-            
+
             //===========
             NSMutableArray *arr1 = [NSMutableArray array];
             NSArray *title1 = @[@"信用报告",@"信用评价",@"信用异议",@"信用修复",@"信用承诺",@"访客",@"自主填报"];
@@ -65,18 +66,18 @@ static NSString *ChartID = @"CreditChartLineCell";
                 [arr1 addObject:model];
             }
             _creditModel.serviceList = arr1;
-            
+
             //===========
             NSMutableArray *arr2 = [NSMutableArray array];
             NSArray *title2 = @[@"税务案件",@"商标查询",@"著作权查询",@"黑名单",@"信用承诺",@"访客",@"自主填报"];
-            
+
             for (int i = 0; i < 7; i++) {
                 CreditServiceModel *model = [CreditServiceModel new];
                 model.menuName = title2[i];
                 [arr2 addObject:model];
             }
             _creditModel.inquiryList = arr2;
-            
+
             //===========
              NSMutableArray *arr3 = [NSMutableArray array];
             NSArray *title3 = @[@"100",@"64",@"75",@"150",@"78",@"70"];
@@ -131,14 +132,14 @@ static NSString *ChartID = @"CreditChartLineCell";
 
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return [_creditModel.companyInfo[@"state"] intValue] == 3 ?4:2;
+    return [_creditModel.companyInfo[@"status"] intValue] == 3 ?4:2;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     if (section == 0||section == 3) {
         return 1;
     }else if (section == 1){
-        int state = [_creditModel.companyInfo[@"state"] intValue];
+        int state = [_creditModel.companyInfo[@"status"] intValue];
         return state == 3? _creditModel.serviceList.count:_creditModel.inquiryList.count;
     }else{
         return _creditModel.inquiryList.count;
@@ -157,7 +158,7 @@ static NSString *ChartID = @"CreditChartLineCell";
             return cell;
         }else{
             CreditCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellID forIndexPath:indexPath];
-            if ([_creditModel.companyInfo[@"state"] intValue] == 3) {//section 1,2
+            if ([_creditModel.companyInfo[@"status"] intValue] == 3) {//section 1,2
                 cell.model = indexPath.section == 1 ?_creditModel.serviceList[indexPath.item]:_creditModel.inquiryList[indexPath.item];
             }else{//section 1
                 cell.model = _creditModel.inquiryList[indexPath.item];
@@ -169,7 +170,7 @@ static NSString *ChartID = @"CreditChartLineCell";
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section != 0) {
         CreditSectionHeader *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderID forIndexPath:indexPath];
-        [header setupHeader:[_creditModel.companyInfo[@"state"] intValue] section:indexPath.section];
+        [header setupHeader:[_creditModel.companyInfo[@"status"] intValue] section:indexPath.section];
         return header;
     }
     return nil;
@@ -178,7 +179,7 @@ static NSString *ChartID = @"CreditChartLineCell";
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         CGFloat height ;
-        int state = [_creditModel.companyInfo[@"state"] intValue];
+        int state = [_creditModel.companyInfo[@"status"] intValue];
         if (state == 1) {
             height = 125;
         }else if (state == 3){
@@ -197,7 +198,7 @@ static NSString *ChartID = @"CreditChartLineCell";
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
     if (section != 0) {
-        int state = [_creditModel.companyInfo[@"state"] intValue];
+        int state = [_creditModel.companyInfo[@"status"] intValue];
         return CGSizeMake(KDeviceW, state == 3?60:50);
     }else{
         return CGSizeZero;
@@ -216,26 +217,52 @@ static NSString *ChartID = @"CreditChartLineCell";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    int state = [_creditModel.companyInfo[@"state"] intValue];//test
-    if (indexPath.section == 1 && state==3) {
-        if (indexPath.row == 0) {
-            CreditReportController *vc = [CreditReportController new];
-            vc.companyid = _creditModel.companyInfo[@"companyId"];
-            vc.companyName = _creditModel.companyInfo[@"companyName"];
-            [self.navigationController pushViewController:vc animated:YES];
-        }else if (indexPath.row == 1){
-            CreditInfoInputController *vc = [CreditInfoInputController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }else if (indexPath.row == 2){
-            ObjectionAppealController *vc = [ObjectionAppealController new];
-            vc.objectionType = ObjectionTypeCredit;
-            vc.companyName = _creditModel.companyInfo[@"companyName"];;
-            [self.navigationController pushViewController:vc animated:YES];
-        }else if (indexPath.row ==3){
-            CreditPormiseController *vc = [CreditPormiseController new];
-            vc.companyName = _creditModel.companyInfo[@"companyName"];
-            [self.navigationController pushViewController:vc animated:YES];
+    int state = [_creditModel.companyInfo[@"status"] intValue];
+    
+//    if (indexPath.section == 1) {
+//        if (state == 3) {
+//
+//
+//        }else{
+//
+//
+//        }
+//
+//    }
+    
+    
+    
+    
+    if (indexPath.section == 1 ) {
+        if (state == 3) {
+            if (indexPath.row == 0) {
+                CreditReportController *vc = [CreditReportController new];
+                vc.companyid = _creditModel.companyInfo[@"companyId"];
+                vc.companyName = _creditModel.companyInfo[@"companyName"];
+                [self.navigationController pushViewController:vc animated:YES];
+            }else if (indexPath.row == 1){
+                CreditInfoInputController *vc = [CreditInfoInputController new];
+                [self.navigationController pushViewController:vc animated:YES];
+            }else if (indexPath.row == 2){
+                ObjectionAppealController *vc = [ObjectionAppealController new];
+                vc.objectionType = ObjectionTypeCredit;
+                vc.companyName = _creditModel.companyInfo[@"companyName"];;
+                [self.navigationController pushViewController:vc animated:YES];
+            }else if (indexPath.row ==3){
+                CreditPormiseController *vc = [CreditPormiseController new];
+                vc.companyName = _creditModel.companyInfo[@"companyName"];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }else{
+            SearchController *SearchVc = [[SearchController alloc]init];
+            SearchVc.searchType = SearchBlurryType;
+            [self.navigationController pushViewController:SearchVc animated:YES];
         }
+       
+    }else if (indexPath.section == 3){
+        SearchController *SearchVc = [[SearchController alloc]init];
+        SearchVc.searchType = SearchBlurryType;
+        [self.navigationController pushViewController:SearchVc animated:YES];
     }
  
 }

@@ -12,8 +12,8 @@
 #import <UIButton+AFNetworking.h>
 
 @interface CreditCollectionCell ()
-//@property (nonatomic ,strong) UIImageView *iconView;
-//@property (nonatomic ,strong) UILabel *titleLab;
+@property (nonatomic ,strong) UIImageView *iconView;
+@property (nonatomic ,strong) UILabel *titleLab;
 @property (nonatomic ,strong) UIButton *cellButotn;
 @end
 @implementation CreditCollectionCell
@@ -44,12 +44,19 @@
 //                make.centerX.mas_equalTo(self.contentView);
 //                make.height.mas_equalTo(30);
 //            }];
+//            view.contentScaleFactor = scale
 //            view;
 //        });
-//
+////
 //        self.titleLab = ({
-//
-//
+//            UILabel *view = [UILabel new];
+//            [self.contentView addSubview:view];
+//            [view mas_makeConstraints:^(MASConstraintMaker *make) {
+//                make.top.mas_equalTo(_iconView.mas_bottom).offset(5);
+//                make.centerX.mas_equalTo(self.contentView);
+//            }];
+//            view.font = KFont(14);
+//            view;
 //        });
 //
         
@@ -62,9 +69,12 @@
 }
 
 - (void)setModel:(CreditServiceModel *)model{
-    [_cellButotn setImage:KImageName(@"icon_shuiwu") forState:UIControlStateNormal];
+    [_cellButotn setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:model.menuImage]];
     [_cellButotn setTitle:model.menuName forState:UIControlStateNormal];
 
+//    [_iconView sd_setImageWithURL:[NSURL URLWithString:model.menuImage]];
+//    _titleLab.text = model.menuName;
+    
     [self layoutIfNeeded];
 
     [_cellButotn setImagePosition:LXMImagePositionTop spacing:5];

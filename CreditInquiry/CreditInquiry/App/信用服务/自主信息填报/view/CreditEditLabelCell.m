@@ -7,7 +7,6 @@
 //
 
 #import "CreditEditLabelCell.h"
-#import "UILabel+Alignment.h"
 
 @interface CreditEditLabelCell ()<UITextFieldDelegate>
 @property (nonatomic ,strong) UILabel *titleLab;

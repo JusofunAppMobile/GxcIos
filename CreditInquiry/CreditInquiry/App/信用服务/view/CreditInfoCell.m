@@ -41,13 +41,13 @@
     [_changeView removeFromSuperview];
     [_cardInfoView removeFromSuperview];
     
-    int state = [_companyInfo[@"state"] intValue];//test 0 1 2 3
-    if (state == 3){//已认证
+    int status = [_companyInfo[@"status"] intValue];//test 0 1 2 3
+    if (status == 3){//已认证
         [self addSubview:self.cardInfoView];
         [self addSubview:self.changeView];
         [self.bgView setBackgroundColor:KHexRGB(0xd51424)];
         _statusLab.hidden = YES;
-    }else if(state == 1){//审核中
+    }else if(status == 1){//审核中
         [self addSubview:self.cardInfoView];
         [self.bgView setBackgroundColor:KHexRGB(0xd51424)];
         _statusLab.hidden = NO;
@@ -60,7 +60,7 @@
     _nameLab.text = _companyInfo[@"companyName"];
     _codeLab.text = _companyInfo[@"code"];
     _typeLab.text = _companyInfo[@"type"];
-    _changeNumLab.text = _companyInfo[@"changeNum"];
+    _changeNumLab.text = [_companyInfo[@"changeNum"] stringValue];
 }
 #pragma mark - 近三个月变化
 - (void)changeAction{

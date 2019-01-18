@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic ,copy) NSString *menuName;
 @property (nonatomic ,copy) NSString *menuType;
 @property (nonatomic ,copy) NSString *menuImage;
-@property (nonatomic ,copy) NSString *webURL;
+@property (nonatomic ,copy) NSString *webUrl;
 
 @end
 
