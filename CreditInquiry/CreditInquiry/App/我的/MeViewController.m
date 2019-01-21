@@ -23,7 +23,7 @@ static NSString *InfoID = @"MeInfoCell";
 static NSString *ItemID = @"MeItemCell";
 static NSString *PlainID = @"MePlainCell";
 
-@interface MeViewController ()<UITableViewDelegate,UITableViewDataSource,MeItemCellDelegate>
+@interface MeViewController ()<UITableViewDelegate,UITableViewDataSource,MeItemCellDelegate,MeInfoCellDelegate>
 @property (nonatomic ,strong) UITableView *tableview;
 @end
 
@@ -102,6 +102,7 @@ static NSString *PlainID = @"MePlainCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         MeInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:InfoID forIndexPath:indexPath];
+        cell.delegate = self;
         return cell;
     }else if (indexPath.section == 1){
         MeItemCell *cell = [tableView dequeueReusableCellWithIdentifier:ItemID forIndexPath:indexPath];
@@ -172,6 +173,12 @@ static NSString *PlainID = @"MePlainCell";
     if ([view isMemberOfClass:[UITableViewHeaderFooterView class]]) {
         ((UITableViewHeaderFooterView *)view).backgroundView.backgroundColor = [UIColor clearColor];
     }
+}
+
+#pragma mark - MeInfoCellDelegate
+- (void)joinVip{
+    VipPrivilegeController *vc = [VipPrivilegeController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - MeItemCellDelegate

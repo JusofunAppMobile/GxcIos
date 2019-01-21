@@ -19,4 +19,7 @@
  */
 - (UIImage *)wcTimelineCompress;
 
+- (UIImage *)imageWithColor:(UIColor *)color;
+
+
 @end

@@ -10,7 +10,9 @@
 #define URLManager_h
 
 //线下
-#define HOSTURL   @"http://39.106.181.46:9080"
+#define HOSTURL   @"http://202.106.10.250:48088"
+//#define HOSTURL   @"http://192.168.200.161:8088/swagger-ui.html"
+
 // http://39.106.181.46:9080/swagger-ui.html
 //H5 交互规则
 #define Md5Encryption  @"md5encryption://parameter"

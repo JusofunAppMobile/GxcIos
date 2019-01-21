@@ -10,8 +10,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MeInfoCell : UITableViewCell
+@protocol MeInfoCellDelegate <NSObject>
 
+- (void)joinVip;
+
+@end
+
+@interface MeInfoCell : UITableViewCell
+@property (nonatomic ,weak) id <MeInfoCellDelegate>delegate;
 @end
 
 NS_ASSUME_NONNULL_END

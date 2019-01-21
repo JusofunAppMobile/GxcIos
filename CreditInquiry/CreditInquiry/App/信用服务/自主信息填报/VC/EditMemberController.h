@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface EditMemberController : BasicViewController
 @property (nonatomic ,copy) NSString *companyName;
-
+@property (nonatomic ,copy) NSString *empId;
 @end
 
 NS_ASSUME_NONNULL_END

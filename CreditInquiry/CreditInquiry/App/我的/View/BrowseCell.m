@@ -22,8 +22,7 @@
             label.image = KImageName(@"home_icon_gongsi");
             [label mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.mas_equalTo(self.contentView).offset(10);
-                make.height.with.mas_equalTo(30);
-                
+                make.height.width.mas_equalTo(33);
                 make.left.mas_equalTo(self.contentView).offset(15);
                 make.bottom.mas_equalTo(self.contentView).offset(-10);
             }];

@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class MyMonitorListModel;
 
 @protocol MyMonitorCellDelegate <NSObject>
-- (void)didClickMonitorButton:(MyMonitorListModel *)model cell:(UITableViewCell*)cell;
+- (void)didClickMonitorButton:(MyMonitorListModel *)model;
 @end
 
 @interface MyMonitorCell : UITableViewCell
