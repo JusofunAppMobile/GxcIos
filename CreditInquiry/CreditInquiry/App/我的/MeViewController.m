@@ -37,6 +37,11 @@ static NSString *PlainID = @"MePlainCell";
 - (void)initView{
     self.view.backgroundColor = KHexRGB(0xecedf2);
     
+    CGFloat y = 0;
+    if(@available(iOS 11.0, *))
+    {
+        y = KNavigationBarHeight;
+    }
     UIImageView *redBg = [UIImageView new];
     redBg.image = KImageName(@"mine_topbg");
     [self.view addSubview:redBg];
@@ -51,7 +56,7 @@ static NSString *PlainID = @"MePlainCell";
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
             make.right.mas_equalTo(-15);
-            make.top.mas_equalTo(0);
+            make.top.mas_equalTo(y);
             make.bottom.mas_equalTo(self.view).offset(-KTabBarHeight);
             make.bottom.mas_equalTo(-KTabBarHeight);
         }];
@@ -123,6 +128,9 @@ static NSString *PlainID = @"MePlainCell";
             [self.navigationController pushViewController:vc animated:YES];
         }else{
             LoginController *vc = [LoginController new];
+            vc.loginSuccessBlock = ^{
+                [tableView reloadData];
+            };
             [self.navigationController pushViewController:vc animated:YES];
         }
     }else if (indexPath.section == 2) {
