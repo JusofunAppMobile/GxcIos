@@ -16,7 +16,7 @@
 
 +(NSString*)desEncryptWithString:(NSString*)string;
 
-+(NSString*)encryptWithJsonString:(NSString*)string;
++(NSString*)encryptWithJsonString:(NSString*)string date:(NSDate*)time;
 
 
 @end

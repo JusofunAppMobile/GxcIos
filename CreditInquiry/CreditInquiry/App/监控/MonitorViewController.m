@@ -45,6 +45,7 @@ static NSString *CELLID = @"MonitorDynamicCell";
     [params setObject:@(20) forKey:@"pageSize"];
     [RequestManager postWithURLString:KGetMonitorDynamic parameters:params success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:YES];
+         [self endRefresh];
         if ([responseObject[@"result"] intValue] == 0) {
             if (_page == 1) {
                 [_datalist removeAllObjects];
@@ -53,7 +54,7 @@ static NSString *CELLID = @"MonitorDynamicCell";
             [_tableview reloadData];
             _page++;
             _moreData = _datalist.count< [responseObject[@"total"] intValue];
-            [self endRefresh];
+           
         }
     } failure:^(NSError *error) {
         [MBProgressHUD hideHudToView:self.view animated:YES];
