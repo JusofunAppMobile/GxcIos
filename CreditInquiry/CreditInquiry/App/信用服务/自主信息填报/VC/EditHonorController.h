@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface EditHonorController : BasicViewController
 @property (nonatomic ,copy) NSString *companyName;
-
+@property (nonatomic ,copy) NSString *honorId;
 @end
 
 NS_ASSUME_NONNULL_END

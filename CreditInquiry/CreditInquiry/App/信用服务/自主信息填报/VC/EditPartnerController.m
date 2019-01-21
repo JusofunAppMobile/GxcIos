@@ -195,6 +195,7 @@ static NSString *TextCellID = @"CreditEditTextCell";
         _dataDic = [NSMutableDictionary dictionary];
         [_dataDic setObject:_companyName forKey:@"companyName"];
         [_dataDic setObject:KUSER.userId forKey:@"userId"];
+        [_dataDic setObject:_partnerId forKey:@"partnerId"];
     }
     return _dataDic;
 }

@@ -1386,6 +1386,8 @@
 		CA56114D21F057560052CF38 /* VIP特权 */ = {
 			isa = PBXGroup;
 			children = (
+				799F796821E5EE72000DBB88 /* BuyVipController.h */,
+				799F796921E5EE72000DBB88 /* BuyVipController.m */,
 				CA56114E21F057B00052CF38 /* VipPrivilegeController.h */,
 				CA56114F21F057B00052CF38 /* VipPrivilegeController.m */,
 			);
@@ -1617,6 +1619,7 @@
 		CA5E00A621DDE5E00040ABE2 /* 信用服务 */ = {
 			isa = PBXGroup;
 			children = (
+				CA9129F221F59F5B00D9A850 /* 访客 */,
 				CA46605321EC5904005C630F /* 信用承诺 */,
 				CADD60B221E6DBFB00EB01CD /* 信用异议 */,
 				CADD607A21E4B94B00EB01CD /* 信用报告 */,
@@ -1632,6 +1635,8 @@
 		CA5E00A721DDE5E30040ABE2 /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
+				CA9129F421F59F8E00D9A850 /* 浏览历史 */,
+				CA9129F321F59F7300D9A850 /* 登录 */,
 				CA56114D21F057560052CF38 /* VIP特权 */,
 				CADD60C621E728A000EB01CD /* 个人设置 */,
 				CADD60A721E6268300EB01CD /* 设置 */,
@@ -1641,18 +1646,6 @@
 				793D1B6121DF694C00C29908 /* View */,
 				CA5E00B221DDE6B10040ABE2 /* MeViewController.h */,
 				CA5E00B321DDE6B10040ABE2 /* MeViewController.m */,
-				799F796821E5EE72000DBB88 /* BuyVipController.h */,
-				799F796921E5EE72000DBB88 /* BuyVipController.m */,
-				CADD60D421E74A5D00EB01CD /* FogotPwdController.h */,
-				CADD60D521E74A5D00EB01CD /* FogotPwdController.m */,
-				799F796E21E72655000DBB88 /* VisitorController.h */,
-				799F796F21E72655000DBB88 /* VisitorController.m */,
-				7976626F21EF220C00CA5B10 /* BrowseController.h */,
-				7976627021EF220C00CA5B10 /* BrowseController.m */,
-				799F797721E86CC5000DBB88 /* LoginController.h */,
-				799F797821E86CC5000DBB88 /* LoginController.m */,
-				799F797A21E87E77000DBB88 /* RegistController.h */,
-				799F797B21E87E77000DBB88 /* RegistController.m */,
 			);
 			path = "我的";
 			sourceTree = "<group>";
@@ -2015,6 +2008,37 @@
 				CA5E000921DDE05D0040ABE2 /* UIView+Zirkfied.m */,
 			);
 			path = Category;
+			sourceTree = "<group>";
+		};
+		CA9129F221F59F5B00D9A850 /* 访客 */ = {
+			isa = PBXGroup;
+			children = (
+				799F796E21E72655000DBB88 /* VisitorController.h */,
+				799F796F21E72655000DBB88 /* VisitorController.m */,
+			);
+			path = "访客";
+			sourceTree = "<group>";
+		};
+		CA9129F321F59F7300D9A850 /* 登录 */ = {
+			isa = PBXGroup;
+			children = (
+				CADD60D421E74A5D00EB01CD /* FogotPwdController.h */,
+				CADD60D521E74A5D00EB01CD /* FogotPwdController.m */,
+				799F797721E86CC5000DBB88 /* LoginController.h */,
+				799F797821E86CC5000DBB88 /* LoginController.m */,
+				799F797A21E87E77000DBB88 /* RegistController.h */,
+				799F797B21E87E77000DBB88 /* RegistController.m */,
+			);
+			path = "登录";
+			sourceTree = "<group>";
+		};
+		CA9129F421F59F8E00D9A850 /* 浏览历史 */ = {
+			isa = PBXGroup;
+			children = (
+				7976626F21EF220C00CA5B10 /* BrowseController.h */,
+				7976627021EF220C00CA5B10 /* BrowseController.m */,
+			);
+			path = "浏览历史";
 			sourceTree = "<group>";
 		};
 		CADD605A21E47EC200EB01CD /* VC */ = {

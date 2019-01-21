@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface EditCompanyInfoController : BasicViewController
 @property (nonatomic ,copy) NSString *companyName;
+@property (nonatomic ,copy) NSString *companyId;
 @end
 
 NS_ASSUME_NONNULL_END

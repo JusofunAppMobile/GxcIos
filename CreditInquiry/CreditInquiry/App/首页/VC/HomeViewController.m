@@ -8,6 +8,7 @@
 
 #import "HomeViewController.h"
 #import "AppDelegate.h"
+#import "VipPrivilegeController.h"
 
 static NSString *HomeSetionHeaderID = @"HomeSectionHeader";
 static NSString *MonitorCellID = @"MonitorCellID";
@@ -34,13 +35,8 @@ static NSString *NewsCellID = @"NewsCellID";
     
     [self drawView];
     
-    
     [self loadData];
-    
 }
-
-
-
 
 #pragma mark - 网络请求
 - (void)loadData{
@@ -59,44 +55,25 @@ static NSString *NewsCellID = @"NewsCellID";
         [MBProgressHUD showError:@"请求失败" toView:self.view];
         [self endRefreshing];
     }];
-    
-    
-   
     _firstDate = [NSDate date];
-    
-   
-   
 }
 
 #pragma mark - 点击搜索框
 //跳转搜索界面
 - (void)goSearchvc{
-    
-    //[MobClick event:@"Home01"];//首页－名称搜索框点击数,0
-    //[[BaiduMobStat defaultStat] logEvent:@"Home01" eventLabel:@"首页－名称搜索框点击数"];
     SearchController *SearchVc = [[SearchController alloc]init];
     SearchVc.searchType = SearchBlurryType;
     [self.navigationController pushViewController:SearchVc animated:YES];
 }
 
--(void)joinVIP
-{
-    
-   
-   
-    
-    LoginController *vc = [[LoginController alloc]init];
-    
-    // BuyVipController*vc = [[BuyVipController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
-    
-    return;
-    
-    
-    VisitorController *vc2 = [[VisitorController alloc]init];
-   
-   // BuyVipController*vc = [[BuyVipController alloc]init];
-    [self.navigationController pushViewController:vc2 animated:YES];
+-(void)joinVIP{
+    if (KUSER.userId.length) {
+        VipPrivilegeController *vc = [VipPrivilegeController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        LoginController *vc = [[LoginController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];//test 发通知登录成功之后
+    }
 }
 
 -(void)adClick:(NSString *)url

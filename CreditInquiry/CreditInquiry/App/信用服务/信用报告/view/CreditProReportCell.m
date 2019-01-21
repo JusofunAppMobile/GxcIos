@@ -10,7 +10,7 @@
 
 @interface CreditProReportCell ()
 @property (nonatomic ,strong) UILabel *nameLab;
-@property (nonatomic ,strong) UILabel *priceLab;
+//@property (nonatomic ,strong) UILabel *priceLab;
 @property (nonatomic ,strong) UILabel *contentLab;
 @end
 
@@ -29,18 +29,18 @@
             make.edges.mas_equalTo(self.contentView).insets(UIEdgeInsetsMake(0, 15, 0, 15));
         }];
         
-        self.priceLab = ({
-            UILabel *view = [UILabel new];
-            [contentBg addSubview:view];
-            [view mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.mas_equalTo(contentBg).offset(20);
-                make.right.mas_equalTo(contentBg).offset(-20);
-            }];
-            view.font = KFont(12);
-            view.textColor = KHexRGB(0xf77f00);
-            view.text = @"$0";
-            view;
-        });
+//        self.priceLab = ({
+//            UILabel *view = [UILabel new];
+//            [contentBg addSubview:view];
+//            [view mas_makeConstraints:^(MASConstraintMaker *make) {
+//                make.top.mas_equalTo(contentBg).offset(20);
+//                make.right.mas_equalTo(contentBg).offset(-20);
+//            }];
+//            view.font = KFont(12);
+//            view.textColor = KHexRGB(0xf77f00);
+//            view.text = @"$0";
+//            view;
+//        });
         
         NSString *title = @"企业信用报告-专业版";
         NSArray *component = [title componentsSeparatedByString:@"-"];
@@ -57,7 +57,7 @@
             [view mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.mas_equalTo(contentBg).offset(20);
                 make.left.mas_equalTo(contentBg).offset(20);
-                make.right.mas_lessThanOrEqualTo(_priceLab.mas_left).offset(-10);
+                make.right.mas_lessThanOrEqualTo(contentBg).offset(-20);
             }];
             view.font = KFont(15);
             view.attributedText = attr;
@@ -143,7 +143,7 @@
 
 - (void)setReportInfo:(NSDictionary *)reportInfo{
     _reportInfo = reportInfo;
-    _priceLab.text = [NSString stringWithFormat:@"¥%@",reportInfo[@"professionVersionDownloadAmount"]];
+//    _priceLab.text = [NSString stringWithFormat:@"¥%@",reportInfo[@"professionVersionDownloadAmount"]?:@"0"];
 }
 
 - (void)sendReportAction{

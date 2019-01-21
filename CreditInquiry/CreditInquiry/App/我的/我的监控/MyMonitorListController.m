@@ -91,9 +91,9 @@ static NSString *CellID = @"MyMonitorCell";
             NSArray *arr =[MyMonitorListModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"list"]];
             [self.datalist addObjectsFromArray: arr];
             [_tableview reloadData];
-            _numLab.attributedText = [self getAttibuteForText:[NSString stringWithFormat:@"数量：%@条",responseObject[@"totalCount"]]];//更新条数
+            _numLab.attributedText = [self getAttibuteForText:[NSString stringWithFormat:@"数量：%@条",responseObject[@"data"][@"totalCount"]]];//更新条数
             
-            _moreData = _datalist.count < [responseObject[@"totalCount"] intValue];
+            _moreData = _datalist.count < [responseObject[@"data"][@"totalCount"] intValue];
             _page++;
             [self endRefresh];
         }
@@ -105,17 +105,13 @@ static NSString *CellID = @"MyMonitorCell";
 }
 
 #pragma mark -
-- (void)didClickMonitorButton:(MyMonitorListModel *)model cell:(UITableViewCell *)cell{
-    MyMonitorCell* cell1 = (MyMonitorCell*)cell;
-    
+- (void)didClickMonitorButton:(MyMonitorListModel *)model {
     //（0:取消监控  1：添加监控）
-    NSString * type = cell1.monitorBtn.selected?@"0":@"1";
-   
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
     [paraDic setObject:KUSER.userId forKey:@"userId"];
     [paraDic setObject:model.companyId forKey:@"companyid"];
     [paraDic setObject:model.companyName forKey:@"companyname"];
-    [paraDic setObject:type forKey:@"monitorType"];
+    [paraDic setObject:@"0" forKey:@"monitorType"];
     
     NSString *method = _listType == ListTypeMyMonitor?KMonitor:KCollection;
     NSString* urlstr = [method stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -125,7 +121,8 @@ static NSString *CellID = @"MyMonitorCell";
     [RequestManager postWithURLString:urlstr parameters:paraDic success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:YES];
         if([[responseObject objectForKey:@"result"] intValue] == 0){
-            [cell1 setMonitorButtonState:!cell1.monitorBtn.selected];
+            _page = 1;
+            [self loadData:NO];//刷新
         }else{
             [MBProgressHUD showError:[responseObject objectForKey:@"msg"] toView:self.view];
         }

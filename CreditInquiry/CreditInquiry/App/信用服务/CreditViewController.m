@@ -16,11 +16,13 @@
 #import "ObjectionAppealController.h"
 #import "CreditInfoCell.h"
 #import "CreditPormiseController.h"
-#import "CreditServiceModel.h"
 #import "CreditVisitorModel.h"
 #import "CreditHomeModel.h"
 #import "MonitorDetailController.h"
 #import "SearchController.h"
+#import "VisitorController.h"
+#import "CreditServiceModel.h"
+
 
 static NSString *InfoID = @"CreditInfoCell";
 static NSString *CellID = @"CreditCollectionCell";
@@ -28,7 +30,6 @@ static NSString *HeaderID = @"CreditSectionHeader";
 static NSString *ChartID = @"CreditChartLineCell";
 
 @interface CreditViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,ULBCollectionViewDelegateFlowLayout,CreditInfoCellDelegate>
-@property (nonatomic ,strong) NSDictionary *companyInfo;
 @property (nonatomic ,strong) UICollectionView *collectionview;
 @property (nonatomic ,strong) CreditHomeModel *creditModel;
 @end
@@ -37,7 +38,6 @@ static NSString *ChartID = @"CreditChartLineCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.companyInfo = @{@"companyName":@"阿里巴巴科技有限公司",@"code":@"91441400696419503L",@"type":@"非上市、自然人投资或控股",@"companyId":@"15",@"state":@"3",@"changeNum":@"5"};
     [self initView];
     [self loadData];
 }
@@ -52,43 +52,7 @@ static NSString *ChartID = @"CreditChartLineCell";
     [RequestManager postWithURLString:KGetCreditHomeInfo parameters:params success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:YES];
         if ([responseObject[@"result"] intValue] == 0) {
-//            _creditModel = [CreditHomeModel mj_objectWithKeyValues:responseObject[@"data"]];
-            
-            _creditModel = [CreditHomeModel new];
-            _creditModel.companyInfo = _companyInfo;
-
-            //===========
-            NSMutableArray *arr1 = [NSMutableArray array];
-            NSArray *title1 = @[@"信用报告",@"信用评价",@"信用异议",@"信用修复",@"信用承诺",@"访客",@"自主填报"];
-            for (int i = 0; i < 6; i++) {
-                CreditServiceModel *model = [CreditServiceModel new];
-                model.menuName = title1[i];
-                [arr1 addObject:model];
-            }
-            _creditModel.serviceList = arr1;
-
-            //===========
-            NSMutableArray *arr2 = [NSMutableArray array];
-            NSArray *title2 = @[@"税务案件",@"商标查询",@"著作权查询",@"黑名单",@"信用承诺",@"访客",@"自主填报"];
-
-            for (int i = 0; i < 7; i++) {
-                CreditServiceModel *model = [CreditServiceModel new];
-                model.menuName = title2[i];
-                [arr2 addObject:model];
-            }
-            _creditModel.inquiryList = arr2;
-
-            //===========
-             NSMutableArray *arr3 = [NSMutableArray array];
-            NSArray *title3 = @[@"100",@"64",@"75",@"150",@"78",@"70"];
-            for (int i = 0; i < 6; i++) {
-                CreditVisitorModel *model = [CreditVisitorModel new];
-                model.date = [NSString stringWithFormat:@"%d月",i+1];
-                model.count = title3[i];
-                [arr3 addObject:model];
-            }
-            _creditModel.VisitorList = arr3;
-            
+            _creditModel = [CreditHomeModel mj_objectWithKeyValues:responseObject[@"data"]];
             [_collectionview reloadData];
         }else{
             [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
@@ -219,52 +183,71 @@ static NSString *ChartID = @"CreditChartLineCell";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     int state = [_creditModel.companyInfo[@"status"] intValue];
     
-//    if (indexPath.section == 1) {
-//        if (state == 3) {
-//
-//
-//        }else{
-//
-//
-//        }
-//
-//    }
-    
-    
-    
-    
-    if (indexPath.section == 1 ) {
-        if (state == 3) {
-            if (indexPath.row == 0) {
-                CreditReportController *vc = [CreditReportController new];
-                vc.companyid = _creditModel.companyInfo[@"companyId"];
-                vc.companyName = _creditModel.companyInfo[@"companyName"];
-                [self.navigationController pushViewController:vc animated:YES];
-            }else if (indexPath.row == 1){
-                CreditInfoInputController *vc = [CreditInfoInputController new];
-                [self.navigationController pushViewController:vc animated:YES];
-            }else if (indexPath.row == 2){
-                ObjectionAppealController *vc = [ObjectionAppealController new];
-                vc.objectionType = ObjectionTypeCredit;
-                vc.companyName = _creditModel.companyInfo[@"companyName"];;
-                [self.navigationController pushViewController:vc animated:YES];
-            }else if (indexPath.row ==3){
-                CreditPormiseController *vc = [CreditPormiseController new];
-                vc.companyName = _creditModel.companyInfo[@"companyName"];
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-        }else{
+    if (indexPath.section == 1||indexPath.section == 2) {
+        CreditServiceModel *model= nil;
+        if (state == 3 &&indexPath.section == 1) {//企业服务
+            model = _creditModel.serviceList[indexPath.item];
+        }else{//专项查询
+            model = _creditModel.inquiryList[indexPath.item];
+        }
+        if (model.menuType.intValue == 9) {
+            
+            CreditReportController *vc = [CreditReportController new];
+            vc.companyid = _creditModel.companyInfo[@"companyId"];
+            vc.companyName = _creditModel.companyInfo[@"companyName"];
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }else if (model.menuType.intValue == 10){
+            
+            ObjectionAppealController *vc = [ObjectionAppealController new];
+            vc.objectionType = ObjectionTypeCredit;
+            vc.companyName = _creditModel.companyInfo[@"companyName"];;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }else if (model.menuType.intValue == 12){
+            
+            CreditPormiseController *vc = [CreditPormiseController new];
+            vc.companyName = _creditModel.companyInfo[@"companyName"];
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }else if (model.menuType.intValue == 13){
+            
+            VisitorController *vc = [VisitorController new];
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }else if (model.menuType.intValue == 14){
+
+            CreditInfoInputController *vc = [CreditInfoInputController new];
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }else if (model.menuType.intValue == 15){
             SearchController *SearchVc = [[SearchController alloc]init];
             SearchVc.searchType = SearchBlurryType;
             [self.navigationController pushViewController:SearchVc animated:YES];
+          
+        }else if (model.menuType.intValue == 16){
+            
+            SearchController *SearchVc = [[SearchController alloc]init];
+            SearchVc.searchType = SearchBlurryType;
+            [self.navigationController pushViewController:SearchVc animated:YES];
+            
+        }else if (model.menuType.intValue == 17){
+            
+            SearchController *SearchVc = [[SearchController alloc]init];
+            SearchVc.searchType = SearchBlurryType;
+            [self.navigationController pushViewController:SearchVc animated:YES];
+          
+        }else if (model.menuType.intValue == 18){
+            
+            SearchController *SearchVc = [[SearchController alloc]init];
+            SearchVc.searchType = SearchBlurryType;
+            [self.navigationController pushViewController:SearchVc animated:YES];
+           
+        }else if (model.menuType.intValue == -1){
+            
+            NSLog(@"网页跳转");
         }
-       
-    }else if (indexPath.section == 3){
-        SearchController *SearchVc = [[SearchController alloc]init];
-        SearchVc.searchType = SearchBlurryType;
-        [self.navigationController pushViewController:SearchVc animated:YES];
     }
- 
 }
 
 #pragma mark - 近期三个月变化

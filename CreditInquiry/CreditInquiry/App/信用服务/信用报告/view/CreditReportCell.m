@@ -11,7 +11,7 @@
 
 @interface CreditReportCell ()
 @property (nonatomic ,strong) UILabel *nameLab;
-@property (nonatomic ,strong) UILabel *priceLab;
+//@property (nonatomic ,strong) UILabel *priceLab;
 @property (nonatomic ,strong) UILabel *timesLab;
 @property (nonatomic ,strong) UILabel *contentLab;
 @end
@@ -31,17 +31,18 @@
             make.edges.mas_equalTo(self.contentView).insets(UIEdgeInsetsMake(0, 15, 0, 15));
         }];
         
-        self.priceLab = ({
-            UILabel *view = [UILabel new];
-            [contentBg addSubview:view];
-            [view mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.mas_equalTo(contentBg).offset(20);
-                make.right.mas_equalTo(contentBg).offset(-20);
-            }];
-            view.font = KFont(12);
-            view.textColor = KHexRGB(0xf77f00);
-            view;
-        });
+//        self.priceLab = ({
+//            UILabel *view = [UILabel new];
+//            [contentBg addSubview:view];
+//            [view mas_makeConstraints:^(MASConstraintMaker *make) {
+//                make.top.mas_equalTo(contentBg).offset(20);
+//                make.right.mas_equalTo(contentBg).offset(-20);
+//            }];
+//            view.font = KFont(12);
+//            view.textColor = KHexRGB(0xf77f00);
+//            view.hidden
+//            view;
+//        });
         
         NSString *title = @"企业信用报告-标准版";
         self.nameLab = ({
@@ -50,7 +51,7 @@
             [view mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.mas_equalTo(contentBg).offset(20);
                 make.left.mas_equalTo(contentBg).offset(20);
-                make.right.mas_lessThanOrEqualTo(_priceLab.mas_left).offset(-10);
+                make.right.mas_lessThanOrEqualTo(contentBg).offset(-20);
             }];
             view.font = KFont(15);
             view.attributedText = [self getAttibureWithString:title attrString:@"标准版"];
@@ -144,7 +145,7 @@
     }
     NSString *times = [NSString stringWithFormat:@"今天剩余%d次下载机会",[reportInfo[@"basicVersionDownloadNum"] intValue]];
     _timesLab.attributedText = [self getAttibureWithString:times attrString:reportInfo[@"basicVersionDownloadNum"]];
-    _priceLab.text = [NSString stringWithFormat:@"¥%@",reportInfo[@"basicVersionDownloadAmount"]];
+//    _priceLab.text = [NSString stringWithFormat:@"¥%@",reportInfo[@"basicVersionDownloadAmount"]?:@"0"];
 }
 
 - (NSAttributedString *)getAttibureWithString:(NSString *)string attrString:(NSString *)attrString{

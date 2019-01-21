@@ -27,7 +27,7 @@
             [view mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.mas_equalTo(self.contentView);
                 make.left.mas_equalTo(15);
-                make.width.height.mas_equalTo(25);
+                make.width.height.mas_equalTo(33);
             }];
             view;
         });
@@ -70,12 +70,12 @@
     
     _nameLab.text = model.companyName;
     [_iconView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:KImageName(@"home_icon_gongsi")];//test,model.companyicon?
-    [self setMonitorButtonState:[model.isUserMonitor boolValue]];
+    [self setMonitorButtonState:YES];
 }
 
 - (void)monitorAction{
-    if ([self.delegate respondsToSelector:@selector(didClickMonitorButton:cell:)]) {
-        [self.delegate didClickMonitorButton:_model cell:self];
+    if ([self.delegate respondsToSelector:@selector(didClickMonitorButton:)]) {
+        [self.delegate didClickMonitorButton:_model];
     }
 }
 
@@ -86,7 +86,7 @@
     if(_monitorBtn.selected)
     {
         NSString *title = _type == ListTypeMyMonitor?@"取消监控":@"取消收藏";
-        NSString *imageName = _type == ListTypeMyMonitor?@"icon_monitor":@"取消收藏";//test
+        NSString *imageName = _type == ListTypeMyMonitor?@"icon_monitor":@"shoucang";//test
 
         
         [_monitorBtn setTitle:title forState:UIControlStateNormal];
@@ -95,7 +95,7 @@
     else
     {
         NSString *title = _type == ListTypeMyMonitor?@"监控":@"收藏";
-        NSString *imageName = _type == ListTypeMyMonitor?@"icon_monitor_sel":@"";//test
+        NSString *imageName = _type == ListTypeMyMonitor?@"icon_monitor_sel":@"shoucang";//test
 
         [_monitorBtn setTitle:title forState:UIControlStateNormal];
         [_monitorBtn setImage:KImageName(imageName) forState:UIControlStateNormal];

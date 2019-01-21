@@ -140,7 +140,14 @@
     }
 }
 
+#pragma mark - 加入vip
+- (void)joinAction{
+    if ([self.delegate respondsToSelector:@selector(joinVip)]) {
+        [self.delegate joinVip];
+    }
+}
 
+#pragma mark - 通知
 - (void)addLoginObserver{
     [KNotificationCenter addObserver:self selector:@selector(setupViews) name:KLoginSuccess object:nil];
 }
@@ -183,6 +190,7 @@
     if (!_joinBtn) {
         _joinBtn = [UIButton new];
         [_joinBtn setImage:KImageName(@"mine_join") forState:UIControlStateNormal];
+        [_joinBtn addTarget:self action:@selector(joinAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _joinBtn;
 }
