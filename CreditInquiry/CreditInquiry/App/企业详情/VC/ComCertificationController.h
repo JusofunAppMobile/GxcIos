@@ -24,7 +24,7 @@ UIImagePickerControllerDelegate>
 /**
  // 0：未认证 1：审核中 2：审核失败 3：审核成功
  */
-@property(nonatomic,copy)NSString *status;
+//@property(nonatomic,copy)NSString *status;
 
 @end
 

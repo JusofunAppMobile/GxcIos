@@ -260,10 +260,12 @@
         if(row == 0)
         {
             self.payLabel.text = @"支付宝";
+            self.payImageView.image = KImageName(@"iconfontrectangle390");
         }
         else
         {
            self.payLabel.text = @"微信支付";
+        self.payImageView.image = KImageName(@"weixin");
         }
     }
     
