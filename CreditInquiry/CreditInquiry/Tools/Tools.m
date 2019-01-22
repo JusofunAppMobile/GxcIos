@@ -136,7 +136,7 @@
     NSInteger currentGMTOffset = [currentTimeZone secondsFromGMTForDate:date];
     NSInteger gmtOffset = [utcTimeZone secondsFromGMTForDate:date];
     NSTimeInterval gmtInterval = currentGMTOffset - gmtOffset;
-    return  (int)date.timeIntervalSince1970 - gmtInterval;
+    return (int)date.timeIntervalSince1970 - gmtInterval;
 }
 
 

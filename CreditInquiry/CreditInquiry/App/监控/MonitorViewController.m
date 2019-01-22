@@ -53,8 +53,8 @@ static NSString *CELLID = @"MonitorDynamicCell";
             [_tableview reloadData];
             _page++;
             _moreData = _datalist.count< [responseObject[@"total"] intValue];
-            [self endRefresh];
         }
+        [self endRefresh];
     } failure:^(NSError *error) {
         [self showNetFailViewWithFrame:_tableview.frame];
         [self endRefresh];
