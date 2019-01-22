@@ -41,7 +41,7 @@ static NSString *ProCellID = @"CreditProReportCell";
 #pragma mark - loadData
 - (void)loadData{
     
-    [MBProgressHUD showMessag:@"" toView:self.view];
+    [self showLoadDataAnimation];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
@@ -49,7 +49,8 @@ static NSString *ProCellID = @"CreditProReportCell";
     [params setObject:_companyName forKey:@"companyname"];
 
     [RequestManager postWithURLString:KGetCreditReportList parameters:params success:^(id responseObject) {
-        [MBProgressHUD hideHudToView:self.view animated:YES];
+        [self hideLoadDataAnimation];
+        
         if ([responseObject[@"result"] intValue] == 0) {
             _reportInfo = responseObject[@"data"];
             [_tableview reloadData];
@@ -58,7 +59,7 @@ static NSString *ProCellID = @"CreditProReportCell";
             [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
         }
     } failure:^(NSError *error) {
-        [MBProgressHUD hideHudToView:self.view animated:YES];
+        [self showNetFailViewWithFrame:_tableview.frame];
     }];
 }
 
@@ -67,6 +68,7 @@ static NSString *ProCellID = @"CreditProReportCell";
         KUSER.vipStatus = _reportInfo[@"isVIP"];
     }
 }
+
 
 #pragma mark - initView
 - (void)initView{
@@ -163,6 +165,11 @@ static NSString *ProCellID = @"CreditProReportCell";
     ReportPreviewController *vc = [ReportPreviewController new];
     vc.url = url;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - 重新加载
+- (void)abnormalViewReload{
+    [self loadData];
 }
 
 #pragma mark - lazy load

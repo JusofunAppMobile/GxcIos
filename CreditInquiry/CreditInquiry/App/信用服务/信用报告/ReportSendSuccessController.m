@@ -46,7 +46,7 @@
     
     UILabel *subLab = [UILabel new];
     subLab.font = KFont(14);
-    subLab.text = @"报告已发送至您的接收邮箱，可以前往查看啦";
+    subLab.text = _msg?_msg:@"报告已发送至您的接收邮箱，可以前往查看啦";
     subLab.textColor = KHexRGB(0x909090);
     subLab.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:subLab];

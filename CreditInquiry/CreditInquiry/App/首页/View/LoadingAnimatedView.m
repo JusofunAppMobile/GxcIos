@@ -23,19 +23,19 @@
         
         self.backgroundColor = [UIColor whiteColor];
         
-        self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 150, 150)];
+        self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 75, 95)];
         _imageView.center = self.center;
         [self addSubview:_imageView];
 
-        for (int i =0; i<21; i++) {
-            UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"img%d",i]];
+        for (int i =0; i<8; i++) {
+            UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"p%d",i]];
             [self.imageArray1 addObject:image];
         }
         
-        for (int i=22; i<47; i++) {
-            UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"img%d",i]];
-            [self.imageArray2 addObject:image];
-        }
+//        for (int i=22; i<47; i++) {
+//            UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"img%d",i]];
+//            [self.imageArray2 addObject:image];
+//        }
         
     }
     return self;
@@ -43,7 +43,7 @@
 
 - (void)startAnimation{
     [self performSelector:@selector(animation1) withObject:nil afterDelay:0];
-    [self performSelector:@selector(animation2) withObject:nil afterDelay:0.83];
+//    [self performSelector:@selector(animation2) withObject:nil afterDelay:0.83];
 }
 
 - (void)stopAnimation{
@@ -53,17 +53,17 @@
 
 - (void)animation1{
     _imageView.animationImages = self.imageArray1;
-    _imageView.animationDuration = .83;
-    _imageView.animationRepeatCount = 1;
-    [_imageView startAnimating];
-}
-
-- (void)animation2{
-    _imageView.animationImages = self.imageArray2;
-    _imageView.animationDuration = 1.17;
+    _imageView.animationDuration = 1.04;
     _imageView.animationRepeatCount = 0;
     [_imageView startAnimating];
 }
+
+//- (void)animation2{
+//    _imageView.animationImages = self.imageArray2;
+//    _imageView.animationDuration = 1.17;
+//    _imageView.animationRepeatCount = 0;
+//    [_imageView startAnimating];
+//}
 
 - (NSMutableArray *)imageArray1{
     if (!_imageArray1) {

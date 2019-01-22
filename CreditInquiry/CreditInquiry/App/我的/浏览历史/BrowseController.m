@@ -35,15 +35,17 @@
     
 }
 
--(void)loadData
+-(void)loadData:(BOOL)loading
 {
+    if (loading) {
+        [self showLoadDataAnimation];
+    }
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
     [params setObject:@"20" forKey:@"pageSize"];
     [params setObject:[NSString stringWithFormat:@"%d",pageIndex] forKey:@"pageIndex"];
-    [MBProgressHUD showMessag:@"" toView:self.view];
     [RequestManager postWithURLString:KBrowseList parameters:params  success:^(id responseObject) {
-        [MBProgressHUD hideHudToView:self.view animated:NO];
+        [self hideLoadDataAnimation];
         [self endRefresh];
         if ([responseObject[@"result"] integerValue] == 0) {
             NSDictionary *dataDic = [responseObject objectForKey:@"data"];
@@ -69,7 +71,7 @@
         }
         
     } failure:^(NSError *error) {
-        [MBProgressHUD showError:@"请求失败" toView:self.view];
+        [self showNetFailViewWithFrame:backTableView.frame];
         [self endRefresh];
     }];
 }
@@ -227,11 +229,11 @@
     
     backTableView.mj_header =  [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         pageIndex = 1;
-        [self loadData];
+        [self loadData:NO];
     }];
     [backTableView.mj_header beginRefreshing];
     backTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        [self loadData];
+        [self loadData:NO];
     }];
     
 }
@@ -248,6 +250,11 @@
     
     UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:barView];
     self.navigationItem.rightBarButtonItem = item;
+}
+
+#pragma mark - 网络异常
+- (void)abnormalViewReload{
+    [self loadData:YES];
 }
 
 @end

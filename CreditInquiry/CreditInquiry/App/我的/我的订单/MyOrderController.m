@@ -73,13 +73,13 @@ static NSString *CellID1 = @"MyOrderReportCell";
 #pragma mark - loadData
 - (void)loadData:(BOOL)loading{
     if (loading) {
-        [MBProgressHUD showMessag:@"" toView:self.view];
+        [self showLoadDataAnimation];
     }
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
     [params setObject:@(_page) forKey:@"pageIndex"];
     [RequestManager postWithURLString:KMyOrderList parameters:params success:^(id responseObject) {
-        [MBProgressHUD hideHudToView:self.view animated:YES];
+        [self hideLoadDataAnimation];
         if ([responseObject[@"result"] intValue] == 0) {
             if (_page == 1) {
                 [_datalist removeAllObjects];

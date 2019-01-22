@@ -289,6 +289,7 @@
         [MBProgressHUD hideHudToView:self.view animated:YES];
         if ([responseObject[@"result"] intValue] == 0) {
             ReportSendSuccessController *vc = [ReportSendSuccessController new];
+            vc.msg = responseObject[@"data"][@"message"];
             [self.navigationController pushViewController:vc animated:YES];
         }else{
             [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];

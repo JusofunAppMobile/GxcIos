@@ -59,7 +59,7 @@
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:_phoneTextFld.text forKey:@"phone"];
-    [params setObject:@"123" forKey:@"regId"];
+    [params setObject:@"123" forKey:@"regId"];//test
     [params setObject:[JAddField desEncryptWithString:_pwdTextFld.text] forKey:@"password"];
     [MBProgressHUD showMessag:@"" toView:self.view];
     [RequestManager postWithURLString:KLogin parameters:params  success:^(id responseObject) {

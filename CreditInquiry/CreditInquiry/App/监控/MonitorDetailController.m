@@ -43,8 +43,7 @@ static NSString *HeadID = @"MonitorDetailHeader";
 #pragma mark - loadData
 - (void)loadData{
     
-    [MBProgressHUD showMessag:@"" toView:self.view];
-    
+    [self showLoadDataAnimation];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
     [params setObject:self.companyId forKey:@"companyid"];
@@ -52,13 +51,13 @@ static NSString *HeadID = @"MonitorDetailHeader";
     
     [params setObject:self.filterIdStr forKey:@"filterId"];
     [RequestManager postWithURLString:KDynamicDetail parameters:params success:^(id responseObject) {
-        [MBProgressHUD hideHudToView:self.view animated:YES];
+        [self hideLoadDataAnimation];
         if ([responseObject[@"result"] intValue] == 0) {
             self.datalist = [MDSectionModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"details"]];
             [_tableview reloadData];
         }
     } failure:^(NSError *error) {
-        [MBProgressHUD hideHudToView:self.view animated:YES];
+        [self showNetFailViewWithFrame:_tableview.frame];
     }];
 }
 
@@ -204,6 +203,11 @@ static NSString *HeadID = @"MonitorDetailHeader";
     
     UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:barView];
     self.navigationItem.rightBarButtonItem = item;
+}
+
+#pragma mark - 网络异常
+- (void)abnormalViewReload{
+    [self loadData];
 }
 
 #pragma mark - lazy load

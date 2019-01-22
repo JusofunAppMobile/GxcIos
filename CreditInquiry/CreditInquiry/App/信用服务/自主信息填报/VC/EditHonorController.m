@@ -71,13 +71,12 @@ static NSString *TextCellID = @"CreditEditTextCell";
 
 #pragma mark - loadData
 - (void)loadData{
-    [MBProgressHUD showMessag:@"" toView:self.view];
-    
+    [self showLoadDataAnimation];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
     
     [RequestManager postWithURLString:KGetCompanyHonor parameters:params success:^(id responseObject) {
-        [MBProgressHUD hideHudToView:self.view animated:YES];
+        [self hideLoadDataAnimation];
         if ([responseObject[@"result"] intValue] == 0) {
             [self.dataDic setDictionary:responseObject[@"data"]];
             [_tableview reloadData];
@@ -85,7 +84,7 @@ static NSString *TextCellID = @"CreditEditTextCell";
             [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
         }
     } failure:^(NSError *error) {
-        
+        [self showNetFailViewWithFrame:_tableview.frame];
     }];
 }
 
@@ -190,6 +189,11 @@ static NSString *TextCellID = @"CreditEditTextCell";
     [[GetPhoto sharedGetPhoto] getPhotoWithTarget:self success:^(UIImage *image, NSString *imagePath) {
         [self uploadHeadImage:image];
     }];
+}
+
+#pragma mark - 网络异常
+- (void)abnormalViewReload{
+    [self loadData];
 }
 
 #pragma mark - lazy load

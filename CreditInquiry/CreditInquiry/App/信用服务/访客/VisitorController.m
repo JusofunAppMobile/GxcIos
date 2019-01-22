@@ -34,13 +34,13 @@
 
 -(void)loadData
 {
+    [self showLoadDataAnimation];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
     [params setObject:@"20" forKey:@"pageSize"];
     [params setObject:[NSString stringWithFormat:@"%d",pageIndex] forKey:@"pageIndex"];
-    [MBProgressHUD showMessag:@"" toView:self.view];
     [RequestManager postWithURLString:KVisitorRecord parameters:params  success:^(id responseObject) {
-        [MBProgressHUD hideHudToView:self.view animated:NO];
+        [self hideLoadDataAnimation];
         [self endRefresh];
         if ([responseObject[@"result"] integerValue] == 0) {
             NSDictionary *dataDic = [responseObject objectForKey:@"data"];

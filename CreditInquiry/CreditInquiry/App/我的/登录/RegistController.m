@@ -68,7 +68,7 @@
     [params setObject:_phoneTextFld.text forKey:@"phone"];
     [params setObject:_codeTextFld.text forKey:@"code"];
     [params setObject:[JAddField desEncryptWithString:_pwdTextFld.text]  forKey:@"password"];
-    [params setObject:@"123456" forKey:@"regId"];
+    [params setObject:@"123456" forKey:@"regId"];//test
     
     [MBProgressHUD showMessag:@"" toView:self.view];
     [RequestManager postWithURLString:KRegister parameters:params  success:^(id responseObject) {

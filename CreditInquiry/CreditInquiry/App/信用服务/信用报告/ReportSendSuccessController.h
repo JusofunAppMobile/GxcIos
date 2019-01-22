@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ReportSendSuccessController : BasicViewController
-
+@property (nonatomic ,copy) NSString *msg;
 @end
 
 NS_ASSUME_NONNULL_END

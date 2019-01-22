@@ -67,6 +67,7 @@ static NSString *NewsCellID = @"NewsCellID";
 }
 
 -(void)joinVIP{
+    
     if (KUSER.userId.length) {
         VipPrivilegeController *vc = [VipPrivilegeController new];
         [self.navigationController pushViewController:vc animated:YES];
@@ -78,6 +79,7 @@ static NSString *NewsCellID = @"NewsCellID";
 
 -(void)adClick:(NSString *)url
 {
+    
     CommonWebViewController *vc = [[CommonWebViewController alloc]init];
     vc.urlStr = url;
     [self.navigationController pushViewController:vc animated:YES];

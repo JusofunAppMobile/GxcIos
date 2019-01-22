@@ -44,12 +44,13 @@ static NSString *CellID3 = @"ObjectionInfoCell";
 
 #pragma mark - loadData
 - (void)loadData{
+    [self loadingAnimationView];
+
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
     
-    [MBProgressHUD showMessag:@"" toView:self.view];
     [RequestManager postWithURLString:KGetObjectionInfo parameters:params success:^(id responseObject) {
-        [MBProgressHUD hideHudToView:self.view animated:YES];
+        [self hideLoadDataAnimation];
         if ([responseObject[@"result"] intValue] == 0) {
             self.objectionList = [ObjectionModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"objectionList"]];
             [_tableview reloadData];
@@ -57,7 +58,7 @@ static NSString *CellID3 = @"ObjectionInfoCell";
             [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
         }
     } failure:^(NSError *error) {
-        [MBProgressHUD hideHudToView:self.view animated:YES];
+        [self showNetFailViewWithFrame:_tableview.frame];
     }];
 }
 

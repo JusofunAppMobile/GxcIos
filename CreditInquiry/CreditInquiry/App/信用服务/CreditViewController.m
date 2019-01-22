@@ -44,13 +44,12 @@ static NSString *ChartID = @"CreditChartLineCell";
 
 #pragma mark - loadData
 - (void)loadData{
-    [MBProgressHUD showMessag:@"" toView:self.view];
-    
+    [self showLoadDataAnimation];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
-    
+    [self hideNetFailView];
     [RequestManager postWithURLString:KGetCreditHomeInfo parameters:params success:^(id responseObject) {
-        [MBProgressHUD hideHudToView:self.view animated:YES];
+        [self hideLoadDataAnimation];
         if ([responseObject[@"result"] intValue] == 0) {
             _creditModel = [CreditHomeModel mj_objectWithKeyValues:responseObject[@"data"]];
             [_collectionview reloadData];
@@ -58,9 +57,10 @@ static NSString *ChartID = @"CreditChartLineCell";
             [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
         }
     } failure:^(NSError *error) {
-        [MBProgressHUD hideHudToView:self.view animated:YES];
+        [self showNetFailViewWithFrame:_collectionview.frame];
     }];
 }
+
 
 #pragma mark - initView
 - (void)initView{
@@ -256,6 +256,11 @@ static NSString *ChartID = @"CreditChartLineCell";
     vc.companyName = _creditModel.companyInfo[@"companyName"];
     vc.companyId = _creditModel.companyInfo[@"companyId"];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - 网络异常
+- (void)abnormalViewReload{
+    [self loadData];
 }
 
 #pragma mark - life cycle
