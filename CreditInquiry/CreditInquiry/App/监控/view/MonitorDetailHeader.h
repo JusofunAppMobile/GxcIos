@@ -12,14 +12,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol MonitorDetailHeaderDelegate <NSObject>
 
-- (void)didClickMoreButton:(NSInteger)section;
+- (void)didClickMoreButton:(MDSectionModel *)model;
 
 @end
 
 @interface MonitorDetailHeader : UITableViewHeaderFooterView
-@property (nonatomic ,assign) NSInteger section;
 @property (nonatomic ,weak) id <MonitorDetailHeaderDelegate>delegate;
-
 @property(nonatomic,strong)MDSectionModel*model;
 @end
 

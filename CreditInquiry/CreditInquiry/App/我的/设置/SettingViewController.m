@@ -10,6 +10,7 @@
 #import "SettingCell.h"
 #import "SettingFooterView.h"
 #import "MsgSettingController.h"
+#import "CommonWebViewController.h"
 static NSString *CellID = @"SettingCell";
 
 @interface SettingViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -73,13 +74,24 @@ static NSString *CellID = @"SettingCell";
         }else{
             [self clearCache];
         }
-    }
-    else
-    {
-        if (indexPath.row == 2) {
-            AboutController *vc = [AboutController new];
-            [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        NSString *title = nil;
+        NSString *url = nil;
+        if (indexPath.row == 0) {
+            title = @"服务协议";
+            url = KUserProtocol;
+        }else if (indexPath.row == 1){
+            title = @"隐私政策";
+            url = KPrivacy;
+        } else {
+            title = @"关于我们";
+            url = KAboutUS;
         }
+        
+        CommonWebViewController *vc = [CommonWebViewController new];
+        vc.urlStr = url;
+        vc.titleStr = title;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

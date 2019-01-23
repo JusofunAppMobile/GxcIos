@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ObjectionEntCell : UITableViewCell
-
+@property (nonatomic ,strong) NSDictionary *companyInfo;
 @end
 
 NS_ASSUME_NONNULL_END

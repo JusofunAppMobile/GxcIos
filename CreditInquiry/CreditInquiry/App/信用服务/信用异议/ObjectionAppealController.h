@@ -11,8 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ObjectionAppealController : BasicViewController
-@property (nonatomic ,copy) NSString *companyName;
 @property (nonatomic ,assign) ObjectionType objectionType;
+@property (nonatomic ,strong) NSDictionary *companyInfo;
 @end
 
 NS_ASSUME_NONNULL_END

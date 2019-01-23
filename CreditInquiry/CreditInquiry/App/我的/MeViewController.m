@@ -18,6 +18,8 @@
 #import "LoginController.h"
 #import "ComCertificationController.h"
 #import "VipPrivilegeController.h"
+#import "CommonWebViewController.h"
+#import "BuyVipController.h"
 
 static NSString *InfoID = @"MeInfoCell";
 static NSString *ItemID = @"MeItemCell";
@@ -134,18 +136,20 @@ static NSString *PlainID = @"MePlainCell";
             [self.navigationController pushViewController:vc animated:YES];
         }
     }else if (indexPath.section == 2) {
-        if (indexPath.row == 3) {
-            SettingViewController *vc = [SettingViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }else if (indexPath.row == 0) {
-            
-            
+        if (indexPath.row == 0) {
             BrowseController *vc = [BrowseController new];
             [self.navigationController pushViewController:vc animated:YES];
-        }
-        else
-        {
-            FogotPwdController *vc = [FogotPwdController new];
+        }else if (indexPath.row == 1){
+            CommonWebViewController *vc = [CommonWebViewController new];
+            vc.urlStr = KUseHelp;
+            vc.titleStr = @"使用帮助";
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if(indexPath.row == 2){//test
+            BuyVipController *vc = [BuyVipController new];
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }else{
+            SettingViewController *vc = [SettingViewController new];
             [self.navigationController pushViewController:vc animated:YES];
         }
     }

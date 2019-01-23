@@ -71,7 +71,7 @@ static NSString *CellID3 = @"ObjectionInfoCell";
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
-    [params setObject:_companyName forKey:@"CompanyName"];
+    [params setObject:_companyInfo[@"companyName"]?:@"" forKey:@"CompanyName"];
     [params addEntriesFromDictionary:[self getMenuInfo]];
     [params addEntriesFromDictionary:self.userInfo];
     
@@ -132,6 +132,7 @@ static NSString *CellID3 = @"ObjectionInfoCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         ObjectionEntCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID1 forIndexPath:indexPath];
+        cell.companyInfo = _companyInfo;
         return cell;
     }else if(indexPath.section == 1){
         ObjectionTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID2 forIndexPath:indexPath];

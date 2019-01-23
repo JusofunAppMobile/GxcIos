@@ -7,6 +7,7 @@
 //
 
 #import "BuyVipController.h"
+#import "VipPrivilegeController.h"
 
 @implementation BuyVipController
 {
@@ -45,7 +46,7 @@
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
-    [params setObject:@"2" forKey:@"type"];
+    [params setObject:@"2" forKey:@"type"];//ios
     [MBProgressHUD showMessag:@"" toView:self.view];
     [RequestManager postWithURLString:KGetOrderMsg parameters:params  success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:NO];
@@ -77,13 +78,10 @@
 
 -(void)buy
 {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:chooseRow1  inSection:0];
-    BuyVipCell *cell = [backTableView cellForRowAtIndexPath:indexPath];
-    NSLog(@"%@%@元",chooseRow2==0?@"支付宝":@"微信支付",cell.curPriceLabel.text.length>2?[cell.curPriceLabel.text substringFromIndex:1]:@"");
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
     [params setObject:@(chooseRow1+1) forKey:@"levelType"];
-    [params setObject:@(chooseRow2+1) forKey:@"payType"];
+    [params setObject:@(2) forKey:@"payType"];//1微信 2支付宝
     [MBProgressHUD showMessag:@"" toView:self.view];
     [RequestManager postWithURLString:KOrderPay parameters:params  success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:NO];
@@ -91,23 +89,19 @@
         if ([responseObject[@"result"] integerValue] == 0) {
             NSDictionary *dic = [responseObject objectForKey:@"data"];
             [[AlipaySDK defaultService] payOrder:[dic objectForKey:@"order"] fromScheme:KAppScheme callback:^(NSDictionary *resultDic) {
-                NSLog(@"reslut = %@",resultDic);
             }];
-            
         }else{
             [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
         }
         
     } failure:^(NSError *error) {
         [MBProgressHUD showError:@"请求失败" toView:self.view];
-        
     }];
-    
 }
 
--(void)VIPIntroduce
-{
-
+-(void)VIPIntroduce{
+    VipPrivilegeController *vc = [VipPrivilegeController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)getPayResult
@@ -172,7 +166,7 @@
     }
     else
     {
-        return 2;
+        return 1;
     }
     
 }
@@ -198,7 +192,7 @@
     backView.backgroundColor = [UIColor whiteColor];
     
     UIView *kongView = [[UIView alloc]init];
-    kongView.backgroundColor = KRGB(243, 242, 242);
+    kongView.backgroundColor = KHexRGB(0xeceef2);
     [backView addSubview:kongView];
     [kongView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.mas_equalTo(backView);
@@ -206,7 +200,6 @@
     }];
     
     UILabel *label = [[UILabel alloc]initWithFrame:KFrame(15, 10, KDeviceW-30, 45)];
-    label.textColor = [UIColor blackColor];
     label.font = KBlodFont(16);
     label.text = section == 0?@"VIP会员":@"支付方式";
     [backView addSubview:label];
@@ -280,7 +273,7 @@
     backTableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     backTableView.delegate = self;
     backTableView.dataSource = self;
-    backTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    backTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     backTableView.estimatedRowHeight = 50;
     backTableView.rowHeight  = UITableViewAutomaticDimension;
     backTableView.estimatedSectionHeaderHeight = 0;
@@ -303,7 +296,7 @@
     backView.backgroundColor = [UIColor whiteColor];
     
     UIView *kongView = [[UIView alloc]init];
-    kongView.backgroundColor = KRGB(243, 242, 242);
+    kongView.backgroundColor = KHexRGB(0xeceef2);
     [backView addSubview:kongView];
     [kongView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.mas_equalTo(backView);

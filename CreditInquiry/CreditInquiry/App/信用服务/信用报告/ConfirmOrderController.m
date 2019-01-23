@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setNavigationBarTitle:@"确认订单"];
+    [self setNavigationBarTitle:@"获取报告"];
     [self setBlankBackButton];
     [self initView];
 }
@@ -194,6 +194,7 @@
             make.left.mas_equalTo(_leftBtn.mas_right).offset(22);
             make.top.width.height.mas_equalTo(_leftBtn);
         }];
+        rightBtn.hidden = YES;
         rightBtn;
     });
     
@@ -279,11 +280,9 @@
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
-    [params setObject:_companyId forKey:@"companyId"];
     [params setObject:_companyName forKey:@"companyName"];
     [params setObject:@(_reportType) forKey:@"type"];
     [params setObject:_emailField.text forKey:@"url"];
-    [params setObject:@"2" forKey:@"OStype"];
 
     [RequestManager postWithURLString:KSendCreditReport parameters:params success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:YES];

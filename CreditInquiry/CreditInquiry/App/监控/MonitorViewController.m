@@ -11,8 +11,8 @@
 #import "MonitorHeaderView.h"
 #import "MonitorTableHeader.h"
 #import "MonitorFilterView.h"
-
 #import "MonitorDetailController.h"
+#import "UITableView+NoData.h"
 
 static NSString *CELLID = @"MonitorDynamicCell";
 
@@ -42,19 +42,19 @@ static NSString *CELLID = @"MonitorDynamicCell";
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
     [params setObject:@(_page) forKey:@"pageIndex"];
-    [params setObject:@(20) forKey:@"pageSize"];
+    [params setObject:@(10) forKey:@"pageSize"];
     [RequestManager postWithURLString:KGetMonitorDynamic parameters:params success:^(id responseObject) {
         [self hideLoadDataAnimation];
+        [self endRefresh];
         if ([responseObject[@"result"] intValue] == 0) {
             if (_page == 1) {
                 [_datalist removeAllObjects];
             }
             [self.datalist addObjectsFromArray: [MonitorListModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"monitor"]]];
-            [_tableview reloadData];
+            [_tableview nd_reloadData];
             _page++;
-            _moreData = _datalist.count< [responseObject[@"total"] intValue];
+            _moreData = _datalist.count< [responseObject[@"data"][@"totalCount"] intValue];
         }
-        [self endRefresh];
     } failure:^(NSError *error) {
         [self showNetFailViewWithFrame:_tableview.frame];
         [self endRefresh];
@@ -126,7 +126,6 @@ static NSString *CELLID = @"MonitorDynamicCell";
 }
 
 #pragma mark - UITableViewDataSource
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     MonitorListModel *model = [self.datalist objectAtIndex:indexPath.row];
     MonitorDetailController *vc = [MonitorDetailController new];

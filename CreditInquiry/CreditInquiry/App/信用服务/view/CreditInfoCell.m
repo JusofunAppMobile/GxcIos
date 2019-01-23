@@ -41,7 +41,7 @@
     [_changeView removeFromSuperview];
     [_cardInfoView removeFromSuperview];
     
-    int status = [_companyInfo[@"status"] intValue];//test 0 1 2 3
+    int status = [_companyInfo[@"status"] intValue];// 0 1 2 3
     if (status == 3){//已认证
         [self addSubview:self.cardInfoView];
         [self addSubview:self.changeView];

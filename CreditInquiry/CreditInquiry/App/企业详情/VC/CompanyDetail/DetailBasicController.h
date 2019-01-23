@@ -15,6 +15,8 @@
 
 @property(nonatomic,strong)NSString *companyId;
 @property(nonatomic,strong) NSString *companyName;
+@property (nonatomic ,strong) NSString *companyNature;
+@property (nonatomic ,strong) NSString *creditCode;
 
 @property(nonatomic,strong)ItemView *itemView;
 

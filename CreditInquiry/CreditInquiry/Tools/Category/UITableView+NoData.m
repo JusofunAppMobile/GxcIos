@@ -107,7 +107,7 @@ static const char PlaceholderKey = '\0';
 - (NSString *)placeholderText{
     NSString *text = objc_getAssociatedObject(self, &PlaceholderKey);
     if (!text.length) {
-        text = @"暂无信息";
+        text = @"没有相关数据";
         objc_setAssociatedObject(self, &PlaceholderKey, text, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return text;

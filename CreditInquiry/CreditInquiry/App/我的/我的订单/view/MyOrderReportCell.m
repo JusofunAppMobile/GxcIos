@@ -127,11 +127,12 @@
             [view mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(_titleLab);
                 make.top.mas_equalTo(_emailLab.mas_bottom).offset(10);
-                make.height.mas_equalTo(14);
+                make.height.mas_equalTo(0);
             }];
             view.font = KFont(13);
             view.text = @"报告格式：";
             view.textColor = KHexRGB(0x878787);
+            view.hidden = YES;
             view;
         });
         
@@ -143,6 +144,7 @@
                 make.top.mas_equalTo(_formatLab.mas_bottom).offset(13);
                 make.left.right.height.mas_equalTo(line);
             }];
+            line2.hidden = YES;
             line2;
         });
         
@@ -150,37 +152,40 @@
             UIView *footerBg = [UIView new];
             [self.contentView addSubview:footerBg];
             [footerBg mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.height.mas_equalTo(40);
+                make.height.mas_equalTo(0);
                 make.left.right.bottom.mas_equalTo(self.contentView);
                 make.top.mas_equalTo(_line2.mas_bottom);
             }];
+            footerBg.hidden = YES;
             footerBg;
         });
        
         
         UIButton *reportBtn = [UIButton new];
-        reportBtn.layer.cornerRadius = 4;
+        reportBtn.layer.cornerRadius = 2;
         reportBtn.layer.masksToBounds = YES;
-        reportBtn.backgroundColor = KHexRGB(0xd60e23);
+        reportBtn.backgroundColor = KHexRGB(0xe60018);
         reportBtn.titleLabel.font = [UIFont boldSystemFontOfSize:13];
         [reportBtn setTitle:@"查看报告" forState:UIControlStateNormal];
+        [reportBtn addTarget:self action:@selector(checkReportAction) forControlEvents:UIControlEventTouchUpInside];
         [_footerBg addSubview:reportBtn];
         [reportBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(_footerBg);
             make.right.mas_equalTo(_footerBg).offset(-15);
             make.width.mas_equalTo(65);
-            make.height.mas_equalTo(25);
+            make.height.mas_equalTo(27);
         }];
         
         
         UIButton *sendBtn = [UIButton new];
-        sendBtn.layer.cornerRadius = 4;
+        sendBtn.layer.cornerRadius = 2;
         sendBtn.layer.masksToBounds = YES;
         sendBtn.layer.borderWidth = 1;
         sendBtn.layer.borderColor = KHexRGB(0xc8c8c8).CGColor;
         sendBtn.titleLabel.font =[UIFont boldSystemFontOfSize:13];
         [sendBtn setTitle:@"重新发送" forState:UIControlStateNormal];
-        [sendBtn setTitleColor:KHexRGB(0xd93947) forState:UIControlStateNormal];
+        [sendBtn setTitleColor:KHexRGB(0xe60018) forState:UIControlStateNormal];
+        [sendBtn addTarget:self action:@selector(sendAction) forControlEvents:UIControlEventTouchUpInside];
         [_footerBg addSubview:sendBtn];
         [sendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.bottom.width.height.mas_equalTo(reportBtn);
@@ -229,8 +234,21 @@
             make.top.mas_equalTo(_emailLab.mas_bottom).offset(10);
         }];
         [_footerBg mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(40);
+            make.height.mas_equalTo(42);
         }];
+    }
+}
+
+#pragma mark - action
+- (void)checkReportAction{
+    if ([self.delegate respondsToSelector:@selector(didClickCheckReportButton:)]) {
+        [self.delegate didClickCheckReportButton:_model];
+    }
+}
+
+- (void)sendAction{
+    if ([self.delegate respondsToSelector:@selector(didClickSendReportButton:)]) {
+        [self.delegate didClickSendReportButton:_model];
     }
 }
 

@@ -34,7 +34,6 @@
 		793D1B2D21DF67E000C29908 /* JobController.m in Sources */ = {isa = PBXBuildFile; fileRef = 793D1AFC21DF67E000C29908 /* JobController.m */; };
 		793D1B2E21DF67E000C29908 /* DetailWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 793D1AFE21DF67E000C29908 /* DetailWebController.m */; };
 		793D1B2F21DF67E000C29908 /* RiskContainerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 793D1B0121DF67E000C29908 /* RiskContainerController.m */; };
-		793D1B3021DF67E000C29908 /* LoadDetailWithH5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 793D1B0321DF67E000C29908 /* LoadDetailWithH5ViewController.m */; };
 		793D1B3121DF67E000C29908 /* ReportController.m in Sources */ = {isa = PBXBuildFile; fileRef = 793D1B0421DF67E000C29908 /* ReportController.m */; };
 		793D1B3221DF67E000C29908 /* OweTaxController.m in Sources */ = {isa = PBXBuildFile; fileRef = 793D1B0721DF67E000C29908 /* OweTaxController.m */; };
 		793D1B3321DF67E000C29908 /* QuestionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 793D1B0821DF67E000C29908 /* QuestionItem.m */; };
@@ -326,7 +325,6 @@
 		793D1AE421DF67E000C29908 /* CompanyMapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyMapController.m; sourceTree = "<group>"; };
 		793D1AE521DF67E000C29908 /* DetailBasicController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailBasicController.h; sourceTree = "<group>"; };
 		793D1AE621DF67E000C29908 /* ReportController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportController.h; sourceTree = "<group>"; };
-		793D1AE721DF67E000C29908 /* LoadDetailWithH5ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadDetailWithH5ViewController.h; sourceTree = "<group>"; };
 		793D1AE821DF67E000C29908 /* OrganizationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrganizationController.m; sourceTree = "<group>"; };
 		793D1AE921DF67E000C29908 /* RiskContainerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RiskContainerController.h; sourceTree = "<group>"; };
 		793D1AEA21DF67E000C29908 /* DetailMapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailMapController.m; sourceTree = "<group>"; };
@@ -354,7 +352,6 @@
 		793D1B0021DF67E000C29908 /* OperatingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OperatingController.h; sourceTree = "<group>"; };
 		793D1B0121DF67E000C29908 /* RiskContainerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RiskContainerController.m; sourceTree = "<group>"; };
 		793D1B0221DF67E000C29908 /* OrganizationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrganizationController.h; sourceTree = "<group>"; };
-		793D1B0321DF67E000C29908 /* LoadDetailWithH5ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadDetailWithH5ViewController.m; sourceTree = "<group>"; };
 		793D1B0421DF67E000C29908 /* ReportController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportController.m; sourceTree = "<group>"; };
 		793D1B0521DF67E000C29908 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		793D1B0621DF67E000C29908 /* BidController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BidController.h; sourceTree = "<group>"; };
@@ -1077,8 +1074,6 @@
 				793D1AF121DF67E000C29908 /* InvestController.m */,
 				793D1AE021DF67E000C29908 /* JobController.h */,
 				793D1AFC21DF67E000C29908 /* JobController.m */,
-				793D1AE721DF67E000C29908 /* LoadDetailWithH5ViewController.h */,
-				793D1B0321DF67E000C29908 /* LoadDetailWithH5ViewController.m */,
 				793D1B0521DF67E000C29908 /* MapViewController.h */,
 				793D1AEF21DF67E000C29908 /* MapViewController.m */,
 				793D1B0021DF67E000C29908 /* OperatingController.h */,
@@ -2555,7 +2550,6 @@
 				CA56111721ECBE380052CF38 /* MDSectionModel.m in Sources */,
 				CA5E008621DDE05E0040ABE2 /* ZFBarChart.m in Sources */,
 				CA5E013221E433890040ABE2 /* CreditServiceHeader.m in Sources */,
-				793D1B3021DF67E000C29908 /* LoadDetailWithH5ViewController.m in Sources */,
 				CA5E008C21DDE05E0040ABE2 /* ZFHorizontalBar.m in Sources */,
 				79D34EBA21E05E1F00B1CB32 /* OweTaxCell.m in Sources */,
 				79D34ED121E05E5600B1CB32 /* SearchJobModel.m in Sources */,

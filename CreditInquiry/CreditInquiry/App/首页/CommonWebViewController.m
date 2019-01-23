@@ -28,14 +28,10 @@
 //    self.webView.delegate = self;
 //    [self.view addSubview:self.webView];
     
-    
-    
-    
     if (_isNeedShare) {
     
         NSMutableArray *buttonArray = [[NSMutableArray alloc ] init];
         shareBarButton = [self addRightItemWithImage:@"分享icon" withImageRectRect:CGRectMake(0, 0, 24, 24) action:@selector(share)];
-        
         
         UIBarButtonItem *negativeSpacer1 = [[UIBarButtonItem alloc]
                                             initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace

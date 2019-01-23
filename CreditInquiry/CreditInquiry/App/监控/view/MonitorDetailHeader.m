@@ -80,7 +80,7 @@
 
 - (void)moreAction{
     if ([self.delegate respondsToSelector:@selector(didClickMoreButton:)]) {
-        [self.delegate didClickMoreButton:_section];
+        [self.delegate didClickMoreButton:_model];
     }
 }
 
@@ -109,16 +109,5 @@
     }
 }
 
-- (void)setSection:(NSInteger)section{
-    _section = section;
-    if (section == 0) {
-        _titleLab.text = @"法律诉讼";
-       
-    }else{
-        _titleLab.text = @"专利信息";
-       
-    }
-    _numLab.text = @"共3条";
-}
 
 @end

@@ -13,9 +13,8 @@
     UITableView* backTableView;
     UILabel *countLabel;
     int pageIndex;
-    NSMutableArray *dataArray;
 }
-
+@property (nonatomic ,strong) NSMutableArray *dataArray;
 @end
 
 @implementation VisitorController
@@ -23,12 +22,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
     [self setNavigationBarTitle:@"访客" andTextColor:[UIColor whiteColor]];
     [self setWhiteBackButton];
     [self drawTableView];
-    
-
 }
 
 
@@ -45,17 +41,16 @@
         if ([responseObject[@"result"] integerValue] == 0) {
             NSDictionary *dataDic = [responseObject objectForKey:@"data"];
             if (pageIndex == 1) {
-                [dataArray removeAllObjects];
-                dataArray = [NSMutableArray array];
+                [_dataArray removeAllObjects];
             }
             
-            [dataArray addObjectsFromArray:[dataDic objectForKey:@"news"]];
+            [self.dataArray addObjectsFromArray:[dataDic objectForKey:@"list"]];
           
             [self setCount:[[responseObject objectForKey:@"data"] objectForKey:@"count"]];
             [backTableView reloadData];
             
             int count = [[dataDic objectForKey:@"count"] intValue];
-            if(dataArray.count>=count)
+            if(_dataArray.count>=count)
             {
                 [backTableView.mj_footer endRefreshingWithNoMoreData];
             }
@@ -113,7 +108,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return dataArray.count;
+    return _dataArray.count;
     
 }
 
@@ -126,7 +121,8 @@
     {
         cell = [[VistorCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ideterfir ];
     }
-    NSDictionary *dic = [dataArray objectAtIndex:indexPath.row];
+    NSDictionary *dic = [_dataArray objectAtIndex:indexPath.row];
+    
     cell.nameLabel.text = [dic objectForKey:@"name"];
     cell.timeLabel.text = [dic objectForKey:@"date"];
    
@@ -136,7 +132,7 @@
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     
-    if(dataArray.count == 0)
+    if(_dataArray.count == 0)
     {
         return nil;
     }
@@ -205,15 +201,16 @@
         make.bottom.mas_equalTo(self.view.mas_bottom);
     }];
     
+    KWeakSelf
     backTableView.mj_header =  [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         pageIndex = 1;
-        [self loadData];
+        [weakSelf loadData];
     }];
-    [backTableView.mj_header beginRefreshing];
     backTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        [self loadData];
+        [weakSelf loadData];
     }];
-    
+    pageIndex = 1;
+    [self loadData];
     
 }
 
@@ -223,6 +220,13 @@
     [self.navigationController.navigationBar fs_setBackgroundColor:[UIColor clearColor]];
 }
 
+#pragma mark - lazy load
+- (NSMutableArray *)dataArray{
+    if (!_dataArray) {
+        _dataArray = [NSMutableArray array];
+    }
+    return _dataArray;
+}
 
 
 @end

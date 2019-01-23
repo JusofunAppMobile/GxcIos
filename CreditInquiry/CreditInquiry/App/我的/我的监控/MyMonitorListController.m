@@ -9,6 +9,7 @@
 #import "MyMonitorListController.h"
 #import "MyMonitorCell.h"
 #import "MyMonitorListModel.h"
+#import "UITableView+NoData.h"
 
 static NSString *CellID = @"MyMonitorCell";
 
@@ -73,7 +74,7 @@ static NSString *CellID = @"MyMonitorCell";
 #pragma mark - loadData
 - (void)loadData:(BOOL)loading{
     if (loading) {
-        [MBProgressHUD showMessag:@"" toView:self.view];
+        [self showLoadDataAnimation];
     }
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
@@ -83,23 +84,25 @@ static NSString *CellID = @"MyMonitorCell";
     NSString *urlStr = _listType == ListTypeMyMonitor?KMyMonitorList:KMyCollectionList;
     
     [RequestManager postWithURLString:urlStr parameters:params success:^(id responseObject) {
-        [MBProgressHUD hideHudToView:self.view animated:YES];
+        [self hideLoadDataAnimation];
+        [self endRefresh];
+
         if ([responseObject[@"result"] intValue] == 0) {
             if (_page == 1) {
                 [_datalist removeAllObjects];
             }
             NSArray *arr =[MyMonitorListModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"list"]];
             [self.datalist addObjectsFromArray: arr];
-            [_tableview reloadData];
+            [_tableview nd_reloadData];
             _numLab.attributedText = [self getAttibuteForText:[NSString stringWithFormat:@"数量：%@条",responseObject[@"data"][@"totalCount"]]];//更新条数
-            
             _moreData = _datalist.count < [responseObject[@"data"][@"totalCount"] intValue];
             _page++;
-            [self endRefresh];
+        }else{
+            [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
         }
     } failure:^(NSError *error) {
-        [MBProgressHUD showError:@"请求失败" toView:self.view];
         [self endRefresh];
+        [self showNetFailViewWithFrame:_tableview.frame];
     }];
     
 }
@@ -153,6 +156,11 @@ static NSString *CellID = @"MyMonitorCell";
     cell.delegate = self;
     [cell setModel:_datalist[indexPath.section] type:_listType];
     return cell;
+}
+
+#pragma mark - 网络异常
+- (void)abnormalViewReload{
+    [self loadData:YES];
 }
 
 #pragma mark - lazy load

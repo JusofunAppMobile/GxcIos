@@ -201,7 +201,7 @@ static NSString *ChartID = @"CreditChartLineCell";
             
             ObjectionAppealController *vc = [ObjectionAppealController new];
             vc.objectionType = ObjectionTypeCredit;
-            vc.companyName = _creditModel.companyInfo[@"companyName"];;
+            vc.companyInfo = _creditModel.companyInfo;
             [self.navigationController pushViewController:vc animated:YES];
             
         }else if (model.menuType.intValue == 12){

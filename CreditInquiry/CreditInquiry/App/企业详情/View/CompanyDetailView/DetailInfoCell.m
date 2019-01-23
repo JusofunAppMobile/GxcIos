@@ -201,7 +201,7 @@
     [self reloadFrame];
 }
 
--(void)setCreditScore:(NSString*)score
+-(void)setCreditScore:(NSString*)score //test信用分
 {
     if(!score||score.length==0)
     {

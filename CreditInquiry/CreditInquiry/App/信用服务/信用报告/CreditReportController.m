@@ -16,6 +16,7 @@
 #import "ShowMessageView.h"
 #import "VipPrivilegeController.h"
 #import "BuyVipController.h"
+#import "UITableView+NoData.h"
 
 static NSString *CellID = @"CreditReportCell";
 static NSString *ProCellID = @"CreditProReportCell";
@@ -45,7 +46,6 @@ static NSString *ProCellID = @"CreditProReportCell";
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
-    [params setObject:_companyid forKey:@"companyid"];
     [params setObject:_companyName forKey:@"companyname"];
 
     [RequestManager postWithURLString:KGetCreditReportList parameters:params success:^(id responseObject) {
@@ -53,7 +53,7 @@ static NSString *ProCellID = @"CreditProReportCell";
         
         if ([responseObject[@"result"] intValue] == 0) {
             _reportInfo = responseObject[@"data"];
-            [_tableview reloadData];
+            [_tableview nd_reloadData];
             [self updateUserInfo];//更新用户状态
         }else{
             [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
@@ -68,7 +68,6 @@ static NSString *ProCellID = @"CreditProReportCell";
         KUSER.vipStatus = _reportInfo[@"isVIP"];
     }
 }
-
 
 #pragma mark - initView
 - (void)initView{
@@ -103,7 +102,7 @@ static NSString *ProCellID = @"CreditProReportCell";
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return _reportInfo?2:0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

@@ -39,9 +39,9 @@
     [params setObject:KUSER.userId forKey:@"userId"];
     [params setObject:@"20" forKey:@"pageSize"];
     [params setObject:[NSString stringWithFormat:@"%d",pageIndex] forKey:@"pageIndex"];
-    [MBProgressHUD showMessag:@"" toView:self.view];
+    [self showLoadDataAnimation];
     [RequestManager postWithURLString:KIndustryInformation parameters:params  success:^(id responseObject) {
-        [MBProgressHUD hideHudToView:self.view animated:NO];
+        [self hideLoadDataAnimation];
         [self endRefresh];
         if ([responseObject[@"result"] integerValue] == 0) {
             NSDictionary *dataDic = [responseObject objectForKey:@"data"];
@@ -67,7 +67,7 @@
         }
         
     } failure:^(NSError *error) {
-        [MBProgressHUD showError:@"请求失败" toView:self.view];
+        [self showNetFailViewWithFrame:backTableView.frame];
         [self endRefresh];
     }];
 }
@@ -213,6 +213,11 @@
     }];
     
   
+}
+
+#pragma mark - 网络异常
+- (void)abnormalViewReload{
+    [self loadData];
 }
 
 -(void)viewWillAppear:(BOOL)animated

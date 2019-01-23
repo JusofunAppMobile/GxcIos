@@ -132,19 +132,14 @@
 
 
 #pragma mark - 纠错
--(void)errorCorrection
-{
-    //[MobClick event:@"Businessdetails01"];//企业详情-纠错点击数
-    //[[BaiduMobStat defaultStat] logEvent:@"Businessdetails01" eventLabel:@"企业详情-纠错点击数"];
-//    RecoveryErrorViewController *recoverError = [[RecoveryErrorViewController alloc] init];
-//    recoverError.squearList = self.itemArray;
-//    recoverError.companyId = self.companyId;
-//    recoverError.currentSquareModel = self.itemModel;
-//    recoverError.companyName = self.companyName;
-//    [self.navigationController pushViewController:recoverError animated:YES];
-    
+-(void)errorCorrection{
+    NSMutableDictionary *companyInfo = [NSMutableDictionary dictionary];
+    [companyInfo setObject:_companyName?:@"" forKey:@"companyName"];
+    [companyInfo setObject:_creditCode?:@"" forKey:@"code"];
+    [companyInfo setObject:_companyNature?:@"" forKey:@"type"];
+
     ObjectionAppealController *vc = [ObjectionAppealController new];
-    vc.companyName = self.companyName;
+    vc.companyInfo = companyInfo;
     vc.objectionType = ObjectionTypeError;
     [self.navigationController pushViewController:vc animated:YES];
 }

@@ -12,6 +12,7 @@
 #import "MonitorMoreController.h"
 #import "MonitorFilterView.h"
 #import "MDSectionModel.h"
+#import "UITableView+NoData.h"
 
 static NSString *CellID = @"MonitorDetailCell";
 static NSString *HeadID = @"MonitorDetailHeader";
@@ -21,7 +22,6 @@ static NSString *HeadID = @"MonitorDetailHeader";
 @property (nonatomic ,strong) UITableView *tableview;
 @property (nonatomic ,strong) MonitorFilterView *filterView;
 @property (nonatomic ,strong) NSArray *datalist;
-
 @property (nonatomic ,copy) NSString *filterIdStr;
 
 @end
@@ -48,13 +48,12 @@ static NSString *HeadID = @"MonitorDetailHeader";
     [params setObject:KUSER.userId forKey:@"userId"];
     [params setObject:self.companyId forKey:@"companyid"];
     [params setObject:self.companyName forKey:@"companyName"];
-    
     [params setObject:self.filterIdStr forKey:@"filterId"];
     [RequestManager postWithURLString:KDynamicDetail parameters:params success:^(id responseObject) {
         [self hideLoadDataAnimation];
         if ([responseObject[@"result"] intValue] == 0) {
             self.datalist = [MDSectionModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"details"]];
-            [_tableview reloadData];
+            [_tableview nd_reloadData];
         }
     } failure:^(NSError *error) {
         [self showNetFailViewWithFrame:_tableview.frame];
@@ -109,7 +108,7 @@ static NSString *HeadID = @"MonitorDetailHeader";
     }
 }
 
--(void)didSelectFilterView:(NSMutableArray *)selectArray
+-(void)didSelectFilterView:(NSMutableArray *)selectArray//test单选还是多选
 {
     for(NSDictionary*dic in selectArray)
     {
@@ -122,9 +121,9 @@ static NSString *HeadID = @"MonitorDetailHeader";
 }
 
 
-- (void)didClickMoreButton:(NSInteger)section{
-    MonitorMoreController *vc = [MonitorMoreController new];
-    [self.navigationController pushViewController:vc animated:YES];
+- (void)didClickMoreButton:(MDSectionModel *)model{
+//    MonitorMoreController *vc = [MonitorMoreController new];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
@@ -157,19 +156,14 @@ static NSString *HeadID = @"MonitorDetailHeader";
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     MonitorDetailHeader *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:HeadID];
-    //header.section = section;
-    MDSectionModel *model = [self.datalist objectAtIndex:section];
-    header.model = model;
+    header.model = [self.datalist objectAtIndex:section];
     header.delegate = self;
     return header;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{//test点击跳转吗
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
 }
-
-
 
 #pragma mark - initView
 - (void)initView{

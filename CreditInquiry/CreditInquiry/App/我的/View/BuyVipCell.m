@@ -45,9 +45,10 @@
                  
                  [backView mas_makeConstraints:^(MASConstraintMaker *make) {
                      make.left.mas_equalTo(15);
-                     make.top.mas_equalTo(10);
                      make.right.mas_equalTo(self.contentView).offset(-15);
-                     make.height.mas_equalTo(65); make.bottom.mas_equalTo(self.contentView.mas_bottom).priorityHigh();
+                     make.top.mas_equalTo(self.contentView);
+                     make.bottom.mas_equalTo(self.contentView).offset(-10);
+                     make.height.mas_equalTo(65);
                  }];
                  backView;
             });
@@ -113,14 +114,12 @@
             self.payImageView = ({
                 UIImageView *imageView = [UIImageView new];
                 [self.contentView addSubview:imageView];
-                imageView.image = KImageName(@"icon_gudong");
                 [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.left.mas_equalTo(15);
                     make.top.mas_equalTo(10);
                     make.width.height.mas_equalTo(35);
                     make.bottom.mas_equalTo(self.contentView).offset(-10).priorityHigh();
                 }];
-                
                 imageView;
             });
             
@@ -151,7 +150,6 @@
             });
             
         }
-        
     }
     return self;
 }
@@ -260,10 +258,12 @@
         if(row == 0)
         {
             self.payLabel.text = @"支付宝";
+            _payImageView.image = KImageName(@"zhifubao");
         }
         else
         {
            self.payLabel.text = @"微信支付";
+            _payImageView.image = KImageName(@"weixin");
         }
     }
     

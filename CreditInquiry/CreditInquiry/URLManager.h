@@ -12,7 +12,7 @@
 //线下
 #define HOSTURL   @"http://202.106.10.250:48088"
 //#define HOSTURL   @"http://192.168.200.161:8088"
-
+#define HTMLHOST @"http://202.106.10.250:4808"
 
 //#define HOSTURL   @"172.16.105.110:8088"
 
@@ -184,6 +184,18 @@
 //提交信用异议
 #define KCommitObjectionCredit @""HOSTURL"/app/CreditService/creditError"
 
+
+//用户协议
+#define KUserProtocol @""HTMLHOST"/creditReport/useragreement.html"
+
+//隐私政策
+#define KPrivacy @""HTMLHOST"/creditReport/privacyprotectionagreement.html"
+
+//使用帮助
+#define KUseHelp @""HTMLHOST"/dist/#/check/help"
+
+//关于我们
+#define KAboutUS @""HTMLHOST"/dist/#/about"
 
 ////////////////////////////////////////////////////////
 

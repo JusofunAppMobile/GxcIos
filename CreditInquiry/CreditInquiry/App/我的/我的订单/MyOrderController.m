@@ -9,10 +9,11 @@
 #import "MyOrderController.h"
 #import "MyOrderReportCell.h"
 #import "MyOrderModel.h"
+#import "UITableView+NoData.h"
 
 static NSString *CellID1 = @"MyOrderReportCell";
 
-@interface MyOrderController ()<UITableViewDelegate,UITableViewDataSource>
+@interface MyOrderController ()<UITableViewDelegate,UITableViewDataSource,MyOrderReportCellDelegate>
 @property (nonatomic ,strong) UITableView *tableview;
 @property (nonatomic ,strong) NSMutableArray *datalist;
 @property (nonatomic ,assign) NSInteger page;
@@ -80,19 +81,19 @@ static NSString *CellID1 = @"MyOrderReportCell";
     [params setObject:@(_page) forKey:@"pageIndex"];
     [RequestManager postWithURLString:KMyOrderList parameters:params success:^(id responseObject) {
         [self hideLoadDataAnimation];
+        [self endRefresh];
         if ([responseObject[@"result"] intValue] == 0) {
             if (_page == 1) {
                 [_datalist removeAllObjects];
             }
             self.remainTime = [responseObject[@"data"][@"remainTime"] intValue];
             [self.datalist addObjectsFromArray: [MyOrderModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"list"]]];
-            [_tableview reloadData];
+            [_tableview nd_reloadData];
             _page++;
             _moreData = _datalist.count< [responseObject[@"data"][@"totalCount"] intValue];
-            [self endRefresh];
         }
     } failure:^(NSError *error) {
-        [MBProgressHUD showError:@"请求失败" toView:self.view];
+        [self showNetFailViewWithFrame:_tableview.frame];
         [self endRefresh];
     }];
     
@@ -117,7 +118,22 @@ static NSString *CellID1 = @"MyOrderReportCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MyOrderReportCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID1 forIndexPath:indexPath];
     cell.model = _datalist[indexPath.section];
+    cell.delegate = self;
     return cell;
+}
+
+#pragma mark - MyOrderReportCellDelegate
+- (void)didClickSendReportButton:(MyOrderModel *)model{//重新发送
+    
+}
+
+- (void)didClickCheckReportButton:(MyOrderModel *)model{
+    
+}
+
+#pragma mark - 网络异常
+- (void)abnormalViewReload{
+    [self loadData:YES];
 }
 
 #pragma mark - lazy load

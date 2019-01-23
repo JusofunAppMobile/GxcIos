@@ -512,15 +512,15 @@
 #pragma mark- 纠错
 -(void)errorCorrection
 {
-//    RecoveryErrorViewController *recoveryErrorView = [[RecoveryErrorViewController alloc] init];
-//    recoveryErrorView.squearList =  itemList;
-//    recoveryErrorView.companyId = detailModel.companyid;
-//    recoveryErrorView.companyName = self.companyName;
-//    [self.navigationController pushViewController:recoveryErrorView animated:YES];
+    NSMutableDictionary *companyInfo = [NSMutableDictionary dictionary];
+    [companyInfo setObject:detailModel.companyname?:@"" forKey:@"companyName"];
+    [companyInfo setObject:detailModel.taxid?:@"" forKey:@"code"];
+    [companyInfo setObject:detailModel.companynature?:@"" forKey:@"type"];
+
     
     ObjectionAppealController *vc = [ObjectionAppealController new];
-    vc.companyName = self.companyName;
     vc.objectionType = ObjectionTypeError;
+    vc.companyInfo = companyInfo;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -634,7 +634,8 @@
         vc.itemModel = model;
         vc.companyId = detailModel.companyid;
         vc.itemArray = itemList;
-        //[MobClick event:model.umeng];
+        vc.companyNature = detailModel.companynature;
+        vc.creditCode = detailModel.taxid;
         [self.navigationController pushViewController:vc animated:YES];
     }
     else if (section == 3)//风险信息
@@ -646,6 +647,8 @@
         vc.itemModel = model;
         vc.companyId = detailModel.companyid;
         vc.companyName = detailModel.companyname;
+        vc.companyNature = detailModel.companynature;
+        vc.creditCode = detailModel.taxid;
         //[MobClick event:model.umeng];
         [self.navigationController pushViewController:vc animated:YES];
         
@@ -654,9 +657,12 @@
     {
         OperatingController *vc1 = [[OperatingController alloc] init];
         vc1.companyName = detailModel.companyname;
+        vc1.companyId = detailModel.companyid;
+        vc1.companyNature = detailModel.companynature;
+        vc1.creditCode = detailModel.taxid;
+        
         vc1.saveTitleStr = model.menuname;
         vc1.itemModel = model;
-        vc1.companyId = detailModel.companyid;
         vc1.itemArray = manageItemList;
         //[MobClick event:model.umeng];
         [self.navigationController pushViewController:vc1 animated:YES];
@@ -668,6 +674,8 @@
         vc.saveTitleStr = model.menuname;
         vc.companyId = detailModel.companyid;
         vc.companyName = detailModel.companyname;
+        vc.companyNature = detailModel.companynature;
+        vc.creditCode = detailModel.taxid;
         vc.itemModel = model;
         vc.itemArray = assetItemList;
         
@@ -698,13 +706,13 @@
     }
     else if (button.tag == KDetailOperationTag+1)//纠错
     {
-//        RecoveryErrorViewController *recoveryErrorView = [[RecoveryErrorViewController alloc] init];
-//        recoveryErrorView.squearList =  itemList;
-//        recoveryErrorView.companyId = detailModel.companyid;
-//        recoveryErrorView.companyName = self.companyName;
-//        [self.navigationController pushViewController:recoveryErrorView animated:YES];
+        NSMutableDictionary *companyInfo = [NSMutableDictionary dictionary];
+        [companyInfo setObject:detailModel.companyname?:@"" forKey:@"companyName"];
+        [companyInfo setObject:detailModel.taxid?:@"" forKey:@"code"];
+        [companyInfo setObject:detailModel.companynature?:@"" forKey:@"type"];
+        
         ObjectionAppealController *vc = [ObjectionAppealController new];
-        vc.companyName = self.companyName;
+        vc.companyInfo = companyInfo;
         vc.objectionType = ObjectionTypeError;
         [self.navigationController pushViewController:vc animated:YES];
     }

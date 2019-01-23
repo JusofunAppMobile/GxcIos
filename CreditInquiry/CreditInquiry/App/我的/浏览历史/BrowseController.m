@@ -7,6 +7,7 @@
 //
 
 #import "BrowseController.h"
+#import "UITableView+NoData.h"
 
 @interface BrowseController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -57,7 +58,7 @@
             [dataArray addObjectsFromArray:[dataDic objectForKey:@"list"]];
             
             [self setCountLabel:[[responseObject objectForKey:@"data"] objectForKey:@"totalCount"]];
-            [backTableView reloadData];
+            [backTableView nd_reloadData];
             
             int count = [[dataDic objectForKey:@"totalCount"] intValue];
             if(dataArray.count>=count)

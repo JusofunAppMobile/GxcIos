@@ -27,7 +27,6 @@
                 make.left.top.mas_equalTo(self.contentView).offset(15);
                 make.right.mas_equalTo(-15);
             }];
-            view.text = @"滴滴出行科技发展有限公司深圳分公司";
             view.font = KFont(17);
             view;
         });
@@ -49,9 +48,8 @@
             [view mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.mas_equalTo(codeTitle);
                 make.left.mas_equalTo(codeTitle.mas_right);
-                make.right.mas_equalTo(self.contentView).offset(-15);
+                make.right.mas_lessThanOrEqualTo(self.contentView).offset(-15);
             }];
-            view.text = @"9391293921931929MSKKL";
             view.font = KFont(12);
             view.textColor = KHexRGB(0x303030);
             view;
@@ -74,15 +72,21 @@
             [view mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.mas_equalTo(typeTitle);
                 make.left.mas_equalTo(typeTitle.mas_right);
-                make.right.mas_equalTo(self.contentView).offset(-15);
+                make.right.mas_lessThanOrEqualTo(self.contentView).offset(-15);
             }];
-            view.text = @"非上市、自然人或投资控股";
             view.font = KFont(12);
             view.textColor = KHexRGB(0x303030);
             view;
         });
     }
     return self;
+}
+
+- (void)setCompanyInfo:(NSDictionary *)companyInfo{
+    _companyInfo = companyInfo;
+    _nameLab.text = companyInfo[@"companyName"];
+    _codeLab.text = companyInfo[@"code"];
+    _typeLab.text = companyInfo[@"type"];
 }
 
 @end
