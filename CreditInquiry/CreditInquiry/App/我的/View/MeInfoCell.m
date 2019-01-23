@@ -34,8 +34,7 @@
         [self.contentView addSubview:self.titleLab];
         [self setupViews];
 
-        [self addLoginObserver];
-        [self addModifyInfoObserver];
+        [self addNotiObserver];
     }
     return self;
 }
@@ -47,22 +46,21 @@
     [_joinBtn removeFromSuperview];
     [_statusLab removeFromSuperview];
     
-    
     if (KUSER.userId.length) {
         [_avatarView sd_setImageWithURL:[NSURL URLWithString:KUSER.headIcon] placeholderImage:KImageName(@"me_head_h")];
 
         if (KUSER.authStatus.intValue == 1 ||KUSER.authStatus.intValue == 3) {//审核中
             [self.contentView addSubview:self.statusLab];
-            
+
             _titleLab.text =  KUSER.company;
             _statusLab.text = KUSER.authStatus.intValue == 1 ?@"审核中":@"已认证";
 
-            [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            [self.titleLab mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.top.mas_equalTo(_avatarView);
                 make.left.mas_equalTo(_avatarView.mas_right).offset(15);
             }];
 
-            [_statusLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            [_statusLab mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.top.mas_equalTo(_titleLab.mas_bottom).offset(15);
                 make.left.mas_equalTo(_titleLab);
                 make.height.mas_equalTo(20);
@@ -70,7 +68,7 @@
             
             if (KUSER.vipStatus.intValue == 1) {//vip
                 [self.contentView addSubview:self.vipIcon];
-                [_vipIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+                [_vipIcon mas_remakeConstraints:^(MASConstraintMaker *make) {
                     make.centerY.mas_equalTo(_titleLab);
                     make.left.mas_equalTo(_titleLab.mas_right).offset(5);
                     make.right.mas_lessThanOrEqualTo(self.contentView).offset(-15);
@@ -80,14 +78,14 @@
                 [self.contentView addSubview:self.joinBtn];
                 [self.contentView addSubview:self.normalBtn];
 
-                [_joinBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                [_joinBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
                     make.centerY.mas_equalTo(self.contentView);
                     make.right.mas_equalTo(self.contentView);
                     make.height.mas_equalTo(29);
                     make.width.mas_equalTo(80);
                 }];
                 
-                [_normalBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                [_normalBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
                     make.left.mas_equalTo(_statusLab.mas_right).offset(20);
                     make.centerY.mas_equalTo(_statusLab);
                     make.height.mas_equalTo(14);
@@ -97,16 +95,17 @@
             }
             
         }else{//未认证
+            
             _titleLab.text =  KUSER.phone;
             
             if (KUSER.vipStatus.intValue == 1){
                 [self.contentView addSubview:self.vipIcon];
-                [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+                [_titleLab mas_remakeConstraints:^(MASConstraintMaker *make) {
                     make.centerY.mas_equalTo(_avatarView);
                     make.left.mas_equalTo(_avatarView.mas_right).offset(15);
                 }];
                
-                [_vipIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+                [_vipIcon mas_remakeConstraints:^(MASConstraintMaker *make) {
                     make.centerY.mas_equalTo(_titleLab);
                     make.left.mas_equalTo(_titleLab.mas_right).offset(5);
                     make.right.mas_lessThanOrEqualTo(self.contentView).offset(-15);
@@ -114,13 +113,13 @@
                 }];
                 
             }else{
-                [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+                [_titleLab mas_remakeConstraints:^(MASConstraintMaker *make) {
                     make.top.mas_equalTo(_avatarView);
                     make.left.mas_equalTo(_avatarView.mas_right).offset(15);
                 }];
                 
                 [self.contentView addSubview:self.normalBtn];
-                [_normalBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                [_normalBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
                     make.top.mas_equalTo(_titleLab.mas_bottom).offset(15);
                     make.left.mas_equalTo(_titleLab);
                     make.height.mas_equalTo(14);
@@ -133,7 +132,7 @@
     }else{
         _avatarView.image = KImageName(@"me_head");
         self.titleLab.text = @"登录|注册";
-        [self.titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.titleLab mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(self.contentView);
             make.left.mas_equalTo(_avatarView.mas_right).offset(15);
         }];
@@ -148,11 +147,9 @@
 }
 
 #pragma mark - 通知
-- (void)addLoginObserver{
+- (void)addNotiObserver{
     [KNotificationCenter addObserver:self selector:@selector(setupViews) name:KLoginSuccess object:nil];
-}
-
-- (void)addModifyInfoObserver{
+    [KNotificationCenter addObserver:self selector:@selector(setupViews) name:KLoginOut object:nil];
     [KNotificationCenter addObserver:self selector:@selector(setupViews) name:KModifyUserInfoSuccessNoti object:nil];
 }
 
@@ -219,8 +216,7 @@
 
 
 - (void)dealloc{
-    [KNotificationCenter removeObserver:self name:KLoginSuccess object:nil];
-    [KNotificationCenter removeObserver:self name:KModifyUserInfoSuccessNoti object:nil];
+    [KNotificationCenter removeObserver:self ];
 }
 
 @end

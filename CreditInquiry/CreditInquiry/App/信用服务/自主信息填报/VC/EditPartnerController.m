@@ -16,7 +16,7 @@ static NSString *LabelCellID = @"CreditEditLabelCell";
 static NSString *ImageCellID = @"CreditEditImageCell";
 static NSString *TextCellID = @"CreditEditTextCell";
 
-@interface EditPartnerController ()<UITableViewDataSource,UITableViewDelegate>
+@interface EditPartnerController ()<UITableViewDataSource,UITableViewDelegate,CreditEditImageCellDelegate>
 @property (nonatomic ,strong) UIButton *rightBtn;
 @property (nonatomic ,strong) UITableView *tableview;
 @property (nonatomic ,assign) BOOL canEdit;
@@ -112,7 +112,10 @@ static NSString *TextCellID = @"CreditEditTextCell";
 
 - (void)commitEditInfo{
     [MBProgressHUD showMessag:@"" toView:self.view];
-    [RequestManager postWithURLString:KEditCompanyInfo parameters:self.dataDic success:^(id responseObject) {
+    if (_partnerId) {
+        [_dataDic setObject:_partnerId forKey:@"partnerId"];
+    }
+    [RequestManager postWithURLString:KEditCompanyPartner parameters:self.dataDic success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:YES];
         if ([responseObject[@"result"] intValue] == 0) {
             [MBProgressHUD showSuccess:@"提交成功" toView:self.view];
@@ -158,6 +161,7 @@ static NSString *TextCellID = @"CreditEditTextCell";
         }else{
             CreditEditImageCell *cell = [tableView dequeueReusableCellWithIdentifier:ImageCellID forIndexPath:indexPath];
             [cell setContent:self.dataDic type:EditTypePartner];
+            cell.delegate = self;
             return cell;
         }
     }else{
@@ -174,7 +178,6 @@ static NSString *TextCellID = @"CreditEditTextCell";
 - (void)rightAction{//对齐标签的bug
     [self.view endEditing:YES];
     if (_rightBtn.selected) {
-        NSLog(@"b内容___%@",self.dataDic);
         [self commitEditInfo];
     }else{
         _canEdit = _rightBtn.selected = YES;
@@ -197,9 +200,8 @@ static NSString *TextCellID = @"CreditEditTextCell";
 - (NSMutableDictionary *)dataDic{
     if (!_dataDic) {
         _dataDic = [NSMutableDictionary dictionary];
-        [_dataDic setObject:_companyName forKey:@"companyName"];
+//        [_dataDic setObject:_companyName forKey:@"companyName"];
         [_dataDic setObject:KUSER.userId forKey:@"userId"];
-        [_dataDic setObject:_partnerId forKey:@"partnerId"];
     }
     return _dataDic;
 }

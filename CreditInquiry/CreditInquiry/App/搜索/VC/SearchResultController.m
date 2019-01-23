@@ -535,7 +535,6 @@
             cell = [[RiskAnalyzeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ShareholderID];
            
         }
-        cell.dataDic = @{};
         return cell;
     }
     else{

@@ -14,7 +14,7 @@
 //#define HOSTURL   @"http://192.168.200.161:8088"
 #define HTMLHOST @"http://202.106.10.250:4808"
 
-//#define HOSTURL   @"172.16.105.110:8088"
+//#define HOSTURL   @"http://172.16.105.110:8088"
 
 
 

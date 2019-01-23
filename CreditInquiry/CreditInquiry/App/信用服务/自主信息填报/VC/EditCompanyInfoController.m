@@ -74,6 +74,9 @@ static NSString *TextCellID = @"CreditEditTextCell";
     [self showLoadDataAnimation];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
+    if (_companyId) {
+        [params setObject:_companyId forKey:@"companyId"];
+    }
     
     [RequestManager postWithURLString:KGetCompanyInfo parameters:params success:^(id responseObject) {
         [self hideLoadDataAnimation];
@@ -112,6 +115,9 @@ static NSString *TextCellID = @"CreditEditTextCell";
 }
 
 - (void)commitEditInfo{
+    if (_companyId) {
+        [self.dataDic setObject:_companyId forKey:@"companyId"];
+    }
     [MBProgressHUD showMessag:@"" toView:self.view];
     [RequestManager postWithURLString:KEditCompanyInfo parameters:self.dataDic success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:YES];
@@ -177,7 +183,6 @@ static NSString *TextCellID = @"CreditEditTextCell";
     [self.view endEditing:YES];
     if (_rightBtn.selected) {
         [self commitEditInfo];
-        NSLog(@"b内容___%@",self.dataDic);
     }else{
         _canEdit = _rightBtn.selected = YES;
         [_tableview reloadData];
@@ -201,7 +206,6 @@ static NSString *TextCellID = @"CreditEditTextCell";
         _dataDic = [NSMutableDictionary dictionary];
         [_dataDic setObject:_companyName forKey:@"companyName"];
         [_dataDic setObject:KUSER.userId forKey:@"userId"];
-        [_dataDic setObject:_companyId forKey:@"companyId"];
     }
     return _dataDic;
 }

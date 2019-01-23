@@ -32,7 +32,6 @@
             }];
             view.font = KFont(15);
             view.textColor = KHexRGB(0x303030);
-            view.backgroundColor = [UIColor greenColor];
             view;
         });
         
@@ -62,7 +61,7 @@
                 make.width.mas_equalTo(185*(KDeviceW/375.f));
                 make.height.mas_equalTo(125*(KDeviceW/375.f));
             }];
-            view.backgroundColor = [UIColor grayColor];
+            view.contentMode = UIViewContentModeScaleAspectFit;
             view;
         });
         

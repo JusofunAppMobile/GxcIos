@@ -22,6 +22,8 @@
 #import "SearchController.h"
 #import "VisitorController.h"
 #import "CreditServiceModel.h"
+#import "CommonWebViewController.h"
+#import "VipPrivilegeController.h"
 
 
 static NSString *InfoID = @"CreditInfoCell";
@@ -38,6 +40,7 @@ static NSString *ChartID = @"CreditChartLineCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self addLoginObserver];
     [self initView];
     [self loadData];
 }
@@ -244,8 +247,13 @@ static NSString *ChartID = @"CreditChartLineCell";
             [self.navigationController pushViewController:SearchVc animated:YES];
            
         }else if (model.menuType.intValue == -1){
-            
-            NSLog(@"网页跳转");
+          
+            CommonWebViewController *vc = [CommonWebViewController new];
+            vc.titleStr = model.menuName;
+            vc.urlStr = model.menuUrl;
+            vc.companyId = _creditModel.companyInfo[@"companyId"];
+            vc.companyName = _creditModel.companyInfo[@"companyName"];
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }
 }
@@ -260,6 +268,16 @@ static NSString *ChartID = @"CreditChartLineCell";
 
 #pragma mark - 网络异常
 - (void)abnormalViewReload{
+    [self loadData];
+}
+
+#pragma mark - 通知
+- (void)addLoginObserver{
+    [KNotificationCenter addObserver:self selector:@selector(reloadAction) name:KLoginSuccess object:nil];
+    [KNotificationCenter addObserver:self selector:@selector(reloadAction) name:KLoginOut object:nil];
+}
+
+- (void)reloadAction{
     [self loadData];
 }
 

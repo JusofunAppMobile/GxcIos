@@ -74,11 +74,12 @@ static NSString *TextCellID = @"CreditEditTextCell";
 
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
+    [params setObject:_productId forKey:@"productId"];
     
     [RequestManager postWithURLString:KGetCompanyProduct parameters:params success:^(id responseObject) {
         [self hideLoadDataAnimation];
         if ([responseObject[@"result"] intValue] == 0) {
-            [self.dataDic setDictionary:responseObject[@"data"]];
+            [self.dataDic addEntriesFromDictionary:responseObject[@"data"]];
             [_tableview reloadData];
         }else{
             [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
@@ -113,7 +114,11 @@ static NSString *TextCellID = @"CreditEditTextCell";
 
 - (void)commitEditInfo{
     [MBProgressHUD showMessag:@"" toView:self.view];
-    [RequestManager postWithURLString:KEditCompanyInfo parameters:self.dataDic success:^(id responseObject) {
+    if (_productId) {
+        [self.dataDic setObject:_productId forKey:@"productId"];
+    }
+    
+    [RequestManager postWithURLString:KEditCompanyProduct parameters:self.dataDic success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:YES];
         if ([responseObject[@"result"] intValue] == 0) {
             [MBProgressHUD showSuccess:@"提交成功" toView:self.view];
@@ -155,6 +160,7 @@ static NSString *TextCellID = @"CreditEditTextCell";
         if (indexPath.row == 5) {
             CreditEditImageCell *cell = [tableView dequeueReusableCellWithIdentifier:ImageCellID forIndexPath:indexPath];
             [cell setContent:self.dataDic type:EditTypeProduct];
+            cell.delegate = self;
             return cell;
         }else{
             CreditEditLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:LabelCellID forIndexPath:indexPath];
@@ -183,6 +189,7 @@ static NSString *TextCellID = @"CreditEditTextCell";
 }
 #pragma mark - CreditEditImageCellDelegate 添加图片
 - (void)didClickAddImageView{
+    
     [[GetPhoto sharedGetPhoto] getPhotoWithTarget:self success:^(UIImage *image, NSString *imagePath) {
         [self uploadHeadImage:image];
     }];
@@ -199,7 +206,6 @@ static NSString *TextCellID = @"CreditEditTextCell";
         _dataDic = [NSMutableDictionary dictionary];
         [_dataDic setObject:_companyName forKey:@"companyName"];
         [_dataDic setObject:KUSER.userId forKey:@"userId"];
-        [_dataDic setObject:_productId forKey:@"productId"];
     }
     return _dataDic;
 }

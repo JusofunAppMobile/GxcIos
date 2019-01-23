@@ -32,4 +32,8 @@ typedef NS_ENUM(NSInteger, WebType) {
 
 @property(nonatomic,strong)NSDictionary *dataDic;
 
+//自主填报
+@property (nonatomic ,copy) NSString *companyId;
+@property (nonatomic ,copy) NSString *companyName;
+
 @end

@@ -39,11 +39,7 @@ static NSString *PlainID = @"MePlainCell";
 - (void)initView{
     self.view.backgroundColor = KHexRGB(0xecedf2);
     
-    CGFloat y = 0;
-    if(@available(iOS 11.0, *))
-    {
-        y = KNavigationBarHeight;
-    }
+   
     UIImageView *redBg = [UIImageView new];
     redBg.image = KImageName(@"mine_topbg");
     [self.view addSubview:redBg];
@@ -58,8 +54,7 @@ static NSString *PlainID = @"MePlainCell";
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
             make.right.mas_equalTo(-15);
-            make.top.mas_equalTo(y);
-            make.bottom.mas_equalTo(self.view).offset(-KTabBarHeight);
+            make.top.mas_equalTo(self.view);
             make.bottom.mas_equalTo(-KTabBarHeight);
         }];
         view.backgroundColor = [UIColor clearColor];
@@ -124,15 +119,13 @@ static NSString *PlainID = @"MePlainCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     if (indexPath.section == 0) {
         if (KUSER.userId.length) {
             PersonalSettingController *vc = [PersonalSettingController new];
             [self.navigationController pushViewController:vc animated:YES];
         }else{
             LoginController *vc = [LoginController new];
-            vc.loginSuccessBlock = ^{
-                [tableView reloadData];
-            };
             [self.navigationController pushViewController:vc animated:YES];
         }
     }else if (indexPath.section == 2) {
@@ -214,6 +207,7 @@ static NSString *PlainID = @"MePlainCell";
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
+
 #pragma mark - life cycle
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -224,5 +218,6 @@ static NSString *PlainID = @"MePlainCell";
     [super viewWillDisappear:animated];
     self.navigationController.navigationBarHidden = NO;
 }
+
 
 @end

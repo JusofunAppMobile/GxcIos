@@ -13,7 +13,7 @@
 #import "CommonWebViewController.h"
 static NSString *CellID = @"SettingCell";
 
-@interface SettingViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface SettingViewController ()<UITableViewDelegate,UITableViewDataSource,SettingFooterViewDelegate>
 @property (nonatomic ,strong) UITableView *tableview;
 @property (nonatomic ,strong) SettingFooterView *footer;
 @end
@@ -115,10 +115,19 @@ static NSString *CellID = @"SettingCell";
     return imageDocPath;
 }
 
+#pragma mark - 退出登录
+- (void)didClickLoginout{
+    KUSER.userId = @"";
+    [User clearTable];
+    [KNotificationCenter postNotificationName:KLoginOut object:nil];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 #pragma mark - lazy load
 - (SettingFooterView *)footer{
     if (!_footer) {
         _footer = [[SettingFooterView alloc]initWithFrame:KFrame(0, 0, KDeviceW, 70)];
+        _footer.delegate = self;
     }
     return _footer;
 }

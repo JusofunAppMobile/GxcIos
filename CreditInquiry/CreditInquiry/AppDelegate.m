@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "BasicTabBarController.h"
+#import <IQKeyboardManager.h>
 
 @interface AppDelegate ()
 
@@ -17,13 +18,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    
     [KNotificationCenter addObserver:self selector:@selector(tokenInvalid) name:KTokenInvalid object:nil];
-    
     [self setIQKeyboardManager];
-    
-    
     [self setTabControllers];
     return YES;
 }

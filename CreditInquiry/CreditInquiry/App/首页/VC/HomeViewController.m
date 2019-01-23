@@ -31,6 +31,8 @@ static NSString *NewsCellID = @"NewsCellID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self addLoginObserver];
+    
     [self checkUpdate];
     
     [self drawView];
@@ -424,6 +426,15 @@ static NSString *NewsCellID = @"NewsCellID";
 
 }
 
+#pragma mark - 通知
+- (void)addLoginObserver{
+    [KNotificationCenter addObserver:self selector:@selector(reloadAction) name:KLoginSuccess object:nil];
+    [KNotificationCenter addObserver:self selector:@selector(reloadAction) name:KLoginOut object:nil];
+}
+
+- (void)reloadAction{
+    [self loadData];
+}
 
 #pragma mark - life cycle
 - (void)viewWillAppear:(BOOL)animated{
@@ -461,9 +472,8 @@ static NSString *NewsCellID = @"NewsCellID";
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)dealloc{
+    [KNotificationCenter removeObserver:self];
 }
 
 @end

@@ -16,7 +16,7 @@ static NSString *LabelCellID = @"CreditEditLabelCell";
 static NSString *ImageCellID = @"CreditEditImageCell";
 static NSString *TextCellID = @"CreditEditTextCell";
 
-@interface EditMemberController ()<UITableViewDataSource,UITableViewDelegate>
+@interface EditMemberController ()<UITableViewDataSource,UITableViewDelegate,CreditEditImageCellDelegate>
 @property (nonatomic ,strong) UIButton *rightBtn;
 @property (nonatomic ,strong) UITableView *tableview;
 @property (nonatomic ,assign) BOOL canEdit;
@@ -109,8 +109,11 @@ static NSString *TextCellID = @"CreditEditTextCell";
 }
 
 - (void)commitEditInfo{
+    if (_empId) {
+        [self.dataDic setObject:_empId forKey:@"empId"];
+    }
     [MBProgressHUD showMessag:@"" toView:self.view];
-    [RequestManager postWithURLString:KEditCompanyInfo parameters:self.dataDic success:^(id responseObject) {
+    [RequestManager postWithURLString:KEditCompanyMember parameters:self.dataDic success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:YES];
         if ([responseObject[@"result"] intValue] == 0) {
             [MBProgressHUD showSuccess:@"提交成功" toView:self.view];
@@ -153,6 +156,7 @@ static NSString *TextCellID = @"CreditEditTextCell";
         if (indexPath.row == 2) {
             CreditEditImageCell *cell = [tableView dequeueReusableCellWithIdentifier:ImageCellID forIndexPath:indexPath];
             [cell setContent:self.dataDic type:EditTypeMember];
+            cell.delegate = self;
             return cell;
         }else{
             CreditEditLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:LabelCellID forIndexPath:indexPath];
@@ -195,9 +199,8 @@ static NSString *TextCellID = @"CreditEditTextCell";
 - (NSMutableDictionary *)dataDic{
     if (!_dataDic) {
         _dataDic = [NSMutableDictionary dictionary];
-        [_dataDic setObject:_companyName forKey:@"companyName"];
+//        [_dataDic setObject:_companyName forKey:@"companyName"];
         [_dataDic setObject:KUSER.userId forKey:@"userId"];
-        [_dataDic setObject:_empId forKey:@"empId"];
     }
     return _dataDic;
 }

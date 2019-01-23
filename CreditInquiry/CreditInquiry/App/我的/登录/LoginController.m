@@ -35,9 +35,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    
-    
     [self setBlankBackButton];
     [self drawRightBarButton];
     
@@ -69,6 +66,7 @@
             User *model = [User mj_objectWithKeyValues:[responseObject objectForKey:@"data"]];
             [model save];
             [KNotificationCenter postNotificationName:KLoginSuccess object:nil];
+            [self back];
             
             if(self.loginSuccessBlock)
             {
@@ -107,21 +105,21 @@
 -(void)drawView
 {
     
-    self.backScrollView = ({
-        UIScrollView *view = [UIScrollView new];
-        [self.view addSubview:view];
-        [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(KNavigationBarHeight);
-            make.bottom.left.mas_equalTo(self.view);
-            make.width.mas_equalTo(KDeviceW);
-        }];
-        view;
-    });
+//    self.backScrollView = ({
+//        UIScrollView *view = [UIScrollView new];
+//        [self.view addSubview:view];
+//        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.mas_equalTo(KNavigationBarHeight);
+//            make.bottom.left.mas_equalTo(self.view);
+//            make.width.mas_equalTo(KDeviceW);
+//        }];
+//        view;
+//    });
     
     
     self.loginBtn = ({
         UIButton *view = [UIButton new];
-        [self.backScrollView addSubview:view];
+        [self.view addSubview:view];
         [view setTitle:@"登录" forState:UIControlStateNormal];
         [view addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
         [view setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -129,8 +127,8 @@
         view.layer.cornerRadius = 22;
         view.clipsToBounds = YES;
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(self.backScrollView).offset(50);
-            make.left.mas_equalTo(self.backScrollView).offset(30);
+            make.centerY.mas_equalTo(self.view).offset(50+KNavigationBarHeight);
+            make.left.mas_equalTo(self.view).offset(30);
             make.width.mas_equalTo(KDeviceW-60);
             make.height.mas_equalTo(44);
         }];
@@ -139,14 +137,14 @@
     
     self.pwdTextFld = ({
         UITextField *view = [UITextField new];
-        [self.backScrollView addSubview:view];
+        [self.view addSubview:view];
         view.textColor = [UIColor blackColor];
         view.secureTextEntry = YES;
         view.font = KFont(16);
         view.placeholder = @"请输入密码";
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.mas_equalTo(self.loginBtn.mas_top).offset(-30);
-            make.left.mas_equalTo(self.backScrollView).offset(30);
+            make.left.mas_equalTo(self.view).offset(30);
             make.height.mas_equalTo(35);
             make.width.mas_equalTo(KDeviceW-60);
         }];
@@ -155,11 +153,11 @@
     
     self.lineView2 = ({
         UIView *view = [UITextField new];
-        [self.backScrollView addSubview:view];
+        [self.view addSubview:view];
         view.backgroundColor = KHexRGB(0xDBDBDB);
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.pwdTextFld.mas_bottom);
-            make.left.mas_equalTo(self.backScrollView).offset(30);
+            make.left.mas_equalTo(self.view).offset(30);
             make.height.mas_equalTo(0.5);
             make.width.mas_equalTo(KDeviceW-60);
         }];
@@ -168,13 +166,13 @@
     
     self.phoneTextFld = ({
         UITextField *view = [UITextField new];
-        [self.backScrollView addSubview:view];
+        [self.view addSubview:view];
         view.textColor = [UIColor blackColor];
         view.font = KFont(16);
         view.placeholder = @"请输入手机号码";
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.mas_equalTo(self.pwdTextFld.mas_top).offset(-20);
-            make.left.mas_equalTo(self.backScrollView).offset(30);
+            make.left.mas_equalTo(self.view).offset(30);
             make.height.mas_equalTo(35);
             make.width.mas_equalTo(KDeviceW-60);
         }];
@@ -183,11 +181,11 @@
     
     self.lineView1 = ({
         UIView *view = [UITextField new];
-        [self.backScrollView addSubview:view];
+        [self.view addSubview:view];
         view.backgroundColor = KHexRGB(0xDBDBDB);
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.phoneTextFld.mas_bottom);
-            make.left.mas_equalTo(self.backScrollView).offset(30);
+            make.left.mas_equalTo(self.view).offset(30);
             make.height.mas_equalTo(0.5);
             make.width.mas_equalTo(KDeviceW-60);
         }];
@@ -197,12 +195,12 @@
     
     self.logoImageView = ({
         UIImageView *view = [UIImageView new];
-        [self.backScrollView addSubview:view];
+        [self.view addSubview:view];
         view.image = KImageName(@"logo");
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
            make.bottom.mas_equalTo(self.phoneTextFld.mas_top).offset(-50);
             
-            make.centerX.mas_equalTo(self.backScrollView);
+            make.centerX.mas_equalTo(self.view);
         }];
         view;
     });
@@ -210,7 +208,7 @@
     
     self.forgetBtn = ({
         UIButton *view = [UIButton new];
-        [self.backScrollView addSubview:view];
+        [self.view addSubview:view];
         [view setTitle:@"忘记密码" forState:UIControlStateNormal];
         view.titleLabel.font = KFont(14);
         [view addTarget:self action:@selector(forgetPassword) forControlEvents:UIControlEventTouchUpInside];
