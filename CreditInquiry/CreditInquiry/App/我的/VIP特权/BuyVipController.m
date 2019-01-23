@@ -328,10 +328,15 @@
         make.height.mas_equalTo(15);
     }];
     
+    NSString *numStr = [dataDic objectForKey:@"vipLastDay"];
+    if(!numStr||numStr.length==0)
+    {
+        numStr = @"0";
+    }
     UILabel *label2 = [[UILabel alloc]init];
     label2.textColor = KRGB(153, 153, 153);
     label2.font = KFont(14);
-    label2.text = [NSString stringWithFormat:@"VIP剩余天数：%@天",[dataDic objectForKey:@"vipLastDay"]];
+    label2.text = [NSString stringWithFormat:@"VIP剩余天数：%@天",numStr];
     [backView addSubview:label2];
     [label2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(nameLabel.mas_bottom).offset(10);

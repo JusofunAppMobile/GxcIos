@@ -38,7 +38,7 @@
     [self drawTableView];
     
     
-    if([self.status intValue] == 1||[self.status intValue] == 2||[self.status intValue] == 3)
+    if([KUSER.authStatus intValue] == 1||[KUSER.authStatus intValue] == 2||[KUSER.authStatus intValue] == 3)
     {
         [self loadData];
     }
@@ -77,7 +77,7 @@
             [cell7.addBtn sd_setImageWithURL:[NSURL URLWithString:@"licenseImage"] forState:UIControlStateNormal placeholderImage:KImageName(@"home_LoadingLogo")];
             [cell8.addBtn sd_setImageWithURL:[NSURL URLWithString:@"idcardImage"] forState:UIControlStateNormal placeholderImage:KImageName(@"home_LoadingPic")];
             
-            self.status = [[responseObject objectForKey:@"data"] objectForKey:@"status"];
+            KUSER.authStatus = [[responseObject objectForKey:@"data"] objectForKey:@"status"];
              [self setStatusLabel];
         }
         else
@@ -267,16 +267,16 @@
 
 -(void)setStatusLabel
 {
-    if([self.status intValue] == 1)//1：审核中
+    if([KUSER.authStatus intValue] == 1)//1：审核中
     {
         messageLabel.text = @"     资料已提交、审核中";
         submitBtn.hidden = YES;
     }
-    else if ([self.status intValue] == 2)//2：审核失败
+    else if ([KUSER.authStatus intValue] == 2)//2：审核失败
     {
         messageLabel.text = @"     认证状态已被驳回，请重新填写认证信息";
     }
-    else if ([self.status intValue] == 3)//3：审核成功
+    else if ([KUSER.authStatus intValue] == 3)//3：审核成功
     {
         messageLabel.text = @"     审核成功";
         submitBtn.hidden = YES;
@@ -372,7 +372,7 @@
         {
             cell.textFld.text = self.companyName;
         }
-        if([self.status intValue] == 0||[self.status intValue] == 2)
+        if([KUSER.authStatus intValue] == 0||[KUSER.authStatus intValue] == 2)
         {
              cell.editEnable = YES;
         }

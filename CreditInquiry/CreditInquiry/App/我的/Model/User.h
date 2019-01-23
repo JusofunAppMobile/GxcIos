@@ -24,8 +24,6 @@ typedef enum : NSInteger{
 SingletonH(User);
 
 
-@property(nonatomic,assign)BOOL isUserLogin;
-
 ///用户userid
 @property(nonatomic,copy)NSString *userId;
 
