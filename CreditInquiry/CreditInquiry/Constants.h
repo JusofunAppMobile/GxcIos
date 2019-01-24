@@ -174,6 +174,6 @@ typedef enum : NSUInteger {
 #define BaiDu_Appkey      @"ZDGjTGHV0mmAi1jxZCWBBmRHGnvuxnz9"
 
 //apple id
-#define KAppleID  @"1055909468"
+#define KAppleID  @"1450104309"//1055909468
 
 #endif /* Constants_h */

@@ -247,7 +247,6 @@
 		CA5E015721E433E30040ABE2 /* MonitorHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5E015021E433E30040ABE2 /* MonitorHeaderView.m */; };
 		CA5E015821E433E30040ABE2 /* MonitorTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5E015221E433E30040ABE2 /* MonitorTableHeader.m */; };
 		CA5EFF9021DC59B20040ABE2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFF8F21DC59B20040ABE2 /* AppDelegate.m */; };
-		CA5EFF9321DC59B20040ABE2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFF9221DC59B20040ABE2 /* ViewController.m */; };
 		CA5EFF9621DC59B20040ABE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA5EFF9421DC59B20040ABE2 /* Main.storyboard */; };
 		CA5EFF9821DC59BF0040ABE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA5EFF9721DC59BF0040ABE2 /* Assets.xcassets */; };
 		CA5EFF9E21DC59BF0040ABE2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFF9D21DC59BF0040ABE2 /* main.m */; };
@@ -726,8 +725,6 @@
 		CA5EFF8B21DC59B20040ABE2 /* CreditInquiry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CreditInquiry.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA5EFF8E21DC59B20040ABE2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CA5EFF8F21DC59B20040ABE2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		CA5EFF9121DC59B20040ABE2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		CA5EFF9221DC59B20040ABE2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		CA5EFF9521DC59B20040ABE2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CA5EFF9721DC59BF0040ABE2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CA5EFF9C21DC59BF0040ABE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1776,8 +1773,6 @@
 				CA5EFFA521DDDAE80040ABE2 /* Base */,
 				CA5EFF8E21DC59B20040ABE2 /* AppDelegate.h */,
 				CA5EFF8F21DC59B20040ABE2 /* AppDelegate.m */,
-				CA5EFF9121DC59B20040ABE2 /* ViewController.h */,
-				CA5EFF9221DC59B20040ABE2 /* ViewController.m */,
 				CA5EFF9421DC59B20040ABE2 /* Main.storyboard */,
 				CA5EFF9721DC59BF0040ABE2 /* Assets.xcassets */,
 				CA5EFF9C21DC59BF0040ABE2 /* Info.plist */,
@@ -2456,7 +2451,6 @@
 				79D34ED021E05E5600B1CB32 /* SearchBaseModel.m in Sources */,
 				CA5E007B21DDE05E0040ABE2 /* UIColor+Zirkfied.m in Sources */,
 				CA5E009021DDE05E0040ABE2 /* ZFLineChart.m in Sources */,
-				CA5EFF9321DC59B20040ABE2 /* ViewController.m in Sources */,
 				CA5E015321E433E30040ABE2 /* MonitorCell.m in Sources */,
 				CA5E015521E433E30040ABE2 /* MonitorFilterHeader.m in Sources */,
 				CA5E008321DDE05E0040ABE2 /* ZFConst.m in Sources */,

@@ -19,6 +19,7 @@
 #import "VipPrivilegeController.h"
 #import "BrowseController.h"
 #import "NewCommonWebController.h"
+#import "ShowMessageView.h"
 
 static NSString *InfoID = @"MeInfoCell";
 static NSString *ItemID = @"MeItemCell";
@@ -142,8 +143,8 @@ static NSString *PlainID = @"MePlainCell";
             vc.urlStr = KUseHelp;
             vc.titleStr = @"使用帮助";
             [self.navigationController pushViewController:vc animated:YES];
-        }else if(indexPath.row == 2){//test
-           
+        }else if(indexPath.row == 2){//test审核问题
+            [self checkUpdate];
         }else{
             SettingViewController *vc = [SettingViewController new];
             [self.navigationController pushViewController:vc animated:YES];
@@ -228,6 +229,16 @@ static NSString *PlainID = @"MePlainCell";
         vc.params = params;
         [self.navigationController pushViewController:vc animated:YES];
     }
+}
+
+#pragma mark - 检查更新
+-(void)checkUpdate
+{
+    [[ShowMessageView alloc]initWithType:ShowMessageCheckType action:^{
+        NSString *urlStr = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/cn/app/id%@?mt=8",KAppleID];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+        
+    }];
 }
 
 #pragma mark - life cycle

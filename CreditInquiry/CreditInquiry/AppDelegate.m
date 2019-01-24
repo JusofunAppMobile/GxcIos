@@ -38,6 +38,7 @@
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     self.tabBarController= [[BasicTabBarController alloc]init];
     self.window.rootViewController = _tabBarController;
+    [self.window makeKeyAndVisible];
 }
 
 #pragma mark - 失效

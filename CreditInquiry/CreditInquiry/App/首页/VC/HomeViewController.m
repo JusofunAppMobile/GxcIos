@@ -213,7 +213,7 @@ static NSString *NewsCellID = @"NewsCellID";
     [[ShowMessageView alloc]initWithType:ShowMessageCheckType action:^{
         NSString *urlStr = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/cn/app/id%@?mt=8",KAppleID];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
-        
+
     }];
 }
 
