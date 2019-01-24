@@ -52,7 +52,7 @@
         if (KUSER.authStatus.intValue == 1 ||KUSER.authStatus.intValue == 3) {//审核中
             [self.contentView addSubview:self.statusLab];
 
-            _titleLab.text =  KUSER.company;
+            _titleLab.text =  KUSER.authCompany;
             _statusLab.text = KUSER.authStatus.intValue == 1 ?@"审核中":@"已认证";
 
             [self.titleLab mas_remakeConstraints:^(MASConstraintMaker *make) {

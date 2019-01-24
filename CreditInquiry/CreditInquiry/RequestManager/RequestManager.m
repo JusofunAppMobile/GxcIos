@@ -230,9 +230,9 @@
             NSMutableDictionary *logDic = [NSMutableDictionary dictionary];
             [logDic setObject:[tmpDic[@"data"] mj_JSONObject] forKey:@"data"];
             [logDic setObject:tmpDic[@"m"] forKey:@"m"];
-            NSLog(@"\nPOST请求：Request success, URL: %@\n params:%@\n",
+            NSLog(@"\nPOST请求：Request failed, URL: %@\n params:%@\n 错误：%@",
                   [self generateGETAbsoluteURL:URLString params:tmpDic],
-                  logDic);
+                  logDic,error);
             failure(error);
         }
     }];

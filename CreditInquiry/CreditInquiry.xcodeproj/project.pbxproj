@@ -233,7 +233,6 @@
 		CA5E00BA21DDEA410040ABE2 /* CustomTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5E00B821DDEA410040ABE2 /* CustomTabBar.m */; };
 		CA5E013021E433890040ABE2 /* CreditSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5E012221E433880040ABE2 /* CreditSectionHeader.m */; };
 		CA5E013121E433890040ABE2 /* CreditCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5E012421E433880040ABE2 /* CreditCollectionCell.m */; };
-		CA5E013221E433890040ABE2 /* CreditServiceHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5E012721E433880040ABE2 /* CreditServiceHeader.m */; };
 		CA5E013321E433890040ABE2 /* XXLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5E012C21E433890040ABE2 /* XXLineChartView.m */; };
 		CA5E013421E433890040ABE2 /* CreditChartLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5E012D21E433890040ABE2 /* CreditChartLineCell.m */; };
 		CA5E013621E433890040ABE2 /* ULBCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5E012F21E433890040ABE2 /* ULBCollectionViewFlowLayout.m */; };
@@ -255,6 +254,9 @@
 		CA5EFFB121DDE0390040ABE2 /* BasicNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFAE21DDE0380040ABE2 /* BasicNavigationController.m */; };
 		CA5EFFB221DDE0390040ABE2 /* BasicWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFAF21DDE0380040ABE2 /* BasicWebViewController.m */; };
 		CA5EFFB321DDE0390040ABE2 /* BasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFB021DDE0390040ABE2 /* BasicViewController.m */; };
+		CA778CA121F9482D000F611E /* NewCommonWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA778CA021F9482D000F611E /* NewCommonWebController.m */; };
+		CA778CA721F9596B000F611E /* SearchResultWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA778CA621F9596B000F611E /* SearchResultWebController.m */; };
+		CA778CAA21F9A39C000F611E /* BigPicWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA778CA921F9A39C000F611E /* BigPicWebController.m */; };
 		CADD605D21E482CE00EB01CD /* EditCompanyInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD605C21E482CE00EB01CD /* EditCompanyInfoController.m */; };
 		CADD606021E491C200EB01CD /* CreditEditTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD605F21E491C200EB01CD /* CreditEditTextCell.m */; };
 		CADD606321E491DB00EB01CD /* CreditEditImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD606221E491DB00EB01CD /* CreditEditImageCell.m */; };
@@ -696,8 +698,6 @@
 		CA5E012421E433880040ABE2 /* CreditCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditCollectionCell.m; sourceTree = "<group>"; };
 		CA5E012521E433880040ABE2 /* CreditSectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditSectionHeader.h; sourceTree = "<group>"; };
 		CA5E012621E433880040ABE2 /* CreditChartLineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditChartLineCell.h; sourceTree = "<group>"; };
-		CA5E012721E433880040ABE2 /* CreditServiceHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditServiceHeader.m; sourceTree = "<group>"; };
-		CA5E012821E433890040ABE2 /* CreditServiceHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditServiceHeader.h; sourceTree = "<group>"; };
 		CA5E012921E433890040ABE2 /* ULBCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ULBCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		CA5E012B21E433890040ABE2 /* XXLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXLineChartView.h; sourceTree = "<group>"; };
 		CA5E012C21E433890040ABE2 /* XXLineChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXLineChartView.m; sourceTree = "<group>"; };
@@ -803,6 +803,12 @@
 		CA5EFFFA21DDE05D0040ABE2 /* YBRectConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBRectConst.m; sourceTree = "<group>"; };
 		CA5EFFFC21DDE05D0040ABE2 /* YTLPieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTLPieView.h; sourceTree = "<group>"; };
 		CA5EFFFD21DDE05D0040ABE2 /* YTLPieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTLPieView.m; sourceTree = "<group>"; };
+		CA778C9F21F9482D000F611E /* NewCommonWebController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewCommonWebController.h; sourceTree = "<group>"; };
+		CA778CA021F9482D000F611E /* NewCommonWebController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewCommonWebController.m; sourceTree = "<group>"; };
+		CA778CA521F9596B000F611E /* SearchResultWebController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchResultWebController.h; sourceTree = "<group>"; };
+		CA778CA621F9596B000F611E /* SearchResultWebController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultWebController.m; sourceTree = "<group>"; };
+		CA778CA821F9A39C000F611E /* BigPicWebController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BigPicWebController.h; sourceTree = "<group>"; };
+		CA778CA921F9A39C000F611E /* BigPicWebController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BigPicWebController.m; sourceTree = "<group>"; };
 		CADD605B21E482CE00EB01CD /* EditCompanyInfoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditCompanyInfoController.h; sourceTree = "<group>"; };
 		CADD605C21E482CE00EB01CD /* EditCompanyInfoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditCompanyInfoController.m; sourceTree = "<group>"; };
 		CADD605E21E491C200EB01CD /* CreditEditTextCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreditEditTextCell.h; sourceTree = "<group>"; };
@@ -939,6 +945,10 @@
 				799F796621E5E9E1000DBB88 /* RiskVipController.m */,
 				799F78E221E5C24C000DBB88 /* SeekRelationController.h */,
 				799F78E321E5C24C000DBB88 /* SeekRelationController.m */,
+				CA778CA521F9596B000F611E /* SearchResultWebController.h */,
+				CA778CA621F9596B000F611E /* SearchResultWebController.m */,
+				CA778CA821F9A39C000F611E /* BigPicWebController.h */,
+				CA778CA921F9A39C000F611E /* BigPicWebController.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -1592,6 +1602,8 @@
 				79D34F0921E0789E00B1CB32 /* View */,
 				793D1B5A21DF692700C29908 /* CommonWebViewController.h */,
 				793D1B5B21DF692800C29908 /* CommonWebViewController.m */,
+				CA778C9F21F9482D000F611E /* NewCommonWebController.h */,
+				CA778CA021F9482D000F611E /* NewCommonWebController.m */,
 			);
 			path = "首页";
 			sourceTree = "<group>";
@@ -1655,8 +1667,6 @@
 				CA5E012421E433880040ABE2 /* CreditCollectionCell.m */,
 				CA5E012521E433880040ABE2 /* CreditSectionHeader.h */,
 				CA5E012221E433880040ABE2 /* CreditSectionHeader.m */,
-				CA5E012821E433890040ABE2 /* CreditServiceHeader.h */,
-				CA5E012721E433880040ABE2 /* CreditServiceHeader.m */,
 				CA5E012921E433890040ABE2 /* ULBCollectionViewFlowLayout.h */,
 				CA5E012F21E433890040ABE2 /* ULBCollectionViewFlowLayout.m */,
 				CADD60D721E75F5A00EB01CD /* CreditInfoCell.h */,
@@ -2352,6 +2362,7 @@
 				793D1B6821DF699500C29908 /* CompanyDetailModel.m in Sources */,
 				79D34EBB21E05E1F00B1CB32 /* RiskSegmentView.m in Sources */,
 				793D1B4121DF685700C29908 /* AnswerModel.m in Sources */,
+				CA778CAA21F9A39C000F611E /* BigPicWebController.m in Sources */,
 				79D34ED221E05E5600B1CB32 /* AddressBookModel.m in Sources */,
 				79D34F0F21E07EE500B1CB32 /* CenterButton.m in Sources */,
 				CA56114C21F0277A0052CF38 /* ReportPreviewController.m in Sources */,
@@ -2494,6 +2505,7 @@
 				CA5E006621DDE05E0040ABE2 /* UILabel+Placeholder.m in Sources */,
 				793D1C7E21E0585D00C29908 /* TabListModel.m in Sources */,
 				79D34E9F21E05DEF00B1CB32 /* RedButton.m in Sources */,
+				CA778CA721F9596B000F611E /* SearchResultWebController.m in Sources */,
 				793D1AC321DF658300C29908 /* SearchResultController.m in Sources */,
 				CA5E006921DDE05E0040ABE2 /* DVFoodPieModel.m in Sources */,
 				CADD60EF21E887DD00EB01CD /* MonitorDetailHeader.m in Sources */,
@@ -2543,13 +2555,13 @@
 				79D34F0321E065CE00B1CB32 /* ReportExportBar.m in Sources */,
 				796AE3CE21EEDC4600623659 /* BRAddressPickerView.m in Sources */,
 				79D34F0621E0675B00B1CB32 /* SearchHistoryCell.m in Sources */,
+				CA778CA121F9482D000F611E /* NewCommonWebController.m in Sources */,
 				793D1AC421DF658300C29908 /* SearchController.m in Sources */,
 				793D1B4721DF68A300C29908 /* BranchOrInvesmentModel.m in Sources */,
 				CA5E008921DDE05E0040ABE2 /* ZFGenericAxis.m in Sources */,
 				793D1B2721DF67E000C29908 /* CompanyMap.m in Sources */,
 				CA56111721ECBE380052CF38 /* MDSectionModel.m in Sources */,
 				CA5E008621DDE05E0040ABE2 /* ZFBarChart.m in Sources */,
-				CA5E013221E433890040ABE2 /* CreditServiceHeader.m in Sources */,
 				CA5E008C21DDE05E0040ABE2 /* ZFHorizontalBar.m in Sources */,
 				79D34EBA21E05E1F00B1CB32 /* OweTaxCell.m in Sources */,
 				79D34ED121E05E5600B1CB32 /* SearchJobModel.m in Sources */,

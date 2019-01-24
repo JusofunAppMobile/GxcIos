@@ -96,8 +96,8 @@ static NSString *TextCellID = @"CreditEditTextCell";
         if ([responseObject[@"result"] intValue] == 0) {
             NSString *filepath = responseObject[@"data"][@"filepath"];
             NSString *imageURL = responseObject[@"data"][@"filehttp"];
-            [self.dataDic setObject:filepath forKey:@"image"];
-            [self.dataDic setObject:imageURL forKey:@"imageHttp"];
+            [self.dataDic setObject:filepath forKey:@"urlComplete"];
+            [self.dataDic setObject:imageURL forKey:@"image"];
             [_tableview reloadData];
         }else{
             [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
@@ -112,13 +112,17 @@ static NSString *TextCellID = @"CreditEditTextCell";
     if (_empId) {
         [self.dataDic setObject:_empId forKey:@"empId"];
     }
+    [self.dataDic setObject:_dataDic[@"urlComplete"] forKey:@"image"];
     [MBProgressHUD showMessag:@"" toView:self.view];
     [RequestManager postWithURLString:KEditCompanyMember parameters:self.dataDic success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:YES];
         if ([responseObject[@"result"] intValue] == 0) {
             [MBProgressHUD showSuccess:@"提交成功" toView:self.view];
             _canEdit = _rightBtn.selected = NO;
-            [_tableview reloadData];
+            [self back];
+            if (_reloadBlock) {
+                _reloadBlock();
+            }
         }else{
             [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
         }
@@ -185,6 +189,7 @@ static NSString *TextCellID = @"CreditEditTextCell";
 }
 #pragma mark - CreditEditImageCellDelegate 添加图片
 - (void)didClickAddImageView{
+    [self.view endEditing:YES];
     [[GetPhoto sharedGetPhoto] getPhotoWithTarget:self success:^(UIImage *image, NSString *imagePath) {
         [self uploadHeadImage:image];
     }];

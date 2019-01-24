@@ -1011,18 +1011,18 @@
 }
 
 
-- (BOOL)shouldAutorotate
-{
-    return YES;
-}
+//- (BOOL)shouldAutorotate
+//{
+//    return YES;
+//}
 - (BOOL)prefersStatusBarHidden
 {
     return NO;
 }
--(UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-    return  UIInterfaceOrientationPortrait ;
-}
+//-(UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+//{
+//    return  UIInterfaceOrientationPortrait ;
+//}
 
 
 

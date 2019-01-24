@@ -7,6 +7,7 @@
 //
 
 #import "SearchController.h"
+#import "SearchResultWebController.h"
 
 @interface SearchController ()<UISearchBarDelegate,UISearchBarDelegate , UISearchDisplayDelegate,UITableViewDelegate,UITableViewDataSource>
 {
@@ -48,17 +49,25 @@
 #pragma mark 请求热词
 -(void)loadHotData{
     
+    int menuType = 0;
+    if (_searchType == SearchSeekRelationType||_searchType == SearchRiskAnalyzeType||_searchType == SearchBidType||_searchType == SearchJudgementType||_searchType == SearchPenaltyType||_searchType == SearchBrandType) {
+        menuType = 0;
+    }else{
+        menuType = _searchType;
+    }
+    
+    
     NSMutableDictionary *paraDic  = [NSMutableDictionary dictionary];
-    [paraDic setObject:@(self.searchType) forKey:@"menuType"];
+    [paraDic setObject:@(menuType) forKey:@"menuType"];
     [paraDic setObject:KUSER.userId forKey:@"userId"];
     [RequestManager postWithURLString:KGetHotKey parameters:paraDic success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         // [MBProgressHUD hideHudToView:self.view animated:YES];
         if ([responseObject[@"result"] integerValue ]==0) {
-            [hotArray removeAllObjects];
-           
-            hotArray = [NSMutableArray arrayWithArray:[responseObject[@"data"] objectForKey:@"keywords"]];
-            
+//            [hotArray removeAllObjects];
+//
+//            hotArray = [NSMutableArray arrayWithArray:[responseObject[@"data"] objectForKey:@"keywords"]];
+            [self filterEmptyHotData:responseObject[@"data"][@"keywords"]];
             [historyTableView reloadData];
         }
         
@@ -69,11 +78,32 @@
     }];
 }
 
+- (void)filterEmptyHotData:(NSArray *)list{
+    [hotArray removeAllObjects];
+    if (!hotArray) {
+        hotArray = [NSMutableArray arrayWithCapacity:1];
+    }
+    
+    for (int i = 0;i<list.count;i++) {
+        NSString *keyword = list[i];
+        if (keyword.length) {
+            [hotArray addObject:keyword];
+        }
+    }
+}
+
 #pragma mark 插入热词
 -(void)insertHotKey:(NSString*)key{
     
+    int menuType = 0;
+    if (_searchType == SearchSeekRelationType||_searchType == SearchRiskAnalyzeType||_searchType == SearchBidType||_searchType == SearchJudgementType||_searchType == SearchPenaltyType||_searchType == SearchBrandType) {
+        menuType = 0;
+    }else{
+        menuType = _searchType;
+    }
+    
     NSMutableDictionary *paraDic  = [NSMutableDictionary dictionary];
-    [paraDic setObject:@(self.searchType) forKey:@"menuType"];
+    [paraDic setObject:@(menuType) forKey:@"menuType"];
     [paraDic setObject:key forKey:@"keyWord"];
     [paraDic setObject:KUSER.userId forKey:@"userId"];
     [RequestManager postWithURLString:KInsertHotKey parameters:paraDic success:^(id responseObject) {
@@ -189,7 +219,16 @@
         [historyTableView reloadData];
     }
     
-    [self pushToResult:searchStr];
+    //test 查关系 查风险
+    if (_searchType == SearchBidType||_searchType == SearchJudgementType||_searchType == SearchPenaltyType||_searchType == SearchBrandType) {
+        SearchResultWebController *vc = [SearchResultWebController new];
+        vc.searchType = _searchType;
+        vc.companyName = searchStr;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        [self pushToResult:searchStr];
+    }
+    
 }
 
 #pragma mark - 清除历史记录
@@ -464,26 +503,8 @@
     
     UIView *sectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KDeviceW, 34)];
     NSArray *arr = @[@"历史搜索",@"热门搜索"];//标题数组
-    //    NSArray *imgArray = @[@"History",@"Hot"];//颜色数组
     sectionView.backgroundColor = [UIColor whiteColor];
-    // sectionView.backgroundColor = [UIColor redColor];
-    
-    //    UIView *kongView = [[UIView alloc]initWithFrame:KFrame(0, 0, KDeviceW, 10)];
-    //    kongView.backgroundColor = KHexRGB(0xf0f4f5);
-    //    [sectionView addSubview:kongView];
-    //
-    //    UIView *lineView = [[UIView alloc]initWithFrame:KFrame(0, 0, KDeviceW, 0.5)];
-    //    lineView.backgroundColor = KHexRGB(0xd8d9da);
-    //   // [sectionView addSubview:lineView];
-    //
-    //    UIView *lineView2 = [[UIView alloc]initWithFrame:KFrame(0, kongView.maxY - 0.5, KDeviceW, 0.5)];
-    //    lineView2.backgroundColor = KHexRGB(0xd8d9da);
-    //    [sectionView addSubview:lineView2];
-    
-    
-    //    UIImageView *leftImg = [[UIImageView alloc] initWithFrame:CGRectMake(10, kongView.maxY+10, 29/2, 29/2)];
-    //    leftImg.image = [UIImage imageNamed:imgArray[index]];
-    //    [sectionView addSubview:leftImg];
+   
     UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, 60, 34)];
     titleLab.font = KFont(14);
     titleLab.textColor = KHexRGB(0x333333);
@@ -614,6 +635,8 @@
     
     [companySearchBar resignFirstResponder];
     
+    [self.navigationController.navigationBar fs_clearBackgroudCustomColor];
+
     //self.navigationController.navigationBar.translucent=YES;
 }
 

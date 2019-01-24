@@ -14,12 +14,11 @@
 #import "MyMonitorListController.h"
 #import "SettingViewController.h"
 #import "PersonalSettingController.h"
-#import "FogotPwdController.h"
 #import "LoginController.h"
 #import "ComCertificationController.h"
 #import "VipPrivilegeController.h"
-#import "CommonWebViewController.h"
-#import "BuyVipController.h"
+#import "BrowseController.h"
+#import "NewCommonWebController.h"
 
 static NSString *InfoID = @"MeInfoCell";
 static NSString *ItemID = @"MeItemCell";
@@ -130,17 +129,21 @@ static NSString *PlainID = @"MePlainCell";
         }
     }else if (indexPath.section == 2) {
         if (indexPath.row == 0) {
-            BrowseController *vc = [BrowseController new];
-            [self.navigationController pushViewController:vc animated:YES];
+            if (KUSER.userId.length) {
+                BrowseController *vc = [BrowseController new];
+                [self.navigationController pushViewController:vc animated:YES];
+            }else{
+                LoginController *vc = [LoginController new];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+           
         }else if (indexPath.row == 1){
-            CommonWebViewController *vc = [CommonWebViewController new];
+            NewCommonWebController *vc = [NewCommonWebController new];
             vc.urlStr = KUseHelp;
             vc.titleStr = @"使用帮助";
             [self.navigationController pushViewController:vc animated:YES];
         }else if(indexPath.row == 2){//test
-            BuyVipController *vc = [BuyVipController new];
-            [self.navigationController pushViewController:vc animated:YES];
-            
+           
         }else{
             SettingViewController *vc = [SettingViewController new];
             [self.navigationController pushViewController:vc animated:YES];
@@ -182,12 +185,26 @@ static NSString *PlainID = @"MePlainCell";
 
 #pragma mark - MeInfoCellDelegate
 - (void)joinVip{
-    VipPrivilegeController *vc = [VipPrivilegeController new];
+//    VipPrivilegeController *vc = [VipPrivilegeController new];
+//    [self.navigationController pushViewController:vc animated:YES];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:KUSER.userId forKey:@"userId"];
+    [params setObject:@"0" forKey:@"type"];//0 VIP
+    
+    NewCommonWebController *vc = [NewCommonWebController new];
+    vc.params = params;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - MeItemCellDelegate
 - (void)didClickItemAtIndex:(NSInteger)index{
+    if (!KUSER.userId.length) {
+        LoginController *vc = [LoginController new];
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+    }
+    
     if (index == 0) {
         MyOrderController *vc = [MyOrderController new];
         [self.navigationController pushViewController:vc animated:YES];
@@ -203,7 +220,12 @@ static NSString *PlainID = @"MePlainCell";
         ComCertificationController *vc = [ComCertificationController new];
         [self.navigationController pushViewController:vc animated:YES];
     }else if (index == 4){
-        VipPrivilegeController *vc = [VipPrivilegeController new];
+        NSMutableDictionary *params = [NSMutableDictionary dictionary];
+        [params setObject:KUSER.userId forKey:@"userId"];
+        [params setObject:@"0" forKey:@"type"];//0 VIP
+        
+        NewCommonWebController *vc = [NewCommonWebController new];
+        vc.params = params;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

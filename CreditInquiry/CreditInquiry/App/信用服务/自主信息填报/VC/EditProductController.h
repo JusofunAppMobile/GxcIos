@@ -9,10 +9,13 @@
 #import "BasicViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
+typedef void(^ReloadBlock)(void);
 
 @interface EditProductController : BasicViewController
 @property (nonatomic ,copy) NSString *companyName;
 @property (nonatomic ,copy) NSString *productId;
+@property (nonatomic ,copy) ReloadBlock reloadBlock;
+
 
 @end
 

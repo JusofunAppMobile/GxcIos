@@ -76,9 +76,9 @@
     _editType = type;
     
     NSString *string = type == EditTypeInfo?data[@"logo"]:data[@"image"];
-    if (![string hasPrefix:@"http://"]) {
-        string = type == EditTypeInfo?data[@"logoHttp"]:data[@"imageHttp"];
-    }
+//    if (![string hasPrefix:@"http://"]) {
+//        string = type == EditTypeInfo?data[@"logoHttp"]:data[@"imageHttp"];
+//    }
     [_iconView sd_setImageWithURL:[NSURL URLWithString:string] placeholderImage:KImageName(@"uploadDefault")];
     
     if (type == EditTypeInfo) {

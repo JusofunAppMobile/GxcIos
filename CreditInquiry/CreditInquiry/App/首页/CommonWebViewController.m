@@ -7,11 +7,7 @@
 //
 
 #import "CommonWebViewController.h"
-#import "EditCompanyInfoController.h"
-#import "EditProductController.h"
-#import "EditHonorController.h"
-#import "EditPartnerController.h"
-#import "EditMemberController.h"
+
 
 @implementation CommonWebViewController
 {
@@ -63,37 +59,7 @@
         _firstUrl = _nowUrl;
     }
     
-    NSLog(@"伪链接___%@",URLStr);
-    if ([URLStr containsString:@"gxc://edit"]) {
-        
-        NSDictionary *dic = [self parseString:URLStr];
-        int type = [dic[@"type"] intValue];
-        if (type == 1) {
-            EditCompanyInfoController *vc = [EditCompanyInfoController new];
-            vc.companyId = dic[@"id"];
-            vc.companyName = _companyName;
-            [self.navigationController pushViewController:vc animated:YES];
-        }else if (type == 2){
-            EditProductController *vc = [EditProductController new];
-            vc.productId = dic[@"id"];
-            vc.companyName = _companyName;
-            [self.navigationController pushViewController:vc animated:YES];
-        }else if (type == 3){
-            EditHonorController *vc = [EditHonorController new];
-            vc.honorId = dic[@"id"];
-            [self.navigationController pushViewController:vc animated:YES];
-        }else if (type == 4){
-            EditPartnerController *vc = [EditPartnerController new];
-            vc.partnerId = dic[@"id"];
-            [self.navigationController pushViewController:vc animated:YES];
-        }else if (type == 5){
-            EditMemberController *vc = [EditMemberController new];
-            vc.empId = dic[@"id"];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-        
-        return NO;
-    }
+   
 
     return YES;
 }
@@ -128,24 +94,6 @@
     [self showNetFailViewWithFrame:self.webView.frame];
 }
 
-#pragma mark - 解析
-- (NSDictionary *)parseString:(NSString *)string{
-    
-    NSString *str = [string stringByReplacingOccurrencesOfString:@"gxc://edit?" withString:@""];
-    NSArray *arr = [str componentsSeparatedByString:@"&"];
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-
-    NSArray *typeArr = [arr[0] componentsSeparatedByString:@"="];
-    NSArray *idArr = [arr[1] componentsSeparatedByString:@"="];
-
-    if (typeArr[1]) {
-        [dic setObject:typeArr[1] forKey:@"type"];
-    }
-    if (idArr[1]) {
-        [dic setObject:idArr[1] forKey:@"id"];
-    }
-    return dic;
-}
 
 
 

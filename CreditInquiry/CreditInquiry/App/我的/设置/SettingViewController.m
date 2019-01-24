@@ -10,7 +10,7 @@
 #import "SettingCell.h"
 #import "SettingFooterView.h"
 #import "MsgSettingController.h"
-#import "CommonWebViewController.h"
+#import "NewCommonWebController.h"
 static NSString *CellID = @"SettingCell";
 
 @interface SettingViewController ()<UITableViewDelegate,UITableViewDataSource,SettingFooterViewDelegate>
@@ -37,7 +37,9 @@ static NSString *CellID = @"SettingCell";
         view.dataSource = self;
         view.rowHeight = UITableViewAutomaticDimension;
         view.estimatedRowHeight = 52;
-        view.tableFooterView = self.footer;
+        if (KUSER.userId.length) {
+            view.tableFooterView = self.footer;
+        }
         view;
     });
     [_tableview registerClass:[SettingCell class] forCellReuseIdentifier:CellID];
@@ -88,7 +90,7 @@ static NSString *CellID = @"SettingCell";
             url = KAboutUS;
         }
         
-        CommonWebViewController *vc = [CommonWebViewController new];
+        NewCommonWebController *vc = [NewCommonWebController new];
         vc.urlStr = url;
         vc.titleStr = title;
         [self.navigationController pushViewController:vc animated:YES];

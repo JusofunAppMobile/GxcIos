@@ -77,8 +77,6 @@
             [MBProgressHUD showSuccess:@"登录成功" toView:self.view];
         }else{
             [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
-            
-            
         }
         
     } failure:^(NSError *error) {

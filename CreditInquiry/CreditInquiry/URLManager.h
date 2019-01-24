@@ -197,6 +197,9 @@
 //关于我们
 #define KAboutUS @""HTMLHOST"/dist/#/about"
 
+#define KGETH5URL @""HOSTURL"/app/Home/GetH5Address"
+
+
 ////////////////////////////////////////////////////////
 
 //企业详情
@@ -209,7 +212,6 @@
 
 //对外投资和分支机构
 #define GetEntBranchOrInvesment  [NSString stringWithFormat:@"%@%@",QXBHOSTURL,@"/api/entdetail/GetEntBranchOrInvesment"]
-
 
 
 

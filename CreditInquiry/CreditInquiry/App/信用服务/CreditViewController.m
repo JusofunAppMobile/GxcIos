@@ -22,9 +22,7 @@
 #import "SearchController.h"
 #import "VisitorController.h"
 #import "CreditServiceModel.h"
-#import "CommonWebViewController.h"
-#import "VipPrivilegeController.h"
-
+#import "NewCommonWebController.h"
 
 static NSString *InfoID = @"CreditInfoCell";
 static NSString *CellID = @"CreditCollectionCell";
@@ -50,7 +48,6 @@ static NSString *ChartID = @"CreditChartLineCell";
     [self showLoadDataAnimation];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
-    [self hideNetFailView];
     [RequestManager postWithURLString:KGetCreditHomeInfo parameters:params success:^(id responseObject) {
         [self hideLoadDataAnimation];
         if ([responseObject[@"result"] intValue] == 0) {
@@ -93,8 +90,6 @@ static NSString *ChartID = @"CreditChartLineCell";
     [_collectionview registerClass:[CreditCollectionCell class] forCellWithReuseIdentifier:CellID];
     [_collectionview registerClass:[CreditChartLineCell class] forCellWithReuseIdentifier:ChartID];
     [_collectionview registerClass:[CreditSectionHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderID];
-    
-    
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -218,37 +213,33 @@ static NSString *ChartID = @"CreditChartLineCell";
             VisitorController *vc = [VisitorController new];
             [self.navigationController pushViewController:vc animated:YES];
             
-        }else if (model.menuType.intValue == 14){
-
-            CreditInfoInputController *vc = [CreditInfoInputController new];
-            [self.navigationController pushViewController:vc animated:YES];
-            
         }else if (model.menuType.intValue == 15){
             SearchController *SearchVc = [[SearchController alloc]init];
-            SearchVc.searchType = SearchBlurryType;
+            SearchVc.searchType = SearchBidType;
             [self.navigationController pushViewController:SearchVc animated:YES];
           
         }else if (model.menuType.intValue == 16){
             
             SearchController *SearchVc = [[SearchController alloc]init];
-            SearchVc.searchType = SearchBlurryType;
+            SearchVc.searchType = SearchJudgementType;
             [self.navigationController pushViewController:SearchVc animated:YES];
             
         }else if (model.menuType.intValue == 17){
             
             SearchController *SearchVc = [[SearchController alloc]init];
-            SearchVc.searchType = SearchBlurryType;
+            SearchVc.searchType = SearchPenaltyType;
             [self.navigationController pushViewController:SearchVc animated:YES];
           
         }else if (model.menuType.intValue == 18){
             
             SearchController *SearchVc = [[SearchController alloc]init];
-            SearchVc.searchType = SearchBlurryType;
+            SearchVc.searchType = SearchBrandType;
             [self.navigationController pushViewController:SearchVc animated:YES];
            
         }else if (model.menuType.intValue == -1){
           
-            CommonWebViewController *vc = [CommonWebViewController new];
+            NewCommonWebController *vc = [NewCommonWebController new];
+            vc.webType = model.webType.intValue;
             vc.titleStr = model.menuName;
             vc.urlStr = model.menuUrl;
             vc.companyId = _creditModel.companyInfo[@"companyId"];
@@ -263,6 +254,18 @@ static NSString *ChartID = @"CreditChartLineCell";
     MonitorDetailController *vc = [MonitorDetailController new];
     vc.companyName = _creditModel.companyInfo[@"companyName"];
     vc.companyId = _creditModel.companyInfo[@"companyId"];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+//去认证
+- (void)didClickAuthView{
+    if (!KUSER.userId.length) {
+        LoginController *vc = [[LoginController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+    }
+    ComCertificationController *vc = [[ComCertificationController alloc]init];
+    vc.companyName = _creditModel.companyInfo[@"companyName"];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

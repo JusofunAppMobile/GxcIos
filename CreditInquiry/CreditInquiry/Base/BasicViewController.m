@@ -16,14 +16,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     [self.navigationController.navigationBar fs_setBackgroundColor:[UIColor whiteColor]];
+    [self.navigationController.navigationBar fs_setBackgroundColor:[UIColor whiteColor]];
     self.view.backgroundColor = [UIColor whiteColor];
     if (@available(iOS 11.0, *)){
         [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
     }else{
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
-    //self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 
 
@@ -167,21 +166,19 @@
 
 
 // 支持屏幕旋转
--(UIInterfaceOrientationMask)supportedInterfaceOrientations
-{
-    return (UIInterfaceOrientationMaskPortrait /*| UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight*/);
-}
-
-// 不自动旋转
-- (BOOL)shouldAutorotate
-{
+//是否自动旋转,返回YES可以自动旋转,返回NO禁止旋转
+- (BOOL)shouldAutorotate{
     return NO;
 }
 
-//
--(UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-    return (UIInterfaceOrientationPortrait /*| UIInterfaceOrientationLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight*/);
+//返回支持的方向
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+//由模态推出的视图控制器 优先支持的屏幕方向
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
+    return UIInterfaceOrientationPortrait;
 }
 
 

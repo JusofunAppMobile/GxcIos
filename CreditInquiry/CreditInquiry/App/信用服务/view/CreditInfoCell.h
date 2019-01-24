@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol CreditInfoCellDelegate <NSObject>
 
 - (void)didClickChangeButton;
-
+- (void)didClickAuthView;
 @end
 
 @interface CreditInfoCell : UICollectionViewCell

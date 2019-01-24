@@ -69,6 +69,12 @@
     }
 }
 
+- (void)authAction{
+    if ([self.delegate respondsToSelector:@selector(didClickAuthView)]) {
+        [self.delegate didClickAuthView];
+    }
+}
+
 #pragma mark - lazy load
 - (UIView *)changeView{
     if (!_changeView) {
@@ -124,6 +130,10 @@
     if (!_cardImageView) {
         _cardImageView = [[UIImageView alloc]initWithFrame:KFrame(15, 15, KDeviceW -15*2, (KDeviceW -15*2)*(221.f/688))];
         _cardImageView.image = KImageName(@"service_renzheng");
+        _cardImageView.userInteractionEnabled = YES;
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(authAction)];
+        [_cardImageView addGestureRecognizer:tap];
     }
     return _cardImageView;
 }
