@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.url = @"https://www.baidu.com/";//test
+//    self.url = @"https://www.baidu.com/";//test
     
     self.webView.frame = KFrame(0, KNavigationBarHeight, KDeviceW, KDeviceH-KNavigationBarHeight);
     [self loadWithUrl];
@@ -26,19 +26,20 @@
 
 -(void)loadWithUrl{
     NSString *urlStr = [self.url  stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSURL*url=[NSURL URLWithString:urlStr];
+    NSURL*url=[NSURL URLWithString:self.url];
     NSURLRequest*request=[NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30];
     [self.webView loadRequest:request];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     NSString *urlStr = request.URL.absoluteString;
-    if (![urlStr hasPrefix:@"gxc://vip"]) {
-        BuyVipController *vc = [BuyVipController new];
-        vc.fromType = _fromType;
-        [self.navigationController pushViewController:vc animated:YES];
-        return NO;
-    }
+
+//    if ([urlStr hasPrefix:@"gxc://vip"]) {
+//        BuyVipController *vc = [BuyVipController new];
+//        vc.fromType = _fromType;
+//        [self.navigationController pushViewController:vc animated:YES];
+//        return NO;
+//    }
     return YES;
 }
 

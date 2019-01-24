@@ -26,6 +26,8 @@
 
 #import "ShareholderCell.h"
 
+#import "NewCommonWebController.h"
+
 #define kCellID @"SearchCollectionCell"
 #define kReusableHeaderView @"reusableHeaderView"
 #define kReusableFooterView @"reusableFooterView"
@@ -138,14 +140,15 @@
     [self.searchView addSubview:self.companySearchBaBar];
     self.navigationItem.titleView = self.searchView;
     
+    //test
     //绘制筛选按钮
-    if (self.searchType != SearchTaxCodeType&&self.searchType != SearchJobType&&self.searchType != SearchRiskAnalyzeType ) {
+    if (self.searchType != SearchTaxCodeType&&self.searchType != SearchJobType ) {
         [self drawFilterBtn];//绘制筛选按钮
         [KeyWindow addSubview:self.filterView];//添加筛选列表
     }
     
     //是否显示排序
-    if (self.searchType != SearchTaxCodeType && self.searchType != SearchRiskAnalyzeType) {
+    if (self.searchType != SearchTaxCodeType ) {
         _sortBarH = self.searchType== SearchCrackcreditType?36:51;
         if (self.searchType == SearchAddressBookType||self.searchType == SearchPenaltyType) {
             [self drawExportBar];
@@ -213,7 +216,7 @@
     }else{
         urlStr = GetSear;
         sortType= sortType?:TimeDownSortType;
-        int type = _searchType == SearchSeekRelationType?6:_searchType;
+        int type = 0;
 
         if(self.searchType == SearchOurmainType)
         {
@@ -238,31 +241,6 @@
         [paraDic setObject:@(type) forKey:@"type"];
         [paraDic setObject:@(sortType) forKey:@"sequence"];
         requestType = HttpRequestTypeGet;
-        
-        if(sortType == HotSortType)
-        {
-            //[MobClick event:@"Search54"];//默认排序
-            //[[BaiduMobStat defaultStat] logEvent:@"Search54" eventLabel:@"搜索结果页－默认排序点击数"];
-            
-        }
-        else if (sortType == MoneyUpSortType||sortType == MoneyDownSortType)
-        {
-            //[MobClick event:@"Search55"];//注资排序
-            //[[BaiduMobStat defaultStat] logEvent:@"Search55" eventLabel:@"搜索结果页－注资排序点击数"];
-            
-        }
-        else
-        {
-            //[MobClick event:@"Search56"];//时间排序
-            //[[BaiduMobStat defaultStat] logEvent:@"Search56" eventLabel:@"搜索结果页－时间排序点击数"];
-            
-        }
-        
-        if(self.searchType == SearchBlurryType)
-        {
-            //[MobClick event:@"Search29"];//企业总搜索次数
-            //[[BaiduMobStat defaultStat] logEvent:@"Search29" eventLabel:@"企业总搜索次数"];
-        }
         
     }
     
@@ -520,24 +498,24 @@
         }
         [cell setModel:_companyAllArr[indexPath.row] checkboxShow:_showCheckbox];
         return cell;
-    }else if (self.searchType == SearchSeekRelationType){
-        ShareholderCell *cell = [tableView dequeueReusableCellWithIdentifier:ShareholderID];
-        if (!cell) {
-            cell = [[ShareholderCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ShareholderID];
-            cell.delegate = self;
-        }
-        [cell setModel:_companyAllArr[indexPath.row] showCheckbox:_showCheckbox];
-        return cell;
     }
-    else if (self.searchType == SearchRiskAnalyzeType){
-        RiskAnalyzeCell *cell = [tableView dequeueReusableCellWithIdentifier:ShareholderID];
-        if (!cell) {
-            cell = [[RiskAnalyzeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ShareholderID];
-           
-        }
-        cell.dataDic = @{};
-        return cell;
-    }
+//    else if (self.searchType == SearchSeekRelationType){
+//        ShareholderCell *cell = [tableView dequeueReusableCellWithIdentifier:ShareholderID];
+//        if (!cell) {
+//            cell = [[ShareholderCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ShareholderID];
+//            cell.delegate = self;
+//        }
+//        [cell setModel:_companyAllArr[indexPath.row] showCheckbox:_showCheckbox];
+//        return cell;
+//    }
+//    else if (self.searchType == SearchRiskAnalyzeType){
+//        RiskAnalyzeCell *cell = [tableView dequeueReusableCellWithIdentifier:ShareholderID];
+//        if (!cell) {
+//            cell = [[RiskAnalyzeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ShareholderID];
+//
+//        }
+//        return cell;
+//    }
     else{
         SearchCompanyCell *cell = [tableView dequeueReusableCellWithIdentifier:SearchCompanyID];
         if (!cell) {
@@ -684,9 +662,26 @@
             vc.companyName = model.companyname;
             [self.navigationController pushViewController:vc animated:YES];
         }
+    }else if (self.searchType == SearchSeekRelationType){
+        CompanyInfoModel *model = self.companyAllArr[indexPath.row];
+        NSMutableDictionary *info = [NSMutableDictionary dictionary];
+        [info setObject:model.companyname forKey:@"companyName"];
+        [KNotificationCenter postNotificationName:KSelectSearchResultNoti object:nil userInfo:info];
+        
+        NSArray *vcs = self.navigationController.viewControllers;
+        [self.navigationController popToViewController:vcs[vcs.count -3] animated:YES];
+        
     }else if (self.searchType == SearchRiskAnalyzeType){
-        RiskAnalyzeController *vc = [RiskAnalyzeController new];
-       
+        CompanyInfoModel *model = self.companyAllArr[indexPath.row];
+        
+        NSMutableDictionary *params = [NSMutableDictionary dictionary];
+        [params setObject:KUSER.userId forKey:@"userId"];
+        [params setObject:@(_searchType) forKey:@"type"];
+        [params setObject:model.companyname forKey:@"name_one"];
+
+        NewCommonWebController *vc = [NewCommonWebController new];
+        vc.params = params;
+        vc.titleStr = @"风险分析";
         [self.navigationController pushViewController:vc animated:YES];
     }
     else{
@@ -815,7 +810,7 @@
 - (void)drawTipsView{
     _tipsBarH = 30;
     _reportExportBar = [[ReportExportBar alloc]initWithFrame:KFrame(0, KNavigationBarHeight+_sortBarH, KDeviceW, _tipsBarH)];
-    _reportExportBar.barType = (_searchType == SearchAddressBookType||_searchType == SearchSeekRelationType||_searchType == SearchTaxCodeType||_searchType == SearchJobType||_searchType == SearchRiskAnalyzeType)?1:0;
+    _reportExportBar.barType = (_searchType == SearchAddressBookType||_searchType == SearchSeekRelationType||_searchType == SearchTaxCodeType||_searchType == SearchJobType)?1:0;
     _reportExportBar.delegate = self;
     [self.view addSubview:_reportExportBar];
 }
@@ -1344,6 +1339,10 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [self.navigationController.navigationBar fs_setBackgroundColor:KNavigationBarRedColor];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [self.navigationController.navigationBar fs_clearBackgroudCustomColor];
 }
 
 

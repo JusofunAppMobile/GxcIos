@@ -14,7 +14,7 @@
 //#define HOSTURL   @"http://192.168.200.161:8088"
 #define HTMLHOST @"http://202.106.10.250:4808"
 
-//#define HOSTURL   @"172.16.105.110:8088"
+//#define HOSTURL   @"http://172.16.105.110:8088"
 
 
 
@@ -197,6 +197,9 @@
 //关于我们
 #define KAboutUS @""HTMLHOST"/dist/#/about"
 
+#define KGETH5URL @""HOSTURL"/app/Home/GetH5Address"
+
+
 ////////////////////////////////////////////////////////
 
 //企业详情
@@ -209,7 +212,6 @@
 
 //对外投资和分支机构
 #define GetEntBranchOrInvesment  [NSString stringWithFormat:@"%@%@",QXBHOSTURL,@"/api/entdetail/GetEntBranchOrInvesment"]
-
 
 
 

@@ -55,6 +55,8 @@ SingletonH(User);
 
 @property(nonatomic,copy)NSString*token;
 
+@property (nonatomic ,copy) NSString *authCompany;
+
 
 
 

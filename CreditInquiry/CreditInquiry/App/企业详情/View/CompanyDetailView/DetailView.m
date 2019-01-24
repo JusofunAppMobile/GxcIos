@@ -535,11 +535,8 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             //cell.detailGridDelegate = self;
         }
-        
-        [cell setSelfRiskNum:[self.holderDic objectForKey:@"ownRisk"]];
-        [cell setRelateRiskNum:[self.holderDic objectForKey:@"relateRisk"]];
-        
-       
+//        [cell setSelfRiskNum:[self.holderDic objectForKey:@"ownRisk"]];
+//        [cell setRelateRiskNum:[self.holderDic objectForKey:@"relateRisk"]];
         return cell;
     }
     else if ([headStr isEqualToString:@"国信企业图谱"])
@@ -648,7 +645,7 @@
     }
     else if ([headStr isEqualToString:@"企业风险"])
     {
-        return 80;
+        return 5+(75.f/375)*KDeviceW;
     }
     else if ([headStr isEqualToString:@"国信企业图谱"])
     {
@@ -985,26 +982,24 @@
 -(void)reportView
 {
     self.toolBar = [[UIView alloc]initWithFrame:KFrame(0, KDeviceH - 55-KBottomHeight-KNavigationBarHeight, KDeviceW, 55+KBottomHeight)];
-    self.toolBar.backgroundColor = KHexRGB(0xEA5B5C);
-    self.toolBar.layer.shadowOpacity = 0.5;// 阴影透明度
-    self.toolBar.layer.shadowColor = [UIColor grayColor].CGColor;// 阴影的颜色
-    self.toolBar.layer.shadowRadius = 3;// 阴影扩散的范围控制
-    self.toolBar.layer.shadowOffset = CGSizeMake(1, 1);// 阴影的范围
     [self addSubview:self.toolBar  ];
     
    
     UIView *view = [[UIView alloc]initWithFrame:KFrame(0, 0, KDeviceW, 55)];
-    view.backgroundColor = [UIColor whiteColor];
+    view.backgroundColor = [UIColor lightGrayColor];
     [self.toolBar addSubview:view];
+    
+//    NSString *monitorTitle = _detailModel.monitorType.intValue == 0?@"监控":@"取消监控";
+    NSString *monitorImage = _detailModel.monitorType.intValue == 0?@"info_bot_icon_jiankong":@"info_bot_icon_jiankong_sel";
     
     NSArray *array = @[@"获取报告",@"纠错",@"监控",@"认证"];
     
-    NSArray *imageArray = @[@"info_bot_icon_baogao",@"info_bot_icon_yiyi",@"icon_monitor",@"info_bot_icon_renzheng"];
-    for(int i = 0;i<array.count;i++)
+    NSArray *imageArray = @[@"info_bot_icon_baogao",@"info_bot_icon_yiyi",monitorImage,@"info_bot_icon_renzheng"];
+    for(int i = 0;i < array.count;i++)
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = KFrame(KDeviceW/4*i+0.5*i, 0, KDeviceW/4, 55);
-        button.backgroundColor = KRGB(220, 39, 42);;
+        button.frame = KFrame(((KDeviceW-0.5*3)/4+0.5)*i, 0, (KDeviceW-0.5*3)/4, 55);
+        button.backgroundColor = KHexRGB(0xe1212a);
         [button setTitle:array[i] forState:UIControlStateNormal];
         button.titleLabel.font = KFont(14);
         [button setImage:KImageName(imageArray[i]) forState:UIControlStateNormal];

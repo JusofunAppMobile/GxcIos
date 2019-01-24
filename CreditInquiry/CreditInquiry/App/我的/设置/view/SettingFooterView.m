@@ -31,7 +31,9 @@
 }
 
 - (void)loginOutAction{
-    NSLog(@"退出");
+    if ([self.delegate respondsToSelector:@selector(didClickLoginout)]) {
+        [self.delegate didClickLoginout];
+    }
 }
 
 @end

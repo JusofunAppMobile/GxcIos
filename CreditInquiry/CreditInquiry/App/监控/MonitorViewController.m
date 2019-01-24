@@ -30,6 +30,7 @@ static NSString *CELLID = @"MonitorDynamicCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     _page = 1;
+    [self addLoginObserver];
     [self initView];
     [self loadData:YES];
 }
@@ -191,11 +192,28 @@ static NSString *CELLID = @"MonitorDynamicCell";
 - (void)abnormalViewReload{
     [self loadData:YES];
 }
+
+
+#pragma mark - 通知
+- (void)addLoginObserver{
+    [KNotificationCenter addObserver:self selector:@selector(reloadAction) name:KLoginSuccess object:nil];
+    [KNotificationCenter addObserver:self selector:@selector(reloadAction) name:KLoginOut object:nil];
+}
+
+- (void)reloadAction{
+    _page = 1;
+    [self loadData:NO];
+}
+
 #pragma mark - life cycle
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self setNavigationBarTitle:@"监控动态" andTextColor:[UIColor whiteColor]];
     [self.navigationController.navigationBar fs_setBackgroundColor:KHexRGB(0xd91526)];
+}
+
+- (void)dealloc{
+    [KNotificationCenter removeObserver:self];
 }
 
 #pragma mark - lazy load
@@ -212,5 +230,7 @@ static NSString *CELLID = @"MonitorDynamicCell";
     }
     return _datalist;
 }
+
+
 
 @end

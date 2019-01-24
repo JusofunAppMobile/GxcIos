@@ -9,10 +9,13 @@
 #import "BasicViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
+typedef void(^ReloadBlock)(void);
 
 @interface EditMemberController : BasicViewController
 @property (nonatomic ,copy) NSString *companyName;
 @property (nonatomic ,copy) NSString *empId;
+@property (nonatomic ,copy) ReloadBlock reloadBlock;
+
 @end
 
 NS_ASSUME_NONNULL_END

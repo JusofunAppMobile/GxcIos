@@ -32,7 +32,6 @@
             }];
             view.font = KFont(15);
             view.textColor = KHexRGB(0x303030);
-            view.backgroundColor = [UIColor greenColor];
             view;
         });
         
@@ -62,7 +61,7 @@
                 make.width.mas_equalTo(185*(KDeviceW/375.f));
                 make.height.mas_equalTo(125*(KDeviceW/375.f));
             }];
-            view.backgroundColor = [UIColor grayColor];
+            view.contentMode = UIViewContentModeScaleAspectFit;
             view;
         });
         
@@ -77,9 +76,9 @@
     _editType = type;
     
     NSString *string = type == EditTypeInfo?data[@"logo"]:data[@"image"];
-    if (![string hasPrefix:@"http://"]) {
-        string = type == EditTypeInfo?data[@"logoHttp"]:data[@"imageHttp"];
-    }
+//    if (![string hasPrefix:@"http://"]) {
+//        string = type == EditTypeInfo?data[@"logoHttp"]:data[@"imageHttp"];
+//    }
     [_iconView sd_setImageWithURL:[NSURL URLWithString:string] placeholderImage:KImageName(@"uploadDefault")];
     
     if (type == EditTypeInfo) {

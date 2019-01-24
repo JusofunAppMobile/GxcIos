@@ -17,7 +17,7 @@
 
 - (void)hotKeySearch:(NSString *)hotKey;
 
--(void)adClick:(NSString*)url;
+-(void)adClick:(NSDictionary*)adDic;
 
 @end
 

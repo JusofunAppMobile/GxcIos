@@ -215,17 +215,24 @@
         if (success) {
             [self verifyToekn:responseObject];
             [self getDateWithTask:task];
+            
+            NSMutableDictionary *logDic = [NSMutableDictionary dictionary];
+            [logDic setObject:[tmpDic[@"data"] mj_JSONObject] forKey:@"data"];
+            [logDic setObject:tmpDic[@"m"] forKey:@"m"];
             NSLog(@"\nPOST请求：Request success, URL: %@\n params:%@\n 返回内容：%@",
                   [self generateGETAbsoluteURL:URLString params:tmpDic],
-                  tmpDic,responseObject);
+                  logDic,responseObject);
             success(responseObject);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (failure) {
             [self getDateWithTask:task];
-            NSLog(@"\nPOST请求：Request success, URL: %@\n params:%@\n",
+            NSMutableDictionary *logDic = [NSMutableDictionary dictionary];
+            [logDic setObject:[tmpDic[@"data"] mj_JSONObject] forKey:@"data"];
+            [logDic setObject:tmpDic[@"m"] forKey:@"m"];
+            NSLog(@"\nPOST请求：Request failed, URL: %@\n params:%@\n 错误：%@",
                   [self generateGETAbsoluteURL:URLString params:tmpDic],
-                  tmpDic);
+                  logDic,error);
             failure(error);
         }
     }];
@@ -414,6 +421,7 @@
     
     return session;
 }
+
 
 
 //加密

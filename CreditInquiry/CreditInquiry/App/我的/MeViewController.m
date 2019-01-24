@@ -14,12 +14,11 @@
 #import "MyMonitorListController.h"
 #import "SettingViewController.h"
 #import "PersonalSettingController.h"
-#import "FogotPwdController.h"
 #import "LoginController.h"
 #import "ComCertificationController.h"
 #import "VipPrivilegeController.h"
-#import "CommonWebViewController.h"
-#import "BuyVipController.h"
+#import "BrowseController.h"
+#import "NewCommonWebController.h"
 
 static NSString *InfoID = @"MeInfoCell";
 static NSString *ItemID = @"MeItemCell";
@@ -39,11 +38,7 @@ static NSString *PlainID = @"MePlainCell";
 - (void)initView{
     self.view.backgroundColor = KHexRGB(0xecedf2);
     
-    CGFloat y = 0;
-    if(@available(iOS 11.0, *))
-    {
-        y = KNavigationBarHeight;
-    }
+   
     UIImageView *redBg = [UIImageView new];
     redBg.image = KImageName(@"mine_topbg");
     [self.view addSubview:redBg];
@@ -58,8 +53,7 @@ static NSString *PlainID = @"MePlainCell";
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
             make.right.mas_equalTo(-15);
-            make.top.mas_equalTo(y);
-            make.bottom.mas_equalTo(self.view).offset(-KTabBarHeight);
+            make.top.mas_equalTo(self.view);
             make.bottom.mas_equalTo(-KTabBarHeight);
         }];
         view.backgroundColor = [UIColor clearColor];
@@ -124,30 +118,32 @@ static NSString *PlainID = @"MePlainCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     if (indexPath.section == 0) {
         if (KUSER.userId.length) {
             PersonalSettingController *vc = [PersonalSettingController new];
             [self.navigationController pushViewController:vc animated:YES];
         }else{
             LoginController *vc = [LoginController new];
-            vc.loginSuccessBlock = ^{
-                [tableView reloadData];
-            };
             [self.navigationController pushViewController:vc animated:YES];
         }
     }else if (indexPath.section == 2) {
         if (indexPath.row == 0) {
-            BrowseController *vc = [BrowseController new];
-            [self.navigationController pushViewController:vc animated:YES];
+            if (KUSER.userId.length) {
+                BrowseController *vc = [BrowseController new];
+                [self.navigationController pushViewController:vc animated:YES];
+            }else{
+                LoginController *vc = [LoginController new];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+           
         }else if (indexPath.row == 1){
-            CommonWebViewController *vc = [CommonWebViewController new];
+            NewCommonWebController *vc = [NewCommonWebController new];
             vc.urlStr = KUseHelp;
             vc.titleStr = @"使用帮助";
             [self.navigationController pushViewController:vc animated:YES];
         }else if(indexPath.row == 2){//test
-            BuyVipController *vc = [BuyVipController new];
-            [self.navigationController pushViewController:vc animated:YES];
-            
+           
         }else{
             SettingViewController *vc = [SettingViewController new];
             [self.navigationController pushViewController:vc animated:YES];
@@ -189,12 +185,26 @@ static NSString *PlainID = @"MePlainCell";
 
 #pragma mark - MeInfoCellDelegate
 - (void)joinVip{
-    VipPrivilegeController *vc = [VipPrivilegeController new];
+//    VipPrivilegeController *vc = [VipPrivilegeController new];
+//    [self.navigationController pushViewController:vc animated:YES];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:KUSER.userId forKey:@"userId"];
+    [params setObject:@"0" forKey:@"type"];//0 VIP
+    
+    NewCommonWebController *vc = [NewCommonWebController new];
+    vc.params = params;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - MeItemCellDelegate
 - (void)didClickItemAtIndex:(NSInteger)index{
+    if (!KUSER.userId.length) {
+        LoginController *vc = [LoginController new];
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+    }
+    
     if (index == 0) {
         MyOrderController *vc = [MyOrderController new];
         [self.navigationController pushViewController:vc animated:YES];
@@ -210,10 +220,16 @@ static NSString *PlainID = @"MePlainCell";
         ComCertificationController *vc = [ComCertificationController new];
         [self.navigationController pushViewController:vc animated:YES];
     }else if (index == 4){
-        VipPrivilegeController *vc = [VipPrivilegeController new];
+        NSMutableDictionary *params = [NSMutableDictionary dictionary];
+        [params setObject:KUSER.userId forKey:@"userId"];
+        [params setObject:@"0" forKey:@"type"];//0 VIP
+        
+        NewCommonWebController *vc = [NewCommonWebController new];
+        vc.params = params;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
+
 #pragma mark - life cycle
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -224,5 +240,6 @@ static NSString *PlainID = @"MePlainCell";
     [super viewWillDisappear:animated];
     self.navigationController.navigationBarHidden = NO;
 }
+
 
 @end

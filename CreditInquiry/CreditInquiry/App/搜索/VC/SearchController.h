@@ -10,6 +10,7 @@
 #import "SearchResultController.h"
 #import "SearchHistoryCell.h"
 
+
 @interface SearchController : BasicViewController<SearchBackDelegate,SearchHistoryCellDelegate>
 
 @property (nonatomic,assign) SearchType searchType;

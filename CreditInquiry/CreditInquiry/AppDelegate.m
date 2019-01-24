@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 #import "BasicTabBarController.h"
+#import <IQKeyboardManager.h>
+#import "LoginController.h"
+#import "BasicNavigationController.h"
 
 @interface AppDelegate ()
 
@@ -17,13 +20,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    
     [KNotificationCenter addObserver:self selector:@selector(tokenInvalid) name:KTokenInvalid object:nil];
-    
+
     [self setIQKeyboardManager];
-    
-    
     [self setTabControllers];
     return YES;
 }
@@ -36,10 +35,9 @@
         User *user ;
         user = [array objectAtIndex:0];
     }
-    
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.tabBarController=[[BasicTabBarController alloc]init];
-    self.window.rootViewController=_tabBarController;
+    self.tabBarController= [[BasicTabBarController alloc]init];
+    self.window.rootViewController = _tabBarController;
 }
 
 #pragma mark - 失效
@@ -97,8 +95,6 @@
     NSDictionary *dic=@{@"result":@(result)};
     [KNotificationCenter postNotificationName:KPaySuccess object:nil userInfo:dic];
 }
-
-
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -97,6 +97,10 @@
 //    NSLog(@"%@",html);
 }
 
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    [self hideLoadDataAnimation];
+}
+
 -(void)loadWithUrl:(NSString *)strUrl
 {
     //    strUrl = [NSString stringWithFormat:@"%@%@",[Constant_Url hostUrl],strUrl];

@@ -95,7 +95,8 @@
 //时间纠偏
 #define KCurrentTimeToServerOffset @"CurrentTimeToServerOffset"
 
-
+//点击搜索结果
+#define KSelectSearchResultNoti @"KSelectSearchResultNoti"
 
 //推送消息
 typedef NS_ENUM(NSInteger, PushMessageType) {

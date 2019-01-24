@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import "AppDelegate.h"
 #import "VipPrivilegeController.h"
+#import "NewCommonWebController.h"
 
 static NSString *HomeSetionHeaderID = @"HomeSectionHeader";
 static NSString *MonitorCellID = @"MonitorCellID";
@@ -30,6 +31,8 @@ static NSString *NewsCellID = @"NewsCellID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self addLoginObserver];
     
     [self checkUpdate];
     
@@ -73,15 +76,15 @@ static NSString *NewsCellID = @"NewsCellID";
         [self.navigationController pushViewController:vc animated:YES];
     }else{
         LoginController *vc = [[LoginController alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];//test 发通知登录成功之后
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
--(void)adClick:(NSString *)url
-{
+-(void)adClick:(NSDictionary *)adDic{
     
-    CommonWebViewController *vc = [[CommonWebViewController alloc]init];
-    vc.urlStr = url;
+    NewCommonWebController *vc = [[NewCommonWebController alloc]init];
+    vc.urlStr = adDic[@"webURL"];
+    vc.webType = [adDic[@"webType"] intValue];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -157,18 +160,42 @@ static NSString *NewsCellID = @"NewsCellID";
     }
     else if (type == SearchRiskAnalyzeType)//9：风险分析(待定)
     {
-        RiskVipController *vc = [RiskVipController new];
-        [self.navigationController pushViewController:vc animated:YES];
+        if (KUSER.vipStatus.intValue == 1) {
+            SearchController *searchVc= [SearchController new];
+            searchVc.searchType = SearchRiskAnalyzeType;
+            [self.navigationController pushViewController:searchVc animated:YES];
+        }else{
+            RiskVipController *vc = [RiskVipController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+      
+    }
+    else if (type == SearchBidType){//中标
+        SearchController *searchVc= [SearchController new];
+        searchVc.searchType = SearchBidType;
+        [self.navigationController pushViewController:searchVc animated:YES];
+    }
+    else if (type == SearchJudgementType){//裁判文书
+        SearchController *searchVc= [SearchController new];
+        searchVc.searchType = SearchJudgementType;
+        [self.navigationController pushViewController:searchVc animated:YES];
+    }
+    else if (type == SearchPenaltyType){//行政处罚
+        SearchController *searchVc= [SearchController new];
+        searchVc.searchType = SearchPenaltyType;
+        [self.navigationController pushViewController:searchVc animated:YES];
+    }
+    else if (type == SearchBrandType){//商标查询
+        SearchController *searchVc= [SearchController new];
+        searchVc.searchType = SearchBrandType;
+        [self.navigationController pushViewController:searchVc animated:YES];
     }
     else if (type == -1)//-1: h5跳转
     {
-        SearchController *searchVc= [SearchController new];
-        //searchVc.searchType = SearchRiskAnalyze;
-        [self.navigationController pushViewController:searchVc animated:YES];
-       
-//        CommonWebViewController *vc = [CommonWebViewController new];
-//        vc.urlStr = [dic objectForKey:@"menuUrl"];
-//        [self.navigationController pushViewController:vc animated:YES];
+        NewCommonWebController *vc = [NewCommonWebController new];
+        vc.urlStr = dic[@"menuUrl"];
+        vc.titleStr = dic[@"menuName"];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
@@ -424,6 +451,15 @@ static NSString *NewsCellID = @"NewsCellID";
 
 }
 
+#pragma mark - 通知
+- (void)addLoginObserver{
+    [KNotificationCenter addObserver:self selector:@selector(reloadAction) name:KLoginSuccess object:nil];
+    [KNotificationCenter addObserver:self selector:@selector(reloadAction) name:KLoginOut object:nil];
+}
+
+- (void)reloadAction{
+    [self loadData];
+}
 
 #pragma mark - life cycle
 - (void)viewWillAppear:(BOOL)animated{
@@ -461,9 +497,9 @@ static NSString *NewsCellID = @"NewsCellID";
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)dealloc{
+    [KNotificationCenter removeObserver:self];
 }
+
 
 @end

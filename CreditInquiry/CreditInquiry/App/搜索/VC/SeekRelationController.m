@@ -7,8 +7,10 @@
 //
 
 #import "SeekRelationController.h"
+#import "SearchController.h"
+#import "BigPicWebController.h"
 
-@interface SeekRelationController ()<UITextFieldDelegate>
+@interface SeekRelationController ()<UITextFieldDelegate,UIWebViewDelegate>
 {
     UITextField *fromTextFld;
     UITextField *toTextFld;
@@ -16,7 +18,9 @@
     UIButton *bigBtn;
     
 }
-
+@property (nonatomic ,assign) int textIndex;
+@property (nonatomic ,strong) UIWebView *webView;
+@property (nonatomic ,copy) NSString *urlStr;
 @end
 
 @implementation SeekRelationController
@@ -28,26 +32,16 @@
     [self setNavigationBarTitle:@"查关系"];
     [self setBlankBackButton];
     
-    self.view.backgroundColor = KRGB(240, 242, 245);
-    
-    
     [self drawView];
     
-}
-
--(void)search
-{
-    
-}
-
--(void)showBig
-{
-    
+    [self addObserver];
 }
 
 
 -(void)drawView
 {
+    self.view.backgroundColor = KRGB(240, 242, 245);
+
     UIView *backView = [[UIView alloc]init];
     backView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:backView];
@@ -103,19 +97,20 @@
     fromTextFld.textColor = KRGB(51, 51, 51);
     fromTextFld.font = KFont(14);
     fromTextFld.placeholder = @"请分别添加两个公司或个人";
+    fromTextFld.delegate = self;
     //[view setValue:KFont(14) forKeyPath:@"_placeholderLabel.font"];
     [self.view addSubview:fromTextFld];
     [fromTextFld mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(label1.mas_right).offset(10);
         make.right.mas_equalTo(lineView);
         make.top.mas_equalTo(label1);
-
     }];
     
     toTextFld = [[UITextField alloc]init];
     toTextFld.textColor = KRGB(51, 51, 51);
     toTextFld.font = KFont(14);
     toTextFld.placeholder = @"请分别添加两个公司或个人";
+    toTextFld.delegate = self;
     //[view setValue:KFont(14) forKeyPath:@"_placeholderLabel.font"];
     [self.view addSubview:toTextFld];
     [toTextFld mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -136,6 +131,10 @@
     [label2 setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     [fromTextFld setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     [toTextFld setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+    
+    
+   
+    
     
     UIImageView *bgView = [UIImageView new];
     bgView.image = KImageName(@"seek");
@@ -172,6 +171,18 @@
     }];
     
     
+    
+    self.webView = ({
+        UIWebView *view = [UIWebView new];
+        [self.view addSubview:view];
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(backView.mas_bottom).offset(5);
+            make.left.right.bottom.mas_equalTo(self.view);
+        }];
+        view.hidden = YES;
+        view;
+    });
+    
     bigBtn = [[UIButton alloc]init];
     [bigBtn setTitle:@"  点击查看大图" forState:UIControlStateNormal];
     [bigBtn setTitleColor:KRGB(231, 0, 11) forState:UIControlStateNormal];
@@ -196,26 +207,103 @@
     }];
     
     
+    
+}
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    if ([textField isEqual:fromTextFld]) {
+        _textIndex = 0;
+    }else{
+        _textIndex = 1;
+    }
+    SearchController *vc = [SearchController new];
+    vc.searchType = SearchSeekRelationType;
+    [self.navigationController pushViewController:vc animated:YES];
+    return NO;
+}
+
+#pragma mark - 通知
+
+- (void)addObserver{
+    [KNotificationCenter addObserver:self selector:@selector(didSelectSearchResult:) name:KSelectSearchResultNoti object:nil];
+}
+
+- (void)didSelectSearchResult:(NSNotification *)noti{
+    NSDictionary *dic = noti.userInfo;
+    
+    
+    if (_textIndex == 0) {
+        fromTextFld.text = dic[@"companyName"];
+    }else{
+        toTextFld.text = dic[@"companyName"];
+    }
 }
 
 
 
+#pragma mark - 按钮
+-(void)search
+{
+    if (!fromTextFld.text.length||!toTextFld.text.length) {
+        [MBProgressHUD showHint:@"请分别添加2个公司或个人！" toView:self.view];
+        return;
+    }
+    
+    [self showLoadDataAnimation];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:KUSER.userId forKey:@"userId"];
+    [params setObject:@(SearchSeekRelationType) forKey:@"type"];
+    [params setObject:fromTextFld.text forKey:@"name_one"];
+    [params setObject:toTextFld.text forKey:@"name_two"];
+    [params setObject:@"6" forKey:@"route_num"];
 
+    [RequestManager postWithURLString:KGETH5URL parameters:params success:^(id responseObject) {
+        [self hideLoadDataAnimation];
+        if ([responseObject[@"result"] intValue] == 0) {
+            _urlStr = responseObject[@"data"][@"H5Address"];
+            [self loadURL];
+        }else{
+            [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
+        }
+        
+    } failure:^(NSError *error) {
+        [self showNetFailViewWithFrame:self.webView.frame];
+    }];
+    
+}
 
+-(void)showBig{
+    BigPicWebController *vc = [BigPicWebController new];
+    vc.urlStr = _urlStr;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
+#pragma mark - 网页加载
+- (void)loadURL{
+    self.webView.hidden = NO;
+    NSURL*url=[NSURL URLWithString:_urlStr];//test_urlstr
+    NSURLRequest *request=[NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:30];
+    [self.webView loadRequest:request];
+}
 
+-(void)webViewDidStartLoad:(UIWebView *)webView
+{
+    [self showLoadDataAnimation];
+}
 
+-(void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [self hideLoadDataAnimation];
+}
 
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    [self hideLoadDataAnimation];
+    [self showNetFailViewWithFrame:self.webView.frame];
+}
 
-
-
-
-
-
-
-
-
-
-
+- (void)abnormalViewReload{
+    [self loadURL];
+}
 
 @end

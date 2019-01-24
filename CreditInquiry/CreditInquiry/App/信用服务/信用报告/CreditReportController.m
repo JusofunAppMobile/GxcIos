@@ -23,7 +23,7 @@ static NSString *ProCellID = @"CreditProReportCell";
 
 @interface CreditReportController ()<UITableViewDataSource,UITableViewDelegate,CreditReportCellDelegate>
 @property (nonatomic ,strong) UITableView *tableview;
-@property (nonatomic ,strong) CreditReportHeader *header;
+//@property (nonatomic ,strong) CreditReportHeader *header;
 @property (nonatomic ,strong) NSDictionary *reportInfo;
 @end
 
@@ -79,7 +79,7 @@ static NSString *ProCellID = @"CreditProReportCell";
         view.rowHeight = UITableViewAutomaticDimension;
         view.estimatedRowHeight = 220;
         view.separatorStyle = UITableViewCellSeparatorStyleNone;
-        view.tableHeaderView = self.header;
+//        view.tableHeaderView = self.header;
         view;
     });
     [_tableview registerClass:[CreditReportCell class] forCellReuseIdentifier:CellID];
@@ -139,22 +139,29 @@ static NSString *ProCellID = @"CreditProReportCell";
 #pragma mark - 预览 获取报告
 - (void)didClickSendReportButton:(int)cellType{
     
-    if (KUSER.vipStatus.intValue == 1) {
-        NSString *price =  cellType == 0?_reportInfo[@"basicVersionDownloadAmount"]:_reportInfo[@"professionVersionDownloadAmount"];
-        
+    if (cellType == 0 ) {//基础报告
         ConfirmOrderController *vc = [ConfirmOrderController new];
-        vc.price = price;
-        vc.reportType = cellType == 0?1:2;
+        vc.price = _reportInfo[@"basicVersionDownloadAmount"];
+        vc.reportType = 1;
         vc.companyName = _companyName;
         vc.companyId = _companyid;
         [self.navigationController pushViewController:vc animated:YES];
-    }else{
-        KWeakSelf
-        [[ShowMessageView alloc]initWithType:ShowMessageVIPType action:^{
-            VipPrivilegeController *vc = [VipPrivilegeController new];
-            vc.fromType = BuyVipFromReportList;
-            [weakSelf.navigationController pushViewController:vc animated:YES];
-        }];
+    }else{//专业报告
+        if (KUSER.vipStatus.intValue == 1) {
+            ConfirmOrderController *vc = [ConfirmOrderController new];
+            vc.price = _reportInfo[@"professionVersionDownloadAmount"];
+            vc.reportType =2;
+            vc.companyName = _companyName;
+            vc.companyId = _companyid;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            KWeakSelf
+            [[ShowMessageView alloc]initWithType:ShowMessageVIPType action:^{
+                VipPrivilegeController *vc = [VipPrivilegeController new];
+                vc.fromType = BuyVipFromReportList;
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+            }];
+        }
     }
 }
 
@@ -171,12 +178,12 @@ static NSString *ProCellID = @"CreditProReportCell";
     [self loadData];
 }
 
-#pragma mark - lazy load
-- (CreditReportHeader *)header{
-    if (!_header) {
-        _header = [[CreditReportHeader alloc]initWithFrame:KFrame(0, 0, KDeviceW, 35)];
-    }
-    return _header;
-}
+//#pragma mark - lazy load
+//- (CreditReportHeader *)header{
+//    if (!_header) {
+//        _header = [[CreditReportHeader alloc]initWithFrame:KFrame(0, 0, KDeviceW, 35)];
+//    }
+//    return _header;
+//}
 
 @end

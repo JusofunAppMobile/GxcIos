@@ -109,5 +109,7 @@
 //查看报告类型
 @property (nonatomic ,strong) NSArray *reportTypeList;
 
+//监控类型
+@property (nonatomic ,copy) NSString *monitorType;//0未监控，1已监控
 
 @end

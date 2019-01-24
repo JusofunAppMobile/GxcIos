@@ -19,7 +19,7 @@
         self.nameLabel = ({
             UILabel *label = [[UILabel alloc]init];
             label.textColor = KRGB(22, 22, 22);
-            label.font = KFont(16);
+            label.font = KFont(15);
             label.text = @"";
             [self.contentView addSubview:label];
             [label mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -36,15 +36,15 @@
         {
             self.introLabel = ({
                 UILabel *label = [[UILabel alloc]init];
-                label.textColor = KRGB(22, 22, 22);
-                label.font = KFont(14);
+                label.textColor = KHexRGB(0x7b7b7b);
+                label.font = KFont(12);
                 label.text = @"";
                 label.numberOfLines = 0;
                 [self.contentView addSubview:label];
                 [label mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.left.mas_equalTo(30);
-                    make.right.mas_equalTo(self.contentView).offset(-30); make.top.mas_equalTo(self.nameLabel.mas_bottom).offset(10);
-                    
+                    make.right.mas_equalTo(self.contentView).offset(-30);
+                    make.top.mas_equalTo(self.nameLabel.mas_bottom).offset(10);
                 }];
                 label;
             });
@@ -100,7 +100,7 @@
             self.textFld = ({
                 UITextField *view = [[UITextField alloc]init];
                 view.textColor = KRGB(0, 0, 0);
-                //view.font = KFont(14);
+                view.font = KFont(15);
                 view.text = @"";
                 //[view setValue:KFont(14) forKeyPath:@"_placeholderLabel.font"];
                 [self.contentView addSubview:view];

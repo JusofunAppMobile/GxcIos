@@ -309,43 +309,19 @@
 #pragma mark - 关注公司
 -(void)focuCompany:(UIButton*)sender
 {
+    
+    KWeakSelf
+    if (!KUSER.userId.length) {
+        LoginController *view = [[LoginController alloc]init];
+        view.loginSuccessBlock = ^{
+            [weakSelf focuCompany:focuButton];
+        };
+        [self.navigationController pushViewController:view animated:YES];
+        return;
+    }
    //（0：取消收藏  1：添加收藏）
-    NSString * type = @"1";
-    KBolckSelf;
-    if(sender.tag == 45678)//关注这家企业
-    {
-        
-        if(KUSER.userId.length>0)
-        {
-            type = @"1";
-        }
-        else
-        {
-            
-            LoginController *view = [[LoginController alloc]init];
-            view.loginSuccessBlock = ^{
-                [blockSelf focuCompany:focuButton];
-            };
-            [self.navigationController pushViewController:view animated:YES];
-            
-            return;
-        }
-    }
-    else //取消关注企业
-    {
-        if (KUSER.userId.length>0) {
-            type = @"0";
-        }else
-        {
-            LoginController *view = [[LoginController alloc]init];
-            view.loginSuccessBlock = ^{
-                [blockSelf focuCompany:focuButton];
-            };
-            [self.navigationController pushViewController:view animated:YES];
-            return;
-        }
-        
-    }
+    NSString * type = sender.tag == 45678?@"1":@"0";
+    
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
     [paraDic setObject:detailModel.companyid forKey:@"companyid"];
     [paraDic setObject:type forKey:@"monitorType"];
@@ -361,21 +337,11 @@
             if(sender.tag == 45678)
             {
                 [MBProgressHUD showSuccess:@"关注成功" toView:self.view];
-            }
-            else
-            {
-                [MBProgressHUD showSuccess:@"取消关注成功" toView:self.view];
-            }
-            
-            
-            if(sender.tag == 45678)
-            {
                 [self setFoucsBtn:YES];
                 //关注成功
                 [[NSNotificationCenter defaultCenter]postNotificationName:KFocuNumChange object:@"1"];
-            }
-            else
-            {
+            }else{
+                [MBProgressHUD showSuccess:@"取消关注成功" toView:self.view];
                 [self setFoucsBtn:NO];
                 //取消关注
                 [[NSNotificationCenter defaultCenter]postNotificationName:KFocuNumChange object:@"0"];
@@ -402,43 +368,18 @@
 #pragma mark - 监控公司
 -(void)monitorCompany:(UIButton*)sender
 {
+    KWeakSelf
+    if (!KUSER.userId.length) {
+        LoginController *view = [[LoginController alloc]init];
+        view.loginSuccessBlock = ^{
+            [weakSelf focuCompany:focuButton];
+        };
+        [self.navigationController pushViewController:view animated:YES];
+        return;
+    }
     //（0:取消监控  1：添加监控）
-    NSString * type = @"1";
-    KBolckSelf;
-    if([sender.titleLabel.text isEqualToString:@"监控"])//关注这家企业
-    {
-        
-        if(KUSER.userId.length>0)
-        {
-            type = @"1";
-        }
-        else
-        {
-            
-            LoginController *view = [[LoginController alloc]init];
-            view.loginSuccessBlock = ^{
-                [blockSelf focuCompany:focuButton];
-            };
-            [self.navigationController pushViewController:view animated:YES];
-            
-            return;
-        }
-    }
-    else //取消关注企业
-    {
-        if (KUSER.userId.length>0) {
-            type = @"0";
-        }else
-        {
-            LoginController *view = [[LoginController alloc]init];
-            view.loginSuccessBlock = ^{
-                [blockSelf focuCompany:focuButton];
-            };
-            [self.navigationController pushViewController:view animated:YES];
-            return;
-        }
-        
-    }
+    NSString * type = [sender.titleLabel.text isEqualToString:@"监控"]?@"1":@"0";
+   
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
     [paraDic setObject:detailModel.companyid forKey:@"companyid"];
     [paraDic setObject:type forKey:@"monitorType"];
@@ -454,11 +395,13 @@
             if([sender.titleLabel.text isEqualToString:@"监控"])
             {
                 [MBProgressHUD showSuccess:@"添加监控成功" toView:self.view];
+                detailModel.monitorType = @"1";
                 [self setMonitorBtn:YES];
             }
             else
             {
                 [MBProgressHUD showSuccess:@"取消监控成功" toView:self.view];
+                detailModel.monitorType = @"0";
                 [self setMonitorBtn:NO];
             }
         }
@@ -788,18 +731,7 @@
 }
 
 #pragma mark - 拨打电话
--(void)callCompany:(NSString *)phoneStr
-{
-//    //[MobClick event:@"Detail61"];//企业详情页－电话点击数
-//    //[[BaiduMobStat defaultStat] logEvent:@"Detail61" eventLabel:@"企业详情页－电话点击数"];
-//
-//    MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"提示" icon:nil message:[NSString stringWithFormat:@"确定拨打电话：%@ ？",phoneStr] delegate:self buttonTitles:@"呼叫",@"取消", nil];
-//    [alertView show];
-    
-    
-    //[MobClick event:@"Businessdetails02"]; //企业详情-联系电话点击数
-    //[[BaiduMobStat defaultStat] logEvent:@"Businessdetails02" eventLabel:@"企业详情-联系电话点击数"];
-    
+-(void)callCompany:(NSString *)phoneStr{
     NSLog(@"呼叫");
     NSString *string =[[self->detailModel.companyphonelist objectAtIndex:0] objectForKey:@"number"];
     NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",string];
@@ -967,13 +899,13 @@
     if(!isMonitor)
     {
         
-       // [sender setTitle:@"监控" forState:UIControlStateNormal];
-        [sender setImage:KImageName(@"icon_monitor") forState:UIControlStateNormal];
+//        [sender setTitle:@"监控" forState:UIControlStateNormal];
+        [sender setImage:KImageName(@"info_bot_icon_jiankong") forState:UIControlStateNormal];
     }
     else
     {
-        [sender setImage:KImageName(@"icon_monitor_sel") forState:UIControlStateNormal];
-        //[sender setTitle:@"已监控" forState:UIControlStateNormal];
+        [sender setImage:KImageName(@"info_bot_icon_jiankong_sel") forState:UIControlStateNormal];
+//        [sender setTitle:@"取消监控" forState:UIControlStateNormal];
     }
 }
 
@@ -991,11 +923,11 @@
     
     NSMutableArray *buttonArray = [[NSMutableArray alloc ] init];
     
-    shareBarButton = [self addRightItemWithImage:@"分享icon" withImageRectRect:CGRectMake(0, 0, 20, 17) action:@selector(share)];
+//    shareBarButton = [self addRightItemWithImage:@"分享icon" withImageRectRect:CGRectMake(0, 0, 20, 17) action:@selector(share)];
 
     focuButton = [self addRightItemWithImage:@"详情收藏" withImageRectRect:CGRectMake(0, 0, 17, 17) action:@selector(focuCompany:)];
     
-    errorBtn = [self addRightItemWithImage:@"详情" withImageRectRect:CGRectMake(0, 0, 20, 17) action:@selector(errorCorrection)];
+//    errorBtn = [self addRightItemWithImage:@"详情" withImageRectRect:CGRectMake(0, 0, 20, 17) action:@selector(errorCorrection)];
     
     
     if (@available(iOS 11.0,*) ){
@@ -1008,7 +940,7 @@
         [buttonArray addObject:negativeSpace];
     }
     
-    UIBarButtonItem *shareItem = [[UIBarButtonItem alloc] initWithCustomView:shareBarButton];
+//    UIBarButtonItem *shareItem = [[UIBarButtonItem alloc] initWithCustomView:shareBarButton];
     UIBarButtonItem *focuItem = [[UIBarButtonItem alloc] initWithCustomView:focuButton];
    // UIBarButtonItem *errorItem = [[UIBarButtonItem alloc] initWithCustomView:errorBtn];
     
@@ -1079,18 +1011,18 @@
 }
 
 
-- (BOOL)shouldAutorotate
-{
-    return YES;
-}
+//- (BOOL)shouldAutorotate
+//{
+//    return YES;
+//}
 - (BOOL)prefersStatusBarHidden
 {
     return NO;
 }
--(UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-    return  UIInterfaceOrientationPortrait ;
-}
+//-(UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+//{
+//    return  UIInterfaceOrientationPortrait ;
+//}
 
 
 

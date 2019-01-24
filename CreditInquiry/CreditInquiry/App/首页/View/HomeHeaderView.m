@@ -227,7 +227,7 @@
         if(array.count >index)
         {
             NSDictionary *dic = array[index];
-            [self.delegate adClick:[dic objectForKey:@"webURL"]];
+            [self.delegate adClick:dic];
         }
         
     }
