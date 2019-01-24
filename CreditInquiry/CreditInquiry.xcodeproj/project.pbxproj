@@ -249,7 +249,6 @@
 		CA5E015821E433E30040ABE2 /* MonitorTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5E015221E433E30040ABE2 /* MonitorTableHeader.m */; };
 		CA5EFF9021DC59B20040ABE2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFF8F21DC59B20040ABE2 /* AppDelegate.m */; };
 		CA5EFF9321DC59B20040ABE2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFF9221DC59B20040ABE2 /* ViewController.m */; };
-		CA5EFF9621DC59B20040ABE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA5EFF9421DC59B20040ABE2 /* Main.storyboard */; };
 		CA5EFF9821DC59BF0040ABE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA5EFF9721DC59BF0040ABE2 /* Assets.xcassets */; };
 		CA5EFF9E21DC59BF0040ABE2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFF9D21DC59BF0040ABE2 /* main.m */; };
 		CA5EFFB121DDE0390040ABE2 /* BasicNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFAE21DDE0380040ABE2 /* BasicNavigationController.m */; };
@@ -728,7 +727,6 @@
 		CA5EFF8F21DC59B20040ABE2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		CA5EFF9121DC59B20040ABE2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		CA5EFF9221DC59B20040ABE2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		CA5EFF9521DC59B20040ABE2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CA5EFF9721DC59BF0040ABE2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CA5EFF9C21DC59BF0040ABE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA5EFF9D21DC59BF0040ABE2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1768,7 +1766,6 @@
 				CA5EFF8F21DC59B20040ABE2 /* AppDelegate.m */,
 				CA5EFF9121DC59B20040ABE2 /* ViewController.h */,
 				CA5EFF9221DC59B20040ABE2 /* ViewController.m */,
-				CA5EFF9421DC59B20040ABE2 /* Main.storyboard */,
 				CA5EFF9721DC59BF0040ABE2 /* Assets.xcassets */,
 				CA5EFF9C21DC59BF0040ABE2 /* Info.plist */,
 				CA5EFF9D21DC59BF0040ABE2 /* main.m */,
@@ -2275,7 +2272,6 @@
 				CA5EFF9821DC59BF0040ABE2 /* Assets.xcassets in Resources */,
 				796AE3CD21EEDC4600623659 /* BRPickerView.bundle in Resources */,
 				796AE39821EED60A00623659 /* provice_city_area.json in Resources */,
-				CA5EFF9621DC59B20040ABE2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2627,17 +2623,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		CA5EFF9421DC59B20040ABE2 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CA5EFF9521DC59B20040ABE2 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		CA5EFF9F21DC59BF0040ABE2 /* Debug */ = {

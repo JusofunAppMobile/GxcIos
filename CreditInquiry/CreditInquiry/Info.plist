@@ -42,8 +42,6 @@
 	<string>请允许访问相机用于更新您的头像等信息</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>请允许访问相册用于更新您的头像等信息</string>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
