@@ -114,7 +114,7 @@
     
     NSURLSessionDataTask *session = [manager GET:URLString parameters:tmpDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (success) {
-           [self getDateWithTask:task];
+           [self QXBGetDateWithTask:task];
             NSLog(@"\nGET请求：Request success, URL: %@\n params:%@\n ",
                   [self generateGETAbsoluteURL:URLString params:tmpDic],
                   tmpDic);
@@ -122,7 +122,7 @@
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (failure) {
-          [self getDateWithTask:task];
+          [self QXBGetDateWithTask:task];
             NSLog(@"\nGET请求：Request failure, URL: %@\n params:%@\n",
                   [self generateGETAbsoluteURL:URLString params:tmpDic],
                   tmpDic);
@@ -147,7 +147,7 @@
     
     NSURLSessionDataTask *session = [manager GET:URLString parameters:tmpDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (success) {
-           [self getDateWithTask:task];
+           [self QXBGetDateWithTask:task];
             NSLog(@"\nGET请求：Request success, URL: %@\n params:%@\n ",
                   [self generateGETAbsoluteURL:URLString params:tmpDic],
                   tmpDic);
@@ -155,7 +155,7 @@
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (failure) {
-           [self getDateWithTask:task];
+           [self QXBGetDateWithTask:task];
             NSLog(@"\nGET请求：Request success, URL: %@\n params:%@\n",
                   [self generateGETAbsoluteURL:URLString params:tmpDic],
                   tmpDic);
@@ -180,7 +180,7 @@
     
     NSURLSessionDataTask *session = [manager POST:URLString parameters:tmpDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (success) {
-          [self getDateWithTask:task];
+          [self QXBGetDateWithTask:task];
             NSLog(@"\nPOST请求：Request success, URL: %@\n params:%@\n 返回内容：%@",
                   [self generateGETAbsoluteURL:URLString params:tmpDic],
                   tmpDic,responseObject);
@@ -188,7 +188,7 @@
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (failure) {
-           [self getDateWithTask:task];
+           [self QXBGetDateWithTask:task];
             NSLog(@"\nPOST请求：Request success, URL: %@\n params:%@\n",
                   [self generateGETAbsoluteURL:URLString params:tmpDic],
                   tmpDic);
@@ -258,7 +258,7 @@
         {
             session = [manager GET:URLString parameters:tmpDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 if (success) {
-                    [self getDateWithTask:task];
+                    [self QXBGetDateWithTask:task];
                     NSLog(@"\nget请求：Request success, URL: %@\n params:%@\n 返回内容：%@",
                           [self generateGETAbsoluteURL:URLString params:parameters],
                           parameters,responseObject);
@@ -266,7 +266,7 @@
                 }
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 if (failure) {
-                   [self getDateWithTask:task];
+                   [self QXBGetDateWithTask:task];
                     NSLog(@"\nGET请求：Request success, URL: %@\n params:%@\n",
                           [self generateGETAbsoluteURL:URLString params:parameters],
                           parameters);
@@ -283,7 +283,7 @@
             session = [manager POST:URLString parameters:tmpDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 if (success) {
                     
-                   [self getDateWithTask:task];
+                   [self QXBGetDateWithTask:task];
                     NSLog(@"\nPOST请求：Request success, URL: %@\n params:%@\n 返回内容：%@",
                           [self generateGETAbsoluteURL:URLString params:parameters],
                           parameters,responseObject);
@@ -291,7 +291,7 @@
                 }
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 if (failure) {
-                [self getDateWithTask:task];
+                [self QXBGetDateWithTask:task];
                     NSLog(@"\nPOST请求：Request success, URL: %@\n params:%@\n",
                           [self generateGETAbsoluteURL:URLString params:parameters],
                           parameters);
@@ -465,12 +465,35 @@
 +(void)getDateWithTask:(NSURLSessionDataTask*)task
 {
     NSHTTPURLResponse *response = (NSHTTPURLResponse*)task.response;
-    NSString *serverDate =response.allHeaderFields[@"Date"];
-    NSDate *serverTime = [JAddField convertHeaderDateToNSDate:serverDate];
-    NSDate *currentTime = [NSDate date];
-    CGFloat timeoffset = currentTime.timeIntervalSince1970 -serverTime.timeIntervalSince1970;
-    [KUserDefaults setValue:[NSString stringWithFormat:@"%f",timeoffset] forKey:KCurrentTimeToServerOffset];
+    if(response)
+    {
+        NSString *serverDate =response.allHeaderFields[@"Date"];
+        NSDate *serverTime = [JAddField convertHeaderDateToNSDate:serverDate];
+        NSDate *currentTime = [NSDate date];
+        CGFloat timeoffset = currentTime.timeIntervalSince1970 -serverTime.timeIntervalSince1970;
+        [KUserDefaults setValue:[NSString stringWithFormat:@"%f",timeoffset] forKey:KCurrentTimeToServerOffset];
+        [KUserDefaults synchronize];
+    }
+    
 }
+
++(void)QXBGetDateWithTask:(NSURLSessionDataTask*)task
+{
+    NSHTTPURLResponse *response = (NSHTTPURLResponse*)task.response;
+    if(response)
+    {
+        NSString *serverDate =response.allHeaderFields[@"Date"];
+        NSDate *serverTime = [JAddField convertHeaderDateToNSDate:serverDate];
+        NSDate *currentTime = [NSDate date];
+        CGFloat timeoffset = currentTime.timeIntervalSince1970 -serverTime.timeIntervalSince1970;
+        [KUserDefaults setValue:[NSString stringWithFormat:@"%f",timeoffset] forKey:KQXBCurrentTimeToServerOffset];
+        
+       // NSLog(@"%f=====",timeoffset);
+        [KUserDefaults synchronize];
+    }
+    
+}
+
 
 
 +(void)verifyToekn:(id)responseObject

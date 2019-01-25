@@ -93,6 +93,9 @@
 //用户信息修改成功
 #define KModifyUserInfoSuccessNoti @"KModifyUserInfoSuccessNoti"
 //时间纠偏
+#define KQXBCurrentTimeToServerOffset @"QXBCurrentTimeToServerOffset"
+
+//时间纠偏
 #define KCurrentTimeToServerOffset @"CurrentTimeToServerOffset"
 
 //点击搜索结果

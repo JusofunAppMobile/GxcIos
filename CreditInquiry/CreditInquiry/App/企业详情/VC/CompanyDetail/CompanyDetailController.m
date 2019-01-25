@@ -90,7 +90,7 @@
     [self showLoadDataAnimation];
     
     NSURLSessionDataTask*task = [RequestManager QXBGetWithURLString:urlstr parameters:paraDic success:^(id responseObject) {
-        NSLog(@"%@",responseObject);
+        //NSLog(@"%@",responseObject);
         [weakSelf hideLoadDataAnimation];
         
         _reportTypeList = [ReportTypeModel mj_objectArrayWithKeyValuesArray:responseObject[@"reportTypeList"]];//test
@@ -182,7 +182,7 @@
     [paraDic setObject:KUSER.userId forKey:@"userId"];
     NSString* urlstr = [KGetCorporateInfo stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURLSessionDataTask*task = [RequestManager postWithURLString:urlstr parameters:paraDic success:^(id responseObject) {
-        NSLog(@"%@",responseObject);
+        //NSLog(@"%@",responseObject);
        
         if ([responseObject[@"result"] integerValue] == 0)
         {
@@ -252,7 +252,7 @@
     [paraDic setObject:self.companyName forKey:@"entname"];
     NSString* url = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURLSessionDataTask*task = [RequestManager QXBGetWithURLString:url parameters:paraDic success:^(id responseObject) {
-        NSLog(@"%@",responseObject);
+        //NSLog(@"%@",responseObject);
         [MBProgressHUD hideHudToView:self.view animated:YES];
         if([[responseObject objectForKey:@"result"] intValue] == 0)
         {
@@ -297,7 +297,7 @@
         }
         
     } failure:^(NSError *error) {
-        NSLog(@"%@",error.description);
+        //NSLog(@"%@",error.description);
         [MBProgressHUD showError:@"请求失败,请稍后重试" toView:self.view];
     }];
     
@@ -718,7 +718,7 @@
 //    KBolckSelf;
 //    NSURLSessionDataTask*task = [RequestManager QXBGetWithURLString:str parameters:nil success:^(id responseObject) {
 //        [MBProgressHUD hideHudToView:self.view animated:YES];
-//        NSLog(@"查看企业报告=%@",responseObject);
+//        //NSLog(@"查看企业报告=%@",responseObject);
 //        if([[responseObject objectForKey:@"result"]intValue] == 0){//跳转各种报告
 //            ReportController *vc = [[ReportController alloc]init];
 //            vc.url = [NSString stringWithFormat:@"%@&version=%@&apptype=1",[[responseObject objectForKey:@"data"] objectForKey:@"reportUrl"],[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]] ;
@@ -749,7 +749,7 @@
 
 #pragma mark - 拨打电话
 -(void)callCompany:(NSString *)phoneStr{
-    NSLog(@"呼叫");
+    //NSLog(@"呼叫");
     NSString *string =[[self->detailModel.companyphonelist objectAtIndex:0] objectForKey:@"number"];
     NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",string];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
@@ -912,13 +912,13 @@
 {
     
     if (buttonIndex == 1) {
-        NSLog(@"取消");
+        //NSLog(@"取消");
     }else
     {
         //[MobClick event:@"Businessdetails02"]; //企业详情-联系电话点击数
         //[[BaiduMobStat defaultStat] logEvent:@"Businessdetails02" eventLabel:@"企业详情-联系电话点击数"];
 
-        NSLog(@"呼叫");
+        //NSLog(@"呼叫");
         NSString *string =[[self->detailModel.companyphonelist objectAtIndex:0] objectForKey:@"number"];
         NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",string];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
