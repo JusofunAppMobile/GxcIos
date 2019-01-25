@@ -6,12 +6,12 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "yangli@2x.png",
+      "filename" : "hidden@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "yangli@3x.png",
+      "filename" : "hidden@3x.png",
       "scale" : "3x"
     }
   ],

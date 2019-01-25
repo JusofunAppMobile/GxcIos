@@ -70,7 +70,6 @@
             
             if(self.loginSuccessBlock)
             {
-                [self.navigationController popViewControllerAnimated:YES];
                 self.loginSuccessBlock();
             }
             

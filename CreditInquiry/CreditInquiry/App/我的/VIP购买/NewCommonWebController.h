@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 //请求url的 参数
 @property (nonatomic ,strong) NSDictionary *params;
 
+@property (nonatomic ,strong) UIViewController *target;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -278,6 +278,7 @@ static NSString *ChartID = @"CreditChartLineCell";
 - (void)addLoginObserver{
     [KNotificationCenter addObserver:self selector:@selector(reloadAction) name:KLoginSuccess object:nil];
     [KNotificationCenter addObserver:self selector:@selector(reloadAction) name:KLoginOut object:nil];
+    [KNotificationCenter addObserver:self selector:@selector(reloadAction) name:KCertificationNoti object:nil];
 }
 
 - (void)reloadAction{

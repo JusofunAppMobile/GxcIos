@@ -62,11 +62,9 @@
 
 - (void)itemAction:(UIButton *)button
 {
-    [self changeState:!button.selected];
     if ([self.delegate respondsToSelector:@selector(selectCollectionViewCell:selected:)]) {
-        [self.delegate selectCollectionViewCell:self.dataDic selected:button.selected];
+        [self.delegate selectCollectionViewCell:_model selected:!button.selected];
     }
-
 }
 
 - (void)changeState:(BOOL)selected{
@@ -81,19 +79,25 @@
 }
 
 
--(void)setDataDic:(NSDictionary *)dataDic
-{
-    _dataDic = dataDic;
-    
-    [self.titleBtn setTitle:[dataDic objectForKey:@"monitor_condition_name"] forState:UIControlStateNormal];
+- (void)setModel:(MonitorFilterModel *)model{
+    _model = model;
+    [self.titleBtn setTitle:model.monitor_condition_name forState:UIControlStateNormal];
+    [self changeState:model.selected];
 }
 
+//-(void)setDataDic:(NSDictionary *)dataDic
+//{
+//    _dataDic = dataDic;
+//
+//    [self.titleBtn setTitle:[dataDic objectForKey:@"monitor_condition_name"] forState:UIControlStateNormal];
+//}
 
-- (void)setText:(NSString *)text{
-    _text = text;
-    _titleLab.text = text;
-    
-    [self.titleBtn setTitle:text forState:UIControlStateNormal];
-}
+
+//- (void)setText:(NSString *)text{
+//    _text = text;
+//    _titleLab.text = text;
+//
+//    [self.titleBtn setTitle:text forState:UIControlStateNormal];
+//}
 
 @end

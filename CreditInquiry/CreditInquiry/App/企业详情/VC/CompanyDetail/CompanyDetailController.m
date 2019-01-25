@@ -12,6 +12,11 @@
 #import "AssetsContainerController.h"
 #import "ReportTypeModel.h"
 #import "ObjectionAppealController.h"
+#import "ShowMessageView.h"
+#import "BuyVipController.h"
+#import "NewCommonWebController.h"
+#import "RiskVipController.h"
+#import "CreditReportController.h"
 
 @interface CompanyDetailController()
 {
@@ -645,7 +650,10 @@
     
     if(button.tag == KDetailOperationTag)//获取报告
     {
-        
+        CreditReportController *vc = [CreditReportController new];
+        vc.companyName = detailModel.companyname;
+        vc.companyid = detailModel.companyid;
+        [self.navigationController pushViewController:vc animated:YES];
     }
     else if (button.tag == KDetailOperationTag+1)//纠错
     {
@@ -661,7 +669,16 @@
     }
     else if (button.tag == KDetailOperationTag+2)//监控
     {
-        [self monitorCompany:button];
+        if (KUSER.vipStatus.intValue == 1) {
+            [self monitorCompany:button];
+        }else{
+            KWeakSelf
+            [[ShowMessageView alloc]initWithType:ShowMessageVIPType action:^{
+                BuyVipController *vc = [BuyVipController new];
+                vc.target = weakSelf;
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+            }];
+        }
     }
     else //if (button.tag == KDetailOperationTag+2)//认证
     {
@@ -804,36 +821,70 @@
 #pragma mark 企业图谱/关联关系 /股权结构
 - (void)detailMapButtonClick:(UIButton *)button
 {
+    
+    if (!KUSER.userId.length) {
+        LoginController *vc = [LoginController new];
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+    }
+    
+    if (!KUSER.vipStatus.intValue) {
+        [[ShowMessageView alloc]initWithType:ShowMessageVIPType action:^{
+            BuyVipController *vc = [BuyVipController new];
+            vc.target = self;
+            [self.navigationController pushViewController:vc animated:YES];
+        }];
+        return;
+    }
+    
     if(button.tag == KDetailMapBtnTag)//企业图谱
     {
-        CommonWebViewController *view = [[CommonWebViewController alloc]init];
+        NewCommonWebController *view = [[NewCommonWebController alloc]init];
         view.urlStr = [holderDic objectForKey:@"AtlasH5Address"];
+        view.titleStr = @"企业图谱";
         [self.navigationController pushViewController:view animated:YES];
     }
     else if(button.tag == KDetailMapBtnTag+1)//关联关系
     {
-        CommonWebViewController *view = [[CommonWebViewController alloc]init];
+        NewCommonWebController *view = [[NewCommonWebController alloc]init];
         view.urlStr = [holderDic objectForKey:@"CorrelationH5Address"];
+        view.titleStr = @"关联关系";
         [self.navigationController pushViewController:view animated:YES];
     }
     else//股权结构
     {
-        CommonWebViewController *view = [[CommonWebViewController alloc]init];
+        NewCommonWebController *view = [[NewCommonWebController alloc]init];
         view.urlStr = [holderDic objectForKey:@"OwnershipStructureH5Address"];
+        view.titleStr = @"股权结构";
         [self.navigationController pushViewController:view animated:YES];
     }
 }
 #pragma mark 企业风险
 -(void)checkDetailRisk
 {
+    if (!KUSER.userId.length) {
+        LoginController *vc = [LoginController new];
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+    }
     
+    if (KUSER.vipStatus.intValue) {
+        NewCommonWebController *view = [[NewCommonWebController alloc]init];
+        view.urlStr = [holderDic objectForKey:@"RiskH5Address"];
+        view.titleStr = @"企业风险分析";
+        [self.navigationController pushViewController:view animated:YES];
+    }else{
+        RiskVipController *vc = [RiskVipController new];
+        vc.target = self;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
+
 #pragma mark 更多信息
--(void)checkDetailMoreInfo
-{
-    
-    CommonWebViewController *view = [[CommonWebViewController alloc]init];
+-(void)checkDetailMoreInfo{
+    NewCommonWebController *view = [[NewCommonWebController alloc]init];
     view.urlStr = [holderDic objectForKey:@"InfoH5Address"];
+    view.titleStr = @"更多信息";
     [self.navigationController pushViewController:view animated:YES];
 }
 
@@ -899,13 +950,13 @@
     if(!isMonitor)
     {
         
-//        [sender setTitle:@"监控" forState:UIControlStateNormal];
+        [sender setTitle:@"监控" forState:UIControlStateNormal];
         [sender setImage:KImageName(@"info_bot_icon_jiankong") forState:UIControlStateNormal];
     }
     else
     {
         [sender setImage:KImageName(@"info_bot_icon_jiankong_sel") forState:UIControlStateNormal];
-//        [sender setTitle:@"取消监控" forState:UIControlStateNormal];
+        [sender setTitle:@"已监控" forState:UIControlStateNormal];
     }
 }
 

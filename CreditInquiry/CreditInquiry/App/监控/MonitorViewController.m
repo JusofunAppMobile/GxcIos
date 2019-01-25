@@ -10,16 +10,16 @@
 #import "MonitorListModel.h"
 #import "MonitorHeaderView.h"
 #import "MonitorTableHeader.h"
-#import "MonitorFilterView.h"
 #import "MonitorDetailController.h"
 #import "UITableView+NoData.h"
+#import "ShowMessageView.h"
+#import "BuyVipController.h"
 
 static NSString *CELLID = @"MonitorDynamicCell";
 
 @interface MonitorViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic ,strong) UITableView *tableview;
 @property (nonatomic ,strong) MonitorTableHeader *tableHeader;
-@property (nonatomic ,strong) MonitorFilterView *filterView;
 @property (nonatomic ,strong) NSMutableArray *datalist;
 @property (nonatomic ,assign) NSInteger page;
 @property (nonatomic ,assign) BOOL moreData;
@@ -68,39 +68,29 @@ static NSString *CELLID = @"MonitorDynamicCell";
     MonitorDynamicCell* cell1 = (MonitorDynamicCell*)cell;
     
     //（0:取消监控  1：添加监控）
-    NSString * type = @"1";
-    KBolckSelf;
-    if(!cell1.monitorBtn.selected)
-    {
-        if(KUSER.userId.length>0)
-        {
-            type = @"1";
-        }
-        else
-        {
-            LoginController *view = [[LoginController alloc]init];
-            view.loginSuccessBlock = ^{
-                [blockSelf didClickMonitorButton:model cell:cell];
-            };
-            [self.navigationController pushViewController:view animated:YES];
-            return;
-        }
+    
+    KWeakSelf
+    if (KUSER.userId.length) {
+        LoginController *view = [[LoginController alloc]init];
+        view.loginSuccessBlock = ^{
+            [weakSelf didClickMonitorButton:model cell:cell];
+        };
+        [self.navigationController pushViewController:view animated:YES];
+        return;
     }
-    else
-    {
-        if (KUSER.userId.length>0) {
-            type = @"0";
-        }else
-        {
-            LoginController *view = [[LoginController alloc]init];
-            view.loginSuccessBlock = ^{
-                 [blockSelf didClickMonitorButton:model cell:cell];
-            };
-            [self.navigationController pushViewController:view animated:YES];
-            return;
-        }
-        
+    
+    if (!KUSER.vipStatus.intValue) {
+        KWeakSelf
+        [[ShowMessageView alloc]initWithType:ShowMessageVIPType action:^{
+            BuyVipController *vc = [BuyVipController new];
+            vc.target = weakSelf;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        }];
+        return;
     }
+    
+    NSString * type =cell1.monitorBtn.selected? @"0":@"1";
+
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
     [paraDic setObject:model.companyId forKey:@"companyid"];
     [paraDic setObject:type forKey:@"monitorType"];

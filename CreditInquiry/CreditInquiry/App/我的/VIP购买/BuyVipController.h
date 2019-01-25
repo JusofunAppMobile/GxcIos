@@ -11,10 +11,8 @@
 #import <AlipaySDK/AlipaySDK.h>
 NS_ASSUME_NONNULL_BEGIN
 
-
 @interface BuyVipController :BasicViewController<UITableViewDelegate,UITableViewDataSource>
-@property (nonatomic ,assign) BuyVipFromType fromType;
-
+@property (nonatomic ,strong) UIViewController *target;
 @end
 
 NS_ASSUME_NONNULL_END

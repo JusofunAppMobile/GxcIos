@@ -98,6 +98,9 @@
 //点击搜索结果
 #define KSelectSearchResultNoti @"KSelectSearchResultNoti"
 
+//企业认证
+#define KCertificationNoti @"KCertificationNoti"
+
 //推送消息
 typedef NS_ENUM(NSInteger, PushMessageType) {
     PushMessageAloneType = 0, //单个公司

@@ -10,6 +10,7 @@
 #import "MyMonitorCell.h"
 #import "MyMonitorListModel.h"
 #import "UITableView+NoData.h"
+#import "CompanyDetailController.h"
 
 static NSString *CellID = @"MyMonitorCell";
 
@@ -79,7 +80,7 @@ static NSString *CellID = @"MyMonitorCell";
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
     [params setObject:@(_page) forKey:@"pageIndex"];
-    [params setObject:@(20) forKey:@"pageSize"];
+    [params setObject:@(10) forKey:@"pageSize"];
 
     NSString *urlStr = _listType == ListTypeMyMonitor?KMyMonitorList:KMyCollectionList;
     
@@ -156,6 +157,17 @@ static NSString *CellID = @"MyMonitorCell";
     cell.delegate = self;
     [cell setModel:_datalist[indexPath.section] type:_listType];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    MyMonitorListModel *model = _datalist[indexPath.section];
+    
+    CompanyDetailController *vc = [CompanyDetailController new];
+    vc.companyId = model.companyid;
+    vc.companyName = model.companyname;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 网络异常

@@ -48,8 +48,8 @@
 
 #pragma mark - 重置 确定
 - (void)resetAction{
-    [_collectionview reloadData];
     [_saveArray removeAllObjects];
+    [_collectionview reloadData];
 }
 
 - (void)confirmAction{
@@ -60,21 +60,22 @@
     [self hideChooseView];
 }
 
-- (void)selectCollectionViewCell:(NSDictionary *)dic selected:(BOOL)isSelected
-{
-    if(!isSelected)
-    {
-        [_saveArray enumerateObjectsUsingBlock:^(id _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if([obj isEqual:dic])
-            {
-                *stop = YES;
-                [_saveArray removeObject:obj];
+- (void)selectCollectionViewCell:(MonitorFilterModel *)newModel selected:(BOOL)isSelected{
+    if (isSelected) {
+        [_saveArray enumerateObjectsUsingBlock:^(MonitorFilterModel *model, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([model.monitor_condition_id intValue] == [newModel.monitor_condition_id intValue]) {
+                [_saveArray removeObject:model];
             }
         }];
-    }
-    else
-    {
-        [_saveArray addObject:dic];
+        [self.saveArray addObject:newModel];
+        [_collectionview reloadData];
+    }else{
+        [_saveArray enumerateObjectsUsingBlock:^(MonitorFilterModel *model, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([model.monitor_condition_id intValue] == [newModel.monitor_condition_id intValue]) {
+                [_saveArray removeObject:model];
+            }
+        }];
+        [_collectionview reloadData];
     }
 }
 
@@ -111,20 +112,25 @@
 }
 
 #pragma mark - UICollectionViewDataSource
-
-//- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-//    return [_dataArray count];
-//}
-//
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return _dataArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    MonitorFilterModel *model = [self.dataArray objectAtIndex:indexPath.row];
+    model.selected = NO;
+    
+    [_saveArray enumerateObjectsUsingBlock:^(MonitorFilterModel* obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([model.monitor_condition_id isEqualToString:obj.monitor_condition_id]) {
+            model.selected = YES;
+            *stop = YES;
+        }
+    }];
+    
     MonitorFilterCell*cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MonitorFilterCell" forIndexPath:indexPath];
     cell.delegate = self;
-    
-    cell.dataDic = [self.dataArray objectAtIndex:indexPath.row];
+    cell.model = model;
     return cell;
 }
 
@@ -136,10 +142,8 @@
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSDictionary *dic = [self.dataArray objectAtIndex:indexPath.row];
-    NSString *str = [dic objectForKey:@"monitor_condition_name"];
-    
-    return CGSizeMake([self getTextWidth:str]+12*2, 30);
+    MonitorFilterModel *model = [self.dataArray objectAtIndex:indexPath.row];
+    return CGSizeMake([self getTextWidth:model.monitor_condition_name]+12*2, 30);
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{

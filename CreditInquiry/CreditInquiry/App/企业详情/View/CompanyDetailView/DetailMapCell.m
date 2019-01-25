@@ -15,8 +15,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        CGFloat width = (KDeviceW - 30 -20)/3.0;
-        
+        int width = (KDeviceW - 30 - 10.2*2)/3;
+
         NSArray *array = @[@"企业图谱",@"关联关系",@"股权结构"];
         NSArray *imageArray = @[@"info_pic_tupu",@"info_pic_guanxi",@"info_pic_jiegou"];
         
@@ -25,19 +25,17 @@
         {
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.frame = KFrame(15+width*i+10*i, 0, width, 110);
-            
             [button setImage:[Tools scaleImage:KImageName([imageArray objectAtIndex:i]) size:CGSizeMake(width, button.height - 50)] forState:UIControlStateNormal];
             [button setTitle:array[i] forState:UIControlStateNormal];
             [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             button.titleLabel.font = KFont(14);
-            button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-            [button setImagePosition:LXMImagePositionTop spacing:10];
             [button addTarget:self action:@selector(detailMapButtonClick:) forControlEvents:UIControlEventTouchUpInside];
             [self.contentView addSubview:button];
             
             button.tag = KDetailMapBtnTag +i;
             
-            
+            [button setImagePosition:LXMImagePositionTop spacing:10];
+
         }
     
     }

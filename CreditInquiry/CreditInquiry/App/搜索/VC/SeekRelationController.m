@@ -86,7 +86,7 @@
     UILabel *label2 = [[UILabel alloc]init];
     label2.textColor = KRGB(153, 153, 153);
     label2.font = KFont(14);
-    label2.text = @"从";
+    label2.text = @"到";
     [self.view addSubview:label2];
     [label2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
@@ -96,7 +96,7 @@
     fromTextFld = [[UITextField alloc]init];
     fromTextFld.textColor = KRGB(51, 51, 51);
     fromTextFld.font = KFont(14);
-    fromTextFld.placeholder = @"请分别添加两个公司或个人";
+    fromTextFld.placeholder = @"请分别添加两个公司";
     fromTextFld.delegate = self;
     //[view setValue:KFont(14) forKeyPath:@"_placeholderLabel.font"];
     [self.view addSubview:fromTextFld];
@@ -109,7 +109,7 @@
     toTextFld = [[UITextField alloc]init];
     toTextFld.textColor = KRGB(51, 51, 51);
     toTextFld.font = KFont(14);
-    toTextFld.placeholder = @"请分别添加两个公司或个人";
+    toTextFld.placeholder = @"请分别添加两个公司";
     toTextFld.delegate = self;
     //[view setValue:KFont(14) forKeyPath:@"_placeholderLabel.font"];
     [self.view addSubview:toTextFld];
@@ -137,7 +137,7 @@
     
     
     UIImageView *bgView = [UIImageView new];
-    bgView.image = KImageName(@"seek");
+    bgView.image = KImageName(@"relation");
     [self.view addSubview:bgView];
    
     [bgView mas_makeConstraints:^(MASConstraintMaker *make) {

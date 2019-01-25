@@ -168,6 +168,7 @@
         if([[responseObject objectForKey:@"result"] intValue] == 0)
         {
             [MBProgressHUD showSuccess:@"提交信息成功，请等待审核" toView:nil];
+            [KNotificationCenter postNotificationName:KCertificationNoti object:nil];
             [self back];
         }
         else

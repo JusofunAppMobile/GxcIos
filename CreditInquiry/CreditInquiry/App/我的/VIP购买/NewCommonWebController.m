@@ -12,6 +12,7 @@
 #import "EditHonorController.h"
 #import "EditPartnerController.h"
 #import "EditMemberController.h"
+#import "BuyVipController.h"
 
 @implementation NewCommonWebController
 
@@ -107,13 +108,15 @@
             };
             [self.navigationController pushViewController:vc animated:YES];
         }
-        
-        if ([urlStr containsString:@"gxc://edit"]) {
-            
-        }
-        
         return NO;
     }
+    if ([urlStr containsString:@"gxc://vip"]) {
+        BuyVipController *vc = [BuyVipController new];
+        vc.target = _target;
+        [self.navigationController pushViewController:vc animated:YES];
+        return NO;
+    }
+    
     
     return YES;
 }

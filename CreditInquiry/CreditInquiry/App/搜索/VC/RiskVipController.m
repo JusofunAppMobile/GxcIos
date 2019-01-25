@@ -7,6 +7,7 @@
 //
 
 #import "RiskVipController.h"
+#import "BuyVipController.h"
 
 @interface RiskVipController ()
 
@@ -27,8 +28,8 @@
 
 -(void)openVIP
 {
-    RiskAnalyzeController *vc = [RiskAnalyzeController new];
-    
+    BuyVipController *vc = [BuyVipController new];
+    vc.target = _target;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -77,9 +78,6 @@
     
     
 }
-
-
-
 
 
 

@@ -7,7 +7,7 @@
 //
 
 #import "BuyVipController.h"
-#import "VipPrivilegeController.h"
+#import "NewCommonWebController.h"
 
 @implementation BuyVipController
 {
@@ -44,13 +44,14 @@
 
 -(void)loadData
 {
+    
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
     [params setObject:@"2" forKey:@"type"];//ios
     [MBProgressHUD showMessag:@"" toView:self.view];
     [RequestManager postWithURLString:KGetOrderMsg parameters:params  success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:NO];
-       
+        [self hideNetFailView];
         if ([responseObject[@"result"] integerValue] == 0) {
             dataDic = [responseObject objectForKey:@"data"];
             
@@ -100,18 +101,22 @@
 }
 
 -(void)VIPIntroduce{
-    VipPrivilegeController *vc = [VipPrivilegeController new];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:KUSER.userId forKey:@"userId"];
+    [params setObject:@"0" forKey:@"type"];//0 VIP
+    
+    NewCommonWebController *vc = [NewCommonWebController new];
+    vc.params = params;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)getPayResult
 {
     [MBProgressHUD showSuccess:@"支付成功" toView:nil];
-    if (_fromType == BuyVipFromMine) {
-        [self back];
+    if (_target) {
+        [self.navigationController popToViewController:_target animated:YES];
     }else{
-        NSArray *vcs = self.navigationController.viewControllers;
-        [self.navigationController popToViewController:vcs[vcs.count - 3] animated:YES];
+        [self back];
     }
 }
 

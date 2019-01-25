@@ -16,7 +16,6 @@
 #import "PersonalSettingController.h"
 #import "LoginController.h"
 #import "ComCertificationController.h"
-#import "VipPrivilegeController.h"
 #import "BrowseController.h"
 #import "NewCommonWebController.h"
 #import "ShowMessageView.h"
@@ -186,8 +185,6 @@ static NSString *PlainID = @"MePlainCell";
 
 #pragma mark - MeInfoCellDelegate
 - (void)joinVip{
-//    VipPrivilegeController *vc = [VipPrivilegeController new];
-//    [self.navigationController pushViewController:vc animated:YES];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
@@ -195,6 +192,7 @@ static NSString *PlainID = @"MePlainCell";
     
     NewCommonWebController *vc = [NewCommonWebController new];
     vc.params = params;
+    vc.target = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

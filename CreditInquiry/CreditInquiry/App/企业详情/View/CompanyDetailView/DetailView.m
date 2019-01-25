@@ -60,13 +60,10 @@
        
         headArray = [NSMutableArray arrayWithObjects:@"企业详情",@"联系信息",@"股东",@"企业背景",@"风险信息",@"经营状况", @"无形资产",nil];
         
-        if([KUSER.vipStatus intValue] == 1)
-        {
-            [headArray insertObject:@"企业风险" atIndex:3];
-            [headArray insertObject:@"国信企业图谱" atIndex:4];
-        }
+        [headArray insertObject:@"企业风险" atIndex:3];
+        [headArray insertObject:@"国信企业图谱" atIndex:4];
         
-        
+
         [self addSubview:self.backTableView];
         [self reportView];
     }
@@ -989,16 +986,16 @@
     view.backgroundColor = [UIColor lightGrayColor];
     [self.toolBar addSubview:view];
     
-//    NSString *monitorTitle = _detailModel.monitorType.intValue == 0?@"监控":@"取消监控";
+    NSString *monitorTitle = _detailModel.monitorType.intValue == 0?@"监控":@"已监控";
     NSString *monitorImage = _detailModel.monitorType.intValue == 0?@"info_bot_icon_jiankong":@"info_bot_icon_jiankong_sel";
     
-    NSArray *array = @[@"获取报告",@"纠错",@"监控",@"认证"];
+    NSArray *array = @[@"获取报告",@"纠错",monitorTitle];
     
-    NSArray *imageArray = @[@"info_bot_icon_baogao",@"info_bot_icon_yiyi",monitorImage,@"info_bot_icon_renzheng"];
+    NSArray *imageArray = @[@"info_bot_icon_baogao",@"info_bot_icon_yiyi",monitorImage];
     for(int i = 0;i < array.count;i++)
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = KFrame(((KDeviceW-0.5*3)/4+0.5)*i, 0, (KDeviceW-0.5*3)/4, 55);
+        button.frame = KFrame(((KDeviceW-0.5*2)/3+0.5)*i, 0, (KDeviceW-0.5*2)/3, 55);
         button.backgroundColor = KHexRGB(0xe1212a);
         [button setTitle:array[i] forState:UIControlStateNormal];
         button.titleLabel.font = KFont(14);

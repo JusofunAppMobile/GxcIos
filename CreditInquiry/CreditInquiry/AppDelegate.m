@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "BasicTabBarController.h"
 #import <IQKeyboardManager.h>
-
+#import "KSGuaidViewManager.h"
 
 @interface AppDelegate ()
 
@@ -20,7 +20,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [KNotificationCenter addObserver:self selector:@selector(tokenInvalid) name:KTokenInvalid object:nil];
-
+    self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+    [self.window makeKeyAndVisible];
+    [self setupGuideView];
     [self setIQKeyboardManager];
     [self setTabControllers];
     return YES;
@@ -34,10 +36,22 @@
         User *user ;
         user = [array objectAtIndex:0];
     }
-    self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+  
     self.tabBarController= [[BasicTabBarController alloc]init];
     self.window.rootViewController = _tabBarController;
-    [self.window makeKeyAndVisible];
+
+}
+
+- (void)setupGuideView{
+    KSGuaidManager.images = @[[UIImage imageNamed:@"lead1"],
+                              [UIImage imageNamed:@"lead2"],
+                              [UIImage imageNamed:@"lead3"]];
+    
+    CGSize size = [UIScreen mainScreen].bounds.size;
+    KSGuaidManager.currentPageIndicatorTintColor = KHexRGB(0xf5414a);
+    KSGuaidManager.pageIndicatorTintColor = KHexRGB(0xe2e2e2);
+    KSGuaidManager.dismissButtonCenter = CGPointMake(size.width / 2, size.height - 80);
+    [KSGuaidManager begin];
 }
 
 #pragma mark - 失效

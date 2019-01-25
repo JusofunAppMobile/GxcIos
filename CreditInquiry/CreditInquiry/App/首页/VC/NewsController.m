@@ -142,7 +142,7 @@
     NSMutableArray *titleArray = [NSMutableArray arrayWithCapacity:1];
     for(NSDictionary *dic in rollNewsArray)
     {
-        [imageArray addObject:[dic objectForKey:@"newsURL"]];
+        [imageArray addObject:[dic objectForKey:@"newsImage"]];
         [titleArray addObject:[dic objectForKey:@"newsName"]];
     }
     

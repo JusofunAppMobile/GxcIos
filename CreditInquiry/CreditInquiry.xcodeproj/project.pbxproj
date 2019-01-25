@@ -153,7 +153,6 @@
 		CA56114621EF50020052CF38 /* CreditVisitorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56114521EF50020052CF38 /* CreditVisitorModel.m */; };
 		CA56114921EF517E0052CF38 /* CreditHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56114821EF517E0052CF38 /* CreditHomeModel.m */; };
 		CA56114C21F0277A0052CF38 /* ReportPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56114B21F0277A0052CF38 /* ReportPreviewController.m */; };
-		CA56115021F057B00052CF38 /* VipPrivilegeController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56114F21F057B00052CF38 /* VipPrivilegeController.m */; };
 		CA56115421F16C5D0052CF38 /* ObjectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56115321F16C5D0052CF38 /* ObjectionModel.m */; };
 		CA56115721F16D320052CF38 /* ObjectionMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56115621F16D320052CF38 /* ObjectionMenuModel.m */; };
 		CA5E005921DDE05E0040ABE2 /* NSNumber+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFB721DDE05D0040ABE2 /* NSNumber+StringValue.m */; };
@@ -298,6 +297,10 @@
 		CADD60F221E897D000EB01CD /* MonitorMoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60F121E897D000EB01CD /* MonitorMoreController.m */; };
 		CADD60F521E8A32F00EB01CD /* ReportSendSuccessController.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60F421E8A32F00EB01CD /* ReportSendSuccessController.m */; };
 		CADD60F821E8A88800EB01CD /* ConfirmOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD60F721E8A88800EB01CD /* ConfirmOrderController.m */; };
+		CAFB3CCA21FAB4690088EDE7 /* KSGuaidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB3CC421FAB4670088EDE7 /* KSGuaidViewController.m */; };
+		CAFB3CCB21FAB4690088EDE7 /* KSGuaidViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB3CC721FAB4690088EDE7 /* KSGuaidViewCell.m */; };
+		CAFB3CCC21FAB4690088EDE7 /* KSGuaidViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB3CC821FAB4690088EDE7 /* KSGuaidViewManager.m */; };
+		CAFB3CCF21FAEDCD0088EDE7 /* MonitorFilterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB3CCE21FAEDCD0088EDE7 /* MonitorFilterModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -594,8 +597,6 @@
 		CA56114821EF517E0052CF38 /* CreditHomeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreditHomeModel.m; sourceTree = "<group>"; };
 		CA56114A21F0277A0052CF38 /* ReportPreviewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReportPreviewController.h; sourceTree = "<group>"; };
 		CA56114B21F0277A0052CF38 /* ReportPreviewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReportPreviewController.m; sourceTree = "<group>"; };
-		CA56114E21F057B00052CF38 /* VipPrivilegeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VipPrivilegeController.h; sourceTree = "<group>"; };
-		CA56114F21F057B00052CF38 /* VipPrivilegeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VipPrivilegeController.m; sourceTree = "<group>"; };
 		CA56115221F16C5D0052CF38 /* ObjectionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectionModel.h; sourceTree = "<group>"; };
 		CA56115321F16C5D0052CF38 /* ObjectionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectionModel.m; sourceTree = "<group>"; };
 		CA56115521F16D320052CF38 /* ObjectionMenuModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectionMenuModel.h; sourceTree = "<group>"; };
@@ -890,6 +891,14 @@
 		CADD60F421E8A32F00EB01CD /* ReportSendSuccessController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReportSendSuccessController.m; sourceTree = "<group>"; };
 		CADD60F621E8A88800EB01CD /* ConfirmOrderController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConfirmOrderController.h; sourceTree = "<group>"; };
 		CADD60F721E8A88800EB01CD /* ConfirmOrderController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfirmOrderController.m; sourceTree = "<group>"; };
+		CAFB3CC421FAB4670088EDE7 /* KSGuaidViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSGuaidViewController.m; sourceTree = "<group>"; };
+		CAFB3CC521FAB4680088EDE7 /* KSGuaidViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSGuaidViewController.h; sourceTree = "<group>"; };
+		CAFB3CC621FAB4680088EDE7 /* KSGuaidViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSGuaidViewManager.h; sourceTree = "<group>"; };
+		CAFB3CC721FAB4690088EDE7 /* KSGuaidViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSGuaidViewCell.m; sourceTree = "<group>"; };
+		CAFB3CC821FAB4690088EDE7 /* KSGuaidViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSGuaidViewManager.m; sourceTree = "<group>"; };
+		CAFB3CC921FAB4690088EDE7 /* KSGuaidViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSGuaidViewCell.h; sourceTree = "<group>"; };
+		CAFB3CCD21FAEDCD0088EDE7 /* MonitorFilterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MonitorFilterModel.h; sourceTree = "<group>"; };
+		CAFB3CCE21FAEDCD0088EDE7 /* MonitorFilterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonitorFilterModel.m; sourceTree = "<group>"; };
 		F9DD2AFF454673A827AD096D /* Pods-CreditInquiry.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CreditInquiry.release.xcconfig"; path = "Pods/Target Support Files/Pods-CreditInquiry/Pods-CreditInquiry.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1383,15 +1392,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		CA56114D21F057560052CF38 /* VIP特权 */ = {
+		CA56114D21F057560052CF38 /* VIP购买 */ = {
 			isa = PBXGroup;
 			children = (
+				CA778C9F21F9482D000F611E /* NewCommonWebController.h */,
+				CA778CA021F9482D000F611E /* NewCommonWebController.m */,
 				799F796821E5EE72000DBB88 /* BuyVipController.h */,
 				799F796921E5EE72000DBB88 /* BuyVipController.m */,
-				CA56114E21F057B00052CF38 /* VipPrivilegeController.h */,
-				CA56114F21F057B00052CF38 /* VipPrivilegeController.m */,
 			);
-			path = "VIP特权";
+			path = "VIP购买";
 			sourceTree = "<group>";
 		};
 		CA56115121F169450052CF38 /* model */ = {
@@ -1597,8 +1606,6 @@
 				79D34F0921E0789E00B1CB32 /* View */,
 				793D1B5A21DF692700C29908 /* CommonWebViewController.h */,
 				793D1B5B21DF692800C29908 /* CommonWebViewController.m */,
-				CA778C9F21F9482D000F611E /* NewCommonWebController.h */,
-				CA778CA021F9482D000F611E /* NewCommonWebController.m */,
 			);
 			path = "首页";
 			sourceTree = "<group>";
@@ -1639,7 +1646,7 @@
 			children = (
 				CA9129F421F59F8E00D9A850 /* 浏览历史 */,
 				CA9129F321F59F7300D9A850 /* 登录 */,
-				CA56114D21F057560052CF38 /* VIP特权 */,
+				CA56114D21F057560052CF38 /* VIP购买 */,
 				CADD60C621E728A000EB01CD /* 个人设置 */,
 				CADD60A721E6268300EB01CD /* 设置 */,
 				CADD609F21E6199F00EB01CD /* 我的监控 */,
@@ -1715,6 +1722,8 @@
 				CA56111021ECBC7B0052CF38 /* MonitorDetailModel.m */,
 				CA56111521ECBE380052CF38 /* MDSectionModel.h */,
 				CA56111621ECBE380052CF38 /* MDSectionModel.m */,
+				CAFB3CCD21FAEDCD0088EDE7 /* MonitorFilterModel.h */,
+				CAFB3CCE21FAEDCD0088EDE7 /* MonitorFilterModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1785,6 +1794,7 @@
 		CA5EFFA521DDDAE80040ABE2 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				CAFB3CC321FAB4530088EDE7 /* GuideView */,
 				CA5E00B921DDEA410040ABE2 /* CustomTabBar.h */,
 				CA5E00B821DDEA410040ABE2 /* CustomTabBar.m */,
 				CA5EFFAC21DDE0380040ABE2 /* BasicWebViewController.h */,
@@ -2206,6 +2216,19 @@
 			path = "个人设置";
 			sourceTree = "<group>";
 		};
+		CAFB3CC321FAB4530088EDE7 /* GuideView */ = {
+			isa = PBXGroup;
+			children = (
+				CAFB3CC921FAB4690088EDE7 /* KSGuaidViewCell.h */,
+				CAFB3CC721FAB4690088EDE7 /* KSGuaidViewCell.m */,
+				CAFB3CC521FAB4680088EDE7 /* KSGuaidViewController.h */,
+				CAFB3CC421FAB4670088EDE7 /* KSGuaidViewController.m */,
+				CAFB3CC621FAB4680088EDE7 /* KSGuaidViewManager.h */,
+				CAFB3CC821FAB4690088EDE7 /* KSGuaidViewManager.m */,
+			);
+			path = GuideView;
+			sourceTree = "<group>";
+		};
 		E4C77B2863F73FC84D3FFC40 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -2513,12 +2536,12 @@
 				CA5E015421E433E30040ABE2 /* MonitorFilterCell.m in Sources */,
 				796AE3C821EEDC4600623659 /* BRStringPickerView.m in Sources */,
 				79D34EFB21E0652000B1CB32 /* SearchJobCell.m in Sources */,
+				CAFB3CCC21FAB4690088EDE7 /* KSGuaidViewManager.m in Sources */,
 				799F796A21E5EE72000DBB88 /* BuyVipController.m in Sources */,
 				CADD60F521E8A32F00EB01CD /* ReportSendSuccessController.m in Sources */,
 				CA5E008521DDE05E0040ABE2 /* ZFBar.m in Sources */,
 				CA5E009A21DDE05E0040ABE2 /* ZJDatePickerView.m in Sources */,
 				793D1B3221DF67E000C29908 /* OweTaxController.m in Sources */,
-				CA56115021F057B00052CF38 /* VipPrivilegeController.m in Sources */,
 				CA5E008E21DDE05E0040ABE2 /* ZFCircle.m in Sources */,
 				CA5E007621DDE05E0040ABE2 /* YBRectConst.m in Sources */,
 				799F796721E5E9E1000DBB88 /* RiskVipController.m in Sources */,
@@ -2527,6 +2550,7 @@
 				CA5E015721E433E30040ABE2 /* MonitorHeaderView.m in Sources */,
 				CA5E009421DDE05E0040ABE2 /* ZFPolygon.m in Sources */,
 				796AE3CB21EEDC4600623659 /* BRBaseView.m in Sources */,
+				CAFB3CCA21FAB4690088EDE7 /* KSGuaidViewController.m in Sources */,
 				CA5E013021E433890040ABE2 /* CreditSectionHeader.m in Sources */,
 				793D1B1E21DF67E000C29908 /* CompanyDetailController.m in Sources */,
 				CA5E008D21DDE05E0040ABE2 /* ZFHorizontalBarChart.m in Sources */,
@@ -2553,6 +2577,7 @@
 				CA56111721ECBE380052CF38 /* MDSectionModel.m in Sources */,
 				CA5E008621DDE05E0040ABE2 /* ZFBarChart.m in Sources */,
 				CA5E008C21DDE05E0040ABE2 /* ZFHorizontalBar.m in Sources */,
+				CAFB3CCF21FAEDCD0088EDE7 /* MonitorFilterModel.m in Sources */,
 				79D34EBA21E05E1F00B1CB32 /* OweTaxCell.m in Sources */,
 				79D34ED121E05E5600B1CB32 /* SearchJobModel.m in Sources */,
 				CADD60C221E6E34200EB01CD /* ObjectionItem.m in Sources */,
@@ -2593,6 +2618,7 @@
 				CADD60A621E61F5700EB01CD /* MyMonitorCell.m in Sources */,
 				796AE3CA21EEDC4600623659 /* BRDatePickerView.m in Sources */,
 				796AE39321ED824700623659 /* NetworkFailedView.m in Sources */,
+				CAFB3CCB21FAB4690088EDE7 /* KSGuaidViewCell.m in Sources */,
 				CA5E008B21DDE05E0040ABE2 /* ZFHorizontalAxis.m in Sources */,
 				CA5EFFB321DDE0390040ABE2 /* BasicViewController.m in Sources */,
 				79D34E9D21E05DEF00B1CB32 /* ReportTypeCell.m in Sources */,
@@ -2753,6 +2779,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 93N52FAB6H;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CreditInquiry/PrefixHeader.pch";
 				INFOPLIST_FILE = CreditInquiry/Info.plist;
@@ -2782,6 +2809,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 93N52FAB6H;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CreditInquiry/PrefixHeader.pch";
 				INFOPLIST_FILE = CreditInquiry/Info.plist;

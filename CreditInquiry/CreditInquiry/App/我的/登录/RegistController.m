@@ -7,7 +7,7 @@
 //
 
 #import "RegistController.h"
-
+#import "Tools.h"
 @interface RegistController ()
 
 @property(nonatomic,strong)UIScrollView *backScrollView;
@@ -44,9 +44,7 @@
     // Do any additional setup after loading the view.
     [self setBlankBackButton];
     [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 120;
-    
     [self drawView];
-    
 }
 
 -(void)regist
@@ -55,6 +53,12 @@
         [MBProgressHUD showError:@"请输入手机号" toView:self.view];
         return;
     }
+    
+    if (![Tools validatePhoneNumber:_phoneTextFld.text]) {
+        [MBProgressHUD showError:@"请输入正确的手机号" toView:self.view];
+        return;
+    }
+    
     if (_codeTextFld.text.length == 0) {
         [MBProgressHUD showError:@"请输入验证码" toView:self.view];
         return;
@@ -74,29 +78,38 @@
     [RequestManager postWithURLString:KRegister parameters:params  success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:NO];
         if ([responseObject[@"result"] integerValue] == 0) {
-            
             [MBProgressHUD showSuccess:@"注册成功" toView:nil];
-            [self back];
+
+            [User clearTable];
+            User *model = [User mj_objectWithKeyValues:[responseObject objectForKey:@"data"]];
+            [model save];
+            [self backToReload];
         }else{
             [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
-            
-            
         }
         
     } failure:^(NSError *error) {
         [MBProgressHUD showError:@"请求失败" toView:self.view];
     }];
-    
 }
 
--(void)getCode
-{
-    
+- (void)backToReload{
+    NSArray *vcs = self.navigationController.viewControllers;
+    [KNotificationCenter postNotificationName:KLoginSuccess object:nil];
+    [self.navigationController popToViewController:vcs[vcs.count - 3] animated:YES];
+}
+
+
+-(void)getCode{
     if (_phoneTextFld.text.length == 0) {
         [MBProgressHUD showError:@"请输入手机号" toView:self.view];
         return;
     }
-   
+    
+    if (![Tools validatePhoneNumber:_phoneTextFld.text]) {
+        [MBProgressHUD showError:@"请输入正确的手机号" toView:self.view];
+        return;
+    }
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:_phoneTextFld.text forKey:@"phone"];
     [params setObject:@"1" forKey:@"type"];
@@ -105,15 +118,10 @@
     [RequestManager postWithURLString:KSendMesCode parameters:params  success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:NO];
         if ([responseObject[@"result"] integerValue] == 0) {
-            
             [self startTimer];
-            
             [MBProgressHUD showSuccess:@"发送验证码成功" toView:self.view];
-            
         }else{
             [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
-            
-            
         }
         
     } failure:^(NSError *error) {

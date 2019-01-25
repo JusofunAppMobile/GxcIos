@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MonitorFilterModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol MonitorCellDelegate <NSObject>
 
-- (void)selectCollectionViewCell:(NSDictionary *)dic selected:(BOOL)isSelected;
+- (void)selectCollectionViewCell:(MonitorFilterModel *)model selected:(BOOL)isSelected;
 
 
 @end
@@ -27,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic ,strong) UIButton *titleBtn;
 @property (nonatomic ,strong) UIImageView *iconView;
 
-@property(nonatomic,strong)NSDictionary *dataDic;
+@property(nonatomic,strong)MonitorFilterModel *model;
 
 
 @end

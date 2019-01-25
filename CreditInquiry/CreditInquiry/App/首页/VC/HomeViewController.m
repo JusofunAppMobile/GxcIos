@@ -8,7 +8,6 @@
 
 #import "HomeViewController.h"
 #import "AppDelegate.h"
-#import "VipPrivilegeController.h"
 #import "NewCommonWebController.h"
 
 static NSString *HomeSetionHeaderID = @"HomeSectionHeader";
@@ -48,17 +47,21 @@ static NSString *NewsCellID = @"NewsCellID";
     [paraDic setObject:KUSER.userId forKey:@"userId"];
     [RequestManager postWithURLString:KGetHomeData parameters:paraDic success:^(id responseObject) {
         if ([responseObject[@"result"] integerValue] == 0) {
-            
+            [self hideNetFailView];
             dataDic = [responseObject objectForKey:@"data"];
             self.headerView.dataDic = dataDic;
             self.tableview.tableHeaderView = self.headerView;
             [self.tableview reloadData];
         }
     } failure:^(NSError *error) {
-        [MBProgressHUD showError:@"请求失败" toView:self.view];
+        [self showNetFailViewWithFrame:_tableview.frame];
         [self endRefreshing];
     }];
     _firstDate = [NSDate date];
+}
+
+- (void)abnormalViewReload{
+    [self loadData];
 }
 
 #pragma mark - 点击搜索框
@@ -70,9 +73,14 @@ static NSString *NewsCellID = @"NewsCellID";
 }
 
 -(void)joinVIP{
-    
     if (KUSER.userId.length) {
-        VipPrivilegeController *vc = [VipPrivilegeController new];
+        NSMutableDictionary *params = [NSMutableDictionary dictionary];
+        [params setObject:KUSER.userId forKey:@"userId"];
+        [params setObject:@"0" forKey:@"type"];//0 VIP
+        
+        NewCommonWebController *vc = [NewCommonWebController new];
+        vc.params = params;
+        vc.target = self;
         [self.navigationController pushViewController:vc animated:YES];
     }else{
         LoginController *vc = [[LoginController alloc]init];
@@ -155,17 +163,39 @@ static NSString *NewsCellID = @"NewsCellID";
     }
     else if (type == SearchSeekRelationType)//：查关系(待定)
     {
-        SeekRelationController *vc = [SeekRelationController new];
-        [self.navigationController pushViewController:vc animated:YES];
+        if (!KUSER.userId.length) {
+            LoginController *vc = [LoginController new];
+            [self.navigationController pushViewController:vc animated:YES];
+            return;
+        }
+        
+        if (KUSER.vipStatus.intValue == 1) {
+            SeekRelationController *vc = [SeekRelationController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            KWeakSelf
+            [[ShowMessageView alloc]initWithType:ShowMessageVIPType action:^{
+                BuyVipController *vc = [BuyVipController new];
+                vc.target = weakSelf;
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+            }];
+        }
+      
     }
     else if (type == SearchRiskAnalyzeType)//9：风险分析(待定)
     {
+        if (!KUSER.userId.length) {
+            LoginController *vc = [LoginController new];
+            [self.navigationController pushViewController:vc animated:YES];
+            return;
+        }
         if (KUSER.vipStatus.intValue == 1) {
             SearchController *searchVc= [SearchController new];
             searchVc.searchType = SearchRiskAnalyzeType;
             [self.navigationController pushViewController:searchVc animated:YES];
         }else{
             RiskVipController *vc = [RiskVipController new];
+            vc.target = self;
             [self.navigationController pushViewController:vc animated:YES];
         }
       
@@ -439,8 +469,10 @@ static NSString *NewsCellID = @"NewsCellID";
 }
 
 - (void)drawRightBarButton{
+    NSString *title = KUSER.vipStatus.intValue == 1?@" VIP会员":@" 加入VIP >";
+    
     buttonRight = [UIButton buttonWithType:UIButtonTypeCustom];
-    [buttonRight setTitle:@" 加入VIP >" forState:UIControlStateNormal];
+    [buttonRight setTitle:title forState:UIControlStateNormal];
     buttonRight.frame = CGRectMake(KDeviceW - 105, 0, 90, 40);
     [buttonRight setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     buttonRight.titleLabel.font = KFont(14);
@@ -459,6 +491,8 @@ static NSString *NewsCellID = @"NewsCellID";
 
 - (void)reloadAction{
     [self loadData];
+    NSString *title = KUSER.vipStatus.intValue == 1?@" VIP会员":@" 加入VIP >";
+    [buttonRight setTitle:title forState:UIControlStateNormal];
 }
 
 #pragma mark - life cycle

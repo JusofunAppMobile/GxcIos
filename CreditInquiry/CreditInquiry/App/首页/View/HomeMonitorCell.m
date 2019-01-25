@@ -96,7 +96,7 @@
     _nameLabel.text = [dataDic objectForKey:@"companyName"];
     _timeLabel.text = [dataDic objectForKey:@"changeDate"];
     
-    NSString *dynamicStr = [NSString stringWithFormat:@"共%@条动态",[dataDic objectForKey:@"changeCount"]];
+    NSString *dynamicStr = [NSString stringWithFormat:@"共%@条动态",[dataDic objectForKey:@"changeNum"]];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc]initWithString:dynamicStr];
     [attr addAttribute:NSForegroundColorAttributeName value:KHexRGB(0xe8603b) range:NSMakeRange(1, dynamicStr.length - 4)];
     _contentLabel.attributedText = attr;

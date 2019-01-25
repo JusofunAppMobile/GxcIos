@@ -14,9 +14,10 @@
 #import "ReportPreviewController.h"
 #import "MyOrderController.h"
 #import "ShowMessageView.h"
-#import "VipPrivilegeController.h"
 #import "BuyVipController.h"
 #import "UITableView+NoData.h"
+#import "NewCommonWebController.h"
+#import "CreditReportController.h"
 
 static NSString *CellID = @"CreditReportCell";
 static NSString *ProCellID = @"CreditProReportCell";
@@ -157,8 +158,8 @@ static NSString *ProCellID = @"CreditProReportCell";
         }else{
             KWeakSelf
             [[ShowMessageView alloc]initWithType:ShowMessageVIPType action:^{
-                VipPrivilegeController *vc = [VipPrivilegeController new];
-                vc.fromType = BuyVipFromReportList;
+                BuyVipController *vc = [BuyVipController new];
+                vc.target = weakSelf;
                 [weakSelf.navigationController pushViewController:vc animated:YES];
             }];
         }

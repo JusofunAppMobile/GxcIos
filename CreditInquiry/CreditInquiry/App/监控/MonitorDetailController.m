@@ -13,6 +13,7 @@
 #import "MonitorFilterView.h"
 #import "MDSectionModel.h"
 #import "UITableView+NoData.h"
+#import "MonitorFilterModel.h"
 
 static NSString *CellID = @"MonitorDetailCell";
 static NSString *HeadID = @"MonitorDetailHeader";
@@ -42,7 +43,7 @@ static NSString *HeadID = @"MonitorDetailHeader";
 
 #pragma mark - loadData
 - (void)loadData{
-    
+        
     [self showLoadDataAnimation];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
@@ -74,8 +75,7 @@ static NSString *HeadID = @"MonitorDetailHeader";
         
         if ([responseObject[@"result"] intValue] == 0) {
            
-            NSArray *array = [[responseObject objectForKey:@"data"] objectForKey:@"filter"];
-            self.filterView.dataArray = array;
+            self.filterView.dataArray = [MonitorFilterModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"filter"]];
             if(loading)
             {
                  [self.filterView showChooseView];
@@ -108,13 +108,17 @@ static NSString *HeadID = @"MonitorDetailHeader";
     }
 }
 
--(void)didSelectFilterView:(NSMutableArray *)selectArray//test单选还是多选
-{
-    for(NSDictionary*dic in selectArray)
-    {
-        NSString *idStr = [dic objectForKey:@"monitor_condition_id"];
-       
-        self.filterIdStr = [NSString stringWithFormat:@"%@,%@",self.filterIdStr,idStr];
+-(void)didSelectFilterView:(NSMutableArray *)selectArray{
+    if (selectArray.count) {
+        NSMutableString *idString = [NSMutableString string];
+        
+        [selectArray enumerateObjectsUsingBlock:^(MonitorFilterModel *model, NSUInteger idx, BOOL * _Nonnull stop) {
+            [idString appendFormat:@"%@,",model.monitor_condition_id];
+        }];
+        [idString deleteCharactersInRange:NSMakeRange(idString.length-1, 1)];
+        _filterIdStr = idString;
+    }else{
+        _filterIdStr = @"";
     }
     
     [self loadData];
@@ -134,7 +138,6 @@ static NSString *HeadID = @"MonitorDetailHeader";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
    MDSectionModel *model = [self.datalist objectAtIndex:section];
-    
     return model.data.count;
 }
 
