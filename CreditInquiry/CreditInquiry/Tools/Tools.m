@@ -92,10 +92,11 @@
 + (NSMutableDictionary*)QXBAddDictionary:(NSMutableDictionary*)dic
 {
     NSDate *cdate = [Tools getCurrentTime];
-    CGFloat Offset = [[KUserDefaults objectForKey:KCurrentTimeToServerOffset] floatValue];
+    CGFloat Offset = [[KUserDefaults objectForKey:KQXBCurrentTimeToServerOffset] floatValue];
     cdate = [NSDate dateWithTimeInterval:-Offset sinceDate:cdate];
     
     int t = (int)[Tools getCurrentTimeStamp:cdate];
+
     
     NSMutableDictionary *returnDic = [NSMutableDictionary dictionaryWithDictionary:dic];
     [returnDic setObject:[NSString stringWithFormat:@"%d",t] forKey:@"t"];
