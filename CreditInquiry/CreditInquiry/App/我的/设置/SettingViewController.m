@@ -24,7 +24,6 @@ static NSString *CellID = @"SettingCell";
     [super viewDidLoad];
     [self setNavigationBarTitle:@"设置"];
     [self setBlankBackButton];
-
     [self initView];
 }
 
@@ -60,6 +59,12 @@ static NSString *CellID = @"SettingCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return CGFLOAT_MIN;
+}
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return nil;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

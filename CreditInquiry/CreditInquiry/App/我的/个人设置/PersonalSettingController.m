@@ -28,7 +28,7 @@ static NSString *CellID2 = @"SettingPlainCell";
     [super viewDidLoad];
     [self setNavigationBarTitle:@"个人设置"];
     [self setBlankBackButton];
-
+    
     [self initView];
 }
 
@@ -64,6 +64,13 @@ static NSString *CellID2 = @"SettingPlainCell";
     return CGFLOAT_MIN;
 }
 
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return nil;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return nil;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0&&indexPath.row == 0) {
         SettingAvatarCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID1 forIndexPath:indexPath];
@@ -92,10 +99,10 @@ static NSString *CellID2 = @"SettingPlainCell";
             [weakSelf.tableview reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         };
         [self.navigationController pushViewController:vc animated:YES];
-       
+        
     }else if (indexPath.section == 0&&indexPath.row == 2){
         ChangePwdController *vc = [ChangePwdController new];
-        [self.navigationController pushViewController:vc animated:YES];        
+        [self.navigationController pushViewController:vc animated:YES];
     }else{
         if ((indexPath.section==1&&indexPath.row == 0) && KUSER.company.length) {
             return;

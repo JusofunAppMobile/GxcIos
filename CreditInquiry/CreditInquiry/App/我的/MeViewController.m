@@ -38,7 +38,7 @@ static NSString *PlainID = @"MePlainCell";
 - (void)initView{
     self.view.backgroundColor = KHexRGB(0xecedf2);
     
-   
+    
     UIImageView *redBg = [UIImageView new];
     redBg.image = KImageName(@"mine_topbg");
     [self.view addSubview:redBg];
@@ -59,6 +59,7 @@ static NSString *PlainID = @"MePlainCell";
         view.backgroundColor = [UIColor clearColor];
         view.delegate = self;
         view.dataSource = self;
+        view.tableFooterView  = [UIView new];
         view;
     });
     [_tableview registerClass:[MeInfoCell class] forCellReuseIdentifier:InfoID];
@@ -100,6 +101,13 @@ static NSString *PlainID = @"MePlainCell";
     }
 }
 
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return nil;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return nil;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         MeInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:InfoID forIndexPath:indexPath];
@@ -136,7 +144,7 @@ static NSString *PlainID = @"MePlainCell";
                 LoginController *vc = [LoginController new];
                 [self.navigationController pushViewController:vc animated:YES];
             }
-           
+            
         }else if (indexPath.row == 1){
             NewCommonWebController *vc = [NewCommonWebController new];
             vc.urlStr = KUseHelp;

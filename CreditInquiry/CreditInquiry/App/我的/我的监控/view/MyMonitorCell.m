@@ -32,18 +32,6 @@
             view;
         });
         
-        self.nameLab = ({
-            UILabel *view = [UILabel new];
-            [self.contentView addSubview:view];
-            [view mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.centerY.mas_equalTo(self.contentView);
-                make.left.mas_equalTo(_iconView.mas_right).offset(15);
-            }];
-            view.font = KFont(16);
-            view.textColor = KHexRGB(0x303030);
-            view;
-        });
-        
         self.monitorBtn = ({
             UIButton *view = [UIButton new];
             [self.contentView addSubview:view];
@@ -57,6 +45,20 @@
             [view setTitleColor:KHexRGB(0xd93947) forState:UIControlStateNormal];
             [view setTitleColor:KHexRGB(0x909090) forState:UIControlStateSelected];
             [view addTarget:self action:@selector(monitorAction) forControlEvents:UIControlEventTouchUpInside];
+            view;
+        });
+        
+        
+        self.nameLab = ({
+            UILabel *view = [UILabel new];
+            [self.contentView addSubview:view];
+            [view mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.mas_equalTo(self.contentView);
+                make.left.mas_equalTo(_iconView.mas_right).offset(5);
+                make.right.mas_lessThanOrEqualTo(_monitorBtn.mas_left).offset(-5);
+            }];
+            view.font = KFont(16);
+            view.textColor = KHexRGB(0x303030);
             view;
         });
     }
@@ -87,7 +89,7 @@
     {
         NSString *title = _type == ListTypeMyMonitor?@"取消监控":@"取消收藏";
         NSString *imageName = _type == ListTypeMyMonitor?@"icon_monitor":@"shoucang";//test
-
+        
         
         [_monitorBtn setTitle:title forState:UIControlStateNormal];
         [_monitorBtn setImage:KImageName(imageName) forState:UIControlStateNormal];
@@ -96,7 +98,7 @@
     {
         NSString *title = _type == ListTypeMyMonitor?@"监控":@"收藏";
         NSString *imageName = _type == ListTypeMyMonitor?@"icon_monitor_sel":@"shoucang";//test
-
+        
         [_monitorBtn setTitle:title forState:UIControlStateNormal];
         [_monitorBtn setImage:KImageName(imageName) forState:UIControlStateNormal];
     }

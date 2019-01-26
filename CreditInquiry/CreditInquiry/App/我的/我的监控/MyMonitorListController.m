@@ -29,7 +29,7 @@ static NSString *CellID = @"MyMonitorCell";
     [super viewDidLoad];
     [self setNavigationBarTitle:_listType == ListTypeMyMonitor? @"我的监控":@"我的收藏"];
     [self setBlankBackButton];
-
+    
     _page = 1;
     [self initView];
     [self loadData:YES];
@@ -81,13 +81,13 @@ static NSString *CellID = @"MyMonitorCell";
     [params setObject:KUSER.userId forKey:@"userId"];
     [params setObject:@(_page) forKey:@"pageIndex"];
     [params setObject:@(10) forKey:@"pageSize"];
-
+    
     NSString *urlStr = _listType == ListTypeMyMonitor?KMyMonitorList:KMyCollectionList;
     
     [RequestManager postWithURLString:urlStr parameters:params success:^(id responseObject) {
         [self hideLoadDataAnimation];
         [self endRefresh];
-
+        
         if ([responseObject[@"result"] intValue] == 0) {
             if (_page == 1) {
                 [_datalist removeAllObjects];
@@ -121,7 +121,7 @@ static NSString *CellID = @"MyMonitorCell";
     NSString* urlstr = [method stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     [MBProgressHUD showMessag:@"" toView:self.view];
-
+    
     [RequestManager postWithURLString:urlstr parameters:paraDic success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:YES];
         if([[responseObject objectForKey:@"result"] intValue] == 0){
@@ -150,6 +150,12 @@ static NSString *CellID = @"MyMonitorCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 10;
+}
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return nil;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
