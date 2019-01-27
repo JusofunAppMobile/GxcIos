@@ -25,7 +25,7 @@ const void *MyViewKey = "MyViewKey";
     if(backgroundColor == [UIColor whiteColor])
     {
        // [self setBackgroundImage:[Tools imageWithColor:backgroundColor size:CGSizeMake(KDeviceW, CGRectGetHeight(self.bounds) + [[UIApplication sharedApplication] statusBarFrame].size.height)] forBarMetrics:UIBarMetricsDefault];
-         [self setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
+        [self setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
         [self setShadowImage:[Tools imageWithColor:KRGB(245, 245, 245) size:CGSizeMake(KDeviceW, 1)]];
     }
     else

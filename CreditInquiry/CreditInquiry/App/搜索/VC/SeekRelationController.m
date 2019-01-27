@@ -163,7 +163,7 @@
     label3.font = KFont(16);
     label3.numberOfLines = 0;
     label3.textAlignment = NSTextAlignmentCenter;
-    label3.text = @"请分别添加2个公司或个人\n再点击\"查关系\"发现关系";
+    label3.text = @"请分别添加2个公司\n再点击\"查关系\"发现关系";
     [self.view addSubview:label3];
     [label3 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(bgView.mas_bottom).offset(45);
@@ -246,7 +246,7 @@
 -(void)search
 {
     if (!fromTextFld.text.length||!toTextFld.text.length) {
-        [MBProgressHUD showHint:@"请分别添加2个公司或个人！" toView:self.view];
+        [MBProgressHUD showHint:@"请分别添加2个公司！" toView:self.view];
         return;
     }
     
@@ -273,7 +273,7 @@
     
 }
 
--(void)showBig{
+-(void)showBig{//test
     BigPicWebController *vc = [BigPicWebController new];
     vc.urlStr = _urlStr;
     [self.navigationController pushViewController:vc animated:YES];
@@ -304,6 +304,10 @@
 
 - (void)abnormalViewReload{
     [self loadURL];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [self.navigationController.navigationBar fs_setBackgroundColor: KNavigationBarBackGroundColor];
 }
 
 @end

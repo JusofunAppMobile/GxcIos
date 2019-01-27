@@ -18,7 +18,6 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    
     if (_urlStr.length) {
         [self loadWithUrl];
     }else{

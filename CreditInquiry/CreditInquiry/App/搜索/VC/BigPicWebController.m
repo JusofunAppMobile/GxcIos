@@ -17,14 +17,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationController.navigationBarHidden = NO;
-    
-    
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+//    self.navigationController.navigationBarHidden = YES;
     [self setBackBtn:@"icon_back"];
-    
 
-    self.webView.frame = self.view.frame;
+//    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+    
+    [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self.view);
+    }];
+    
     [self loadWithUrl];
     [self hengshuping:true];
 
@@ -38,13 +39,6 @@
     [self.webView loadRequest:request];
 }
 
--(void)viewWillDisappear:(BOOL)animated{
-    [self hengshuping:NO];
-    self.navigationController.navigationBarHidden = NO;
-    
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
-}
 
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -70,8 +64,44 @@
     [invocation invoke];
 }
 
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+    
+    return ( UIInterfaceOrientationPortrait |UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight);
+}
 
 
+
+// 不自动旋转
+- (BOOL)shouldAutorotate
+{
+    return YES;
+}
+
+//
+-(UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    return ( UIInterfaceOrientationPortrait |UIInterfaceOrientationLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight);
+}
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+//    self.navigationController.navigationBarHidden = YES;
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+    [self.navigationController.navigationBar fs_setBackgroundColor:[UIColor clearColor]];
+
+    [self hengshuping:true];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [self hengshuping:NO];
+//    self.navigationController.navigationBarHidden = NO;
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+    [self.navigationController.navigationBar fs_clearBackgroudCustomColor];
+
+}
 
 
 @end

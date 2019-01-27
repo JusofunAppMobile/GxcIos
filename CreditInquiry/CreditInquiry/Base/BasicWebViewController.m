@@ -21,6 +21,9 @@
     [self.view addSubview:self.webView];
     // Do any additional setup after loading the view from its nib.
    
+    if (@available(iOS 11.0, *)) {
+        self.webView.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
     
 }
 -(void)requestUrl:(NSString *)url{
