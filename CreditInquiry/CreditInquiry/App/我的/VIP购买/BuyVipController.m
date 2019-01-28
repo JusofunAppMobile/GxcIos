@@ -71,10 +71,7 @@
         
     } failure:^(NSError *error) {
         [MBProgressHUD showError:@"请求失败" toView:self.view];
-       
     }];
-    
-    
 }
 
 -(void)buy
@@ -110,15 +107,46 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
--(void)getPayResult
-{
-    [MBProgressHUD showSuccess:@"支付成功" toView:nil];
+-(void)getPayResult{
+    [MBProgressHUD showMessag:@"" toView:self.view];
+    [self performSelector:@selector(checkPayResult) withObject:nil afterDelay:1.f];
+}
+
+- (void)checkPayResult{
+    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    [paraDic setObject:KUSER.userId forKey:@"userId"];
+    [RequestManager postWithURLString:KGetIdentVip parameters:paraDic success:^(id responseObject) {
+        [MBProgressHUD hideHudToView:self.view animated:YES];
+        if([[responseObject objectForKey:@"result"] intValue] == 0){
+            NSDictionary *dic = [responseObject objectForKey:@"data"];
+            
+            KUSER.vipStatus = dic[@"vipStatus"];
+            KUSER.authStatus = dic[@"authStatus"];
+            KUSER.authCompany = dic[@"authCompany"];
+            [KUSER update];
+            
+            if ([dic[@"vipStatus"] intValue] == 1) {// 0：未认证  1：审核中 2：审核失败 3：审核成功
+                [MBProgressHUD showSuccess:@"支付成功" toView:nil];
+                [self backToReload];
+            }
+        }else{
+            [MBProgressHUD showError:[responseObject objectForKey:@"msg"] toView:self.view];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showError:@"请求失败" toView:self.view];
+    }];
+}
+
+
+
+- (void)backToReload{
     if (_target) {
         [self.navigationController popToViewController:_target animated:YES];
     }else{
         [self back];
     }
 }
+
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

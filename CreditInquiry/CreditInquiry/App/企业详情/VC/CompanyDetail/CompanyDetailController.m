@@ -93,7 +93,7 @@
         //NSLog(@"%@",responseObject);
         [weakSelf hideLoadDataAnimation];
         
-        _reportTypeList = [ReportTypeModel mj_objectArrayWithKeyValuesArray:responseObject[@"reportTypeList"]];//test
+        _reportTypeList = [ReportTypeModel mj_objectArrayWithKeyValuesArray:responseObject[@"reportTypeList"]];
 
         
         
@@ -436,7 +436,10 @@
         {
             NSDictionary *dic = [responseObject objectForKey:@"data"];
            // 0：未认证  1：审核中 2：审核失败 3：审核成功
-            
+            KUSER.vipStatus = dic[@"vipStatus"];
+            KUSER.authStatus = dic[@"authStatus"];
+            KUSER.authCompany = dic[@"authCompany"];
+            [KUSER update];
         }
         else
         {
@@ -680,32 +683,32 @@
             }];
         }
     }
-    else //if (button.tag == KDetailOperationTag+2)//认证
-    {
-        [self checkAuthStatus];
-        /**
-         // 0：未认证 1：审核中 2：审核失败 3：审核成功
-         */
-        int status = [KUSER.authStatus intValue];
-        if(status == 0||status == 2)
-        {
-            ComCertificationController *vc = [[ComCertificationController alloc]init];
-            vc.companyName = self.companyName;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-        else
-        {
-            if(status == 1)
-            {
-                [MBProgressHUD showHint:@"您的认证正在审核中" toView:self.view];
-            }
-            else if(status == 3)
-            {
-                [MBProgressHUD showHint:@"您已有认证企业" toView:self.view];
-            }
-        }
-        
-    }
+//    else //if (button.tag == KDetailOperationTag+2)//认证
+//    {
+//        [self checkAuthStatus];
+//        /**
+//         // 0：未认证 1：审核中 2：审核失败 3：审核成功
+//         */
+//        int status = [KUSER.authStatus intValue];
+//        if(status == 0||status == 2)
+//        {
+//            ComCertificationController *vc = [[ComCertificationController alloc]init];
+//            vc.companyName = self.companyName;
+//            [self.navigationController pushViewController:vc animated:YES];
+//        }
+//        else
+//        {
+//            if(status == 1)
+//            {
+//                [MBProgressHUD showHint:@"您的认证正在审核中" toView:self.view];
+//            }
+//            else if(status == 3)
+//            {
+//                [MBProgressHUD showHint:@"您已有认证企业" toView:self.view];
+//            }
+//        }
+//
+//    }
 }
 
 

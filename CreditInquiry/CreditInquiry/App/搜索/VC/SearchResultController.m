@@ -140,7 +140,6 @@
     [self.searchView addSubview:self.companySearchBaBar];
     self.navigationItem.titleView = self.searchView;
     
-    //test
     //绘制筛选按钮
     if (self.searchType != SearchTaxCodeType&&self.searchType != SearchJobType ) {
         [self drawFilterBtn];//绘制筛选按钮
@@ -1100,7 +1099,7 @@
 //        NSLog(@"responseObject_______%@",responseObject);
 //        [MBProgressHUD hideHudToView:self.view animated:YES];
 //        if([[responseObject objectForKey:@"result"]intValue] == 0){
-//            [self exportCompanyReport:responseObject[@"data"][@"type"]];//test
+//            [self exportCompanyReport:responseObject[@"data"][@"type"]];
 //        }else{
 //            [MBProgressHUD showError:[responseObject objectForKey:@"msg"] toView:self.view];
 //        }
@@ -1137,7 +1136,7 @@
     vc.url = [NSString stringWithFormat:@"%@&version=%@&apptype=1",data[@"reportUrl"],[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]] ;
     vc.vipType = data[@"vipType"];
     vc.companyId = model.companyid;
-    vc.companyName = model.companyname;//test传类型
+    vc.companyName = model.companyname;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

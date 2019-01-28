@@ -179,6 +179,7 @@
             make.top.mas_equalTo(backView.mas_bottom).offset(5);
             make.left.right.bottom.mas_equalTo(self.view);
         }];
+        view.delegate = self;
         view.hidden = YES;
         view;
     });
@@ -205,9 +206,6 @@
         make.bottom.mas_equalTo(self.view.mas_bottom).offset(-30);
         make.right.mas_equalTo(self.view).offset(-15);
     }];
-    
-    
-    
 }
 
 #pragma mark - UITextFieldDelegate
@@ -256,7 +254,7 @@
     [params setObject:@(SearchSeekRelationType) forKey:@"type"];
     [params setObject:fromTextFld.text forKey:@"name_one"];
     [params setObject:toTextFld.text forKey:@"name_two"];
-    [params setObject:@"6" forKey:@"route_num"];
+    [params setObject:@"3" forKey:@"route_num"];
 
     [RequestManager postWithURLString:KGETH5URL parameters:params success:^(id responseObject) {
         [self hideLoadDataAnimation];
@@ -282,7 +280,7 @@
 #pragma mark - 网页加载
 - (void)loadURL{
     self.webView.hidden = NO;
-    NSURL*url=[NSURL URLWithString:_urlStr];//test_urlstr
+    NSURL*url=[NSURL URLWithString:_urlStr];
     NSURLRequest *request=[NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:30];
     [self.webView loadRequest:request];
 }
@@ -303,7 +301,11 @@
 }
 
 - (void)abnormalViewReload{
-    [self loadURL];
+    if (_urlStr) {
+        [self loadURL];
+    }else{
+        [self search];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated{

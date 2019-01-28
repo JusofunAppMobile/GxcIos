@@ -1013,12 +1013,11 @@
 }
 
 - (void)reportBtnAction{
-//    if (_detailModel.reportTypeList.count < 2) {//test
+//    if (_detailModel.reportTypeList.count < 2) {
 //        return;
 //    }
     _reportBtn.selected = !_reportBtn.selected;
-    [self reportListShow:_reportBtn.selected];//test
-    NSLog(@"弹出／隐藏");
+    [self reportListShow:_reportBtn.selected];
 }
 
 - (void)reportListShow:(BOOL)show{
@@ -1042,7 +1041,7 @@
 - (ReportTypeView *)reportTypeView{
     if (!_reportTypeView) {
         CGFloat height = 48*2+10;//三角高度
-        //    CGFloat height = 48*(_detailModel.reportTypeList.count-1)+10;//test
+        //    CGFloat height = 48*(_detailModel.reportTypeList.count-1)+10;
         _reportTypeView = [[ReportTypeView alloc]initWithFrame: KFrame(5, _toolBar.y-height, 200, height)];
         _reportTypeView.models = _detailModel.reportTypeList;
         _reportTypeView.delegate = self;

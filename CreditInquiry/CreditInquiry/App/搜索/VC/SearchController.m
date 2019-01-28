@@ -219,7 +219,6 @@
         [historyTableView reloadData];
     }
     
-    //test 查关系 查风险
     if (_searchType == SearchBidType||_searchType == SearchJudgementType||_searchType == SearchPenaltyType||_searchType == SearchBrandType) {
         SearchResultWebController *vc = [SearchResultWebController new];
         vc.searchType = _searchType;

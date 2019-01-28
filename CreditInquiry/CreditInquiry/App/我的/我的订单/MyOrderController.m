@@ -19,8 +19,6 @@ static NSString *CellID1 = @"MyOrderReportCell";
 @property (nonatomic ,assign) NSInteger page;
 @property (nonatomic ,assign) BOOL moreData;
 @property (nonatomic ,assign) NSInteger remainTime;//test作用？
-
-
 @end
 
 @implementation MyOrderController

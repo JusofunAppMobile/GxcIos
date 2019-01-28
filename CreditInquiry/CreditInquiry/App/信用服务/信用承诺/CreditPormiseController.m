@@ -119,7 +119,7 @@
     [RequestManager uploadWithURLString:KUploadImage parameters:params progress:nil image:image success:^(id responseObject) {
         if ([responseObject[@"result"] intValue] == 0) {
             NSString *filepath = responseObject[@"data"][@"filepath"];
-            [self commitEditInfo:filepath];//test
+            [self commitEditInfo:filepath];
             [self.promiseView setImage:image forState:UIControlStateNormal];
         }else{
             [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];

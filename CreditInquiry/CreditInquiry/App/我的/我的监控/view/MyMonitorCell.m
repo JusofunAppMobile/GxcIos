@@ -71,7 +71,7 @@
     _type = type;
     
     _nameLab.text = model.companyName;
-    [_iconView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:KImageName(@"home_icon_gongsi")];//test,model.companyicon?
+    [_iconView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:KImageName(@"home_icon_gongsi")];
     [self setMonitorButtonState:YES];
 }
 
@@ -88,7 +88,7 @@
     if(_monitorBtn.selected)
     {
         NSString *title = _type == ListTypeMyMonitor?@"取消监控":@"取消收藏";
-        NSString *imageName = _type == ListTypeMyMonitor?@"icon_monitor":@"shoucang";//test
+        NSString *imageName = _type == ListTypeMyMonitor?@"icon_monitor":@"shoucang";
         
         
         [_monitorBtn setTitle:title forState:UIControlStateNormal];
@@ -97,7 +97,7 @@
     else
     {
         NSString *title = _type == ListTypeMyMonitor?@"监控":@"收藏";
-        NSString *imageName = _type == ListTypeMyMonitor?@"icon_monitor_sel":@"shoucang";//test
+        NSString *imageName = _type == ListTypeMyMonitor?@"icon_monitor_sel":@"shoucang";
         
         [_monitorBtn setTitle:title forState:UIControlStateNormal];
         [_monitorBtn setImage:KImageName(imageName) forState:UIControlStateNormal];

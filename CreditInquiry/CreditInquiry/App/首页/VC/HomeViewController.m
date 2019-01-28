@@ -42,12 +42,13 @@ static NSString *NewsCellID = @"NewsCellID";
 
 #pragma mark - 网络请求
 - (void)loadData{
-    
+    [self showLoadDataAnimation];
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
     [paraDic setObject:KUSER.userId forKey:@"userId"];
     [RequestManager postWithURLString:KGetHomeData parameters:paraDic success:^(id responseObject) {
+        [self hideLoadDataAnimation];
+        [self endRefreshing];
         if ([responseObject[@"result"] integerValue] == 0) {
-            [self hideNetFailView];
             dataDic = [responseObject objectForKey:@"data"];
             self.headerView.dataDic = dataDic;
             self.tableview.tableHeaderView = self.headerView;

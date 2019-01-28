@@ -200,7 +200,7 @@
     
     _titleLab.text = model.title;
     _nameLab.text = model.name;
-    _priceLab.text = [NSString stringWithFormat:@"￥%@",model.money];//test
+    _priceLab.text = [NSString stringWithFormat:@"￥%@",model.money];
     _orderLab.attributedText = [self getAttibuteForText:[NSString stringWithFormat:@"订单编号：%@",model.no]];
     _dateLab.attributedText = [self getAttibuteForText:[NSString stringWithFormat:@"购买时间：%@",model.time]];
     

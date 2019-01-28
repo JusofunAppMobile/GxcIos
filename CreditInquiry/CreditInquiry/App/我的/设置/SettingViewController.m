@@ -110,6 +110,7 @@ static NSString *CellID = @"SettingCell";
         [[SDImageCache sharedImageCache]clearDiskOnCompletion:^{
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
             [weakSelf.tableview reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            [MBProgressHUD showSuccess:@"清除完成" toView:weakSelf.view];
         }];
     });
 }

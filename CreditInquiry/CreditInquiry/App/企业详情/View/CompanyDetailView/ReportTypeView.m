@@ -60,7 +60,7 @@
     }
 }
 
-- (NSArray *)testData{//test
+- (NSArray *)testData{
     NSArray *names = @[@"企业报告",@"股东权结构分析",@"企业风险分析报告"];
     NSMutableArray *data = [NSMutableArray array];
     for (int i= 0; i<3; i++) {

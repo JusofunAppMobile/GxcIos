@@ -113,9 +113,7 @@
     NSString *dynamicStr = [NSString stringWithFormat:@"共%@条动态",model.changeCount];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc]initWithString:dynamicStr];
     [attr addAttribute:NSForegroundColorAttributeName value:KHexRGB(0xe8603b) range:NSMakeRange(1, dynamicStr.length - 4)];
-    _dynamicLab.attributedText = attr;
-    
-   // [_iconView sd_setImageWithURL:[NSURL URLWithString:model.companyIcon] placeholderImage:KImageName(@"")];//test
+    _dynamicLab.attributedText = attr;    
 }
 
 - (void)monitorAction{

@@ -43,7 +43,7 @@ static NSString *PlainID = @"MePlainCell";
     redBg.image = KImageName(@"mine_topbg");
     [self.view addSubview:redBg];
     [redBg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.right.left.mas_equalTo(self.view);//test高度
+        make.top.right.left.mas_equalTo(self.view);
         make.height.mas_equalTo((444.f/750)*KDeviceW);
     }];
     
