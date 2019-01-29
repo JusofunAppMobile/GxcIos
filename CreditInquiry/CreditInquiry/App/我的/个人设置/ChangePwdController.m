@@ -161,7 +161,8 @@
             [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
         }
     } failure:^(NSError *error) {
-        [MBProgressHUD showError:@"请求失败" toView:self.view];
+        [MBProgressHUD hideHudToView:self.view animated:NO];
+        [MBProgressHUD showError:@"验证码发送失败" toView:self.view];
     }];
     
 }
@@ -169,10 +170,14 @@
 - (void)commitAction{
     
     if (!_codeText.text.length) {
-        [MBProgressHUD showHint:@"请输入验证码" toView:self.view];
+        [MBProgressHUD showHint:@"请输入验证码！" toView:self.view];
         return;
     }
-    [MBProgressHUD showMessag:@"" toView:nil];
+    if (!_pwdText.text.length) {
+        [MBProgressHUD showHint:@"请输入密码！" toView:self.view];
+        return;
+    }
+    [MBProgressHUD showMessag:@"" toView:self.view];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
     [params setObject:_codeText.text forKey:@"code"];
@@ -180,13 +185,14 @@
     [RequestManager postWithURLString:KChangeUserInfo parameters:params success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:YES];
         if ([responseObject[@"result"] intValue] == 0) {
-            [MBProgressHUD showSuccess:@"修改成功" toView:nil];
+            [MBProgressHUD showSuccess:@"密码修改成功" toView:nil];
             [self back];
         }else{
-            [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
+            [MBProgressHUD showHint:responseObject[@"msg"] toView:nil];
         }
         
     } failure:^(NSError *error) {
+        [MBProgressHUD hideHudToView:self.view animated:YES];
         [MBProgressHUD showError:@"请求失败" toView:self.view];
     }];
 }

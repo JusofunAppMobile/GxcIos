@@ -32,7 +32,7 @@ static NSString *ProCellID = @"CreditProReportCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setNavigationBarTitle:@"信用报告"];//test企业名
+    [self setNavigationBarTitle:@"信用报告"];
     [self setBlankBackButton];
     [self setRightNaviButton];
     
@@ -111,11 +111,11 @@ static NSString *ProCellID = @"CreditProReportCell";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return CGFLOAT_MIN;
+    return 10;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 10;
+    return CGFLOAT_MIN;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{

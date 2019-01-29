@@ -250,8 +250,8 @@
         [MBProgressHUD showHint:@"请分别添加2个公司！" toView:self.view];
         return;
     }
-    
-    [self showLoadDataAnimation];
+    [self hideNetFailView];
+    [MBProgressHUD showMessag:@"" toView:self.view];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
     [params setObject:@(SearchSeekRelationType) forKey:@"type"];
@@ -260,7 +260,7 @@
     [params setObject:@"3" forKey:@"route_num"];
 
     [RequestManager postWithURLString:KGETH5URL parameters:params success:^(id responseObject) {
-        [self hideLoadDataAnimation];
+        [MBProgressHUD hideHudToView:self.view animated:YES];
         if ([responseObject[@"result"] intValue] == 0) {
             _urlStr = responseObject[@"data"][@"H5Address"];
             [self loadURL];

@@ -68,7 +68,7 @@
 }
 
 - (void)setupHeader:(int)status section:(NSInteger)section{
-    if (status == 3) {//test
+    if (status == 3) {
         if (section == 1) {
             _titleLab.text = @"企业服务";
             _line.hidden = NO;

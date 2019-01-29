@@ -53,6 +53,8 @@ static NSString *NewsCellID = @"NewsCellID";
             self.headerView.dataDic = dataDic;
             self.tableview.tableHeaderView = self.headerView;
             [self.tableview reloadData];
+        }else{
+            [MBProgressHUD showHint:responseObject[@"msg"] toView:nil];
         }
     } failure:^(NSError *error) {
         [self showNetFailViewWithFrame:_tableview.frame];
@@ -495,6 +497,7 @@ static NSString *NewsCellID = @"NewsCellID";
     NSString *title = KUSER.vipStatus.intValue == 1?@" VIP会员":@" 加入VIP >";
     [buttonRight setTitle:title forState:UIControlStateNormal];
 }
+
 
 #pragma mark - life cycle
 - (void)viewWillAppear:(BOOL)animated{

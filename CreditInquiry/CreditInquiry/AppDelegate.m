@@ -19,7 +19,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [KNotificationCenter addObserver:self selector:@selector(tokenInvalid) name:KTokenInvalid object:nil];
+    [KNotificationCenter addObserver:self selector:@selector(tokenInvalid:) name:KTokenInvalid object:nil];
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window makeKeyAndVisible];
     [self setupGuideView];
@@ -55,10 +55,14 @@
 }
 
 #pragma mark - 失效
--(void)tokenInvalid
+-(void)tokenInvalid:(NSNotification *)noti
 {
-    [MBProgressHUD showHint:@"token失效，请重新登录" toView:nil];
+    [self setTabControllers];
+
+    NSDictionary *info = noti.userInfo;
+    [MBProgressHUD showHint:info[@"msg"] toView:nil];
     KUSER.userId = @"";
+    KUSER.token = nil;
     [User clearTable];
 }
 

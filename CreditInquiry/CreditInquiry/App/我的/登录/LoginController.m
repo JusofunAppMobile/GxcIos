@@ -220,6 +220,9 @@
         view;
     });
     
+//    _phoneTextFld.text = @"13264302360";//test
+//    _pwdTextFld.text = @"123456";//test
+    
 }
 
 

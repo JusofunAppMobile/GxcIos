@@ -78,18 +78,19 @@
                 [self.contentView addSubview:self.joinBtn];
                 [self.contentView addSubview:self.normalBtn];
 
-                [_joinBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-                    make.centerY.mas_equalTo(self.contentView);
-                    make.right.mas_equalTo(self.contentView);
-                    make.height.mas_equalTo(29);
-                    make.width.mas_equalTo(80);
-                }];
-                
                 [_normalBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
                     make.left.mas_equalTo(_statusLab.mas_right).offset(20);
                     make.centerY.mas_equalTo(_statusLab);
                     make.height.mas_equalTo(14);
                 }];
+                
+                [_joinBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+                    make.centerY.mas_equalTo(_normalBtn);
+                    make.right.mas_equalTo(self.contentView);
+                    make.height.mas_equalTo(29);
+                    make.width.mas_equalTo(80);
+                }];
+                
                 [self layoutIfNeeded];
                 [_normalBtn setImagePosition:LXMImagePositionRight spacing:5];
             }
@@ -113,17 +114,27 @@
                 }];
                 
             }else{
+                [self.contentView addSubview:self.normalBtn];
+                [self.contentView addSubview:self.joinBtn];
+
                 [_titleLab mas_remakeConstraints:^(MASConstraintMaker *make) {
                     make.top.mas_equalTo(_avatarView);
                     make.left.mas_equalTo(_avatarView.mas_right).offset(15);
                 }];
                 
-                [self.contentView addSubview:self.normalBtn];
                 [_normalBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
                     make.top.mas_equalTo(_titleLab.mas_bottom).offset(15);
                     make.left.mas_equalTo(_titleLab);
                     make.height.mas_equalTo(14);
                 }];
+                
+                [_joinBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+                    make.centerY.mas_equalTo(self.contentView);
+                    make.right.mas_equalTo(self.contentView);
+                    make.height.mas_equalTo(29);
+                    make.width.mas_equalTo(80);
+                }];
+                
                 [self layoutIfNeeded];
                 [_normalBtn setImagePosition:LXMImagePositionRight spacing:5];
             }

@@ -74,8 +74,8 @@
             cell5.textFld.text = [dic objectForKey:@"phone"];
             cell6.textFld.text = [dic objectForKey:@"email"];
             
-            [cell7.addBtn sd_setImageWithURL:[NSURL URLWithString:@"licenseImage"] forState:UIControlStateNormal placeholderImage:KImageName(@"home_LoadingLogo")];
-            [cell8.addBtn sd_setImageWithURL:[NSURL URLWithString:@"idcardImage"] forState:UIControlStateNormal placeholderImage:KImageName(@"home_LoadingPic")];
+            [cell7.addBtn sd_setImageWithURL:[NSURL URLWithString:responseObject[@"data"][@"licenseImage"]] forState:UIControlStateNormal placeholderImage:KImageName(@"home_LoadingPic")];
+            [cell8.addBtn sd_setImageWithURL:[NSURL URLWithString:responseObject[@"data"][@"idcardImage"]] forState:UIControlStateNormal placeholderImage:KImageName(@"home_LoadingPic")];
             
             KUSER.authStatus = [[responseObject objectForKey:@"data"] objectForKey:@"status"];
              [self setStatusLabel];

@@ -2792,7 +2792,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/CreditInquiry/Tools/jusfounCore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.siccredit.guoXintest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.siccredit.guoXinTest123;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "-Wdocumentation";
@@ -2822,7 +2822,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/CreditInquiry/Tools/jusfounCore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.siccredit.guoXintest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.siccredit.guoXinTest123;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "-Wdocumentation";

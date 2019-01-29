@@ -27,6 +27,8 @@
 #import "ShareholderCell.h"
 
 #import "NewCommonWebController.h"
+#import "UITableView+NoData.h"
+
 
 #define kCellID @"SearchCollectionCell"
 #define kReusableHeaderView @"reusableHeaderView"
@@ -40,7 +42,6 @@
 
 
 
-
 @interface SearchResultController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource,FilterViewDelegate,SearchCellSelectedDelegate,ExportBarProtocol>
 
 {
@@ -48,7 +49,6 @@
     
     BOOL isShowLoseFootView;//是否展示失信的footview
     
-    BOOL isShowFootView;//全网查找的footview;
     
     SearchAllWebView *searchAllWebView;
 }
@@ -135,7 +135,6 @@
 
     loseCreditType = 1;
     isShowLoseFootView = NO;
-    isShowFootView = NO;
     
     [self.searchView addSubview:self.companySearchBaBar];
     self.navigationItem.titleView = self.searchView;
@@ -186,7 +185,6 @@
     NSString *urlStr;
     NSMutableDictionary *paraDic  = [NSMutableDictionary dictionaryWithDictionary:chooseDic];
     isShowLoseFootView = NO;
-    isShowFootView = NO;
     [searchAllWebView removeFromSuperview];
     
     HttpRequestType requestType;
@@ -253,7 +251,6 @@
     
     KWeakSelf
     [RequestManager QXBRequestWithURLString:urlStr parameters:paraDic type:requestType success:^(id responseObject) {
-        NSLog(@"responseObject---%@",responseObject);
         [weakSelf hideLoadDataAnimation];
         [ weakSelf endRefresh];
         
@@ -264,7 +261,6 @@
             if ( weakSelf.currpage == 1) {
                 [self.exportModels removeAllObjects];//刷新排序 清空导出map
                 [ weakSelf.companyAllArr removeAllObjects];
-//                [self.companySearchTableView setContentOffset:CGPointMake(0,0) animated:YES];
             }
             
             if(self.searchType == SearchCrackcreditType)
@@ -312,27 +308,14 @@
             }else if (self.searchType == SearchTaxCodeType||self.searchType == SearchJobType||self.searchType == SearchAddressBookType){
                 
                 [_reportExportBar setTipsWithNum:responseObject[@"totalCount"] type:self.searchType];//设置搜索结果数
-                
                 if([responseObject[@"totalCount"] intValue] == weakSelf.companyAllArr.count){
                     [weakSelf.companySearchTableView.mj_footer endRefreshingWithNoMoreData];
                 }
                 
             }else{
-                
                 [_reportExportBar setTipsWithNum:responseObject[@"count"] type:self.searchType];//设置搜索结果数
-                
                 if(weakSelf.companyAllArr.count == [[responseObject objectForKey:@"count"] intValue]){
                     [weakSelf.companySearchTableView.mj_footer endRefreshingWithNoMoreData];
-                    if(weakSelf.companyAllArr.count == 0){
-                        isShowFootView = NO;
-                        searchAllWebView = [[SearchAllWebView alloc]initWithFrame: KFrame(0, 0, weakSelf.companySearchTableView.width, weakSelf.companySearchTableView.height)];
-                        searchAllWebView.searchAllWeb = ^{
-                            [weakSelf searchAllNetwork];
-                        };
-                        [weakSelf.companySearchTableView addSubview:searchAllWebView];
-                    }else{
-                        isShowFootView = YES;
-                    }
                 }
             }
             weakSelf.currpage ++;
@@ -340,7 +323,6 @@
         }else{
             NSString *result = [NSString stringWithFormat:@"%@",[responseObject objectForKey:@"result"]];
             if(result.length>0){
-                
                 [MBProgressHUD showError:[responseObject objectForKey:@"msg"] toView:self.view];
             }else{
                 if (loading) {
@@ -348,7 +330,7 @@
                 }
             }
         }
-        [weakSelf.companySearchTableView reloadData];
+        [weakSelf.companySearchTableView nd_reloadData];
         
     } failure:^(NSError *error) {
         [weakSelf endRefresh];
@@ -366,42 +348,6 @@
 }
 
 #pragma mark 全网查找
--(void)searchAllNetwork
-{
-    //[MobClick event:@"Search16"];
-    //[[BaiduMobStat defaultStat] logEvent:@"Search16" eventLabel:@"搜索页面-全网搜索"];
-    
-    ProblemViewController *probelemView = [[ProblemViewController alloc] init];
-    probelemView.titleName = @"企业查询";
-    
-    NSString *city;
-    NSString *provincestr = chooseDic[@"province"];
-    NSString *citystr = chooseDic[@"city"];
-    if(provincestr && provincestr.length >0)
-    {
-        city = [NSString stringWithFormat:@"?Province=%@",provincestr];
-    }
-    else
-    {
-        if(citystr && citystr.length >0)
-        {
-            city = [NSString stringWithFormat:@"?Province=%@",citystr];
-        }
-        else
-        {
-            city = [NSString stringWithFormat:@"?Province=%@",@"全国"];
-        }
-        
-    }
-    
-    NSString *searchCriteria = [NSString stringWithFormat:@"&text=%@",self.btnTitile];
-    NSString *verson = [NSString stringWithFormat:@"&version=%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
-    NSString *appType = [NSString stringWithFormat:@"&appType=%@",@"1"];
-    probelemView.url = [NSString stringWithFormat:@"%@%@%@%@%@%@",HOSTURL,FullWebSearch,city,searchCriteria,verson,appType];
-    [self.navigationController pushViewController:probelemView animated:YES];
-}
-
-
 
 #pragma mark searchBar Delegate
 
@@ -453,7 +399,6 @@
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
     return 1;
-    
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -497,25 +442,7 @@
         }
         [cell setModel:_companyAllArr[indexPath.row] checkboxShow:_showCheckbox];
         return cell;
-    }
-//    else if (self.searchType == SearchSeekRelationType){
-//        ShareholderCell *cell = [tableView dequeueReusableCellWithIdentifier:ShareholderID];
-//        if (!cell) {
-//            cell = [[ShareholderCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ShareholderID];
-//            cell.delegate = self;
-//        }
-//        [cell setModel:_companyAllArr[indexPath.row] showCheckbox:_showCheckbox];
-//        return cell;
-//    }
-//    else if (self.searchType == SearchRiskAnalyzeType){
-//        RiskAnalyzeCell *cell = [tableView dequeueReusableCellWithIdentifier:ShareholderID];
-//        if (!cell) {
-//            cell = [[RiskAnalyzeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ShareholderID];
-//
-//        }
-//        return cell;
-//    }
-    else{
+    }else{
         SearchCompanyCell *cell = [tableView dequeueReusableCellWithIdentifier:SearchCompanyID];
         if (!cell) {
             cell = [[SearchCompanyCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SearchCompanyID];
@@ -535,15 +462,7 @@
     }
     else
     {
-        if(isShowFootView)
-        {
-            return 60;
-        }
-        else
-        {
-            return 0.001f;
-        }
-        
+        return 0.001f;
     }
     
 }
@@ -569,47 +488,13 @@
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(textLabel.x - 15 - 5, 22, 15, 15)];
         imageView.image = [UIImage imageNamed:@"Bell"];
         [bottomView addSubview:imageView];
-        
-        
-        
+    
         return bottomView;
     }
     else
     {//石油
-        if(isShowFootView)
-        {
-            _companySearchTableView.backgroundColor = KHexRGB(0xf8f8f8);
-            
-            UIView *backView = [[UIView alloc]initWithFrame:KFrame(0, 0, KDeviceW, 60)];
-            backView.backgroundColor = KHexRGB(0xf8f8f8);
-            
-            //75
-            UILabel *label = [[UILabel alloc]initWithFrame:KFrame(KDeviceW/2- 5-90, 10, 90, 35)];
-            label.font = KFont(12);
-            label.textColor = KRGB(153, 153, 153);
-            label.text = @"没有找到信息？\n试试全网查找吧";
-            label.numberOfLines = 0;
-            [backView addSubview:label];
-            
-            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-            button.frame = KFrame(KDeviceW/2+5, 12.5, 75, 30);
-            [button setTitle:@"全网查找" forState:UIControlStateNormal];
-            [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [button jm_setCornerRadius:5 withBackgroundColor:KRGB(253, 119, 49)];
-            [button addTarget:self action:@selector(searchAllNetwork) forControlEvents:UIControlEventTouchUpInside];
-            button.titleLabel.font = KFont(14);
-            [backView addSubview:button];
-            
-            return backView;
-        }
-        else
-        {
-            _companySearchTableView.backgroundColor = [UIColor whiteColor];
-            return nil;
-        }
-        
-        
-        
+        _companySearchTableView.backgroundColor = [UIColor whiteColor];
+        return nil;
     }
     
 }
@@ -947,8 +832,6 @@
     self.companySearchTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         [weakSelf loadData:NO];
     }];
-    // [self.CompanySearchTableView.mj_footer endRefreshingWithNoMoreData];
-    // self.companySearchTableView.mj_footer.automaticallyHidden = YES;
 }
 
 

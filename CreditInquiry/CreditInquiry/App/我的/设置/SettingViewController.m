@@ -133,6 +133,7 @@ static NSString *CellID = @"SettingCell";
         [MBProgressHUD hideHudToView:self.view animated:YES];
         if ([responseObject[@"result"] intValue] == 0) {
             KUSER.userId = @"";
+            KUSER.token = nil;
             [User clearTable];
             [KNotificationCenter postNotificationName:KLoginOutNoti object:nil];
             [self.navigationController popToRootViewControllerAnimated:YES];

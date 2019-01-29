@@ -162,8 +162,7 @@
     {
         self.nameLabel.text = @"营业执照:";
         self.introLabel.text = @"仅支持JPG、JPEG和PNG格式，大小不超过5兆。文字应清晰可辨。企业名称必须与您填写的名称一致。";
-        [self.addBtn setImage:KImageName(@"idfanmian") forState:UIControlStateNormal];
-        
+        [self.addBtn setImage:KImageName(@"idfanmian") forState:UIControlStateNormal];        
     }
     else if (index == 7)
     {

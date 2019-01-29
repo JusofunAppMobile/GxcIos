@@ -32,12 +32,16 @@ static NSString *ChartID = @"CreditChartLineCell";
 @interface CreditViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,ULBCollectionViewDelegateFlowLayout,CreditInfoCellDelegate>
 @property (nonatomic ,strong) UICollectionView *collectionview;
 @property (nonatomic ,strong) CreditHomeModel *creditModel;
+@property (nonatomic ,assign) BOOL viewFirstLoad;//防止viewwillappear里的请求在第一次进入的时候调用
 @end
 
 @implementation CreditViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _viewFirstLoad = YES;
+    
     [self addLoginObserver];
     [self initView];
     [self loadData];
@@ -54,13 +58,34 @@ static NSString *ChartID = @"CreditChartLineCell";
             _creditModel = [CreditHomeModel mj_objectWithKeyValues:responseObject[@"data"]];
             [_collectionview reloadData];
         }else{
-            [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
+            [MBProgressHUD showHint:responseObject[@"msg"] toView:nil];
         }
+        _viewFirstLoad = NO;
     } failure:^(NSError *error) {
         [self showNetFailViewWithFrame:_collectionview.frame];
     }];
 }
 
+#pragma mark - 检查用户认证状态
+- (void)checkUserAuthStatus{
+    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    [paraDic setObject:KUSER.userId forKey:@"userId"];
+    [RequestManager postWithURLString:KGetIdentVip parameters:paraDic success:^(id responseObject) {
+        if([[responseObject objectForKey:@"result"] intValue] == 0){
+            NSDictionary *dic = [responseObject objectForKey:@"data"];
+            
+            KUSER.vipStatus = dic[@"vipStatus"];
+            KUSER.authStatus = dic[@"authStatus"];
+            KUSER.authCompany = dic[@"authCompany"];
+            [KUSER update];
+            
+            if (KUSER.vipStatus.intValue != [_creditModel.companyInfo[@"status"] intValue]) {
+                [self loadData];
+            }
+        }
+    } failure:^(NSError *error) {
+    }];
+}
 
 #pragma mark - initView
 - (void)initView{
@@ -290,6 +315,9 @@ static NSString *ChartID = @"CreditChartLineCell";
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar fs_setBackgroundColor:KHexRGB(0xd51424)];
     [self setNavigationBarTitle:@"信用服务" andTextColor:[UIColor whiteColor]];
+    if (!_viewFirstLoad&&KUSER.userId.length) {
+        [self checkUserAuthStatus];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated{

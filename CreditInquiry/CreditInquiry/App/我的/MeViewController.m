@@ -56,15 +56,34 @@ static NSString *PlainID = @"MePlainCell";
             make.top.mas_equalTo(self.view);
             make.bottom.mas_equalTo(-KTabBarHeight);
         }];
-        view.backgroundColor = [UIColor clearColor];
         view.delegate = self;
         view.dataSource = self;
         view.tableFooterView  = [UIView new];
+        view.backgroundColor = [UIColor clearColor];
         view;
     });
     [_tableview registerClass:[MeInfoCell class] forCellReuseIdentifier:InfoID];
     [_tableview registerClass:[MeItemCell class] forCellReuseIdentifier:ItemID];
     [_tableview registerClass:[MePlainCell class] forCellReuseIdentifier:PlainID];
+}
+
+#pragma mark - 检查用户认证状态
+- (void)checkUserAuthStatus{
+    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    [paraDic setObject:KUSER.userId forKey:@"userId"];
+    [RequestManager postWithURLString:KGetIdentVip parameters:paraDic success:^(id responseObject) {
+        if([[responseObject objectForKey:@"result"] intValue] == 0){
+            NSDictionary *dic = [responseObject objectForKey:@"data"];
+            if (KUSER.vipStatus.intValue != [dic[@"vipStatus"] intValue]||KUSER.authStatus.intValue != [dic[@"authStatus"] intValue]) {
+                KUSER.vipStatus = dic[@"vipStatus"];
+                KUSER.authStatus = dic[@"authStatus"];
+                KUSER.authCompany = dic[@"authCompany"];
+                [KUSER update];
+                [KNotificationCenter postNotificationName:KLoginSuccess object:nil];//认证状态改变刷新view
+            }
+        }
+    } failure:^(NSError *error) {
+    }];
 }
 
 #pragma mark - initView
@@ -238,8 +257,7 @@ static NSString *PlainID = @"MePlainCell";
 }
 
 #pragma mark - 检查更新
--(void)checkUpdate
-{
+-(void)checkUpdate{
     [[ShowMessageView alloc]initWithType:ShowMessageCheckType action:^{
         NSString *urlStr = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/cn/app/id%@?mt=8",KAppleID];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
@@ -251,6 +269,9 @@ static NSString *PlainID = @"MePlainCell";
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
+    if (KUSER.userId.length) {
+        [self checkUserAuthStatus];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated{

@@ -93,7 +93,7 @@
             make.left.mas_equalTo(18);
         }];
         
-        UIImageView *nextIcon = [UIImageView new];//test
+        UIImageView *nextIcon = [UIImageView new];
         nextIcon.image = KImageName(@"me_listicon_more");
         [_changeView addSubview:nextIcon];
         [nextIcon mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -106,7 +106,6 @@
         _changeNumLab = [UILabel new];
         _changeNumLab.backgroundColor = KHexRGB(0xd60e23);
         _changeNumLab.textColor = [UIColor whiteColor];
-        _changeNumLab.text = @"3";//test
         _changeNumLab.font = KFont(12);
         _changeNumLab.textAlignment = NSTextAlignmentCenter;
         _changeNumLab.layer.cornerRadius = 10;
@@ -115,7 +114,8 @@
         [_changeNumLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(_changeView);
             make.right.mas_equalTo(nextIcon.mas_left).offset(-6);
-            make.height.width.mas_equalTo(20);
+            make.height.mas_equalTo(20);
+            make.width.mas_greaterThanOrEqualTo(20);
         }];
         
         

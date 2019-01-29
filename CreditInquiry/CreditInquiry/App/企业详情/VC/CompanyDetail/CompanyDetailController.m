@@ -58,7 +58,6 @@
     
     [self drawView];
     [self setBackBtn:@"whiteBack"];
-    [self setNavigationBarTitle:@"企业详情" andTextColor:[UIColor whiteColor]];
     [self setRightBarBtn];
     [self loadCompanyInfo];
     [self loadHoldeInfo];
@@ -1045,6 +1044,8 @@
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     self.navigationController.navigationBarHidden = NO;
     [self.navigationController.navigationBar fs_setBackgroundColor:KNavigationBarRedColor];
+    [self setNavigationBarTitle:@"企业详情" andTextColor:[UIColor whiteColor]];
+
 }
 
 -(void)back

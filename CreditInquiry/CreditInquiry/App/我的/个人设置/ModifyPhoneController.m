@@ -159,7 +159,7 @@
         [MBProgressHUD showHint:@"请输入验证码" toView:self.view];
         return;
     }
-    
+    [MBProgressHUD showMessag:@"" toView:self.view];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
     [params setObject:_phoneText.text forKey:@"phone"];
@@ -167,7 +167,7 @@
     [RequestManager postWithURLString:KChangePhone parameters:params success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:YES];
         if ([responseObject[@"result"] intValue] == 0) {
-            [MBProgressHUD showSuccess:@"修改成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"绑定成功" toView:self.view];
             [self updateUserInfo];
         }else{
             [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
