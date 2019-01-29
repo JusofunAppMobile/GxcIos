@@ -118,6 +118,13 @@ static NSString *ProCellID = @"CreditProReportCell";
     return 10;
 }
 
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return nil;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return nil;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section ==0) {
         CreditReportCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID forIndexPath:indexPath];
@@ -169,8 +176,9 @@ static NSString *ProCellID = @"CreditProReportCell";
 - (void)didClickPreviewButton:(int)cellType{
     NSString *url = cellType== 0?_reportInfo[@"basicVersionSamplePreview"]:_reportInfo[@"professionVersionSamplePreview"];
 
-    ReportPreviewController *vc = [ReportPreviewController new];
-    vc.url = url;
+    NewCommonWebController *vc = [NewCommonWebController new];
+    vc.urlStr = url;
+    vc.titleStr = @"信用报告";
     [self.navigationController pushViewController:vc animated:YES];
 }
 

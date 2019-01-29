@@ -168,9 +168,6 @@
 #pragma mark - 跳到详情页
 -(void)pushToResult:(NSString*)searchStr
 {
-    [self insertHotKey:searchStr];
-    
-    companySearchBar.text = searchStr;
     SearchResultController *SearchVc = [[SearchResultController alloc]init];
     SearchVc.btnTitile = searchStr;
     SearchVc.searchType = self.searchType;
@@ -219,6 +216,10 @@
         [historyTableView reloadData];
     }
     
+    companySearchBar.text = searchStr;
+
+    [self insertHotKey:searchStr];
+
     if (_searchType == SearchBidType||_searchType == SearchJudgementType||_searchType == SearchPenaltyType||_searchType == SearchBrandType) {
         SearchResultWebController *vc = [SearchResultWebController new];
         vc.searchType = _searchType;
@@ -593,6 +594,7 @@
             companySearchBar.placeholder = @"请输入企业名称";
             break;
         default:
+            companySearchBar.placeholder = KSearchPlaceholder;
             break;
     }
     UITextField * searchField = [companySearchBar valueForKey:@"_searchField"];

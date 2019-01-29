@@ -149,7 +149,7 @@
 #pragma mark - 通知
 - (void)addNotiObserver{
     [KNotificationCenter addObserver:self selector:@selector(setupViews) name:KLoginSuccess object:nil];
-    [KNotificationCenter addObserver:self selector:@selector(setupViews) name:KLoginOut object:nil];
+    [KNotificationCenter addObserver:self selector:@selector(setupViews) name:KLoginOutNoti object:nil];
     [KNotificationCenter addObserver:self selector:@selector(setupViews) name:KModifyUserInfoSuccessNoti object:nil];
 }
 

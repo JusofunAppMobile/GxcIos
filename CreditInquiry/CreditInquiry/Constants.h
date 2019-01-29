@@ -69,7 +69,7 @@
 //推送 id
 #define KPushID    @"push_id"
 //退出登录
-#define KLoginOut   @"loginOut"
+#define KLoginOutNoti   @"LoginOutNoti"
 
 //Token 失效
 #define KTokenInvalid   @"KTokenInvalid"
@@ -180,6 +180,6 @@ typedef enum : NSUInteger {
 #define BaiDu_Appkey      @"ZDGjTGHV0mmAi1jxZCWBBmRHGnvuxnz9"
 
 //apple id
-#define KAppleID  @"1450104309"//1055909468
+#define KAppleID  @"1450143654"//1055909468
 
 #endif /* Constants_h */

@@ -29,6 +29,7 @@
     UISearchBar *searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, (44-28)/2, KDeviceW - 60-15-15,  28)];
     [[searchBar.subviews[0] subviews][0] removeFromSuperview];
     searchBar.placeholder = KSearchPlaceholder;
+    searchBar.text = _companyName;
     
    
     UITextField * searchField = [searchBar valueForKey:@"_searchField"];

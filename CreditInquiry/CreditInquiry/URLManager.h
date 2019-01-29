@@ -11,19 +11,14 @@
 
 //线下
 #define HOSTURL   @"http://202.106.10.250:48088"
-//#define HOSTURL   @"http://192.168.200.161:8088"
+//正式
+//#define HOSTURL   @"http://guoxin.sic-credit.com:8089"
 #define HTMLHOST @"http://202.106.10.250:4808"
+//#define HTMLHOST @"http://guoxin.sic-credit.com:9090"
 
-//#define HOSTURL   @"http://172.16.105.110:8088"
-
-
-
-// http://39.106.181.46:9080/swagger-ui.html
 //H5 交互规则
 #define Md5Encryption  @"md5encryption://parameter"
 
-//线上
-//#define HOSTURL @"http://api.jusfoun.com/api_qixinbao"
 
 //企信宝接口
 #define QXBHOSTURL @"http://api.jusfoun.com/api_qixinbao"
@@ -85,6 +80,9 @@
 
 //登录
 #define KLogin   @""HOSTURL"/app/UserLogin/loginApp"
+
+//退出登录
+#define KLoginoutMethod @""HOSTURL"/app/UserLogin/ExitApp"
 
 //注册
 #define KRegister   @""HOSTURL"/app/UserLogin/RegisterApp"

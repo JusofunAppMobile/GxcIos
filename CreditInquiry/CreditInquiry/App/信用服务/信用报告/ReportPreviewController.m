@@ -19,8 +19,6 @@
     [self setNavigationBarTitle:@"信用报告"];
     [self setBlankBackButton];
     
-    self.url = @"https://www.baidu.com/";//test
-    
     self.webView.frame = KFrame(0, KNavigationBarHeight, KDeviceW, KDeviceH-KNavigationBarHeight);
     [self loadWithUrl];
 }

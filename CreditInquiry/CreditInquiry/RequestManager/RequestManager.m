@@ -8,6 +8,7 @@
 
 #import "RequestManager.h"
 #import <AFNetworkActivityIndicatorManager.h>
+#import "AppDelegate.h"
 //#import "FileModel.h"
 
 @implementation RequestManager
@@ -213,16 +214,22 @@
     
     NSURLSessionDataTask *session = [manager POST:URLString parameters:tmpDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (success) {
-            [self verifyToekn:responseObject];
-            [self getDateWithTask:task];
             
-            NSMutableDictionary *logDic = [NSMutableDictionary dictionary];
-            [logDic setObject:[tmpDic[@"data"] mj_JSONObject] forKey:@"data"];
-            [logDic setObject:tmpDic[@"m"] forKey:@"m"];
-            NSLog(@"\nPOST请求：Request success, URL: %@\n params:%@\n 返回内容：%@",
-                  [self generateGETAbsoluteURL:URLString params:tmpDic],
-                  logDic,responseObject);
-            success(responseObject);
+            if ([responseObject[@"result"] intValue] == 2019) {//token失效
+                [MBProgressHUD showError:responseObject[@"msg"] toView:nil];
+                [self forceLoginout];
+            }else{
+                [self verifyToekn:responseObject];
+                [self getDateWithTask:task];
+                
+                NSMutableDictionary *logDic = [NSMutableDictionary dictionary];
+                [logDic setObject:[tmpDic[@"data"] mj_JSONObject] forKey:@"data"];
+                [logDic setObject:tmpDic[@"m"] forKey:@"m"];
+                NSLog(@"\nPOST请求：Request success, URL: %@\n params:%@\n 返回内容：%@",
+                      [self generateGETAbsoluteURL:URLString params:tmpDic],
+                      logDic,responseObject);
+                success(responseObject);
+            }
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (failure) {
@@ -236,12 +243,17 @@
             failure(error);
         }
     }];
-    
-    
     return session;
 }
 
-
+//强制退出登录
++ (void)forceLoginout{
+    KUSER.userId = @"";
+    [User clearTable];
+    
+    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [app setTabControllers];
+}
 
 #pragma mark -- POST/GET网络请求 --
 + (NSURLSessionDataTask *)QXBRequestWithURLString:(NSString *)URLString

@@ -487,7 +487,7 @@ static NSString *NewsCellID = @"NewsCellID";
 #pragma mark - 通知
 - (void)addLoginObserver{
     [KNotificationCenter addObserver:self selector:@selector(reloadAction) name:KLoginSuccess object:nil];
-    [KNotificationCenter addObserver:self selector:@selector(reloadAction) name:KLoginOut object:nil];
+    [KNotificationCenter addObserver:self selector:@selector(reloadAction) name:KLoginOutNoti object:nil];
 }
 
 - (void)reloadAction{

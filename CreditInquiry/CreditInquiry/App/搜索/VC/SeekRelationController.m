@@ -206,6 +206,9 @@
         make.bottom.mas_equalTo(self.view.mas_bottom).offset(-30);
         make.right.mas_equalTo(self.view).offset(-15);
     }];
+    
+//    fromTextFld.text = @"北京市通州区国有资本运营有限公司";
+//    toTextFld.text = @"北京市民望房地产开发有限责任公司";
 }
 
 #pragma mark - UITextFieldDelegate
@@ -272,6 +275,12 @@
 }
 
 -(void)showBig{//test
+    
+    if (!_urlStr) {
+        [MBProgressHUD showHint:@"请先查关系" toView:self.view];
+        return;
+    }
+    
     BigPicWebController *vc = [BigPicWebController new];
     vc.urlStr = _urlStr;
     [self.navigationController pushViewController:vc animated:YES];

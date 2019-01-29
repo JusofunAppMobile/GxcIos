@@ -89,7 +89,7 @@
     _model = model;
     _titleLab.text = model.monitor_name;
     _numLab.text = [NSString stringWithFormat:@"共%@条",model.total];
-    if([model.lcon intValue] == 2)//1：变更信息    2：警示信息 3：利好信息
+    if([model.lcon intValue] == 2)//1：变更信息 2：警示信息 3：利好信息
     {
         _tagLab.textColor = KHexRGB(0xDC212A);
         _tagLab.layer.borderColor = KHexRGB(0xDC212A).CGColor;

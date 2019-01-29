@@ -129,6 +129,13 @@ static NSString *CellID3 = @"ObjectionInfoCell";
     return CGFLOAT_MIN;
 }
 
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return nil;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return nil;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         ObjectionEntCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID1 forIndexPath:indexPath];
@@ -141,7 +148,7 @@ static NSString *CellID3 = @"ObjectionInfoCell";
         return cell;
     }else{
         ObjectionInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID3 forIndexPath:indexPath];
-        [cell setModel:_selectedTypeModel type:ObjectionTypeCredit];
+        [cell setModel:_selectedTypeModel type:_objectionType];
         cell.delegate = self;
         return cell;
     }

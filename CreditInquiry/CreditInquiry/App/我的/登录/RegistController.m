@@ -8,6 +8,7 @@
 
 #import "RegistController.h"
 #import "Tools.h"
+#import "NewCommonWebController.h"
 @interface RegistController ()
 
 @property(nonatomic,strong)UIScrollView *backScrollView;
@@ -167,14 +168,19 @@
 
 
 
--(void)agreement
-{
-    NSLog(@"服务协议");
+-(void)agreement{
+    NewCommonWebController *vc = [NewCommonWebController new];
+    vc.urlStr = KUserProtocol;
+    vc.titleStr = @"服务协议";
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)privacyPolicy
 {
-    NSLog(@"隐私政策");
+    NewCommonWebController *vc = [NewCommonWebController new];
+    vc.urlStr = KPrivacy;
+    vc.titleStr = @"隐私政策";
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
@@ -193,98 +199,17 @@
     });
     
     
-    self.loginBtn = ({
-        UIButton *view = [UIButton new];
+    self.logoImageView = ({
+        UIImageView *view = [UIImageView new];
         [self.backScrollView addSubview:view];
-        [view setTitle:@"注册" forState:UIControlStateNormal];
-        [view addTarget:self action:@selector(regist) forControlEvents:UIControlEventTouchUpInside];
-        [view setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        view.backgroundColor = KHexRGB(0xEE2520);
-        view.layer.cornerRadius = 22;
-        view.clipsToBounds = YES;
+        view.image = KImageName(@"logo");
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(self.backScrollView).offset(80);
-            make.left.mas_equalTo(self.backScrollView).offset(30);
-            make.width.mas_equalTo(KDeviceW-60);
-            make.height.mas_equalTo(44);
+            make.centerX.mas_equalTo(self.view);
+            make.height.width.mas_equalTo(66);
+            make.top.mas_equalTo(30);
         }];
         view;
     });
-    
-    self.pwdTextFld = ({
-        UITextField *view = [UITextField new];
-        [self.backScrollView addSubview:view];
-        view.textColor = [UIColor blackColor];
-        view.secureTextEntry = YES;
-        view.font = KFont(16);
-        view.placeholder = @"请输入密码";
-        [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(self.loginBtn.mas_top).offset(-30);
-            make.left.mas_equalTo(self.backScrollView).offset(30);
-            make.height.mas_equalTo(35);
-            make.width.mas_equalTo(KDeviceW-60);
-        }];
-        view;
-    });
-    
-    self.lineView2 = ({
-        UIView *view = [UITextField new];
-        [self.backScrollView addSubview:view];
-        view.backgroundColor = KHexRGB(0xDBDBDB);
-        [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.pwdTextFld.mas_bottom);
-            make.left.mas_equalTo(self.backScrollView).offset(30);
-            make.height.mas_equalTo(0.5);
-            make.width.mas_equalTo(KDeviceW-60);
-        }];
-        view;
-    });
-    
-    self.codeBtn = ({
-        UIButton *view = [UIButton new];
-        [self.backScrollView addSubview:view];
-        [view setTitle:@"获取验证码" forState:UIControlStateNormal];
-        view.titleLabel.font = KFont(16);
-        [view addTarget:self action:@selector(getCode) forControlEvents:UIControlEventTouchUpInside];
-        [view setTitleColor:KHexRGB(0xF02F27) forState:UIControlStateNormal];
-        [view mas_makeConstraints:^(MASConstraintMaker *make) {
-           make.bottom.mas_equalTo(self.pwdTextFld.mas_top).offset(-20);
-            make.right.mas_equalTo(self.loginBtn);
-            make.width.mas_equalTo(90);
-            make.height.mas_equalTo(35);
-        }];
-        view;
-    });
-    
-    self.codeTextFld = ({
-        UITextField *view = [UITextField new];
-        [self.backScrollView addSubview:view];
-        view.textColor = [UIColor blackColor];
-        view.font = KFont(16);
-        view.placeholder = @"请输入验证码";
-        [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(self.pwdTextFld.mas_top).offset(-20);
-            make.left.mas_equalTo(self.backScrollView).offset(30);
-            make.height.mas_equalTo(35);
-            make.right.mas_equalTo(self.codeBtn.mas_left).offset(-10);
-        }];
-        view;
-    });
-    
-    self.lineView3 = ({
-        UIView *view = [UITextField new];
-        [self.backScrollView addSubview:view];
-        view.backgroundColor = KHexRGB(0xDBDBDB);
-        [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.codeTextFld.mas_bottom);
-            make.left.mas_equalTo(self.backScrollView).offset(30);
-            make.height.mas_equalTo(0.5);
-            make.width.mas_equalTo(KDeviceW-60);
-        }];
-        view;
-    });
-    
-    
     
     self.phoneTextFld = ({
         UITextField *view = [UITextField new];
@@ -293,7 +218,7 @@
         view.font = KFont(16);
         view.placeholder = @"请输入手机号码";
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(self.codeTextFld.mas_top).offset(-20);
+            make.top.mas_equalTo(_logoImageView.mas_bottom).offset(52);
             make.left.mas_equalTo(self.backScrollView).offset(30);
             make.height.mas_equalTo(35);
             make.width.mas_equalTo(KDeviceW-60);
@@ -315,24 +240,104 @@
     });
     
     
-    self.logoImageView = ({
-        UIImageView *view = [UIImageView new];
+    self.codeBtn = ({
+        UIButton *view = [UIButton new];
         [self.backScrollView addSubview:view];
-        view.image = KImageName(@"logo");
+        [view setTitle:@"获取验证码" forState:UIControlStateNormal];
+        view.titleLabel.font = KFont(16);
+        [view addTarget:self action:@selector(getCode) forControlEvents:UIControlEventTouchUpInside];
+        [view setTitleColor:KHexRGB(0xF02F27) forState:UIControlStateNormal];
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(self.phoneTextFld.mas_top).offset(-50);
-            
-            make.centerX.mas_equalTo(self.backScrollView);
+            make.top.mas_equalTo(_lineView1.mas_bottom).offset(30);
+            make.right.mas_equalTo(_lineView1);
+            make.width.mas_equalTo(90);
+            make.height.mas_equalTo(35);
+        }];
+        view;
+    });
+    
+    self.codeTextFld = ({
+        UITextField *view = [UITextField new];
+        [self.backScrollView addSubview:view];
+        view.textColor = [UIColor blackColor];
+        view.font = KFont(16);
+        view.placeholder = @"请输入验证码";
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(_codeBtn);
+            make.left.mas_equalTo(self.backScrollView).offset(30);
+            make.height.mas_equalTo(35);
+            make.right.mas_equalTo(self.codeBtn.mas_left).offset(-10);
+        }];
+        view;
+    });
+    
+    self.lineView2 = ({
+        UIView *view = [UITextField new];
+        [self.backScrollView addSubview:view];
+        view.backgroundColor = KHexRGB(0xDBDBDB);
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(_codeBtn.mas_bottom);
+            make.left.mas_equalTo(self.backScrollView).offset(30);
+            make.height.mas_equalTo(0.5);
+            make.width.mas_equalTo(KDeviceW-60);
+        }];
+        view;
+    });
+    
+    self.pwdTextFld = ({
+        UITextField *view = [UITextField new];
+        [self.backScrollView addSubview:view];
+        view.textColor = [UIColor blackColor];
+        view.secureTextEntry = YES;
+        view.font = KFont(16);
+        view.placeholder = @"请输入密码";
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(_lineView2.mas_bottom).offset(23);
+            make.left.mas_equalTo(self.backScrollView).offset(30);
+            make.height.mas_equalTo(35);
+            make.width.mas_equalTo(KDeviceW-60);
+        }];
+        view;
+    });
+    
+
+    self.lineView3 = ({
+        UIView *view = [UITextField new];
+        [self.backScrollView addSubview:view];
+        view.backgroundColor = KHexRGB(0xDBDBDB);
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.pwdTextFld.mas_bottom);
+            make.left.mas_equalTo(self.backScrollView).offset(30);
+            make.height.mas_equalTo(0.5);
+            make.width.mas_equalTo(KDeviceW-60);
         }];
         view;
     });
     
     
+    self.loginBtn = ({
+        UIButton *view = [UIButton new];
+        [self.backScrollView addSubview:view];
+        [view setTitle:@"注册" forState:UIControlStateNormal];
+        [view addTarget:self action:@selector(regist) forControlEvents:UIControlEventTouchUpInside];
+        [view setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        view.backgroundColor = KHexRGB(0xEE2520);
+        view.layer.cornerRadius = 22;
+        view.clipsToBounds = YES;
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(_lineView3.mas_bottom).offset(30);
+            make.left.mas_equalTo(self.backScrollView).offset(30);
+            make.width.mas_equalTo(KDeviceW-60);
+            make.height.mas_equalTo(44);
+        }];
+        view;
+    });
+    
     self.agreementLabel = ({
         YYLabel *view = [YYLabel new];
         [self.backScrollView addSubview:view];
         NSMutableAttributedString *text  = [[NSMutableAttributedString alloc] initWithString: @"注册即表示同意《服务协议》及《隐私政策》"];
-        text.yy_font = [UIFont systemFontOfSize:14];
+        text.yy_font = [UIFont systemFontOfSize:13];
         text.yy_color = KHexRGB(0xA2A2A2);
         text.yy_alignment = NSTextAlignmentCenter;
         __weak typeof(self) weakself = self;
@@ -347,7 +352,7 @@
         view.numberOfLines = 0;
         view.preferredMaxLayoutWidth = KDeviceW-60; //设置最大的宽度
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.loginBtn.mas_bottom).offset(10);
+            make.top.mas_equalTo(self.loginBtn.mas_bottom).offset(15);
             make.left.mas_equalTo(self.backScrollView).offset(30);
             make.width.mas_equalTo(KDeviceW-60);
             

@@ -125,10 +125,26 @@ static NSString *CellID = @"SettingCell";
 
 #pragma mark - 退出登录
 - (void)didClickLoginout{
-    KUSER.userId = @"";
-    [User clearTable];
-    [KNotificationCenter postNotificationName:KLoginOut object:nil];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:KUSER.userId forKey:@"userId"];
+    
+    [MBProgressHUD showMessag:@"" toView:self.view];
+    [RequestManager postWithURLString:KLoginoutMethod parameters:params success:^(id responseObject) {
+        [MBProgressHUD hideHudToView:self.view animated:YES];
+        if ([responseObject[@"result"] intValue] == 0) {
+            KUSER.userId = @"";
+            [User clearTable];
+            [KNotificationCenter postNotificationName:KLoginOutNoti object:nil];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            
+            [MBProgressHUD showSuccess:@"退出成功！" toView:self.view];
+        }else{
+            [MBProgressHUD showError:responseObject[@"msg"] toView:self.view];
+        }
+        
+    } failure:^(NSError *error) {
+        [MBProgressHUD hideHudToView:self.view animated:YES];
+    }];
 }
 
 #pragma mark - lazy load

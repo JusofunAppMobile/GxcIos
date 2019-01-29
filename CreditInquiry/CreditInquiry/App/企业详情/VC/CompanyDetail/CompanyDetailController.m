@@ -58,6 +58,7 @@
     
     [self drawView];
     [self setBackBtn:@"whiteBack"];
+    [self setNavigationBarTitle:@"企业详情" andTextColor:[UIColor whiteColor]];
     [self setRightBarBtn];
     [self loadCompanyInfo];
     [self loadHoldeInfo];

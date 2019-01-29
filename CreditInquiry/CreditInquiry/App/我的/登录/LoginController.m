@@ -113,53 +113,18 @@
 //        view;
 //    });
     
-    
-    self.loginBtn = ({
-        UIButton *view = [UIButton new];
+    self.logoImageView = ({
+        UIImageView *view = [UIImageView new];
         [self.view addSubview:view];
-        [view setTitle:@"登录" forState:UIControlStateNormal];
-        [view addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
-        [view setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        view.backgroundColor = KHexRGB(0xEE2520);
-        view.layer.cornerRadius = 22;
-        view.clipsToBounds = YES;
+        view.image = KImageName(@"logo");
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(self.view).offset(50+KNavigationBarHeight);
-            make.left.mas_equalTo(self.view).offset(30);
-            make.width.mas_equalTo(KDeviceW-60);
-            make.height.mas_equalTo(44);
+            make.centerX.mas_equalTo(self.view);
+            make.height.width.mas_equalTo(66);
+            make.top.mas_equalTo(KNavigationBarHeight+30);
         }];
         view;
     });
     
-    self.pwdTextFld = ({
-        UITextField *view = [UITextField new];
-        [self.view addSubview:view];
-        view.textColor = [UIColor blackColor];
-        view.secureTextEntry = YES;
-        view.font = KFont(16);
-        view.placeholder = @"请输入密码";
-        [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(self.loginBtn.mas_top).offset(-30);
-            make.left.mas_equalTo(self.view).offset(30);
-            make.height.mas_equalTo(35);
-            make.width.mas_equalTo(KDeviceW-60);
-        }];
-        view;
-    });
-    
-    self.lineView2 = ({
-        UIView *view = [UITextField new];
-        [self.view addSubview:view];
-        view.backgroundColor = KHexRGB(0xDBDBDB);
-        [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.pwdTextFld.mas_bottom);
-            make.left.mas_equalTo(self.view).offset(30);
-            make.height.mas_equalTo(0.5);
-            make.width.mas_equalTo(KDeviceW-60);
-        }];
-        view;
-    });
     
     self.phoneTextFld = ({
         UITextField *view = [UITextField new];
@@ -168,7 +133,7 @@
         view.font = KFont(16);
         view.placeholder = @"请输入手机号码";
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(self.pwdTextFld.mas_top).offset(-20);
+            make.top.mas_equalTo(_logoImageView.mas_bottom).offset(52);
             make.left.mas_equalTo(self.view).offset(30);
             make.height.mas_equalTo(35);
             make.width.mas_equalTo(KDeviceW-60);
@@ -190,19 +155,55 @@
     });
     
     
-    self.logoImageView = ({
-        UIImageView *view = [UIImageView new];
+    self.pwdTextFld = ({
+        UITextField *view = [UITextField new];
         [self.view addSubview:view];
-        view.image = KImageName(@"logo");
+        view.textColor = [UIColor blackColor];
+        view.secureTextEntry = YES;
+        view.font = KFont(16);
+        view.placeholder = @"请输入密码";
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
-           make.bottom.mas_equalTo(self.phoneTextFld.mas_top).offset(-50);
-            
-            make.centerX.mas_equalTo(self.view);
+            make.top.mas_equalTo(_lineView1.mas_bottom).offset(23);
+            make.left.mas_equalTo(self.view).offset(30);
+            make.height.mas_equalTo(35);
+            make.width.mas_equalTo(KDeviceW-60);
+        }];
+        view;
+    });
+    
+    self.lineView2 = ({
+        UIView *view = [UITextField new];
+        [self.view addSubview:view];
+        view.backgroundColor = KHexRGB(0xDBDBDB);
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.pwdTextFld.mas_bottom);
+            make.left.mas_equalTo(self.view).offset(30);
+            make.height.mas_equalTo(0.5);
+            make.width.mas_equalTo(KDeviceW-60);
         }];
         view;
     });
     
     
+    self.loginBtn = ({
+        UIButton *view = [UIButton new];
+        [self.view addSubview:view];
+        [view setTitle:@"登录" forState:UIControlStateNormal];
+        [view addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
+        [view setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        view.backgroundColor = KHexRGB(0xEE2520);
+        view.layer.cornerRadius = 22;
+        view.clipsToBounds = YES;
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(_lineView2.mas_bottom).offset(30);
+            make.left.mas_equalTo(self.view).offset(30);
+            make.width.mas_equalTo(KDeviceW-60);
+            make.height.mas_equalTo(45);
+        }];
+        view;
+    });
+    
+   
     self.forgetBtn = ({
         UIButton *view = [UIButton new];
         [self.view addSubview:view];

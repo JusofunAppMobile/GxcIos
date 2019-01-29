@@ -70,7 +70,7 @@ static NSString *CELLID = @"MonitorDynamicCell";
     //（0:取消监控  1：添加监控）
     
     KWeakSelf
-    if (KUSER.userId.length) {
+    if (!KUSER.userId.length) {
         LoginController *view = [[LoginController alloc]init];
         view.loginSuccessBlock = ^{
             [weakSelf didClickMonitorButton:model cell:cell];
@@ -80,7 +80,6 @@ static NSString *CELLID = @"MonitorDynamicCell";
     }
     
     if (!KUSER.vipStatus.intValue) {
-        KWeakSelf
         [[ShowMessageView alloc]initWithType:ShowMessageVIPType action:^{
             BuyVipController *vc = [BuyVipController new];
             vc.target = weakSelf;
@@ -187,7 +186,7 @@ static NSString *CELLID = @"MonitorDynamicCell";
 #pragma mark - 通知
 - (void)addLoginObserver{
     [KNotificationCenter addObserver:self selector:@selector(reloadAction) name:KLoginSuccess object:nil];
-    [KNotificationCenter addObserver:self selector:@selector(reloadAction) name:KLoginOut object:nil];
+    [KNotificationCenter addObserver:self selector:@selector(reloadAction) name:KLoginOutNoti object:nil];
 }
 
 - (void)reloadAction{
