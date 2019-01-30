@@ -93,7 +93,7 @@ static NSString *PlainID = @"MePlainCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 2) {
-        return 4;
+        return 3;
     }else{
         return 1;
     }
@@ -169,9 +169,11 @@ static NSString *PlainID = @"MePlainCell";
             vc.urlStr = KUseHelp;
             vc.titleStr = @"使用帮助";
             [self.navigationController pushViewController:vc animated:YES];
-        }else if(indexPath.row == 2){//test审核问题
-            [self checkUpdate];
-        }else{
+        }
+//        else if(indexPath.row == 2){//test审核问题
+//            [self checkUpdate];
+//        }
+        else{
             SettingViewController *vc = [SettingViewController new];
             [self.navigationController pushViewController:vc animated:YES];
         }

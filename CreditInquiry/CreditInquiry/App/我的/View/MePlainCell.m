@@ -44,8 +44,8 @@
             view;
         });
         
-        _icons = @[@"mine_lishi",@"mine_help",@"mine_update",@"mine_setting"];
-        _titles = @[@"浏览历史",@"使用帮助",@"检测更新",@"设置"];
+        _icons = @[@"mine_lishi",@"mine_help",@"mine_setting"];
+        _titles = @[@"浏览历史",@"使用帮助",@"设置"];
         
     }
     return self;

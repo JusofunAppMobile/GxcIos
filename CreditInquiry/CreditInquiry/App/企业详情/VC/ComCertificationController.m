@@ -26,6 +26,9 @@
     
     
 }
+
+@property (nonatomic ,strong) NSArray *proviceArray;
+
 @end
 
 @implementation ComCertificationController
@@ -36,7 +39,6 @@
     [self setNavigationBarTitle:@"企业认证"];
     [self setBlankBackButton];
     [self drawTableView];
-    
     
     if([KUSER.authStatus intValue] == 1||[KUSER.authStatus intValue] == 2||[KUSER.authStatus intValue] == 3)
     {
@@ -76,6 +78,10 @@
             
             [cell7.addBtn sd_setImageWithURL:[NSURL URLWithString:responseObject[@"data"][@"licenseImage"]] forState:UIControlStateNormal placeholderImage:KImageName(@"home_LoadingPic")];
             [cell8.addBtn sd_setImageWithURL:[NSURL URLWithString:responseObject[@"data"][@"idcardImage"]] forState:UIControlStateNormal placeholderImage:KImageName(@"home_LoadingPic")];
+            imagePath1 = responseObject[@"data"][@"licenseimgpath"];
+            imagePath2 = responseObject[@"data"][@"idcardImgpath"];
+            
+            [self initProvinceData:responseObject[@"data"]];
             
             KUSER.authStatus = [[responseObject objectForKey:@"data"] objectForKey:@"status"];
              [self setStatusLabel];
@@ -90,6 +96,31 @@
     }];
     
 }
+
+- (void)initProvinceData:(NSDictionary *)result{
+    
+    NSString *proName = result[@"provinceName"];
+    NSString *cityName = result[@"cityName"];
+    [self.proviceArray enumerateObjectsUsingBlock:^(NSDictionary *province, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([proName isEqualToString:province[@"name"]]) {
+            provinceModel = [BRProvinceModel new];
+            provinceModel.code = province[@"id"];
+            provinceModel.name = proName;
+            NSArray *cityList = province[@"children"];
+            [cityList enumerateObjectsUsingBlock:^(NSDictionary * city, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([cityName isEqualToString:city[@"name"]]) {
+                    cityModel = [BRCityModel new];
+                    cityModel.code = city[@"id"];
+                    cityModel.name = cityName;
+                    *stop = YES;
+                }
+            }];
+            *stop = YES;
+        }
+    }];
+    
+}
+
 
 -(void)certification
 {
@@ -162,6 +193,7 @@
     [paraDic setObject:imagePath1 forKey:@"licenseImage"];
     [paraDic setObject:imagePath2 forKey:@"idcardImage"];
     [MBProgressHUD showMessag:@"" toView:self.view];
+    
     [RequestManager postWithURLString:KCertification parameters:paraDic success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         [MBProgressHUD hideHudToView:self.view animated:YES];
@@ -228,14 +260,7 @@
 {
     [self.view endEditing:YES];
     
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"provice_city_area" ofType:@"json"];
-    // 将文件数据化
-    NSData *data = [[NSData alloc] initWithContentsOfFile:path];
-    // 对数据进行JSON格式化并返回字典形式
-    NSArray *array =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-    NSLog(@"%@",array);
-    
-    [BRAddressPickerView showAddressPickerWithShowType:BRAddressPickerModeCity dataSource:array defaultSelected:nil isAutoSelect:YES themeColor:nil resultBlock:^(BRProvinceModel *province, BRCityModel *city, BRAreaModel *area) {
+    [BRAddressPickerView showAddressPickerWithShowType:BRAddressPickerModeCity dataSource:self.proviceArray defaultSelected:nil isAutoSelect:YES themeColor:nil resultBlock:^(BRProvinceModel *province, BRCityModel *city, BRAreaModel *area) {
         NSLog(@"%@%@",province.name,city.name);
         provinceModel = province;
         cityModel = city;
@@ -467,8 +492,20 @@
     }];
     
    
+
     
     
-    
+}
+
+#pragma mark - lazy load
+- (NSArray *)proviceArray{
+    if (!_proviceArray) {
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"provice_city_area" ofType:@"json"];
+        // 将文件数据化
+        NSData *data = [[NSData alloc] initWithContentsOfFile:path];
+        // 对数据进行JSON格式化并返回字典形式
+        _proviceArray =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+    }
+    return _proviceArray;
 }
 @end
