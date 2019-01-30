@@ -120,7 +120,30 @@ static NSString *TextCellID = @"CreditEditTextCell";
     if (_companyId) {
         [self.dataDic setObject:_companyId forKey:@"companyId"];
     }
-    [self.dataDic setObject:_dataDic[@"urlComplete"] forKey:@"logo"];
+    
+    if (!_dataDic[@"industry"]) {
+        [MBProgressHUD showHint:@"请输入行业" toView:self.view];
+        return;
+    }
+    if (!_dataDic[@"phone"]) {
+        [MBProgressHUD showHint:@"请输入联系电话" toView:self.view];
+        return;
+    }
+    if (!_dataDic[@"email"]) {
+        [MBProgressHUD showHint:@"请输入邮箱" toView:self.view];
+        return;
+    }
+    if (!_dataDic[@"webURL"]) {
+        [MBProgressHUD showHint:@"请输入网址" toView:self.view];
+        return;
+    }
+    
+    if (!_dataDic[@"urlComplete"]) {
+        [MBProgressHUD showHint:@"请上传企业LOGO" toView:self.view];
+        return;
+    }
+    [self.dataDic setObject:_dataDic[@"urlComplete"] forKey:@"image"];
+
     [MBProgressHUD showMessag:@"" toView:self.view];
     [RequestManager postWithURLString:KEditCompanyInfo parameters:self.dataDic success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:YES];
@@ -160,6 +183,13 @@ static NSString *TextCellID = @"CreditEditTextCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return CGFLOAT_MIN;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return nil;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

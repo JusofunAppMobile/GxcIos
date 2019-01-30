@@ -28,6 +28,7 @@
 }
 
 @property (nonatomic ,strong) NSArray *proviceArray;
+@property (nonatomic ,strong) NSString *message;
 
 @end
 
@@ -84,6 +85,8 @@
             [self initProvinceData:responseObject[@"data"]];
             
             KUSER.authStatus = [[responseObject objectForKey:@"data"] objectForKey:@"status"];
+            _message = responseObject[@"data"][@"promptxt"];
+            NSLog(@"____%@",_message);
              [self setStatusLabel];
         }
         else
@@ -300,7 +303,8 @@
     }
     else if ([KUSER.authStatus intValue] == 2)//2：审核失败
     {
-        messageLabel.text = @"     认证状态已被驳回，请重新填写认证信息";
+//        messageLabel.text = @"     认证状态已被驳回，请重新填写认证信息";
+        messageLabel.text = [NSString stringWithFormat:@"%@%@",@"     ",_message];
     }
     else if ([KUSER.authStatus intValue] == 3)//3：审核成功
     {

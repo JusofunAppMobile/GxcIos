@@ -25,6 +25,7 @@
     [self setupGuideView];
     [self setIQKeyboardManager];
     [self setTabControllers];
+    
     return YES;
 }
 

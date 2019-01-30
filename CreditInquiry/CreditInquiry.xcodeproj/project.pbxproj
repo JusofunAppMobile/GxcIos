@@ -2778,7 +2778,7 @@
 				CLANG_LINK_OBJC_RUNTIME = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8ZRX8DLNYD;
+				DEVELOPMENT_TEAM = 93N52FAB6H;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CreditInquiry/PrefixHeader.pch";
@@ -2792,7 +2792,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/CreditInquiry/Tools/jusfounCore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.siccredit.guoXin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.siccredit.guoXinTest123;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "-Wdocumentation";
@@ -2808,7 +2808,7 @@
 				CLANG_LINK_OBJC_RUNTIME = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8ZRX8DLNYD;
+				DEVELOPMENT_TEAM = 93N52FAB6H;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CreditInquiry/PrefixHeader.pch";
@@ -2822,7 +2822,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/CreditInquiry/Tools/jusfounCore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.siccredit.guoXin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.siccredit.guoXinTest123;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "-Wdocumentation";

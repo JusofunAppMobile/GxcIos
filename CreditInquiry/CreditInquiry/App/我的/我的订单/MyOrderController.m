@@ -76,7 +76,10 @@ static NSString *CellID1 = @"MyOrderReportCell";
     }
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
+    [params setObject:@"1" forKey:@"type"];
     [params setObject:@(_page) forKey:@"pageIndex"];
+    [params setObject:@(10) forKey:@"pageSize"];
+
     [RequestManager postWithURLString:KMyOrderList parameters:params success:^(id responseObject) {
         [self hideLoadDataAnimation];
         [self endRefresh];
@@ -89,6 +92,8 @@ static NSString *CellID1 = @"MyOrderReportCell";
             [_tableview nd_reloadData];
             _page++;
             _moreData = _datalist.count< [responseObject[@"data"][@"totalCount"] intValue];
+        }else{
+            [MBProgressHUD showHint:responseObject[@"msg"] toView:self.view];
         }
     } failure:^(NSError *error) {
         [self showNetFailViewWithFrame:_tableview.frame];
@@ -111,6 +116,13 @@ static NSString *CellID1 = @"MyOrderReportCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return CGFLOAT_MIN;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return nil;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

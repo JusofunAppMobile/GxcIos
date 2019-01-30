@@ -71,11 +71,14 @@ static NSString *TextCellID = @"CreditEditTextCell";
 
 #pragma mark - loadData
 - (void)loadData{
-   
+    if (!_honorId.length) {
+        return;
+    }
     [self showLoadDataAnimation];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
-    
+    [params setObject:_honorId forKey:@"honorId"];
+
     [RequestManager postWithURLString:KGetCompanyHonor parameters:params success:^(id responseObject) {
         [self hideLoadDataAnimation];
         if ([responseObject[@"result"] intValue] == 0) {
@@ -117,7 +120,18 @@ static NSString *TextCellID = @"CreditEditTextCell";
     if (_honorId) {
         [self.dataDic setObject:_honorId forKey:@"honorId"];
     }
+    if (!_dataDic[@"honor"]) {
+        [MBProgressHUD showHint:@"请输入荣誉名称" toView:self.view];
+        return;
+    }
+    
+    if (!_dataDic[@"urlComplete"]) {
+        [MBProgressHUD showHint:@"请上传荣誉图片" toView:self.view];
+        return;
+    }
+    
     [self.dataDic setObject:_dataDic[@"urlComplete"] forKey:@"image"];
+    
     [RequestManager postWithURLString:KEditCompanyHonor parameters:self.dataDic success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:YES];
         if ([responseObject[@"result"] intValue] == 0) {
@@ -158,6 +172,13 @@ static NSString *TextCellID = @"CreditEditTextCell";
     return CGFLOAT_MIN;
 }
 
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return nil;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return nil;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
@@ -180,6 +201,7 @@ static NSString *TextCellID = @"CreditEditTextCell";
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     [self.view endEditing:YES];
 }
+
 
 #pragma mark - 提交
 - (void)rightAction{//对齐标签的bug

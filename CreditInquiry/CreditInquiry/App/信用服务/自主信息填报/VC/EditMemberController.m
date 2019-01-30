@@ -69,6 +69,9 @@ static NSString *TextCellID = @"CreditEditTextCell";
 
 #pragma mark - loadData
 - (void)loadData{
+    if (!_empId.length) {
+        return;
+    }
     [self showLoadDataAnimation];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
@@ -112,7 +115,23 @@ static NSString *TextCellID = @"CreditEditTextCell";
     if (_empId) {
         [self.dataDic setObject:_empId forKey:@"empId"];
     }
+    
+    if (!_dataDic[@"name"]) {
+        [MBProgressHUD showHint:@"请输入企业成员姓名" toView:self.view];
+        return;
+    }
+    
+    if (!_dataDic[@"position"]) {
+        [MBProgressHUD showHint:@"请输入企业成员职务" toView:self.view];
+        return;
+    }
+    
+    if (!_dataDic[@"urlComplete"]) {
+        [MBProgressHUD showHint:@"请上传企业成员图片" toView:self.view];
+        return;
+    }
     [self.dataDic setObject:_dataDic[@"urlComplete"] forKey:@"image"];
+
     [MBProgressHUD showMessag:@"" toView:self.view];
     [RequestManager postWithURLString:KEditCompanyMember parameters:self.dataDic success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:YES];
@@ -153,6 +172,13 @@ static NSString *TextCellID = @"CreditEditTextCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return CGFLOAT_MIN;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return nil;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

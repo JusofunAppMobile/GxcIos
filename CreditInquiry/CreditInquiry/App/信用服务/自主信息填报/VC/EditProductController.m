@@ -120,6 +120,31 @@ static NSString *TextCellID = @"CreditEditTextCell";
     if (_productId) {
         [self.dataDic setObject:_productId forKey:@"productId"];
     }
+    if (!_dataDic[@"companyName"]) {
+        [MBProgressHUD showHint:@"请输入所属公司" toView:self.view];
+        return;
+    }
+    if (!_dataDic[@"product"]) {
+        [MBProgressHUD showHint:@"请输入产品名称" toView:self.view];
+        return;
+    }
+    if (!_dataDic[@"industry"]) {
+        [MBProgressHUD showHint:@"请输入所属领域" toView:self.view];
+        return;
+    }
+    if (!_dataDic[@"tag"]) {
+        [MBProgressHUD showHint:@"请输入产品标签" toView:self.view];
+        return;
+    }
+    if (!_dataDic[@"url"]) {
+        [MBProgressHUD showHint:@"请输入链接地址" toView:self.view];
+        return;
+    }
+    
+    if (!_dataDic[@"urlComplete"]) {
+        [MBProgressHUD showHint:@"请上传产品图片" toView:self.view];
+        return;
+    }
     [self.dataDic setObject:_dataDic[@"urlComplete"] forKey:@"image"];
 
     [RequestManager postWithURLString:KEditCompanyProduct parameters:self.dataDic success:^(id responseObject) {
@@ -160,6 +185,13 @@ static NSString *TextCellID = @"CreditEditTextCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return CGFLOAT_MIN;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return nil;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
