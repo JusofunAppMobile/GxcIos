@@ -79,7 +79,7 @@ static NSString *ChartID = @"CreditChartLineCell";
             KUSER.authCompany = dic[@"authCompany"];
             [KUSER update];
             
-            if (KUSER.vipStatus.intValue != [_creditModel.companyInfo[@"status"] intValue]) {
+            if (KUSER.authStatus.intValue != [_creditModel.companyInfo[@"status"] intValue]) {
                 [self loadData];
             }
         }
@@ -314,7 +314,7 @@ static NSString *ChartID = @"CreditChartLineCell";
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar fs_setBackgroundColor:KHexRGB(0xd51424)];
-    [self setNavigationBarTitle:@"信用服务" andTextColor:[UIColor whiteColor]];
+    [self setNavigationBarTitle:@"企业服务" andTextColor:[UIColor whiteColor]];
     if (!_viewFirstLoad&&KUSER.userId.length) {
         [self checkUserAuthStatus];
     }

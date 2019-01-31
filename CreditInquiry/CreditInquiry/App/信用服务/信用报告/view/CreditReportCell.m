@@ -44,7 +44,7 @@
 //            view;
 //        });
         
-        NSString *title = @"企业信用报告-标准版";
+        NSString *title = @"企业报告-标准版";
         self.nameLab = ({
             UILabel *view = [UILabel new];
             [contentBg addSubview:view];

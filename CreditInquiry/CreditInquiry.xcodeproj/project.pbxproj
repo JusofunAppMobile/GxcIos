@@ -262,7 +262,6 @@
 		CADD606F21E4A74300EB01CD /* EditHonorController.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD606E21E4A74300EB01CD /* EditHonorController.m */; };
 		CADD607221E4A7E600EB01CD /* EditPartnerController.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD607121E4A7E600EB01CD /* EditPartnerController.m */; };
 		CADD607521E4AA7D00EB01CD /* EditMemberController.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD607421E4AA7D00EB01CD /* EditMemberController.m */; };
-		CADD607921E4B6AC00EB01CD /* CreditScoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD607821E4B6AC00EB01CD /* CreditScoreController.m */; };
 		CADD607F21E4BA1F00EB01CD /* CreditReportController.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD607E21E4BA1F00EB01CD /* CreditReportController.m */; };
 		CADD608221E4BB8900EB01CD /* CreditReportCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD608121E4BB8900EB01CD /* CreditReportCell.m */; };
 		CADD608521E4CA0F00EB01CD /* CreditProReportCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CADD608421E4CA0F00EB01CD /* CreditProReportCell.m */; };
@@ -821,8 +820,6 @@
 		CADD607121E4A7E600EB01CD /* EditPartnerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditPartnerController.m; sourceTree = "<group>"; };
 		CADD607321E4AA7D00EB01CD /* EditMemberController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditMemberController.h; sourceTree = "<group>"; };
 		CADD607421E4AA7D00EB01CD /* EditMemberController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditMemberController.m; sourceTree = "<group>"; };
-		CADD607721E4B6AC00EB01CD /* CreditScoreController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreditScoreController.h; sourceTree = "<group>"; };
-		CADD607821E4B6AC00EB01CD /* CreditScoreController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreditScoreController.m; sourceTree = "<group>"; };
 		CADD607D21E4BA1F00EB01CD /* CreditReportController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreditReportController.h; sourceTree = "<group>"; };
 		CADD607E21E4BA1F00EB01CD /* CreditReportController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreditReportController.m; sourceTree = "<group>"; };
 		CADD608021E4BB8900EB01CD /* CreditReportCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreditReportCell.h; sourceTree = "<group>"; };
@@ -1632,7 +1629,6 @@
 				CA46605321EC5904005C630F /* 信用承诺 */,
 				CADD60B221E6DBFB00EB01CD /* 信用异议 */,
 				CADD607A21E4B94B00EB01CD /* 信用报告 */,
-				CADD607621E4B68200EB01CD /* 信用评价 */,
 				CA5E013721E433A40040ABE2 /* 自主信息填报 */,
 				CA5E012121E4336A0040ABE2 /* view */,
 				CA5E00AF21DDE69C0040ABE2 /* CreditViewController.h */,
@@ -2067,15 +2063,6 @@
 			path = VC;
 			sourceTree = "<group>";
 		};
-		CADD607621E4B68200EB01CD /* 信用评价 */ = {
-			isa = PBXGroup;
-			children = (
-				CADD607721E4B6AC00EB01CD /* CreditScoreController.h */,
-				CADD607821E4B6AC00EB01CD /* CreditScoreController.m */,
-			);
-			path = "信用评价";
-			sourceTree = "<group>";
-		};
 		CADD607A21E4B94B00EB01CD /* 信用报告 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2489,7 +2476,6 @@
 				CA5E00AA21DDE61D0040ABE2 /* HomeViewController.m in Sources */,
 				793D1AC721DF65CC00C29908 /* SearchLoseCreitARRModel.m in Sources */,
 				799F798221EC1B22000DBB88 /* HodelButton.m in Sources */,
-				CADD607921E4B6AC00EB01CD /* CreditScoreController.m in Sources */,
 				79D34F1521E0836100B1CB32 /* HomeSectionHeader.m in Sources */,
 				CA56113421EDE45F0052CF38 /* SettingFooterView.m in Sources */,
 				CADD605D21E482CE00EB01CD /* EditCompanyInfoController.m in Sources */,

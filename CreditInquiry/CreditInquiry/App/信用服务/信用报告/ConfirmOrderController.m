@@ -53,9 +53,9 @@
         make.height.mas_equalTo(16);
     }];
     
-    NSString *reportName = _reportType == 1?@"企业信用报告-基础版":@"企业信用报告-专业版";
+    NSString *reportName = _reportType == 1?@"企业报告-基础版":@"企业报告-专业版";
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc]initWithString:reportName];
-    [attr addAttribute:NSForegroundColorAttributeName value:KHexRGB(0xf77f00) range:NSMakeRange(7, reportName.length-7)];
+    [attr addAttribute:NSForegroundColorAttributeName value:KHexRGB(0xf77f00) range:NSMakeRange(reportName.length-3, 3)];
     
     UILabel *typeLab = [UILabel new];
     typeLab.font = KFont(15);

@@ -32,7 +32,7 @@ static NSString *ProCellID = @"CreditProReportCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setNavigationBarTitle:@"信用报告"];
+    [self setNavigationBarTitle:@"企业报告"];
     [self setBlankBackButton];
     [self setRightNaviButton];
     
@@ -178,7 +178,7 @@ static NSString *ProCellID = @"CreditProReportCell";
 
     NewCommonWebController *vc = [NewCommonWebController new];
     vc.urlStr = url;
-    vc.titleStr = @"信用报告";
+    vc.titleStr = @"企业报告";
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -42,7 +42,7 @@
 //            view;
 //        });
         
-        NSString *title = @"企业信用报告-专业版";
+        NSString *title = @"企业报告-专业版";
         NSArray *component = [title componentsSeparatedByString:@"-"];
         NSRange rangeName = [title rangeOfString:component[1]];
         
@@ -65,7 +65,7 @@
         });
         
        
-        NSString *str = @"包括基础版企业信用报告所有内容，以及：\n1.主要人员详细信息\n2.疑似实际股权控制路径\n3.企业联系方式\n4.注册资本组成部分";
+        NSString *str = @"包括基础版企业报告所有内容，以及：\n1.主要人员详细信息\n2.疑似实际股权控制路径\n3.企业联系方式\n4.注册资本组成部分";
         NSMutableParagraphStyle * mParagraphStyle = [[NSMutableParagraphStyle  alloc] init];
         mParagraphStyle.lineSpacing = 15;
         

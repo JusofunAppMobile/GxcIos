@@ -396,7 +396,7 @@
     }
     else if ([headStr isEqualToString:@"股东"])
     {
-        return 1;
+        return ggArray.count||holderArray.count?1:0;
     }
     else if ([headStr isEqualToString:@"企业风险"])
     {

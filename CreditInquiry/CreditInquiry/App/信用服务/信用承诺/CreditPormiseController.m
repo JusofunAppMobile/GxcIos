@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setNavigationBarTitle:@"信用承诺书"];
+    [self setNavigationBarTitle:@"企业承诺书"];
     [self setBlankBackButton];
     // Do any additional setup after loading the view.
     [self initView];
@@ -59,7 +59,7 @@
     
     UIButton *uploadBtn = [UIButton new];
     uploadBtn.titleLabel.font = KFont(15);
-    [uploadBtn setTitle:@"上传信用承诺书" forState:UIControlStateNormal];
+    [uploadBtn setTitle:@"上传企业承诺书" forState:UIControlStateNormal];
     [uploadBtn setTitleColor:KHexRGB(0x303030) forState:UIControlStateNormal];
     [self.view addSubview:uploadBtn];
     [uploadBtn mas_makeConstraints:^(MASConstraintMaker *make) {

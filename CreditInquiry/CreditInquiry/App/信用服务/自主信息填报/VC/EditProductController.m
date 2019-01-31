@@ -145,6 +145,12 @@ static NSString *TextCellID = @"CreditEditTextCell";
         [MBProgressHUD showHint:@"请上传产品图片" toView:self.view];
         return;
     }
+    
+    if (!_dataDic[@"introduce"]) {
+        [MBProgressHUD showHint:@"请输入产品简介" toView:self.view];
+        return;
+    }
+    
     [self.dataDic setObject:_dataDic[@"urlComplete"] forKey:@"image"];
 
     [RequestManager postWithURLString:KEditCompanyProduct parameters:self.dataDic success:^(id responseObject) {

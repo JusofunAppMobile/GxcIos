@@ -72,10 +72,10 @@ static NSString *TextCellID = @"CreditEditTextCell";
 
 #pragma mark - loadData
 - (void)loadData{
-    [self showLoadDataAnimation];
     if (!_companyId.length) {
         return;
     }
+    [self showLoadDataAnimation];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
     [params setObject:_companyId forKey:@"companyId"];
@@ -140,6 +140,11 @@ static NSString *TextCellID = @"CreditEditTextCell";
     
     if (!_dataDic[@"urlComplete"]) {
         [MBProgressHUD showHint:@"请上传企业LOGO" toView:self.view];
+        return;
+    }
+    
+    if (!_dataDic[@"introduce"]) {
+        [MBProgressHUD showHint:@"请输入企业简介" toView:self.view];
         return;
     }
     [self.dataDic setObject:_dataDic[@"urlComplete"] forKey:@"image"];

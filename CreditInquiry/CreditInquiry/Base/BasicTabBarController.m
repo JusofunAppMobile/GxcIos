@@ -53,7 +53,7 @@
     BasicNavigationController *monitorNavi=[[BasicNavigationController alloc]initWithRootViewController:_monitorVc];
     
     self.creditVc=[[CreditViewController alloc]init];
-    _creditVc.title = @"信用服务";
+    _creditVc.title = @"企业服务";
     _creditVc.tabBarItem.selectedImage = [self getOriginalImage:@"icon_service_sel"];
     _creditVc.tabBarItem.image =[self getOriginalImage:@"icon_service"];
     

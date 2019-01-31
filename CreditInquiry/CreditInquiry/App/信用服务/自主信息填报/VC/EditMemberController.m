@@ -75,6 +75,7 @@ static NSString *TextCellID = @"CreditEditTextCell";
     [self showLoadDataAnimation];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
+    [params setObject:_empId forKey:@"empId"];
     [RequestManager postWithURLString:KGetCompanyMember parameters:params success:^(id responseObject) {
         [self hideLoadDataAnimation];
         if ([responseObject[@"result"] intValue] == 0) {
@@ -128,6 +129,10 @@ static NSString *TextCellID = @"CreditEditTextCell";
     
     if (!_dataDic[@"urlComplete"]) {
         [MBProgressHUD showHint:@"请上传企业成员图片" toView:self.view];
+        return;
+    }
+    if (!_dataDic[@"introduce"]) {
+        [MBProgressHUD showHint:@"请输入公司成员简介" toView:self.view];
         return;
     }
     [self.dataDic setObject:_dataDic[@"urlComplete"] forKey:@"image"];

@@ -29,6 +29,7 @@
 
 @property (nonatomic ,strong) NSArray *proviceArray;
 @property (nonatomic ,strong) NSString *message;
+@property (nonatomic ,strong) UIView *footerBg;
 
 @end
 
@@ -299,21 +300,33 @@
     if([KUSER.authStatus intValue] == 1)//1：审核中
     {
         messageLabel.text = @"     资料已提交、审核中";
-        submitBtn.hidden = YES;
+        _footerBg.hidden = YES;
+        [_footerBg mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
+        }];
     }
     else if ([KUSER.authStatus intValue] == 2)//2：审核失败
     {
 //        messageLabel.text = @"     认证状态已被驳回，请重新填写认证信息";
         messageLabel.text = [NSString stringWithFormat:@"%@%@",@"     ",_message];
+        [_footerBg mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(65);
+        }];
     }
     else if ([KUSER.authStatus intValue] == 3)//3：审核成功
     {
         messageLabel.text = @"     审核成功";
-        submitBtn.hidden = YES;
+        _footerBg.hidden = YES;
+        [_footerBg mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
+        }];
     }
     else
     {
         messageLabel.text = @"     填写身份证信息，快速认证企业";
+        [_footerBg mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(65);
+        }];
     }
 }
 
@@ -451,23 +464,35 @@
 }
 -(void)drawTableView
 {
+    self.footerBg = ({
+        UIView *view = [UIView new];
+        [self.view addSubview:view];
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(65);
+            make.left.right.bottom.mas_equalTo(self.view);
+        }];
+        view.backgroundColor = [UIColor whiteColor];
+        view;
+    });
     
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setBackgroundColor:KRGB(238, 37, 32)];
-    [button setTitle:@"提交认证" forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    button.layer.cornerRadius = 5;
-    button.clipsToBounds = YES;
-    [self.view addSubview:button];
-    submitBtn = button;
-    [button mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.view).offset(-10);
-        make.height.mas_equalTo(45);
-        make.width.mas_equalTo(KDeviceW-30);
-        make.left.mas_equalTo(15);
-        
-    }];
-    [button addTarget:self action:@selector(certification) forControlEvents:UIControlEventTouchUpInside];
+    submitBtn = ({
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setBackgroundColor:KRGB(238, 37, 32)];
+        [button setTitle:@"提交认证" forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(certification) forControlEvents:UIControlEventTouchUpInside];
+        button.layer.cornerRadius = 5;
+        button.clipsToBounds = YES;
+        [_footerBg addSubview:button];
+        [button mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(45);
+            make.centerY.mas_equalTo(_footerBg);
+            make.width.mas_equalTo(KDeviceW-30);
+            make.left.mas_equalTo(_footerBg).offset(15);
+        }];
+        button;
+    });
+   
     
     backTableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     backTableView.delegate = self;
@@ -482,17 +507,7 @@
         make.top.mas_equalTo(KNavigationBarHeight);
         make.left.mas_equalTo(0);
         make.width.mas_equalTo(KDeviceW);
-        
-        make.bottom.mas_equalTo(button.mas_top).offset(-10);
-        
-//        if(self.isShow)
-//        {
-//            make.bottom.mas_equalTo(self.view);
-//        }
-//        else
-//        {
-//            make.bottom.mas_equalTo(button.mas_top).offset(-10);
-//        }
+        make.bottom.mas_equalTo(_footerBg.mas_top);
     }];
     
    

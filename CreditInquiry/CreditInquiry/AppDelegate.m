@@ -44,9 +44,9 @@
 }
 
 - (void)setupGuideView{
-    KSGuaidManager.images = @[[UIImage imageNamed:@"lead1"],
-                              [UIImage imageNamed:@"lead2"],
-                              [UIImage imageNamed:@"lead3"]];
+    KSGuaidManager.images = @[[UIImage imageNamed:@"lead1_750"],
+                              [UIImage imageNamed:@"lead2_750"],
+                              [UIImage imageNamed:@"lead3_750"]];
     
     CGSize size = [UIScreen mainScreen].bounds.size;
     KSGuaidManager.currentPageIndicatorTintColor = KHexRGB(0xf5414a);

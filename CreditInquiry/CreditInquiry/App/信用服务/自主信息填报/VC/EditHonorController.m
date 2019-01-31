@@ -116,7 +116,6 @@ static NSString *TextCellID = @"CreditEditTextCell";
 }
 
 - (void)commitEditInfo{
-    [MBProgressHUD showMessag:@"" toView:self.view];
     if (_honorId) {
         [self.dataDic setObject:_honorId forKey:@"honorId"];
     }
@@ -130,8 +129,14 @@ static NSString *TextCellID = @"CreditEditTextCell";
         return;
     }
     
+    if (!_dataDic[@"introduce"]) {
+        [MBProgressHUD showHint:@"请输入荣誉简介" toView:self.view];
+        return;
+    }
+    
     [self.dataDic setObject:_dataDic[@"urlComplete"] forKey:@"image"];
     
+    [MBProgressHUD showMessag:@"" toView:self.view];
     [RequestManager postWithURLString:KEditCompanyHonor parameters:self.dataDic success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:YES];
         if ([responseObject[@"result"] intValue] == 0) {

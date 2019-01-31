@@ -77,7 +77,7 @@ static NSString *TextCellID = @"CreditEditTextCell";
     [self showLoadDataAnimation];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:KUSER.userId forKey:@"userId"];
-    
+    [params setObject:_partnerId forKey:@"partnerId"];
     [RequestManager postWithURLString:KGetCompanyPartner parameters:params success:^(id responseObject) {
         [self hideLoadDataAnimation];
         if ([responseObject[@"result"] intValue] == 0) {
@@ -115,7 +115,6 @@ static NSString *TextCellID = @"CreditEditTextCell";
 }
 
 - (void)commitEditInfo{
-    [MBProgressHUD showMessag:@"" toView:self.view];
     if (_partnerId) {
         [_dataDic setObject:_partnerId forKey:@"partnerId"];
     }
@@ -130,6 +129,12 @@ static NSString *TextCellID = @"CreditEditTextCell";
         return;
     }
     
+    if (!_dataDic[@"introduce"]) {
+        [MBProgressHUD showHint:@"请输入合作伙伴简介" toView:self.view];
+        return;
+    }
+    [MBProgressHUD showMessag:@"" toView:self.view];
+
     [self.dataDic setObject:_dataDic[@"urlComplete"] forKey:@"image"];
     [RequestManager postWithURLString:KEditCompanyPartner parameters:self.dataDic success:^(id responseObject) {
         [MBProgressHUD hideHudToView:self.view animated:YES];

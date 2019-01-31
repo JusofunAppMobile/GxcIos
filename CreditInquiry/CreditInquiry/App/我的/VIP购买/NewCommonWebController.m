@@ -68,6 +68,8 @@
     if ([urlStr containsString:@"gxc://edit"]) {
         
         NSDictionary *dic = [self parseString:urlStr];
+        
+        NSLog(@"字典___%@",dic);
         int type = [dic[@"type"] intValue];
         if (type == 1) {
             EditCompanyInfoController *vc = [EditCompanyInfoController new];
