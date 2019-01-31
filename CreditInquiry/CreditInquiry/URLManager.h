@@ -10,12 +10,12 @@
 #define URLManager_h
 
 //线下
-#define HOSTURL   @"http://202.106.10.250:48088"
-#define HTMLHOST @"http://202.106.10.250:4808"
+//#define HOSTURL   @"http://202.106.10.250:48088"
+//#define HTMLHOST @"http://202.106.10.250:4808"
 
 //正式
-//#define HOSTURL   @"http://guoxin.sic-credit.com:8088"
-//#define HTMLHOST @"http://guoxin.sic-credit.com:9090"
+#define HOSTURL   @"http://guoxin.sic-credit.com:8088"
+#define HTMLHOST @"http://guoxin.sic-credit.com:9090"
 
 //H5 交互规则
 #define Md5Encryption  @"md5encryption://parameter"

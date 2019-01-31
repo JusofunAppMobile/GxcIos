@@ -21,6 +21,7 @@
 @property (nonatomic ,assign) int textIndex;
 @property (nonatomic ,strong) UIWebView *webView;
 @property (nonatomic ,copy) NSString *urlStr;
+@property (nonatomic ,strong) UIView *backView;
 @end
 
 @implementation SeekRelationController
@@ -42,9 +43,9 @@
 {
     self.view.backgroundColor = KRGB(240, 242, 245);
 
-    UIView *backView = [[UIView alloc]init];
-    backView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:backView];
+    _backView = [[UIView alloc]init];
+    _backView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:_backView];
     
     UILabel *label1 = [[UILabel alloc]init];
     label1.textColor = KRGB(153, 153, 153);
@@ -121,7 +122,7 @@
     }];
     
    
-    [backView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_backView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view);
         make.top.mas_equalTo(KNavigationBarHeight);
         make.bottom.mas_equalTo(toTextFld.mas_bottom).offset(15);
@@ -148,11 +149,11 @@
     [self.view layoutIfNeeded];
     
     
-    if(bgView.y<=backView.maxY)
+    if(bgView.y<=_backView.maxY)
     {
         [bgView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(self.view);
-            make.top.mas_equalTo(backView.mas_bottom).offset(30);
+            make.top.mas_equalTo(_backView.mas_bottom).offset(30);
         }];
     }
     
@@ -172,17 +173,7 @@
     
     
     
-    self.webView = ({
-        UIWebView *view = [UIWebView new];
-        [self.view addSubview:view];
-        [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(backView.mas_bottom).offset(5);
-            make.left.right.bottom.mas_equalTo(self.view);
-        }];
-        view.delegate = self;
-        view.hidden = YES;
-        view;
-    });
+  
     
     bigBtn = [[UIButton alloc]init];
     [bigBtn setTitle:@"  点击查看大图" forState:UIControlStateNormal];
@@ -288,9 +279,21 @@
 
 #pragma mark - 网页加载
 - (void)loadURL{
+    self.webView = ({
+        UIWebView *view = [UIWebView new];
+        [self.view addSubview:view];
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(_backView.mas_bottom).offset(5);
+            make.left.right.bottom.mas_equalTo(self.view);
+        }];
+        view.delegate = self;
+        view.hidden = YES;
+        view;
+    });
+    
     self.webView.hidden = NO;
     NSURL*url=[NSURL URLWithString:_urlStr];
-    NSURLRequest *request=[NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:30];
+    NSURLRequest *request=[NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30];
     [self.webView loadRequest:request];
 }
 

@@ -49,14 +49,7 @@
 #pragma mark 请求热词
 -(void)loadHotData{
     
-    int menuType = 0;
-    if (_searchType == SearchSeekRelationType||_searchType == SearchRiskAnalyzeType||_searchType == SearchBidType||_searchType == SearchJudgementType||_searchType == SearchPenaltyType||_searchType == SearchBrandType) {
-        menuType = 0;
-    }else{
-        menuType = _searchType;
-    }
-    
-    
+    int menuType = _searchType;
     NSMutableDictionary *paraDic  = [NSMutableDictionary dictionary];
     [paraDic setObject:@(menuType) forKey:@"menuType"];
     [paraDic setObject:KUSER.userId forKey:@"userId"];
@@ -94,16 +87,8 @@
 
 #pragma mark 插入热词
 -(void)insertHotKey:(NSString*)key{
-    
-    int menuType = 0;
-    if (_searchType == SearchSeekRelationType||_searchType == SearchRiskAnalyzeType||_searchType == SearchBidType||_searchType == SearchJudgementType||_searchType == SearchPenaltyType||_searchType == SearchBrandType) {
-        menuType = 0;
-    }else{
-        menuType = _searchType;
-    }
-    
     NSMutableDictionary *paraDic  = [NSMutableDictionary dictionary];
-    [paraDic setObject:@(menuType) forKey:@"menuType"];
+    [paraDic setObject:@(_searchType) forKey:@"menuType"];
     [paraDic setObject:key forKey:@"keyWord"];
     [paraDic setObject:KUSER.userId forKey:@"userId"];
     [RequestManager postWithURLString:KInsertHotKey parameters:paraDic success:^(id responseObject) {
@@ -218,7 +203,9 @@
     
     companySearchBar.text = searchStr;
 
-    [self insertHotKey:searchStr];
+    if (KUSER.userId.length) {
+        [self insertHotKey:searchStr];
+    }
 
     if (_searchType == SearchBidType||_searchType == SearchJudgementType||_searchType == SearchPenaltyType||_searchType == SearchBrandType) {
         SearchResultWebController *vc = [SearchResultWebController new];
@@ -244,6 +231,7 @@
 #pragma mark - searchBar 代理
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    
     [searchBar resignFirstResponder];
     NSString *str = [searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     

@@ -120,11 +120,11 @@
             //view.textAlignment = NSTextAlignmentCenter;
             if(showType == ShowMessageVIPType)
             {
-                view.text = @"· 查看企业关系图，透视公司关联关系\n· 查看企业股权关系图，清晰企业股权结构\n· 获得专业政府认证企业信用分\n";
+                view.text = @"· 查看企业关系图，透视公司关联关系\n· 查看企业股权关系图，清晰企业股权结构";
             }
             else if(showType == ShowMessageAutiType)
             {
-                view.text = @"· 官方信息维护，展现企业全貌\n· 专属认证标识，彰显企业商誉\n· 实时访客查询，挖掘企业商机\n· 专业企业报告，助力企业管理";
+                view.text = @"· 官方信息维护，展现企业全貌\n· 专属认证标识，彰显企业商誉\n· 实时访客查询，挖掘企业商机\n· 专业企业报告，助力企业管理\n";
             }
             else{
                 view.text = @"";

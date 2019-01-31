@@ -206,14 +206,16 @@
     if(!score||score.length==0)
     {
         _creditLabel.text = @"信用分：暂无";
+        _creditLabel.hidden = YES;
     }
     else
     {
+        _creditLabel.hidden = NO;
         NSString *str1 = @"信用分：";
         NSString *str2  = score;
         NSString *str3 = [NSString stringWithFormat:@"%@%@",str1,str2];
         NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:str3];
-        
+
         [AttributedStr addAttribute:NSFontAttributeName
                               value:[UIFont systemFontOfSize:14.0]
                               range:NSMakeRange(0, str1.length)];

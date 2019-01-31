@@ -330,6 +330,7 @@
                 }
             }
         }
+        
         [weakSelf.companySearchTableView nd_reloadData];
         
     } failure:^(NSError *error) {
