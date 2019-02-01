@@ -119,7 +119,7 @@ static NSString *ChartID = @"CreditChartLineCell";
 
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return [_creditModel.companyInfo[@"status"] intValue] == 3 ?4:2;
+    return [_creditModel.companyInfo[@"status"] intValue] == 3 ?3:2;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
