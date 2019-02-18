@@ -172,17 +172,17 @@ static NSString *NewsCellID = @"NewsCellID";
             return;
         }
         
-        if (KUSER.vipStatus.intValue == 1) {
+//        if (KUSER.vipStatus.intValue == 1) {//test隐藏
             SeekRelationController *vc = [SeekRelationController new];
             [self.navigationController pushViewController:vc animated:YES];
-        }else{
-            KWeakSelf
-            [[ShowMessageView alloc]initWithType:ShowMessageVIPType action:^{
-                BuyVipController *vc = [BuyVipController new];
-                vc.target = weakSelf;
-                [weakSelf.navigationController pushViewController:vc animated:YES];
-            }];
-        }
+//        }else{
+//            KWeakSelf
+//            [[ShowMessageView alloc]initWithType:ShowMessageVIPType action:^{
+//                BuyVipController *vc = [BuyVipController new];
+//                vc.target = weakSelf;
+//                [weakSelf.navigationController pushViewController:vc animated:YES];
+//            }];
+//        }
       
     }
     else if (type == SearchRiskAnalyzeType)//9：风险分析(待定)
@@ -192,15 +192,15 @@ static NSString *NewsCellID = @"NewsCellID";
             [self.navigationController pushViewController:vc animated:YES];
             return;
         }
-        if (KUSER.vipStatus.intValue == 1) {
+//        if (KUSER.vipStatus.intValue == 1) {//test隐藏
             SearchController *searchVc= [SearchController new];
             searchVc.searchType = SearchRiskAnalyzeType;
             [self.navigationController pushViewController:searchVc animated:YES];
-        }else{
-            RiskVipController *vc = [RiskVipController new];
-            vc.target = self;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
+//        }else{
+//            RiskVipController *vc = [RiskVipController new];
+//            vc.target = self;
+//            [self.navigationController pushViewController:vc animated:YES];
+//        }
       
     }
     else if (type == SearchBidType){//中标
@@ -402,7 +402,7 @@ static NSString *NewsCellID = @"NewsCellID";
 #pragma mark - initView
 - (void)drawView{
     
-    [self drawRightBarButton];
+//    [self drawRightBarButton];//test隐藏
     
     self.navigationItem.titleView = self.naviSearchView;
     

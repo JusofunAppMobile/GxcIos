@@ -75,8 +75,6 @@
 		7976627121EF220C00CA5B10 /* BrowseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7976627021EF220C00CA5B10 /* BrowseController.m */; };
 		7976627421EF248F00CA5B10 /* BrowseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7976627321EF248F00CA5B10 /* BrowseCell.m */; };
 		799F78E421E5C24C000DBB88 /* SeekRelationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F78E321E5C24C000DBB88 /* SeekRelationController.m */; };
-		799F796721E5E9E1000DBB88 /* RiskVipController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F796621E5E9E1000DBB88 /* RiskVipController.m */; };
-		799F796A21E5EE72000DBB88 /* BuyVipController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F796921E5EE72000DBB88 /* BuyVipController.m */; };
 		799F796D21E6E574000DBB88 /* BuyVipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F796C21E6E574000DBB88 /* BuyVipCell.m */; };
 		799F797021E72655000DBB88 /* VisitorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F796F21E72655000DBB88 /* VisitorController.m */; };
 		799F797321E74656000DBB88 /* VistorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 799F797221E74656000DBB88 /* VistorCell.m */; };
@@ -440,10 +438,6 @@
 		7976627321EF248F00CA5B10 /* BrowseCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrowseCell.m; sourceTree = "<group>"; };
 		799F78E221E5C24C000DBB88 /* SeekRelationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeekRelationController.h; sourceTree = "<group>"; };
 		799F78E321E5C24C000DBB88 /* SeekRelationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SeekRelationController.m; sourceTree = "<group>"; };
-		799F796521E5E9E1000DBB88 /* RiskVipController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RiskVipController.h; sourceTree = "<group>"; };
-		799F796621E5E9E1000DBB88 /* RiskVipController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RiskVipController.m; sourceTree = "<group>"; };
-		799F796821E5EE72000DBB88 /* BuyVipController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuyVipController.h; sourceTree = "<group>"; };
-		799F796921E5EE72000DBB88 /* BuyVipController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuyVipController.m; sourceTree = "<group>"; };
 		799F796B21E6E574000DBB88 /* BuyVipCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuyVipCell.h; sourceTree = "<group>"; };
 		799F796C21E6E574000DBB88 /* BuyVipCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuyVipCell.m; sourceTree = "<group>"; };
 		799F796E21E72655000DBB88 /* VisitorController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VisitorController.h; sourceTree = "<group>"; };
@@ -942,8 +936,6 @@
 				793D1AD121DF662C00C29908 /* ProblemViewController.m */,
 				79D34F4121E4747300B1CB32 /* RiskAnalyzeController.h */,
 				79D34F4221E4747300B1CB32 /* RiskAnalyzeController.m */,
-				799F796521E5E9E1000DBB88 /* RiskVipController.h */,
-				799F796621E5E9E1000DBB88 /* RiskVipController.m */,
 				799F78E221E5C24C000DBB88 /* SeekRelationController.h */,
 				799F78E321E5C24C000DBB88 /* SeekRelationController.m */,
 				CA778CA521F9596B000F611E /* SearchResultWebController.h */,
@@ -1389,15 +1381,13 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		CA56114D21F057560052CF38 /* VIP购买 */ = {
+		CA56114D21F057560052CF38 /* 通用 */ = {
 			isa = PBXGroup;
 			children = (
 				CA778C9F21F9482D000F611E /* NewCommonWebController.h */,
 				CA778CA021F9482D000F611E /* NewCommonWebController.m */,
-				799F796821E5EE72000DBB88 /* BuyVipController.h */,
-				799F796921E5EE72000DBB88 /* BuyVipController.m */,
 			);
-			path = "VIP购买";
+			path = "通用";
 			sourceTree = "<group>";
 		};
 		CA56115121F169450052CF38 /* model */ = {
@@ -1642,7 +1632,7 @@
 			children = (
 				CA9129F421F59F8E00D9A850 /* 浏览历史 */,
 				CA9129F321F59F7300D9A850 /* 登录 */,
-				CA56114D21F057560052CF38 /* VIP购买 */,
+				CA56114D21F057560052CF38 /* 通用 */,
 				CADD60C621E728A000EB01CD /* 个人设置 */,
 				CADD60A721E6268300EB01CD /* 设置 */,
 				CADD609F21E6199F00EB01CD /* 我的监控 */,
@@ -2265,8 +2255,8 @@
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = CA5EFF8221DC59B20040ABE2;
 			productRefGroup = CA5EFF8C21DC59B20040ABE2 /* Products */;
@@ -2302,16 +2292,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-CreditInquiry/Pods-CreditInquiry-resources.sh",
-				"${PODS_ROOT}/AlipaySDK-iOS/AlipaySDK.bundle",
 				"${PODS_ROOT}/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Map.framework/mapapi.bundle",
-				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
+				"${PODS_ROOT}/IQKeyboardManager/IQKeyBoardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AlipaySDK.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/mapapi.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
@@ -2523,14 +2511,12 @@
 				796AE3C821EEDC4600623659 /* BRStringPickerView.m in Sources */,
 				79D34EFB21E0652000B1CB32 /* SearchJobCell.m in Sources */,
 				CAFB3CCC21FAB4690088EDE7 /* KSGuaidViewManager.m in Sources */,
-				799F796A21E5EE72000DBB88 /* BuyVipController.m in Sources */,
 				CADD60F521E8A32F00EB01CD /* ReportSendSuccessController.m in Sources */,
 				CA5E008521DDE05E0040ABE2 /* ZFBar.m in Sources */,
 				CA5E009A21DDE05E0040ABE2 /* ZJDatePickerView.m in Sources */,
 				793D1B3221DF67E000C29908 /* OweTaxController.m in Sources */,
 				CA5E008E21DDE05E0040ABE2 /* ZFCircle.m in Sources */,
 				CA5E007621DDE05E0040ABE2 /* YBRectConst.m in Sources */,
-				799F796721E5E9E1000DBB88 /* RiskVipController.m in Sources */,
 				CA5E008421DDE05E0040ABE2 /* ZFMethod.m in Sources */,
 				CA5E013F21E433A40040ABE2 /* CreditInfoInputController.m in Sources */,
 				CA5E015721E433E30040ABE2 /* MonitorHeaderView.m in Sources */,
@@ -2647,6 +2633,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -2706,6 +2693,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

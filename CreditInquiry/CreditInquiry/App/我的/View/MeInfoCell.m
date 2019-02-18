@@ -197,6 +197,7 @@
 - (UIButton *)joinBtn{
     if (!_joinBtn) {
         _joinBtn = [UIButton new];
+        _joinBtn.hidden = YES;//test隐藏
         [_joinBtn setImage:KImageName(@"mine_join") forState:UIControlStateNormal];
         [_joinBtn addTarget:self action:@selector(joinAction) forControlEvents:UIControlEventTouchUpInside];
     }

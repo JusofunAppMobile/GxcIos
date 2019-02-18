@@ -13,7 +13,7 @@
 #import "MonitorDetailController.h"
 #import "UITableView+NoData.h"
 #import "ShowMessageView.h"
-#import "BuyVipController.h"
+//#import "BuyVipController.h"//test隐藏
 
 static NSString *CELLID = @"MonitorDynamicCell";
 
@@ -79,14 +79,14 @@ static NSString *CELLID = @"MonitorDynamicCell";
         return;
     }
     
-    if (!KUSER.vipStatus.intValue) {
-        [[ShowMessageView alloc]initWithType:ShowMessageVIPType action:^{
-            BuyVipController *vc = [BuyVipController new];
-            vc.target = weakSelf;
-            [weakSelf.navigationController pushViewController:vc animated:YES];
-        }];
-        return;
-    }
+//    if (!KUSER.vipStatus.intValue) {//test隐藏
+//        [[ShowMessageView alloc]initWithType:ShowMessageVIPType action:^{
+//            BuyVipController *vc = [BuyVipController new];
+//            vc.target = weakSelf;
+//            [weakSelf.navigationController pushViewController:vc animated:YES];
+//        }];
+//        return;
+//    }
     
     NSString * type =cell1.monitorBtn.selected? @"0":@"1";
 

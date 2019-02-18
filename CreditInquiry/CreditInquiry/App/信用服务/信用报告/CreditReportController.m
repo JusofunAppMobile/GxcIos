@@ -14,7 +14,7 @@
 #import "ReportPreviewController.h"
 #import "MyOrderController.h"
 #import "ShowMessageView.h"
-#import "BuyVipController.h"
+//#import "BuyVipController.h"//test隐藏
 #import "UITableView+NoData.h"
 #import "NewCommonWebController.h"
 #import "CreditReportController.h"
@@ -155,21 +155,21 @@ static NSString *ProCellID = @"CreditProReportCell";
         vc.companyId = _companyid;
         [self.navigationController pushViewController:vc animated:YES];
     }else{//专业报告
-        if (KUSER.vipStatus.intValue == 1) {
+//        if (KUSER.vipStatus.intValue == 1) {//test隐藏
             ConfirmOrderController *vc = [ConfirmOrderController new];
             vc.price = _reportInfo[@"professionVersionDownloadAmount"];
             vc.reportType =2;
             vc.companyName = _companyName;
             vc.companyId = _companyid;
             [self.navigationController pushViewController:vc animated:YES];
-        }else{
-            KWeakSelf
-            [[ShowMessageView alloc]initWithType:ShowMessageVIPType action:^{
-                BuyVipController *vc = [BuyVipController new];
-                vc.target = weakSelf;
-                [weakSelf.navigationController pushViewController:vc animated:YES];
-            }];
-        }
+//        }else{
+//            KWeakSelf
+//            [[ShowMessageView alloc]initWithType:ShowMessageVIPType action:^{
+//                BuyVipController *vc = [BuyVipController new];
+//                vc.target = weakSelf;
+//                [weakSelf.navigationController pushViewController:vc animated:YES];
+//            }];
+//        }
     }
 }
 

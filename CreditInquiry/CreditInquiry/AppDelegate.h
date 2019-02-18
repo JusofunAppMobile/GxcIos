@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "BasicTabBarController.h"
 #import <IQKeyboardManager.h>
-#import <AlipaySDK/AlipaySDK.h>
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

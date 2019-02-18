@@ -13,9 +13,9 @@
 #import "ReportTypeModel.h"
 #import "ObjectionAppealController.h"
 #import "ShowMessageView.h"
-#import "BuyVipController.h"
+//#import "BuyVipController.h"//test隐藏
 #import "NewCommonWebController.h"
-#import "RiskVipController.h"
+//#import "RiskVipController.h"//test隐藏
 #import "CreditReportController.h"
 
 @interface CompanyDetailController()
@@ -672,16 +672,16 @@
     }
     else if (button.tag == KDetailOperationTag+2)//监控
     {
-        if (KUSER.vipStatus.intValue == 1) {
+//        if (KUSER.vipStatus.intValue == 1) {//test隐藏
             [self monitorCompany:button];
-        }else{
-            KWeakSelf
-            [[ShowMessageView alloc]initWithType:ShowMessageVIPType action:^{
-                BuyVipController *vc = [BuyVipController new];
-                vc.target = weakSelf;
-                [weakSelf.navigationController pushViewController:vc animated:YES];
-            }];
-        }
+//        }else{
+//            KWeakSelf
+//            [[ShowMessageView alloc]initWithType:ShowMessageVIPType action:^{
+//                BuyVipController *vc = [BuyVipController new];
+//                vc.target = weakSelf;
+//                [weakSelf.navigationController pushViewController:vc animated:YES];
+//            }];
+//        }
     }
 //    else //if (button.tag == KDetailOperationTag+2)//认证
 //    {
@@ -831,14 +831,14 @@
         return;
     }
     
-    if (!KUSER.vipStatus.intValue) {
-        [[ShowMessageView alloc]initWithType:ShowMessageVIPType action:^{
-            BuyVipController *vc = [BuyVipController new];
-            vc.target = self;
-            [self.navigationController pushViewController:vc animated:YES];
-        }];
-        return;
-    }
+//    if (!KUSER.vipStatus.intValue) {//tet隐藏
+//        [[ShowMessageView alloc]initWithType:ShowMessageVIPType action:^{
+//            BuyVipController *vc = [BuyVipController new];
+//            vc.target = self;
+//            [self.navigationController pushViewController:vc animated:YES];
+//        }];
+//        return;
+//    }
     
     if(button.tag == KDetailMapBtnTag)//企业图谱
     {
@@ -871,16 +871,16 @@
         return;
     }
     
-    if (KUSER.vipStatus.intValue) {
+//    if (KUSER.vipStatus.intValue) {//test隐藏
         NewCommonWebController *view = [[NewCommonWebController alloc]init];
         view.urlStr = [holderDic objectForKey:@"RiskH5Address"];
         view.titleStr = @"企业风险分析";
         [self.navigationController pushViewController:view animated:YES];
-    }else{
-        RiskVipController *vc = [RiskVipController new];
-        vc.target = self;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+//    }else{
+//        RiskVipController *vc = [RiskVipController new];
+//        vc.target = self;
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }
 }
 
 #pragma mark 更多信息

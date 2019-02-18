@@ -92,7 +92,7 @@
             view.textAlignment = NSTextAlignmentCenter;
             if(showType == ShowMessageVIPType)
             {
-                view.text = @"开通VIP后获得权限";
+//                view.text = @"开通VIP后获得权限";//test隐藏
             }
             else if(showType == ShowMessageAutiType)
             {

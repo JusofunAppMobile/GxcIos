@@ -35,15 +35,15 @@
         titleLab.font = KFont(15);
         titleLab.text = @"企业动态";
         
-        UILabel *vipLab = [UILabel new];
-        [self addSubview:vipLab];
-        [vipLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(titleLab.mas_right).offset(10);
-            make.centerY.mas_equalTo(self);
-        }];
-        vipLab.text = @"成为VIP掌握企业风险动态";
-        vipLab.font = KFont(12);
-        vipLab.textColor = KHexRGB(0xe26062);
+//        UILabel *vipLab = [UILabel new];//test隐藏
+//        [self addSubview:vipLab];
+//        [vipLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.mas_equalTo(titleLab.mas_right).offset(10);
+//            make.centerY.mas_equalTo(self);
+//        }];
+//        vipLab.text = @"成为VIP掌握企业风险动态";
+//        vipLab.font = KFont(12);
+//        vipLab.textColor = KHexRGB(0xe26062);
         
         
 //        UIButton *filterBtn = [UIButton new];

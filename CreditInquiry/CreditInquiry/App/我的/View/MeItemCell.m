@@ -15,9 +15,9 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
         NSArray *icons = @[@"mine_dingdan",@"mine_jiankong",@"mine_shoucang",
-                           @"mine_renzheng",@"mine_tequan"/*,@"mine_zengsong"*/];
-        NSArray *titles = @[@"我的订单",@"我的监控",@"我的收藏",@"认证企业",@"VIP特权"/*,
-                                                                     @"赠送好友VIP"*/];
+                           @"mine_renzheng"/*,@"mine_tequan",@"mine_zengsong"*/];//test隐藏
+        NSArray *titles = @[@"我的订单",@"我的监控",@"我的收藏",@"认证企业"/*,@"VIP特权",
+                                                                     @"赠送好友VIP"*/];//test隐藏
         
         CGFloat width = (KDeviceW -15*2)/4;
         CGFloat height = 50;
