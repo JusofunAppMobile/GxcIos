@@ -725,10 +725,8 @@
 		CA5EFF9721DC59BF0040ABE2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CA5EFF9C21DC59BF0040ABE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA5EFF9D21DC59BF0040ABE2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		CA5EFFA721DDDB7A0040ABE2 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		CA5EFFA821DDDC7C0040ABE2 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		CA5EFFA921DDDC7C0040ABE2 /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
-		CA5EFFAA21DDDC7C0040ABE2 /* URLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLManager.h; sourceTree = "<group>"; };
 		CA5EFFAB21DDE0380040ABE2 /* BasicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicViewController.h; sourceTree = "<group>"; };
 		CA5EFFAC21DDE0380040ABE2 /* BasicWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicWebViewController.h; sourceTree = "<group>"; };
 		CA5EFFAD21DDE0380040ABE2 /* BasicNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicNavigationController.h; sourceTree = "<group>"; };
@@ -1783,10 +1781,8 @@
 				CA5EFF9721DC59BF0040ABE2 /* Assets.xcassets */,
 				CA5EFF9C21DC59BF0040ABE2 /* Info.plist */,
 				CA5EFF9D21DC59BF0040ABE2 /* main.m */,
-				CA5EFFA721DDDB7A0040ABE2 /* PrefixHeader.pch */,
 				CA5EFFA821DDDC7C0040ABE2 /* Constants.h */,
 				CA5EFFA921DDDC7C0040ABE2 /* Macros.h */,
-				CA5EFFAA21DDDC7C0040ABE2 /* URLManager.h */,
 			);
 			path = CreditInquiry;
 			sourceTree = "<group>";
