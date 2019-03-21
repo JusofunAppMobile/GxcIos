@@ -807,6 +807,8 @@
 		CA778CA621F9596B000F611E /* SearchResultWebController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultWebController.m; sourceTree = "<group>"; };
 		CA778CA821F9A39C000F611E /* BigPicWebController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BigPicWebController.h; sourceTree = "<group>"; };
 		CA778CA921F9A39C000F611E /* BigPicWebController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BigPicWebController.m; sourceTree = "<group>"; };
+		CA9986C222436AE7007C533C /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		CA9986C322436AE7007C533C /* URLManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = URLManager.h; sourceTree = "<group>"; };
 		CADD605B21E482CE00EB01CD /* EditCompanyInfoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditCompanyInfoController.h; sourceTree = "<group>"; };
 		CADD605C21E482CE00EB01CD /* EditCompanyInfoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditCompanyInfoController.m; sourceTree = "<group>"; };
 		CADD605E21E491C200EB01CD /* CreditEditTextCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreditEditTextCell.h; sourceTree = "<group>"; };
@@ -1783,6 +1785,8 @@
 				CA5EFF9D21DC59BF0040ABE2 /* main.m */,
 				CA5EFFA821DDDC7C0040ABE2 /* Constants.h */,
 				CA5EFFA921DDDC7C0040ABE2 /* Macros.h */,
+				CA9986C222436AE7007C533C /* PrefixHeader.pch */,
+				CA9986C322436AE7007C533C /* URLManager.h */,
 			);
 			path = CreditInquiry;
 			sourceTree = "<group>";

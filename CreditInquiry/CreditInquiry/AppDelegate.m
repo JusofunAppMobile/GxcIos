@@ -17,7 +17,7 @@
 
 @implementation AppDelegate
 
-
+//
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [KNotificationCenter addObserver:self selector:@selector(tokenInvalid:) name:KTokenInvalid object:nil];
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
