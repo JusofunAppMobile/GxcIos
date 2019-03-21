@@ -13,8 +13,6 @@
 #import "HomeMonitorCell.h"
 #import "NewsCell.h"
 #import "SeekRelationController.h"
-//#import "RiskVipController.h"//test隐藏
-//#import "BuyVipController.h"//test隐藏
 #import "VisitorController.h"
 #import "ShowMessageView.h"
 #import "LoginController.h"

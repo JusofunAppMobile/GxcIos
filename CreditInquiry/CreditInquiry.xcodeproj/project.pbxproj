@@ -249,6 +249,10 @@
 		CA5EFFB121DDE0390040ABE2 /* BasicNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFAE21DDE0380040ABE2 /* BasicNavigationController.m */; };
 		CA5EFFB221DDE0390040ABE2 /* BasicWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFAF21DDE0380040ABE2 /* BasicWebViewController.m */; };
 		CA5EFFB321DDE0390040ABE2 /* BasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5EFFB021DDE0390040ABE2 /* BasicViewController.m */; };
+		CA7395BC2223CB9700388B82 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA7395BB2223CB9700388B82 /* StoreKit.framework */; };
+		CA7395C8222778E300388B82 /* SandBoxHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CA7395C7222778E300388B82 /* SandBoxHelper.m */; };
+		CA73960B2227791A00388B82 /* IAPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CA7396092227791A00388B82 /* IAPManager.m */; };
+		CA73960E22277A7F00388B82 /* NSString+category.m in Sources */ = {isa = PBXBuildFile; fileRef = CA73960C22277A7F00388B82 /* NSString+category.m */; };
 		CA778CA121F9482D000F611E /* NewCommonWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA778CA021F9482D000F611E /* NewCommonWebController.m */; };
 		CA778CA721F9596B000F611E /* SearchResultWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA778CA621F9596B000F611E /* SearchResultWebController.m */; };
 		CA778CAA21F9A39C000F611E /* BigPicWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA778CA921F9A39C000F611E /* BigPicWebController.m */; };
@@ -792,6 +796,13 @@
 		CA5EFFFA21DDE05D0040ABE2 /* YBRectConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBRectConst.m; sourceTree = "<group>"; };
 		CA5EFFFC21DDE05D0040ABE2 /* YTLPieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTLPieView.h; sourceTree = "<group>"; };
 		CA5EFFFD21DDE05D0040ABE2 /* YTLPieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTLPieView.m; sourceTree = "<group>"; };
+		CA7395BB2223CB9700388B82 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		CA7395C6222778E200388B82 /* SandBoxHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandBoxHelper.h; sourceTree = "<group>"; };
+		CA7395C7222778E300388B82 /* SandBoxHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SandBoxHelper.m; sourceTree = "<group>"; };
+		CA7396092227791A00388B82 /* IAPManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPManager.m; sourceTree = "<group>"; };
+		CA73960A2227791A00388B82 /* IAPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPManager.h; sourceTree = "<group>"; };
+		CA73960C22277A7F00388B82 /* NSString+category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+category.m"; sourceTree = "<group>"; };
+		CA73960D22277A7F00388B82 /* NSString+category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+category.h"; sourceTree = "<group>"; };
 		CA778C9F21F9482D000F611E /* NewCommonWebController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewCommonWebController.h; sourceTree = "<group>"; };
 		CA778CA021F9482D000F611E /* NewCommonWebController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewCommonWebController.m; sourceTree = "<group>"; };
 		CA778CA521F9596B000F611E /* SearchResultWebController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchResultWebController.h; sourceTree = "<group>"; };
@@ -898,6 +909,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA7395BC2223CB9700388B82 /* StoreKit.framework in Frameworks */,
 				87E7B666298C06E9D3FD25BC /* libPods-CreditInquiry.a in Frameworks */,
 				CA5E006C21DDE05E0040ABE2 /* libjusfounCore.a in Frameworks */,
 			);
@@ -1384,6 +1396,8 @@
 		CA56114D21F057560052CF38 /* 通用 */ = {
 			isa = PBXGroup;
 			children = (
+				CA73960A2227791A00388B82 /* IAPManager.h */,
+				CA7396092227791A00388B82 /* IAPManager.m */,
 				CA778C9F21F9482D000F611E /* NewCommonWebController.h */,
 				CA778CA021F9482D000F611E /* NewCommonWebController.m */,
 			);
@@ -1828,6 +1842,10 @@
 		CA5EFFB521DDE05D0040ABE2 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				CA73960D22277A7F00388B82 /* NSString+category.h */,
+				CA73960C22277A7F00388B82 /* NSString+category.m */,
+				CA7395C6222778E200388B82 /* SandBoxHelper.h */,
+				CA7395C7222778E300388B82 /* SandBoxHelper.m */,
 				CA56111C21ED84930052CF38 /* UIButton+Verification.h */,
 				CA56111B21ED84920052CF38 /* UIButton+Verification.m */,
 				CA5EFFB621DDE05D0040ABE2 /* NSNumber+StringValue.h */,
@@ -2209,6 +2227,7 @@
 		E4C77B2863F73FC84D3FFC40 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CA7395BB2223CB9700388B82 /* StoreKit.framework */,
 				963E3CE0C10D1E4512DFED45 /* libPods-CreditInquiry.a */,
 			);
 			name = Frameworks;
@@ -2247,6 +2266,11 @@
 				TargetAttributes = {
 					CA5EFF8A21DC59B20040ABE2 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -2349,6 +2373,7 @@
 				CA56111D21ED84930052CF38 /* UIButton+Verification.m in Sources */,
 				79D34E8B21E05DA100B1CB32 /* MyAlertView.m in Sources */,
 				793D1B6821DF699500C29908 /* CompanyDetailModel.m in Sources */,
+				CA73960B2227791A00388B82 /* IAPManager.m in Sources */,
 				79D34EBB21E05E1F00B1CB32 /* RiskSegmentView.m in Sources */,
 				793D1B4121DF685700C29908 /* AnswerModel.m in Sources */,
 				CA778CAA21F9A39C000F611E /* BigPicWebController.m in Sources */,
@@ -2416,6 +2441,7 @@
 				CA5E008821DDE05E0040ABE2 /* ZFCirqueChart.m in Sources */,
 				CADD60BC21E6E25900EB01CD /* ObjectionTypeCell.m in Sources */,
 				CA56112821EDDACF0052CF38 /* MyMonitorListModel.m in Sources */,
+				CA73960E22277A7F00388B82 /* NSString+category.m in Sources */,
 				CA5EFFB221DDE0390040ABE2 /* BasicWebViewController.m in Sources */,
 				CA56114621EF50020052CF38 /* CreditVisitorModel.m in Sources */,
 				79D34F2721E347AE00B1CB32 /* DetailMapCell.m in Sources */,
@@ -2601,6 +2627,7 @@
 				79D34EF721E0652000B1CB32 /* ShareholderCell.m in Sources */,
 				CADD60F821E8A88800EB01CD /* ConfirmOrderController.m in Sources */,
 				799F797021E72655000DBB88 /* VisitorController.m in Sources */,
+				CA7395C8222778E300388B82 /* SandBoxHelper.m in Sources */,
 				79D34EE321E0616E00B1CB32 /* FilterCellModel.m in Sources */,
 				793D1B2F21DF67E000C29908 /* RiskContainerController.m in Sources */,
 				CADD608521E4CA0F00EB01CD /* CreditProReportCell.m in Sources */,
@@ -2796,7 +2823,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/CreditInquiry/Tools/jusfounCore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.siccredit.guoXin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.picovr.picovr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "-Wdocumentation";

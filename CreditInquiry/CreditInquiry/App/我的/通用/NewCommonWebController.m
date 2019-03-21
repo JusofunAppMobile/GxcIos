@@ -12,12 +12,18 @@
 #import "EditHonorController.h"
 #import "EditPartnerController.h"
 #import "EditMemberController.h"
+#import "IAPManager.h"
 //#import "BuyVipController.h"//test隐藏
+static NSString * const productId = @"com.siccredit.guoXin.1450143654.test.VIP1";
 
+@interface NewCommonWebController ()<IApRequestResultsDelegate>
+@end
 @implementation NewCommonWebController
 
 - (void)viewDidLoad{
     [super viewDidLoad];
+    /**启动IAP工具类*/
+    [[IAPManager sharedIAPManager] startManager];
     if (_urlStr.length) {
         [self loadWithUrl];
     }else{
@@ -69,7 +75,6 @@
         
         NSDictionary *dic = [self parseString:urlStr];
         
-        NSLog(@"字典___%@",dic);
         int type = [dic[@"type"] intValue];
         if (type == 1) {
             EditCompanyInfoController *vc = [EditCompanyInfoController new];
@@ -111,12 +116,16 @@
         }
         return NO;
     }
-//    if ([urlStr containsString:@"gxc://vip"]) {//test隐藏
+    if ([urlStr containsString:@"gxc://vip"]) {//test隐藏
+        
+        [IAPManager sharedIAPManager].delegate = self;
+        [[IAPManager sharedIAPManager] requestProductWithId:productId];
+        
 //        BuyVipController *vc = [BuyVipController new];
 //        vc.target = _target;
 //        [self.navigationController pushViewController:vc animated:YES];
-//        return NO;
-//    }
+        return NO;
+    }
     
     
     return YES;
@@ -169,5 +178,37 @@
 //    self.navigationController.navigationBar
 }
 
+#pragma mark IApRequestResultsDelegate
+- (void)filedWithErrorCode:(NSInteger)errorCode andError:(NSString *)error {
+    
+    switch (errorCode) {
+        case IAP_FILEDCOED_APPLECODE:
+            NSLog(@"用户禁止应用内付费购买:%@",error);
+            break;
+            
+        case IAP_FILEDCOED_NORIGHT:
+            NSLog(@"用户禁止应用内付费购买");
+            break;
+            
+        case IAP_FILEDCOED_EMPTYGOODS:
+            NSLog(@"商品为空");
+            break;
+            
+        case IAP_FILEDCOED_CANNOTGETINFORMATION:
+            NSLog(@"无法获取产品信息，请重试");
+            break;
+            
+        case IAP_FILEDCOED_BUYFILED:
+            NSLog(@"购买失败，请重试");
+            break;
+            
+        case IAP_FILEDCOED_USERCANCEL:
+            NSLog(@"用户取消交易");
+            break;
+            
+        default:
+            break;
+    }
+}
 
 @end

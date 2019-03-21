@@ -169,16 +169,21 @@
 
 
 -(void)agreement{
+
+    NSString *url = [NSString stringWithFormat:@"%@?VersionCode=%@&AppType=1",KUserProtocol,[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
+    
     NewCommonWebController *vc = [NewCommonWebController new];
-    vc.urlStr = KUserProtocol;
+    vc.urlStr = url;
     vc.titleStr = @"服务协议";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)privacyPolicy
 {
+    NSString *url = [NSString stringWithFormat:@"%@?VersionCode=%@&AppType=1",KPrivacy,[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
+
     NewCommonWebController *vc = [NewCommonWebController new];
-    vc.urlStr = KPrivacy;
+    vc.urlStr = url;
     vc.titleStr = @"隐私政策";
     [self.navigationController pushViewController:vc animated:YES];
 }

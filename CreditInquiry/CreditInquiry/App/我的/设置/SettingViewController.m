@@ -83,17 +83,19 @@ static NSString *CellID = @"SettingCell";
         }
     }else{
         NSString *title = nil;
-        NSString *url = nil;
+        NSString *addr = nil;
         if (indexPath.row == 0) {
             title = @"服务协议";
-            url = KUserProtocol;
+            addr = KUserProtocol;
         }else if (indexPath.row == 1){
             title = @"隐私政策";
-            url = KPrivacy;
+            addr = KPrivacy;
         } else {
             title = @"关于我们";
-            url = KAboutUS;
+            addr = KAboutUS;
         }
+        NSString *url = [NSString stringWithFormat:@"%@?VersionCode=%@&AppType=1",addr,[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
+
         
         NewCommonWebController *vc = [NewCommonWebController new];
         vc.urlStr = url;

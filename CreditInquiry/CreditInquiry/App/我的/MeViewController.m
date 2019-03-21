@@ -165,8 +165,10 @@ static NSString *PlainID = @"MePlainCell";
             }
             
         }else if (indexPath.row == 1){
+            NSString *url = [NSString stringWithFormat:@"%@?VersionCode=%@&AppType=1",KUseHelp,[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
+
             NewCommonWebController *vc = [NewCommonWebController new];
-            vc.urlStr = KUseHelp;
+            vc.urlStr = url;
             vc.titleStr = @"使用帮助";
             [self.navigationController pushViewController:vc animated:YES];
         }

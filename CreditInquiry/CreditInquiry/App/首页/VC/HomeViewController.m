@@ -63,6 +63,8 @@ static NSString *NewsCellID = @"NewsCellID";
     _firstDate = [NSDate date];
 }
 
+
+
 - (void)abnormalViewReload{
     [self loadData];
 }
@@ -402,7 +404,7 @@ static NSString *NewsCellID = @"NewsCellID";
 #pragma mark - initView
 - (void)drawView{
     
-//    [self drawRightBarButton];//test隐藏
+    [self drawRightBarButton];//test隐藏
     
     self.navigationItem.titleView = self.naviSearchView;
     
