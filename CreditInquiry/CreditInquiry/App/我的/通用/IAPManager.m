@@ -133,8 +133,9 @@ SingletonM(IAPManager)
 
     } else {
         //发起购买请求
-        SKPayment *payment = [SKPayment paymentWithProduct:product[0]];
-       
+        SKMutablePayment * payment = [SKMutablePayment paymentWithProduct:product[0]];
+            //使用苹果提供的属性,将平台订单号复制给这个属性作为透传参
+        payment.applicationUsername = @"";//    payment.applicationUsername = self.order;
         [[SKPaymentQueue defaultQueue] addPayment:payment];
     }
 }
@@ -243,7 +244,7 @@ SingletonM(IAPManager)
     
     NSString *fileName = [NSString uuid];
    
-    self.userId = @"UserID";
+    self.userId = @"UserID";//testwang
    
     NSString *savedPath = [NSString stringWithFormat:@"%@/%@.plist", [SandBoxHelper iapReceiptPath], fileName];
     
@@ -304,7 +305,8 @@ SingletonM(IAPManager)
 
 
 - (void)serverReceiptRequest:(NSDictionary *)params{
-    
+    NSString *bodyString = [NSString stringWithFormat:@"{\"receipt-data\" : \"%@\"}", self.receipt];
+
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];//要用json的方式
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:@[
@@ -316,7 +318,7 @@ SingletonM(IAPManager)
                                                                               @"text/xml",
                                                                               @"image/*",
                                                                               @"application/x-www-form-urlencoded; charset=UTF-8"]];
-    [manager POST:@"https://sandbox.itunes.apple.com/verifyReceipt" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager POST:@"https://sandbox.itunes.apple.com/verifyReceipt" parameters:bodyString progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if([responseObject[@"status"] intValue] == 0){
             [self removeReceipt];
         } else {
